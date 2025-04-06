@@ -131,8 +131,9 @@ if PRINT_OBJECTS then
 
         local tile = 0
         local position = 0
+        local pdp = nil
         if odr:has_value(pdpLit) then
-            local pdp = odr:get_value(pdpLit)
+            pdp = odr:get_value(pdpLit)
             if pdp ~= 0 then
                 pdp = pdp - 0x80000000
                 
@@ -174,6 +175,7 @@ if PRINT_OBJECTS then
                     file:write("(" .. pnt.x .. ", " .. pnt.y .. "), ")
                 end
                 file:write("],", "\n")
+                -- NOTE the height_range read for some doors (seen on Caverns & Control) is nonsense, and varies between dumps
                 file:write("  \"height_range\" : (" .. min_y .. ", " .. max_y .. "),", "\n")
             end
 
@@ -184,6 +186,22 @@ if PRINT_OBJECTS then
             if position ~= 0 then
                 file:write("  \"position\" : (" .. position.x .. ", " .. position.z .. "),", "\n")
                 file:write("  \"height\" : " .. position.y .. ",", "\n")
+
+                file:write("  \"room_list\" : [")
+                room_ptr = pdp + 0x2c
+                for i=0,7 do
+                    local room = mainmemory.read_u8(room_ptr + i)
+                    if (room == 0xFF) then break end
+                    file:write(("0x%02X, "):format(room))
+                end
+                file:write("],", "\n")
+            end
+
+            -- Object position! May differ and is used by the maps for drawing reachability
+            -- Depot's gates are fucked using the position data position
+            if odr:has_value("position") then
+                local obj_pos = odr:get_value("position")
+                file:write("  \"object_position\" : (" .. obj_pos.x .. ", " .. obj_pos.z .. "),", "\n")
             end
 
             if odr:has_value("health") then
@@ -202,6 +220,20 @@ if PRINT_OBJECTS then
                     file:write("    (" .. hingePos.x .. ", " .. hingePos.z .. "),", "\n")
                 end
                 file:write("  ],", "\n")
+
+                local flags_2 = odr:get_value("flags_2")
+                local guard_inoperable = bit.band(bit.rshift(flags_2, 29), 1)
+                -- Previously bugged: 0 is truthy in lua so this always wrote "False". It was disabled and removed from the data, now fixed but needs re-dumping
+                file:write("  \"guard_can_open\" : " .. (guard_inoperable == 1 and "False" or "True") .. ",", "\n")
+
+                -- NTSC / PAL investigation, the 5 constants used in the update_speed function
+                file:write("  \"door_speed_values\" : [")
+                local offsets = {0x84, 0xb8, 0x8c, 0x90, 0x94}
+                for _, off in ipairs(offsets) do
+                    local f = mainmemory.readfloat(odr.current_address + off, true)
+                    file:write(f .. ",")
+                end
+                file:write("],", "\n")
 
             end
 
@@ -249,6 +281,7 @@ if PRINT_GUARDS then
         local id = gdr:get_value("id")
         local grenadeOdds = gdr:get_value("belligerency")
         local facing_angle = GuardData.facing_angle(gdr.current_address)
+        local hearing_ability = gdr:get_value("hearing_ability")
         file:write(("0x%06X"):format(gdr.current_address) .. " : {", "\n")
         file:write("  \"position\" : (" .. pos.x .. ", " .. pos.z .. "),", "\n") -- historically no y, so added seperately as height
         file:write("  \"height\" : " .. pos.y .. ",", "\n")
@@ -258,6 +291,7 @@ if PRINT_GUARDS then
         file:write(("  \"id\" : 0x%04X,"):format(id), "\n")
         file:write("  \"grenade_odds\" : " .. grenadeOdds .. ",", "\n")
         file:write("  \"facing_angle\" : " .. facing_angle .. ",", "\n")
+        file:write("  \"hearing_ability\" : " .. hearing_ability .. ",", "\n")
         file:write("},", "\n")
     end)
 
@@ -310,11 +344,17 @@ if PRINT_PADS then
             break
         end
 
+        -- Include normal in these only, even if that's a bit ridiculous
+        -- (We are just adding this for control)
         if not seenPadNums[n] then
             local pos = PadData.padPosFromNum(n)
+            local norm = PadData.padNormalFromNum(n)
+
             file:write(("0x%04X : {\n"):format(n))
             file:write("  \"position\" : (" .. pos.x .. ", " .. pos.y .. ", " .. pos.z .. "),", "\n")
+            file:write("  \"normal\" : (" .. norm.x .. ", " .. norm.y .. ", " .. norm.z .. "),", "\n")
             file:write(("  \"tile\" : 0x%06X,"):format(assocTile - 0x80000000), "\n")
+            
             file:write("},", "\n")
             seenPadNums[n] = true
         end
