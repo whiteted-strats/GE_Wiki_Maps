@@ -1,9 +1,12 @@
 from lib.seperate_tile_groups import seperateGroups
 from lib.tiles import prepTiles, drawTiles, getGroupBounds, prepPlot, drawTileHardEdges, getTilePlanes
-from lib.object import drawObjects
+from lib.object import drawObjects, markBadDoors
 from lib.circle_related import colourSphereIntesectionWithTiles, drawDoorReachability
 from lib.stairs import markStairs
 from lib.path_finding import prepSets, getPathBetweenPads, drawPathWithinGroup
+from lib.set_boundaries import drawSetBoundaries, drawNavGraph
+from lib.near_geoms import computeNearGeoms, drawNearGeoms
+
 import matplotlib.pyplot as plt
 import os
 from math import sqrt
@@ -110,14 +113,22 @@ def main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GROUP_N
     fig,axs = prepPlot(plt,groupBounds[GROUP_NO])
     tilePlanes = getTilePlanes(currentTiles, tiles, level_scale)
 
-    # Draw stuff :)
-    drawTiles(currentTiles, tiles, (0.75, 0.75, 0.75), axs)
+    # Draw stuff :) - Including near geoms for the ending
+    # Draw tiles or pretty colours for Nat / Silvereye
+    if GROUP_NO == 3:
+        computeNearGeoms(pads, tiles)
+        drawNearGeoms(pads, axs, currentTiles)
+        drawNavGraph(pads, plt, axs, currentTiles, edgeColour='w')
+    else:
+        drawTiles(currentTiles, tiles, (0.75, 0.75, 0.75), axs)
+
+
     markStairs(tilePlanes, tiles, (0.4,0.2,0), plt) # make generic
     drawTileHardEdges(currentTiles, tiles, (0.65, 0.65, 0.65), axs)
-
+    markBadDoors(objects, "facility")
     drawGuards(guards, currentTiles, axs)
     drawObjects(plt, axs, objects, tiles, currentTiles)
-    drawDoorReachability(plt, axs, objects, presets, currentTiles, set(excludeDoorReachPresets))
+    drawDoorReachability(plt, axs, objects, presets, currentTiles, set(excludeDoorReachPresets), tiles)
     drawCollectibles(objects, axs, currentTiles)
 
     drawActivatables(axs, activatable_objects, objects, currentTiles)
@@ -131,5 +142,5 @@ if __name__ == "__main__":
     main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 0, 'facility/facility_downstairs')
     main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 2, 'facility/facility_upstairs')
     main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 3, 'facility/facility_ending')
-    ##main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 4, 'facility_E')
-    ##main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 5, 'facility_F')
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 4, 'facility/facility_E')
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 5, 'facility/facility_F')

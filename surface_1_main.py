@@ -19,6 +19,7 @@ from data.surface_1 import tiles, guards, objects, pads, level_scale, sets, pres
 from level_specific.surface_1.group_names import *
 import numpy as np
 
+np.random.seed(135)     # nice colours for TASing
 
 def surface_1_specific(tilePlanes, currentTiles, plt, axs):
     guardAddrWithId = dict((gd["id"], addr) for addr, gd in guards.items())
@@ -29,7 +30,8 @@ def surface_1_specific(tilePlanes, currentTiles, plt, axs):
     def colourBySet(pd):
         return colourForSet[pd['set']]
         
-    # Draw line through the points
+    # Draw line through the points (and beyond)
+    # This can stay
     pntA = pads[0x00A3]["position"][::2]
     pntB = tiles[0x1B9EC4]["points"][1]
     xs, zs = map(list, zip(*[pntA, pntB]))
@@ -40,12 +42,42 @@ def surface_1_specific(tilePlanes, currentTiles, plt, axs):
     xs = [-x for x in xs]
     plt.plot(xs, zs, linewidth=3, color='k')
 
+    # Draw something of the area that guards will see in
+    # Except don't, people aren't interested in OOK ( :'( )
+    """
+    lg_start = guards[guardAddrWithId[0xF]]["position"]
+    lg_end = pads[0x006A]["position"][::2]
+    v = [lg_end[0] - lg_start[0], lg_end[1] - lg_start[1]]
+    R = 2500    # Lured guard visibility
+    k = R / np.linalg.norm(v)
+
+    xs, zs = map(list, zip(*[lg_start, lg_end]))
+    zs = [k*v[0] + z for z in zs]
+    xs = [k*v[1] - x for x in xs]
+    plt.plot(xs, zs, linewidth=5, color='r')
+
+    for x,z in [lg_start, lg_end]:
+        axs.add_artist(plt.Circle((-x, z), R, color='r', linewidth=5, fill=False))
+    """
+
+    # Draw a tile which we're using for navigation (053300)
+    # Ditto - nah
+    """
+    tile_ps = tiles[0x1C709C]["points"]
+    for i in range(len(tile_ps)):
+        xs, zs = map(list, zip(*[tile_ps[i-1], tile_ps[i]]))
+        xs = [-x for x in xs]
+        plt.plot(xs, zs, linewidth=3, color='g')
+    """
+
+    # Draw the all important near geoms - or don't
+    """
     computeNearGeoms(pads, tiles)
     drawNearGeoms(pads, axs, colouring=colourBySet)
+    """
 
-    # Something worth generalising perhaps
     # Draw the important border between rooms 5 and 7
-
+    #   Something worth generalising perhaps
     for ta, td in tiles.items():
         if td['room'] != 0x5:
             continue
@@ -103,7 +135,7 @@ def main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GROUP_N
 
     drawGuards(guards, currentTiles, plt, axs)
     drawObjects(plt, axs, objects, tiles, currentTiles)
-    drawDoorReachability(plt, axs, objects, presets, currentTiles, set(excludeDoorReachPresets))
+    drawDoorReachability(plt, axs, objects, presets, currentTiles, set(excludeDoorReachPresets), tiles)
     drawCollectibles(objects, plt, axs, currentTiles)
 
     drawActivatables(plt, axs, activatable_objects, objects, currentTiles)

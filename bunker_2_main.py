@@ -1,6 +1,6 @@
 from lib.seperate_tile_groups import seperateGroups
 from lib.tiles import prepTiles, drawTiles, getGroupBounds, prepPlot, drawTileHardEdges, getTilePlanes
-from lib.object import drawObjects
+from lib.object import drawObjects, markBadDoors
 from lib.circle_related import colourSphereIntesectionWithTiles, drawDoorReachability
 from lib.stairs import markStairs
 from lib.path_finding import prepSets, getPathBetweenPads, drawPathWithinGroup, getPathTime
@@ -34,13 +34,13 @@ def bunker_2_specific(tilePlanes, currentTiles, plt, axs):
     noiseIncr = 2
     baseNoise = 2
     noises = [baseNoise + noiseIncr*i for i in range(1,ceil((maxNoise - baseNoise) / noiseIncr))] + [maxNoise]
-    
+    # Yeah we use more realistic figures thanks..
 
     clipboardGuard = guards[guardAddrWithId[0x14]]
     cbGuardSpherePos = noiseAroundGuardHelper(clipboardGuard, [17.85, 19.85], tilePlanes, tiles, plt, axs, '#d1512e')
 
     keyGuard1 = guards[guardAddrWithId[0xB]]
-    noiseAroundGuardHelper(keyGuard1, [3.966, 5.883, 7.809, 9.704, 11.528, 13.362], tilePlanes, tiles, plt, axs, '#bab21e')
+    noiseAroundGuardHelper(keyGuard1, [3.966, 5.883, 7.809, 9.704, 11.528, 13.362], tilePlanes, tiles, plt, axs, '#490eb0', base_alpha=0.075)
 
     # Not so specific but we won't want to draw it on every map
     drawSetBoundaries(sets, pads, currentTiles, tiles, plt)
@@ -111,6 +111,11 @@ def bunker_2_specific(tilePlanes, currentTiles, plt, axs):
     drawPathWithinGroup(plt, axs, path, pads, currentTiles, tiles, clipboardGuard)
 
 
+    # Potential B2 00A lure
+    # So he can't hear us anywhere exciting..? Why are we drawing some mess on the screen
+    ##noiseAroundGuardHelper(pads[0x005D], [10], tilePlanes, tiles, plt, axs, '#bab21e', base_alpha=0.2)
+
+
 # --------------------------------------------------------
 # Generic stuff below 
 
@@ -145,7 +150,8 @@ def main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GROUP_N
 
     drawGuards(guards, currentTiles, plt, axs)
     drawObjects(plt, axs, objects, tiles, currentTiles)
-    drawDoorReachability(plt, axs, objects, presets, currentTiles, set(excludeDoorReachPresets))
+    markBadDoors(objects, "bunker_2")
+    drawDoorReachability(plt, axs, objects, presets, currentTiles, set(excludeDoorReachPresets), tiles=tiles)
     drawCollectibles(objects, plt, axs, currentTiles)
 
     drawActivatables(plt, axs, activatable_objects, objects, currentTiles)
