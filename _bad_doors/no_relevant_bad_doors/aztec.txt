@@ -1,0 +1,12 @@
+~~ Irrelevant ~~
+Door 2732 not reachable from: 0x07
+=> First door from the near side, though we approach it straight on anyway
+Door 2787 not reachable from: 0x18, 0x17
+=> Right half of the sliding mainframe, but we don't active it anyway
+Door 2735 not reachable from: 0x30, 0x21, 0x23
+=> The table which counts as a door
+
+[!] Error drawing reachability for door at 2735
+=> The table
+[!] Error drawing reachability for door at 2787
+=> The right side of the sliding mainframe again

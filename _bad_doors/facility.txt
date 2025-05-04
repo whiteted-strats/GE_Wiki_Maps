@@ -1,0 +1,25 @@
+~~ Relevant ~~
+Door 2754 is not reachable from: 0x0f
+=> Our toilet door is not reachable from the vents
+    Specifically you must be over the hole in order to get it
+    (The door must also be on screen which looking down hard helps with)
+=> But we grab the circle anyway?
+
+Door 2787 is not reachable from: 0x36, 0x37
+=> Lure lab door! Can't be grabbed using the preset until we are around the corner
+
+~~ Irrelevant ~~
+Door 275B is not reachable from: 0x08
+=> 2nd door isn't reachable from after the 3rd door, but who cares about that
+Door 275C is not reachable from: 0x0c
+=> 3rd door isn't reachable from the bathroom, but Bond is too fat to grab it from inside anyway
+
+Door 2768 is not reachable from: 0x48
+Door 276B is not reachable from: 0x02
+Door 2767 is not reachable from: 0x08
+=> Some doors downstairs in the start which we don't care about
+
+Door 2785 is not reachable from: 0x37
+=> A lab door, on the far side from where we'd get it from
+Door 2786 is not reachable from: 0x3a
+=> A possible Doak lab door, but from a side we wouldn't care for

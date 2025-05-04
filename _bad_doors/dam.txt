@@ -1,0 +1,15 @@
+~~ Irrelevant ~~
+Door 2724 is not reachable from: 0x74
+=> Mesh gate from inside the general's room
+Door 274D is not reachable from: 0x7b
+=> Door to general's room from starting side of the mesh gate
+Door 274F is not reachable from: 0x48
+=> 1st hut. The doorway itself is part of the room for the top of the hut.
+    This doesn't restrict where you can open it from
+Door 2754 is not reachable from: 0x4e
+=> 3rd hut and ditto.
+
+~~ Relevant ~~
+Door 2751 is not reachable from: 0x43
+=> 2nd hut. Door is not openable from the outside using the preset trigger
+    Probably not a huge problem as the door is narrow + our approach

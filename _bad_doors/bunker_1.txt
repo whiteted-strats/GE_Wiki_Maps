@@ -1,0 +1,25 @@
+
+~~ Kinda relevant ~~
+Door 2718 not reachable from: 0x0a
+Door 2719 not reachable from: 0x0a
+=> Double doors to camera with machine, when approached from the left out in the corridor
+    This could happen when destroying the camera after escorting Boris,
+    so open the door on the way to the one at the back, and get it coming back (as people do?)
+
+~~ Irrelevant ~~
+Door 271A not reachable from: 0x0b
+=> Left outer door to mainframe from left hand side in the corridor
+    We aren't there even when we reopen it
+
+Door 271E not reachable from: 0x14
+Door 271F not reachable from: 0x14
+=> Alarm room double doors from left hand side out in the corridor
+    We're never there since it's down towards the dead end
+
+Door 2710 not reachable from: 0x06
+Door 2711 not reachable from: 0x06
+Door 2712 not reachable from: 0x06
+Door 2713 not reachable from: 0x06
+Door 2714 not reachable from: 0x06
+Door 2715 not reachable from: 0x06
+=> Glass from in the main room, but the circular test dominate anyway

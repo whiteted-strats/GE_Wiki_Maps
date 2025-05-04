@@ -1,0 +1,16 @@
+~~ Irrelevant ~~
+Door 2730 not reachable from: 0x1d
+    => Empty unit from past the door
+Door 273D not reachable from: 0x24
+    => Hut door, but from sort of in the doorframe? Irrelevant.
+
+~~ Semi-Relevant ~~
+Door 273A not reachable from: 0x08
+    => The left (and only the left) mesh gate door.
+    However the circle trigger is centred on the left of the door, so actually covers most of it.
+    Probably also a good demo
+
+~~ Very relevant ~~
+Door 273E not reachable from: 0x55, 0x26
+Door 273F not reachable from: 0x53, 0x26
+    => The train doors, including from 0x26 aka the main platform! This makes the circle triggers it

@@ -1,0 +1,50 @@
+
+~~ Irrelevant ~~
+Door 2774 not reachable from: 0x26
+    => initial cell door, 0x26 is the well room (and is outside the cell)
+Door 277A not reachable from: 0x37
+Door 277B not reachable from: 0x37
+Door 2778 not reachable from: 0x37
+Door 2779 not reachable from: 0x37
+    => double doors to the clipboard room
+        0x37 is the room containing the boxes inside this room
+Door 2764 not reachable from: 0x0d
+Door 2765 not reachable from: 0x0d
+    => Double door to the strange machine room,
+        can't be triggered from the left side out in the corridor
+Door 2768 not reachable from: 0x23
+    => Right door into the room with staff (?) list on the table
+        can't be triggered from the right side in the corridor, but SA lures it open anyway
+Door 275A not reachable from: 0x1b
+    => Safe door. 0x1b is the main part of the room, but the safe's corner is separate
+       This won't be relevant as long as you approach from the right hand side
+Door 2710 not reachable from: 0x06
+Door 2711 not reachable from: 0x06
+Door 2712 not reachable from: 0x06
+Door 2713 not reachable from: 0x06
+Door 2714 not reachable from: 0x06
+Door 2715 not reachable from: 0x06
+    => Glass door parts. Room 06 is the main room with the screen etc.
+        But because we approach front on, we'll enter the cylinder trigger first anyway
+
+~~ Relevant ~~
+Door 276B not reachable from: 0x1a, 0x1b, 0x1d
+Door 276A not reachable from: 0x18, 0x1a, 0x1b, 0x1d
+    => These are the double doors to the safe (opened on 00a)
+        They are in their own narrow room - 0x1c
+        So they can't be activated from their preset anywhere
+Door 2772 not reachable from: 0x1c
+Door 2773 not reachable from: 0x1a, 0x1b, 0x1c
+    => Double doors to the right of the safe room
+        The 3 rooms are inside / on the boundary of the safe room
+        (Ace's WR has this door opened by a guard but not everyone does)
+Door 2766 not reachable from: 0x13
+Door 2767 not reachable from: 0x13
+    => Double doors to the cassette tape
+        The inspiration for this investigation
+        Approaching from the stairs (i.e. as on A) you can't activate it using the preset
+Door 2763 not reachable from: 0x0e
+    => Left door to the room with 6 mainframes and the safe key guard
+        Approaching from the left (i.e. as on 00a) you can't activate it using the preset
+
+

@@ -1,0 +1,65 @@
+~~ Irrelevant ~~
+Door 2727 not reachable from: 0x07
+Door 2746 not reachable from: 0x0d
+Door 2754 not reachable from: 0x1c
+Door 2768 not reachable from: 0x2f
+Door 2781 not reachable from: 0x31
+=> 1st door in a pair not reachable from beyond 2nd
+
+Door 2749 not reachable from: 0x0d
+Door 274B not reachable from: 0x19
+Door 274C not reachable from: 0x1a
+Door 274E not reachable from: 0x18
+Door 274F not reachable from: 0x19
+Door 2751 not reachable from: 0x17
+Door 275D not reachable from: 0x1c
+Door 275F not reachable from: 0x28
+Door 2760 not reachable from: 0x29
+Door 2762 not reachable from: 0x27
+Door 2763 not reachable from: 0x28
+Door 2765 not reachable from: 0x26
+=> Irrelevant side doors
+
+Door 27AC not reachable from: 0x35
+=> Ouro door from through the hatch so irrel
+
+Door at 27B7 is not upright nor inverted! Unable to process reachability..
+=> The hatch itself
+
+Door 2748 not reachable from: 0x1a, 0x0c, 0x0e
+Door 2778 not reachable from: 0x2a
+Door 277D not reachable from: 0x30
+Door 2752 not reachable from: 0x18, 0x1b, 0x16
+Door 275C not reachable from: 0x29, 0x1b, 0x1d
+Door 2766 not reachable from: 0x2a, 0x25, 0x27
+Door 277E not reachable from: 0x2c, 0x2e
+Door 277F not reachable from: 0x2c, 0x2e
+=> Toilet / angled bedroom doors
+
+Door 27B1 not reachable from: 0x32, 0x35
+Door 27B4 not reachable from: 0x32
+Door 27B6 not reachable from: 0x31, 0x33, 0x35
+=> Metal shields
+
+
+~~ Still not relevant ~~
+Door 2745 not reachable from: 0x05
+Door 2753 not reachable from: 0x0b
+Door 2767 not reachable from: 0x17
+Door 2780 not reachable from: 0x26
+Door 27B8 not reachable from: 0x2b
+=> 2nd door in a pair not reachable from before 1st
+    However we don't actually care for these since we approach them straight on
+
+
+~~ Weird but not relevant ~~
+Door 27B5 not reachable from: 0x33
+=> Last door before Ouro's door.. and our code is concerned about this from Ouro's room???
+- Door at 0x1CCDCC
+- Tile at 0x1AE9C4 aka 06CD28 which is in front of Ouro's door
+=> The door's tile mismatches its tile and that's where our code gets confused?
+
+Door 27BA not reachable from: 0x32
+- Door at 0x1CCFEC
+- Tile at 0x1AEAC4 aka 06C72A, large tile among the boxes before Ouro's door
+=> Dunno what this is but who cares

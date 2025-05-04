@@ -1,0 +1,30 @@
+~~ Irrelevant ~~
+Door 283B not reachable from: 0x3f (a secret corridor)
+    => 1st door upstairs, opened by a guard 
+Door 283C not reachable from: 0x3f (a secret corridor)
+    => Henrik route 1st door upstairs
+Door 27D8 not reachable from: 0x34 (inside Nat's room)
+    => Double door nearest Nat's door
+Door 27DA not reachable from: 0x32
+Door 27DB not reachable from: 0x32
+    => Double door after Nat's door on SA/00A, not reachable from on the stairs after
+Door 2841 not reachable from: 0x37
+Door 2842 not reachable from: 0x38
+    => Secret corridor doors not reachable from the main upstairs area
+Door 2787 not reachable from: 0x07
+Door 2788 not reachable from: 0x07
+    => Door to Mishkin & door to the courtyard, from the section of corridor between the two
+Door 278A not reachable from: 0x30
+Door 2795 not reachable from: 0x01
+    => Final door & it's nearest neighbour, trying to open one from the other's room i.e. not relevant
+Door 2793 not reachable from: 0x2b
+    => 1st door downstairs on SA/00A, but from the other side so irrelevant
+Door 2840 not reachable from: 0x23
+    => Door opposite the 1st door, from the inside.
+
+~~ Almost relevant ~~
+Door 278B not reachable from: 0x31
+    => Door before Mishkin's door. Not reachable from the right. 
+    We approach it more front-on, especially because we're in left strafe and swing, so this isn't an issue
+Door 2790 not reachable from: 0x31
+    => Locked door from the triple on the ORG route or w/e. Probably a great example

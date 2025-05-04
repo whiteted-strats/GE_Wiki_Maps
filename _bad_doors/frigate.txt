@@ -1,0 +1,13 @@
+~~ Irrelevant ~~
+Door 2755 not reachable from: 0x06
+    => 1st door on agent. Not reachable from corridor on the right on the inside
+Door 2759 not reachable from: 0x09, 0x2a
+    => Bug throw door. Not reachable from agent hostage's room, but also the high deck outside
+Door 2758 not reachable from: 0x2a, 0x2c
+    => Door to 1st hostage, not reachable from outside
+
+~~ Relevant ~~
+Door 2764 not reachable from: 0x0d
+    => Door to outside coming up the stairs on SA / 00A after the pipe warp
+       The preset trigger can't be reached from the stairs!
+       So only the cylindrical trigger can be used there
