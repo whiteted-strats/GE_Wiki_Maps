@@ -146,3 +146,101 @@ def getTilePlanes(currentTiles, tiles, level_scale):
     tilePlanes = dict([(rescalePlane(n,a,level_scale), tileAddrs) for (n,a), tileAddrs in tilePlanes.items()])
 
     return tilePlanes
+
+
+# -------------- Tile planes ---------------
+
+def getCommonVoidCornerWithInwardVector(tile_names, tiles):
+    # On each tile, identify any points which are on a void edge, i.e. an unlinked edge.
+    # We then look for a unique common such point between all (both of) the provided tiles.
+    # NOTE that this is can miss void points - the true test would be to attempt to walk around
+    #   the point in a complete loop. But this is simpler and sufficient for this function's purpose:
+    #   Be sure to pass tiles which *witness* that the point you are trying to identify is void.
+
+    assert len(tile_names) == 2     # 3 or more doesn't actually make any sense
+
+    # Slightly inefficiently search for these names
+    named_tiles = []
+    tile_names = set(tile_names)
+    for tile_addr, tile in tiles.items():
+        if tile["name"] in tile_names:
+            named_tiles.append(tile)
+    assert len(named_tiles) == len(tile_names), "Bad tile name - at least one wasn't found"
+
+    # Determine which points are on a void edge of each tile
+    # Note them against their indices
+    void_point_maps = [
+        {
+            pnt : i for i,pnt in enumerate(tile["points"])
+            if tile["links"][i] == 0 or tile["links"][i-1] == 0
+        }
+        for tile in named_tiles
+    ]
+
+    # Get the unique common void point, and its indices on the two tiles
+    common_void_pnt = set.intersection(*[set(d.keys()) for d in void_point_maps])
+    assert len(common_void_pnt) == 1
+    common_void_pnt = next(iter(common_void_pnt))
+    pnt_indices = [m[common_void_pnt] for m in void_point_maps]
+
+    # Debug
+    ##print("Common point: ", common_void_pnt)
+    ##print("Indices: ", pnt_indices)
+    ##for tile in named_tiles:
+    ##    print("Tile:")
+    ##    print("  points: ", tile["points"])
+    ##    print("  links: ", tile["links"])
+
+    # Then we need to work out which way is "inwards"
+    # Essentially we are working out how to orientate the two void edges so that they are both going
+    #   clockwise around the void, with our common point in the middle.
+    # We also make some checks. These boil down to the two tiles sharing a common edge..
+    assert all((tile["links"][i] == 0) ^ (tile["links"][i-1] == 0) for (i,tile) in zip(pnt_indices, named_tiles))
+    t_a, t_b = named_tiles
+    i_a, i_b = pnt_indices
+    assert (t_a["links"][i_a] == 0) ^ (t_b["links"][i_b] == 0)
+    cws = t_a["links"][i_a-1] == 0
+
+    if (cws):
+        void_pnts = [t_a["points"][i_a-1], common_void_pnt, t_b["points"][i_b+1]]
+    else:
+        void_pnts = [t_b["points"][i_b-1], common_void_pnt, t_a["points"][i_a+1]]
+
+    # Then we can get the normals (inwards) from these void edges
+    void_vs = [np.subtract(p,q) for p,q in zip(void_pnts, void_pnts[1:])]
+    norms = [np.linalg.norm(v) for v in void_vs]
+    assert 0 not in norms
+    void_vs = [np.multiply(v, 1/n) for v,n in zip(void_vs, norms)]
+    void_vs = [(-z, x) for x,z in void_vs]
+
+    # We just add these to give us an inward edge at the corner
+    # It is a little bit sus geometrically but it should do the job?
+    # If we are returning a single edge then surely there's not a better choice
+    inward_v = np.add(*void_vs)
+
+    return common_void_pnt, inward_v
+
+def drawEdgeInsideCornerToTarget(tile_names, target_pnt, tiles, plt, linewidth=0.5, color='k'):
+    if len(target_pnt) == 3:
+        target_pnt = target_pnt[::2]    # ditch y
+
+    common_void_pnt, inward_v = getCommonVoidCornerWithInwardVector(tile_names, tiles)
+
+    # Construct a vector out from this void point at a right angle to the vector to the target
+    # It is length 30 i.e. Bond's radius
+    v = tuple(np.subtract(target_pnt, common_void_pnt))
+    v = np.multiply([-v[1], v[0]], 30 / np.linalg.norm(v))
+
+    # Flip this if necessary so that it points inwards
+    if np.dot(v, inward_v) < 0:
+        v = np.multiply(v, -1)
+
+    # Add to the corner to give our bond point
+    # Assuming that the void point is 'convex' rather than concave (which would make no sense)
+    #   and that we haven't crossed some other edge into void, then this is in-bounds,
+    # and our line away is avoiding the corner (and both the edges)
+    bond_pos = np.add(common_void_pnt, v)
+
+    # Draw the line
+    xs, zs = zip(bond_pos, target_pnt)
+    plt.plot([-x for x in xs], zs, linewidth=linewidth, color=color)

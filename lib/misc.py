@@ -2,17 +2,22 @@ from .circle_related import colourSphereIntesectionWithTiles
 
 BOND_HEIGHT = 167.3     # measured in frigate, standing on a flat tile
 
-def noiseAroundGuardHelper(guardData, noises, tilePlanes, tiles, plt, axs, base_colour, base_alpha=0.1, fill=True, inclTileTest=None):
+def noiseAroundGuardHelper(thingData, noises, tilePlanes, tiles, plt, axs, base_colour, base_alpha=0.1, fill=True, inclTileTest=None,lw=0.5):
 
     # Create the point using the guard's height and our height above the tiles
-    gx, gz = guardData["position"]
-    gh = guardData["height"]
+    pos = thingData["position"]
+    if len(pos) == 3:
+        gx, gh, gz = pos
+    else:
+        gx, gz = pos
+        gh = thingData["height"]
+    
     spherePos = (gx, gh - BOND_HEIGHT, gz)
 
     # Start with the loudest
     for noise in noises[::-1]:
         sphere = (spherePos, noise*100)
-        colourSphereIntesectionWithTiles([sphere], tilePlanes, tiles, plt, axs, base_colour=base_colour, base_alpha=base_alpha, fill=fill, inclTileTest=inclTileTest)
+        colourSphereIntesectionWithTiles([sphere], tilePlanes, tiles, plt, axs, base_colour=base_colour, base_alpha=base_alpha, fill=fill, inclTileTest=inclTileTest, lw=lw)
 
     return spherePos
 

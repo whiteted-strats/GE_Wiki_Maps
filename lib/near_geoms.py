@@ -6,15 +6,21 @@ def splitIntoNearest(poly, nearPoint, farPoint):
     n_x, _, n_z = nearPoint["position"]
     f_x, _, f_z = farPoint["position"]
 
-    k = 4
+    # This previously arbitrary scaling constant is now the arbitrary dividing line length
+    # Set as 1000m
+    k = 1000 * 100
 
     # Dividing line
     mid = ((n_x + f_x) / 2, (n_z + f_z) / 2)
-    v = ( (f_x - n_x)*k, (f_z - n_z)*k )
+    v = (f_x - n_x, f_z - n_z)
+    len_v = np.linalg.norm(v)
+    k /= len_v      # send k back to it's roots as a multiplier
+    v = [k*v[0], k*v[1]]
+
     rotL = (-v[1], v[0])
     linePts = [np.add(mid, rotL), np.subtract(mid, rotL)]
 
-
+    # Use v to make two big squares as the intersections
     farSide = [np.add(linePts[0], v), np.add(linePts[1], v)]
     farSide = Polygon(linePts + farSide[::-1])
 
@@ -34,7 +40,6 @@ def computeNearGeoms(pads, tiles):
     # Focus around pads, and create shapes
     for tile, td in tiles.items():
         pad = td["nearPad"]
-
         pads[pad]["assocTiles"].append(tile)
 
         xs, ys = zip(*td["points"])
@@ -66,7 +71,7 @@ def computeNearGeoms(pads, tiles):
             nd = pads[neighbour]
             n_x, _, n_z = nd["position"]
             if n_x == p_x and n_z == p_z:
-                # Special case for where our points coincide (0x41, 0x62)
+                # Special case for where our points coincide (0x41 & 0x62 in one of the bunkers)
                 nearGeom = Polygon()    # remArea preserved
             else:
                 remArea, nearGeom = splitIntoNearest(remArea, pd, nd)
@@ -79,8 +84,13 @@ def computeNearGeoms(pads, tiles):
     for pad, pd in pads.items():
         pd["nearGeom"] = unary_union(pd["nearGeom"])
 
-def drawNearGeoms(pads, axs, colouring=None):
+def drawNearGeoms(pads, axs, currentTiles=None, colouring=None):
     for pad, pd in pads.items():
+
+        # We're not quite sure if we should be doing something with the assocTiles..
+        if currentTiles and pd["tile"] not in currentTiles:
+            continue
+
         colour = np.random.rand(3,) if colouring is None else colouring(pd)
         geom = pd["nearGeom"]
 

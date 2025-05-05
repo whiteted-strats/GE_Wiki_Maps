@@ -2,6 +2,7 @@ import numpy as np
 from math import sqrt
 from matplotlib import patches
 from math import atan2, pi
+from data.relevant_bad_doors import bad_doors_by_level
 
 def euclidDistSq(v,w):
     diff = np.subtract(v,w)
@@ -45,12 +46,31 @@ def getInsetPoint(p_i, points, distIn):
     # | v_x  w_x |   | a |       | c_x |
     # | v_z  w_z | * | b |   =   | c_z |
     det = v_x * w_z - w_x * v_z
-    a = (w_z * c_x - w_x * c_z) / det
+    a = (w_z * c_x - w_x * c_z) / det   # Not sure what we should have when dividing by 0 here, but it's not 0
 
     # Final result at -a*v + unit v rotate cws
     r_x = -a*v_x + uv_z
     r_z = -a*v_z - uv_x
     return (cp[0] + r_x, cp[1] + r_z)
+
+
+def markBadDoors(objects, level_name):
+    bad_door_presets = set(bad_doors_by_level.get(level_name, []))
+    if not bad_door_presets:
+        return
+
+    seen_count = 0
+    for obj in objects.values():
+        if obj["type"] != "door":
+            continue
+        preset_no = obj["preset"]
+        assert preset_no < 10000
+        preset_no += 10000
+        if preset_no in bad_door_presets:
+            obj["is_bad_door"] = True
+            seen_count += 1
+
+    assert seen_count == len(bad_door_presets)
 
 
 def drawObjects(plt, axs, objects, tiles, currentTiles):
@@ -62,7 +82,7 @@ def drawObjects(plt, axs, objects, tiles, currentTiles):
     for addr, obj in objects.items():
         if obj["type"] == "lock":   # TODO locks
             continue
-
+            
         if obj["tile"] not in currentTiles:
             continue
 

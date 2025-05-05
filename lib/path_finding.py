@@ -201,7 +201,7 @@ def walkAcrossTiles(currTile, n, a, universeTiles, endTiles, tiles, endPoint=Non
     return currTile, prevTile, intersectP
 
 
-def drawPathWithinGroup(plt, axs, path, pads, currentTiles, tiles, guard=None, stdColour='b', secretColour='r', padRadius=3, linewidth=0.5):
+def drawPathWithinGroup(plt, axs, path, pads, currentTiles, tiles, guard=None, stdColour='b', secretColour='r', padRadius=3, linewidth=0.5, fullEdges=None):
     # If guard is not None, use their starting point. Should be data.
     # Should cope with paths entering and leaving the group many times, though it's untested
 
@@ -219,7 +219,8 @@ def drawPathWithinGroup(plt, axs, path, pads, currentTiles, tiles, guard=None, s
     isInternal.extend([True])  # [-1] and [len(isInternal)]
 
     exitingEdges = []
-    fullEdges = []
+    if fullEdges == None:
+        fullEdges = []
 
     for i in range(len(path)):
         if not isInternal[i]:

@@ -10,7 +10,7 @@
 from lib.path_finding import walkAcrossTiles, rotACWS, drawPathWithinGroup
 import numpy as np
 
-def drawSets(sets, pads, lone_pads, currentTiles, tiles, plt, axs, scale=1):
+def drawSets(sets, pads, lone_pads, currentTiles, tiles, plt, axs, scale=1, add_labels=True):
     # Show all the sets and the connections of the 'navigation graph',
     #   with a different colour to show crossing between sets rather than internally
     # The stress is more on sets than the navigation graph, unlike the function below. 
@@ -37,24 +37,30 @@ def drawSets(sets, pads, lone_pads, currentTiles, tiles, plt, axs, scale=1):
 
     padsByIndex = dict((p['index'], p) for p in pads.values())
 
-    # Also draw the name for each set
-    for sI, s in enumerate(sets):
-        setPadPositions = [padsByIndex[i]["position"] for i in s["pad_indices"]]
-        xs,ys,zs = zip(*setPadPositions)
-        x = sum(xs) / len(xs) + 15
-        z = sum(zs) / len(zs) + 5
-        plt.text(-x, z, f"{sI:X}", fontsize=14*scale)
+    # Also draw the name for each set.. if it features in our map + the user asks
+    if add_labels:
+        for sI, s in enumerate(sets):
+            setPadPositions = [padsByIndex[i]["position"] for i in s["pad_indices"] if padsByIndex[i]["tile"] in currentTiles]
+            if not setPadPositions:
+                continue
+            xs,ys,zs = zip(*setPadPositions)
+            x = sum(xs) / len(xs) + 15
+            z = sum(zs) / len(zs) + 5
+            plt.text(-x, z, f"{sI:X}", fontsize=14*scale)
 
-def drawNavGraph(pads, plt, axs, edgeColour='w'):
+def drawNavGraph(pads, plt, axs, currentTiles=None, edgeColour='w'):
     # Named to distinguish it from drawSets, though there's some similarity
     #   -> join them at some point
+    # Also fucks the scale up sometimes
 
     xs = []
     zs = []
     for pad, pd in pads.items():
         x,_,z = pd["position"]
-        xs.append(-x)
-        zs.append(z)
+
+        if currentTiles == None or pd["tile"] in currentTiles:
+            xs.append(-x)
+            zs.append(z)
 
     axs.scatter(xs, zs)
 
@@ -80,15 +86,23 @@ def drawNavGraph(pads, plt, axs, edgeColour='w'):
             continue
         if pad in coincidingPads:
             lbl += "/" + "/".join(["{:02x}".format(q) for q in coincidingPads[pad]])
-        axs.annotate(lbl, (-x, z))
+
         pd["num"] = pad
 
+        if currentTiles == None or pd["tile"] in currentTiles:
+            axs.annotate(lbl, (-x, z))
+        
     for pad, pd in pads.items():
         p_x, _, p_z = pd["position"]
+        
+        if currentTiles != None and pd["tile"] not in currentTiles:
+            continue
+
         for neighbour in pd["neighbours"][::-1]:
             nd = pads[neighbour]
             n_x, _, n_z = nd["position"]
             plt.plot([-p_x, -n_x], [p_z, n_z], color=edgeColour, linewidth=0.5)
+
 
 
 def findBisector(startPad, endPad, currentTiles, tiles):

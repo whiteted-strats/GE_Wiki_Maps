@@ -1,0 +1,23 @@
+
+__all__ = [
+    "archives",
+    "aztec",
+    "bunker_1",
+    "bunker_2",
+    "caverns",
+    "control",
+    "cradle",
+    "dam",
+    "depot",
+    "egyptian",
+    "facility",
+    "frigate",
+    "jungle",
+    "runway",
+    "silo",
+    "statue",
+    "streets",
+    "surface_1",
+    "surface_2",
+    "train",
+]

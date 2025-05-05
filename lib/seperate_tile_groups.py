@@ -2,6 +2,8 @@
 
 def seperateGroups(tiles, startTileName, dividingTiles):
     dividingTiles = set(dividingTiles)
+    if startTileName is None:
+        startTileName = next(iter(tiles.values()))["name"]
 
     groups = []
     stack = []
