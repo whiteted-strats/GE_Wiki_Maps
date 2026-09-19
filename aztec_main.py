@@ -18,7 +18,7 @@ from data.aztec import tiles, guards, objects, pads, level_scale, sets, presets,
 from level_specific.aztec.group_names import *
 import numpy as np
 
-def aztec_specific(tilePlanes, currentTiles, plt, axs):
+def aztec_specific(tilePlanes, currentTiles, plt, axs, GROUP_NO):
     guardAddrWithId = dict((gd["id"], addr) for addr, gd in guards.items())
     mg = guards[guardAddrWithId[0x10]]
 
@@ -42,28 +42,30 @@ def aztec_specific(tilePlanes, currentTiles, plt, axs):
     # And some line of sight-y tests
     # TODO move to a library
 
-    currentBlackRoomTiles = [ta for ta in currentTiles if isTileInBlackRoom(ta, tiles)]
+    # Only the main map has the black room
+    if GROUP_NO == GRP_MAIN:
+        currentBlackRoomTiles = [ta for ta in currentTiles if isTileInBlackRoom(ta, tiles)]
 
-    for startTileAddr,startPoint,endData in [
-        (0x1CC314, tiles[0x1CC314]["points"][0], [(0x1CC3B4, 0, []), (0x1CBC64, 0, [0x1CBC64])]),   # The two between pillars #0 and #1
-        (mg["tile"], mg["position"], [(0x1CBBC4, 0, [0x1CBBC4])]),      # Mainframe guard to his side of #1
-        (0x1CC404, tiles[0x1CC3B4]["points"][0], [(0x1CBC64, 0, [0x1CBC64])]),
-    ]:
-        for nextTileAddr,pi2,contAddrs in endData:
-            q = tiles[nextTileAddr]["points"][pi2]
-            v = np.subtract(q,startPoint)
-            n = [-v[1], v[0]]
-            n = np.multiply(n, 1 / np.linalg.norm(n)) 
-            a = np.dot(n, startPoint)
+        for startTileAddr,startPoint,endData in [
+            (0x1CC314, tiles[0x1CC314]["points"][0], [(0x1CC3B4, 0, []), (0x1CBC64, 0, [0x1CBC64])]),   # The two between pillars #0 and #1
+            (mg["tile"], mg["position"], [(0x1CBBC4, 0, [0x1CBBC4])]),      # Mainframe guard to his side of #1
+            (0x1CC404, tiles[0x1CC3B4]["points"][0], [(0x1CBC64, 0, [0x1CBC64])]),
+        ]:
+            for nextTileAddr,pi2,contAddrs in endData:
+                q = tiles[nextTileAddr]["points"][pi2]
+                v = np.subtract(q,startPoint)
+                n = [-v[1], v[0]]
+                n = np.multiply(n, 1 / np.linalg.norm(n)) 
+                a = np.dot(n, startPoint)
 
-            p = startPoint
+                p = startPoint
 
-            for ta in [startTileAddr] + contAddrs:
-                _, _, r = walkAcrossTiles(ta, n, a, currentBlackRoomTiles, set([0]), tiles, endPoint=None, visitedTiles=None)
+                for ta in [startTileAddr] + contAddrs:
+                    _, _, r = walkAcrossTiles(ta, n, a, currentBlackRoomTiles, set([0]), tiles, endPoint=None, visitedTiles=None)
 
-                xs, zs = zip(p,r)
-                p = r
-                plt.plot([-x for x in xs], zs, linewidth=0.5, color='k')
+                    xs, zs = zip(p,r)
+                    p = r
+                    plt.plot([-x for x in xs], zs, linewidth=0.5, color='k')
 
     
     
@@ -110,7 +112,7 @@ def main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GROUP_N
     drawActivatables(plt, axs, activatable_objects, objects, currentTiles)
 
     # Call specific code
-    aztec_specific(tilePlanes, currentTiles, plt, axs)
+    aztec_specific(tilePlanes, currentTiles, plt, axs, GROUP_NO)
 
     # Save
     saveFig(plt,fig,os.path.join('output', path))

@@ -2,5 +2,5 @@
 matplotlib
 numpy
 shapely
-# Used by lib/fov.py, which imports some of its internals (helper_classes, helper_fcts) so may need an older version
-extremitypathfinder
+# Used by lib/fov.py, which imports some of its internals (helper_classes, helper_fcts). These are gone by 2.8.0, 2.2.1 works
+extremitypathfinder==2.2.1
