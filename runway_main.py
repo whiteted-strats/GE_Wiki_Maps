@@ -114,4 +114,5 @@ def main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GROUP_N
     saveFig(plt,fig,os.path.join('output', path))
 
 
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 0, "runway/runway")
+if __name__ == "__main__":
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 0, "runway/runway")

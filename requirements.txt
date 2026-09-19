@@ -1,0 +1,6 @@
+# Versions are not pinned as the originals weren't recorded
+matplotlib
+numpy
+shapely
+# Used by lib/fov.py, which imports some of its internals (helper_classes, helper_fcts) so may need an older version
+extremitypathfinder

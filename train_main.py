@@ -82,4 +82,5 @@ def main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GROUP_N
 
 
 
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 0, "train/train_full")
+if __name__ == "__main__":
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 0, "train/train_full")

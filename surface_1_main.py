@@ -146,10 +146,11 @@ def main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GROUP_N
     # Save
     saveFig(plt,fig,os.path.join('output', path),useWikiDpi)
 
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 1, "surface_1/surface_1_B")
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 2, "surface_1/surface_1_C")
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 3, "surface_1/surface_1_D")
+if __name__ == "__main__":
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 1, "surface_1/surface_1_B")
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 2, "surface_1/surface_1_C")
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 3, "surface_1/surface_1_D")
 
-print("Making massive main map..")
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 0, "surface_1/surface_1_A", True)
-print("Done")
+    print("Making massive main map..")
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 0, "surface_1/surface_1_A", True)
+    print("Done")

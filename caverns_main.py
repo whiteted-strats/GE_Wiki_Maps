@@ -442,8 +442,9 @@ def main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GROUP_N
     saveFig(plt,fig,os.path.join('output', path))
 
 
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_DOWNSTAIRS, "caverns/caverns_main_downstairs")
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_OBJ_A_AREA, "caverns/caverns_objective_a_area")
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_MAIN_UPSTAIRS, "caverns/caverns_main_upstairs")
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_UPSTAIRS_LOWER_CATWALK, "caverns/caverns_upstairs_lower_catwalk")
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_SPIRAL_MIDDLE, "caverns/caverns_spiral_middle")
+if __name__ == "__main__":
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_DOWNSTAIRS, "caverns/caverns_main_downstairs")
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_OBJ_A_AREA, "caverns/caverns_objective_a_area")
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_MAIN_UPSTAIRS, "caverns/caverns_main_upstairs")
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_UPSTAIRS_LOWER_CATWALK, "caverns/caverns_upstairs_lower_catwalk")
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_SPIRAL_MIDDLE, "caverns/caverns_spiral_middle")

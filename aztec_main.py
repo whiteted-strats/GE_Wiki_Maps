@@ -118,6 +118,7 @@ def main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GROUP_N
 
 
 
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_MAIN, "aztec/aztec_start")
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_RATWAYS, "aztec/aztec_ratways")
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_ENDING, "aztec/aztec_ending")
+if __name__ == "__main__":
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_MAIN, "aztec/aztec_start")
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_RATWAYS, "aztec/aztec_ratways")
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_ENDING, "aztec/aztec_ending")

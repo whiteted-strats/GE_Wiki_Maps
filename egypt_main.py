@@ -295,7 +295,8 @@ def gif_main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRO
 
 
 
-gif_main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_MAIN, "gg_room_anim.gif")
+if __name__ == "__main__":
+    gif_main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_MAIN, "gg_room_anim.gif")
 
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_MAIN, "egypt/egyptian_main")
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_LOWER, "egypt/egyptian_lower")
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_MAIN, "egypt/egyptian_main")
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_LOWER, "egypt/egyptian_lower")

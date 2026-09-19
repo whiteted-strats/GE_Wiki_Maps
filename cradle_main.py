@@ -82,8 +82,9 @@ def main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GROUP_N
 
 
 
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 0, "cradle/cradle_top")
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 1, "cradle/cradle_middle")
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 2, "cradle/cradle_lower")
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 3, "cradle/cradle_bottom")
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 4, "cradle/cradle_lol")
+if __name__ == "__main__":
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 0, "cradle/cradle_top")
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 1, "cradle/cradle_middle")
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 2, "cradle/cradle_lower")
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 3, "cradle/cradle_bottom")
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 4, "cradle/cradle_lol")

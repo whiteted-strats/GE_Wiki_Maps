@@ -339,6 +339,7 @@ def main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GROUP_N
     saveFig(plt,fig,os.path.join('output', path))
 
 
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_STREETS_START, "streets/streets_start")
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_STREETS_MID, "streets/streets_mid")
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_STREETS_END, "streets/streets_end")
+if __name__ == "__main__":
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_STREETS_START, "streets/streets_start")
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_STREETS_MID, "streets/streets_mid")
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_STREETS_END, "streets/streets_end")

@@ -346,8 +346,9 @@ def main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GROUP_N
 
 ##print("[!] Drawing the mid-level only")
 
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_CONTROL_MAIN, "control/control_main")
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_CONTROL_MID_FLOOR, "control/protect_mid_floor")
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 2, "control/protect_upper_floor")
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 3, "control/protect_left_space")
-main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 4, "control/protect_right_space")
+if __name__ == "__main__":
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_CONTROL_MAIN, "control/control_main")
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_CONTROL_MID_FLOOR, "control/protect_mid_floor")
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 2, "control/protect_upper_floor")
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 3, "control/protect_left_space")
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, 4, "control/protect_right_space")
