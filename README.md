@@ -19,15 +19,15 @@ full knowledge of it. Treat it as a rough guide.*
 2. `lib/` holds the shared geometry and drawing code.
 3. `level_specific/<level>/` holds small per-level settings: where to split the level into separate maps,
    names for those groups, and doors to skip.
-4. `<level>_main.py` draws the maps for a level, including any investigation specific to it,
+4. `maps/<level>.py` draws the maps for a level, including any investigation specific to it,
    and saves them as PNGs under `output/<level>/`.
 
 ## Running
 
     pip install -r requirements.txt
-    python facility_main.py
+    python -m maps.facility
 
-Run from the repository root.
+Run from the repository root, as a module so that `lib`, `data` and `level_specific` can be imported.
 
 ## Notes
 
@@ -35,7 +35,7 @@ Run from the repository root.
   of the dump, and some objects only exist on certain difficulties.
 - Some levels are plain maps with nothing level specific drawn: silo, train, jungle, cradle and the
   simple bunker 1.
-- `_bad_doors/` has notes on doors which can't be opened from everywhere you'd expect, and
-  `_notable_doors/` has example images. See `data/relevant_bad_doors.py` for the ones drawn in red.
+- `notes/bad_doors/` has notes on doors which can't be opened from everywhere you'd expect, and
+  `notes/notable_doors/` has example images. See `data/relevant_bad_doors.py` for the ones drawn in red.
 - The `guard_can_open` field is missing from the data until the levels are dumped again,
   and `height_range` is unreliable for some doors. See the comments in `dump_map_data.lua`.
