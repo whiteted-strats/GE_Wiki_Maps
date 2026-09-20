@@ -13,6 +13,7 @@ from itertools import pairwise
 Num = int | Fraction | float
 Point = tuple[Num, Num]
 Interval = tuple[Num, Num]
+Box = tuple[Num, Num, Num, Num]  # (min x, max x, min z, max z)
 
 
 def divide(numerator: Num, denominator: Num) -> Num:
@@ -208,6 +209,73 @@ def merge_intervals(intervals: list[Interval]) -> list[Interval]:
 def covers_unit_interval(intervals: list[Interval]) -> bool:
     merged = merge_intervals(intervals)
     return any(low <= 0 and high >= 1 for low, high in merged)
+
+
+def strictly_inside_polygon(p: Point, polygon: list[Point]) -> bool:
+    """Inside, and not on the edge."""
+    n = len(polygon)
+    on_edge = any(point_on_segment(p, polygon[i], polygon[(i + 1) % n]) for i in range(n))
+    return not on_edge and point_in_polygon(p, polygon)
+
+
+def interior_point(polygon: list[Point]) -> Point | None:
+    """Some point strictly inside the polygon. None if it has no area."""
+    n = len(polygon)
+    for i in range(n):
+        a, b, c = polygon[i], polygon[(i + 1) % n], polygon[(i + 2) % n]
+        if cross(sub(b, a), sub(c, a)) == 0:
+            continue
+        centre = (divide(a[0] + b[0] + c[0], 3), divide(a[1] + b[1] + c[1], 3))
+        if strictly_inside_polygon(centre, polygon):
+            return centre
+    return None
+
+
+def polygons_overlap(first: list[Point], second: list[Point], within: Box | None = None) -> bool:
+    return overlap_point(first, second, within) is not None
+
+
+def overlap_point(
+    first: list[Point], second: list[Point], within: Box | None = None
+) -> Point | None:
+    """A point where the two polygons share area, if they do: touching along an edge or at a corner
+    doesn't count. With `within`, only area inside that box counts. The point is inside one of them
+    and on the outline of the other, or inside both.
+
+    Any shared area has an outline, made of pieces of the three outlines. A piece of one outline
+    which is strictly inside the other two shapes is looked for first. If there is none, the shared
+    area must be the whole of one polygon, so a point inside each is tried.
+    """
+    shapes = [first, second]
+    if within is not None:
+        x0, x1, z0, z1 = within
+        shapes.append([(x0, z0), (x1, z0), (x1, z1), (x0, z1)])
+
+    for shape in shapes:
+        others = [other for other in shapes if other is not shape]
+        n = len(shape)
+        for i in range(n):
+            p, q = shape[i], shape[(i + 1) % n]
+            if p == q:
+                continue
+            cuts: set[Num] = {0, 1}
+            for other in others:
+                for j in range(len(other)):
+                    contact = contact_interval(p, q, other[j], other[(j + 1) % len(other)])
+                    if contact is not None:
+                        cuts.update(contact)
+            for low, high in pairwise(sorted(cuts)):
+                middle = lerp(p, q, divide(low + high, 2))
+                if all(strictly_inside_polygon(middle, other) for other in others):
+                    return middle
+
+    for shape in shapes[:2]:
+        inside = interior_point(shape)
+        if inside is not None and all(
+            strictly_inside_polygon(inside, other) for other in shapes if other is not shape
+        ):
+            return inside
+    return None
 
 
 def bounding_box(points: list[Point]) -> tuple[Num, Num, Num, Num]:

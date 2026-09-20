@@ -21,15 +21,21 @@ import numpy as np
 
 from gaps.exact import Point, bounding_box, dist2, grow_box, lerp
 from gaps.fast import distance_to_nearest_wall, ray_hits_wall_at, wall_arrays
-from gaps.mesh import Level
+from gaps.mesh import BoundarySegment, Level
 from gaps.pinch import Pinch
 from gaps.sheet import ObjectsPresent, fits, trace, walls_near
 
-SEARCH_RADIUS_CM = 300  # how far back from the pinch Bond may stand, either side
+# How far back from the pinch Bond may stand, either side. The proposals take their walls from
+# everything linked to the pinch within this distance, and where two storeys are linked that close
+# by (Bunker 1's roof, 2 m above the door 0x1d24f0) the walls of one get in the way of the other.
+# Nothing wrong can come of that, as proposals are certified exactly, but warps are missed. So if
+# nothing is found, the search is tried again closer in, where fewer storeys are joined up.
+SEARCH_RADII_CM = (300, 150, 75)
 SAMPLE_SPACING_CM = 2  # distance between the positions tried along each line
 CROSSING_POINTS = (0.5, 0.25, 0.75, 0.1, 0.9)  # where on the pinch line to cross it
 ANGLES_DEGREES = range(-85, 86, 5)  # measured from straight through the gap
 PROPOSALS_TO_CERTIFY = 8
+ROUNDS_OF_PROPOSALS = 5  # see find_witness
 REFINEMENT_STEPS = 12  # halvings of the sample spacing when homing in on where Bond first fits
 CLEARANCE_MARGIN = 1e-6  # floats propose positions this much clear of walls, so they certify
 
@@ -53,11 +59,26 @@ class _Proposal:
 
 
 def find_witness(level: Level, pinch: Pinch, present: ObjectsPresent) -> Witness | None:
-    proposals = _propose(level, pinch, present)
-    for proposal in proposals[:PROPOSALS_TO_CERTIFY]:
-        witness = _certify(level, pinch, present, proposal)
-        if witness is not None:
-            return witness
+    for search_radius_cm in SEARCH_RADII_CM:
+        reach = search_radius_cm * float(level.scale)
+        margin = math.ceil(reach + float(level.bond_radius) + CLEARANCE_MARGIN)
+        region = grow_box(bounding_box([pinch.a, pinch.b]), margin)
+        walls = walls_near(level, pinch.start_tile, region, present)
+
+        # Near stairs a sheet does lie over itself, and then the walls found from the pinch can
+        # differ from those which the exact checks find from where Bond stands. When a proposal
+        # fails over a wall the proposals didn't know about, they are made again knowing about it.
+        for _ in range(ROUNDS_OF_PROPOSALS):
+            unknown_walls = []
+            for proposal in _propose(level, pinch, walls, reach)[:PROPOSALS_TO_CERTIFY]:
+                witness, in_the_way = _certify(level, pinch, present, proposal)
+                if witness is not None:
+                    return witness
+                if in_the_way is not None and in_the_way not in walls + unknown_walls:
+                    unknown_walls.append(in_the_way)
+            if not unknown_walls:
+                break
+            walls = walls + unknown_walls
     return None
 
 
@@ -65,14 +86,11 @@ def find_witness(level: Level, pinch: Pinch, present: ObjectsPresent) -> Witness
 # 1. Propose, in floats
 
 
-def _propose(level: Level, pinch: Pinch, present: ObjectsPresent) -> list[_Proposal]:
-    scale = float(level.scale)
+def _propose(
+    level: Level, pinch: Pinch, walls: list[BoundarySegment], reach: float
+) -> list[_Proposal]:
     radius = float(level.bond_radius) + CLEARANCE_MARGIN
-    reach = SEARCH_RADIUS_CM * scale
-    spacing = SAMPLE_SPACING_CM * scale
-
-    region = grow_box(bounding_box([pinch.a, pinch.b]), math.ceil(reach + radius))
-    walls = walls_near(level, pinch.start_tile, region, present)
+    spacing = SAMPLE_SPACING_CM * float(level.scale)
     starts, ends = wall_arrays(walls)
 
     a = np.array([float(pinch.a[0]), float(pinch.a[1])])
@@ -134,7 +152,8 @@ def _first_fit_along(
 
 def _certify(
     level: Level, pinch: Pinch, present: ObjectsPresent, proposal: _Proposal
-) -> Witness | None:
+) -> tuple[Witness | None, BoundarySegment | None]:
+    """The witness, or failing that the wall which was in the way, if it was a wall."""
     crossing_point = lerp(pinch.a, pinch.b, Fraction(proposal.crossing))
     direction = (Fraction(proposal.direction[0]), Fraction(proposal.direction[1]))
     p = _along(crossing_point, direction, -Fraction(proposal.back))
@@ -145,20 +164,23 @@ def _certify(
         level, pinch.start_tile, pinch.a, crossing_point, present, may_touch_walls_at_ends=True
     )
     if not to_crossing.clear:
-        return None
+        return (None, to_crossing.blocker)
     crossing_tile = min(to_crossing.end_tiles)
 
     # p and q are either side of the crossing point on one straight line, so if both halves are
     # clear then so is the whole step
     to_p = trace(level, crossing_tile, crossing_point, p, present)
     to_q = trace(level, crossing_tile, crossing_point, q, present)
-    if not (to_p.clear and to_q.clear):
-        return None
+    for line in (to_p, to_q):
+        if not line.clear:
+            return (None, line.blocker)
     tile_p, tile_q = min(to_p.end_tiles), min(to_q.end_tiles)
 
-    if not (fits(level, tile_p, p, present)[0] and fits(level, tile_q, q, present)[0]):
-        return None
-    return Witness(p, q, dist2(p, q), tile_p, tile_q)
+    for tile, position in ((tile_p, p), (tile_q, q)):
+        bond_fits, overlapped = fits(level, tile, position, present)
+        if not bond_fits:
+            return (None, overlapped)
+    return (Witness(p, q, dist2(p, q), tile_p, tile_q), None)
 
 
 def _along(origin: Point, direction: Point, distance: Fraction) -> Point:

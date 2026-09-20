@@ -15,6 +15,7 @@ def build(
     tiles: dict[str, list[Point]],
     objects: dict[int, dict] | None = None,
     removed: dict[int, str] | None = None,
+    heights: dict[str, float] | None = None,
 ) -> Level:
     """Tiles are named, and are linked automatically wherever two of them share a whole edge.
     Listing a tile's name in `UNLINKED` style is not needed: give unlinked tiles different edges."""
@@ -34,7 +35,7 @@ def build(
             links.append(addresses[others[0]] if others else 0)
         raw_tiles[addresses[name]] = {
             "points": [(float(x), float(z)) for x, z in points],
-            "heights": [FLOOR] * len(points),
+            "heights": [(heights or {}).get(name, FLOOR)] * len(points),
             "room": 1,
             "links": links,
             "name": addresses[name],

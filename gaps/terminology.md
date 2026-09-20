@@ -58,6 +58,13 @@ the same place seen from above and yet have nothing to do with each other, such 
 building, or Aztec's pipes behind the glass. They are different sheets, or distant parts of one.
 So "near" always means *reachable through links without going far*, never just close from above.
 
+Where links lead round to another storey within the distance being looked at, that storey is left
+out: a tile isn't taken as near if it lies over or under one which already has been, with a metre
+or more between them. Nearer tiles are taken first, measured along the way there, so it is the far
+storey which goes. The metre is there because tiles of one floor overlap slightly where a level was
+drawn carelessly, and both of those must be kept. Storeys are 2 m apart or more. This is the only
+use made of heights. (`Level.linked_tiles_within` in `mesh.py`.)
+
 **Scaled units** - the whole-number units which tiles are stored in. Centimetres multiplied by the
 level's scale. All exact arithmetic is done in these; reports convert back to centimetres.
 

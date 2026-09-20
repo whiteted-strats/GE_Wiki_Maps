@@ -19,7 +19,7 @@ from gaps.witness import Witness, find_witness
 
 # Saved surveys are only reused if they were made with this format. Add one whenever a change to
 # the code means that old surveys would be wrong or would no longer load.
-SURVEY_FORMAT = 7
+SURVEY_FORMAT = 9
 
 # What was found at a gap
 WARP = "warp"  # a warp exists with the level exactly as dumped
@@ -88,6 +88,7 @@ def survey_level(name: str, removed: dict[int, str] | None = None) -> Survey:
 def save_survey(survey: Survey, path: Path) -> None:
     """Surveying takes a minute or so per level, and filtering and drawing don't need it redone."""
     path.parent.mkdir(parents=True, exist_ok=True)
+    survey.level.forget_caches()
     with path.open("wb") as file:
         pickle.dump(survey, file)
 

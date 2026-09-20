@@ -108,6 +108,6 @@ which objects are independent and which removals are real (destroyed, opened), t
 
 - The collision rules are the geometric ones described above, not yet checked against the game's
   own routine in the decompilation.
-- A step may not start further than 3 m from the pinch (`SEARCH_RADIUS_CM` in witness.py).
+- A step may not start further than 3 m from the pinch (`SEARCH_RADII_CM` in witness.py).
 - The walk round is searched within 4 m on a grid of 4 cm, so a passage only a little wider than
   Bond can be missed, giving "none found" when there is a way.

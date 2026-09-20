@@ -28,4 +28,13 @@ KNOWN_WARPS = [
         step_cm=110.77,
         objects_forming_gap=[0x1D9AAC],
     ),
+    KnownWarp(
+        name="TAS closed end door warp",
+        walls="016601.1 | 0x1dacac.0",
+        status=WARP,
+        width_cm=0.0,
+        step_cm=102.53,
+        objects_forming_gap=[0x1DACAC],
+        notes="Room 0x04. A hairline: 0.0000031 cm. The same door as in Bunker 1.",
+    ),
 ]

@@ -13,6 +13,7 @@ question is always "which tiles can be reached from this tile, through links, wi
 small region", see `Level.linked_tiles_within`.
 """
 
+import heapq
 import math
 import struct
 from collections import defaultdict
@@ -32,13 +33,17 @@ from gaps.exact import (
     grow_box,
     lerp,
     merge_intervals,
+    overlap_point,
     point_in_polygon,
+    polygons_overlap,
     sub,
 )
 
 Box = tuple[Num, Num, Num, Num]
 
 BOND_RADIUS_CM = 30
+STOREY_SEPARATION_CM = 100  # see Level.linked_tiles_within. Storeys are 2 m apart or more
+FLOODS_REMEMBERED = 20000  # see Level.linked_tiles_within. Only there to save time
 
 # Objects which Bond walks through: pick-ups, and the locks which sit on doors
 OUTSIDE_WALKABLE_AREA = (
@@ -61,6 +66,24 @@ class Tile:
 
     def edge(self, i: int) -> tuple[Point, Point]:
         return (self.points[i], self.points[(i + 1) % len(self.points)])
+
+    def height_at(self, point: Point) -> float:
+        """Centimetres, in floats: the height of the tile's plane above or below this point. Only
+        used to tell another storey from the same floor drawn twice, never for geometry."""
+        n = len(self.points)
+        for i in range(n):
+            (ax, az), (bx, bz), (cx, cz) = (
+                (float(x), float(z))
+                for x, z in (self.points[i - 2], self.points[i - 1], self.points[i])
+            )
+            doubled_area = (bx - ax) * (cz - az) - (bz - az) * (cx - ax)
+            if doubled_area != 0:
+                ha, hb, hc = self.heights[i - 2], self.heights[i - 1], self.heights[i]
+                x, z = float(point[0]) - ax, float(point[1]) - az
+                u = (x * (cz - az) - z * (cx - ax)) / doubled_area
+                v = (z * (bx - ax) - x * (bz - az)) / doubled_area
+                return ha + u * (hb - ha) + v * (hc - ha)
+        return self.heights[0]
 
 
 @dataclass
@@ -114,6 +137,8 @@ class Level:
     _object_segments: dict[int, list[BoundarySegment]] = field(default_factory=dict)
     _objects_on_tile: dict[int, list[int]] = field(default_factory=dict)
     _walls_at_corner: dict[Point, list[BoundarySegment]] = field(default_factory=dict)
+    _flood_cache: dict[tuple[int, Box], set[int]] = field(default_factory=dict)
+    _overlap_cache: dict[tuple[int, int], bool] = field(default_factory=dict)
 
     @property
     def bond_radius(self) -> Fraction:
@@ -131,17 +156,70 @@ class Level:
 
     def linked_tiles_within(self, start_tile: int, region: Box) -> set[int]:
         """The tiles reachable from start_tile through links, only passing through tiles whose
-        bounding box touches the region. This is what "nearby" means on a sheet."""
-        reached = {start_tile}
-        stack = [start_tile]
-        while stack:
-            for neighbour in self.tiles[stack.pop()].links:
-                if neighbour == 0 or neighbour in reached or neighbour not in self.tiles:
+        bounding box touches the region. This is what "nearby" means on a sheet.
+
+        A sheet doesn't lie over itself. Where links lead round to another storey within the
+        region, a tile is left out if, from above and inside the region, it lies over or under a
+        tile already reached, with at least STOREY_SEPARATION_CM between them. Tiles are reached
+        nearest first, measured along the way there from the middle of the region, so it is the far
+        storey which is left out. Vertical tiles have no area, so they are never left out and never
+        cause it.
+
+        The separation is there because tiles of one floor do overlap a little where the level was
+        drawn carelessly (Control's 033A08 and 033D08, by up to 1.5 cm). Those must both be kept.
+        It is the only use made of heights.
+        """
+        key = (start_tile, region)
+        if key not in self._flood_cache:
+            if len(self._flood_cache) >= FLOODS_REMEMBERED:
+                self._flood_cache.clear()
+            self._flood_cache[key] = self._flood(start_tile, region)
+        return self._flood_cache[key]
+
+    def _flood(self, start_tile: int, region: Box) -> set[int]:
+        middle = (float(region[0] + region[1]) / 2, float(region[2] + region[3]) / 2)
+        reached: set[int] = set()
+        with_area: list[Tile] = []  # those reached which aren't vertical
+        queued = {start_tile}
+        queue: list[tuple[float, int, tuple[float, float]]] = [(0.0, start_tile, middle)]
+        while queue:
+            distance, addr, position = heapq.heappop(queue)
+            tile = self.tiles[addr]
+            if not tile.is_vertical:
+                if any(self._overlap(tile, other, region) for other in with_area):
+                    continue
+                with_area.append(tile)
+            reached.add(addr)
+            for i, neighbour in enumerate(tile.links):
+                if neighbour == 0 or neighbour in queued or neighbour not in self.tiles:
                     continue
                 if boxes_overlap(self.tiles[neighbour].box, region):
-                    reached.add(neighbour)
-                    stack.append(neighbour)
+                    queued.add(neighbour)
+                    a, b = tile.edge(i)
+                    crossing = _nearest_on_edge(position, a, b)
+                    step = math.dist(position, crossing)
+                    heapq.heappush(queue, (distance + step, neighbour, crossing))
         return reached
+
+    def _overlap(self, tile: Tile, other: Tile, region: Box) -> bool:
+        """Whether one is on another storey from the other, over or under it in the region."""
+        if not boxes_overlap(tile.box, other.box):
+            return False
+        # Most pairs don't overlap at all, which holds whatever the region, so is remembered
+        pair = (min(tile.addr, other.addr), max(tile.addr, other.addr))
+        if pair not in self._overlap_cache:
+            self._overlap_cache[pair] = polygons_overlap(tile.points, other.points)
+        if not self._overlap_cache[pair]:
+            return False
+        shared = overlap_point(tile.points, other.points, region)
+        if shared is None:
+            return False
+        return abs(tile.height_at(shared) - other.height_at(shared)) >= STOREY_SEPARATION_CM
+
+    def forget_caches(self) -> None:
+        """Before saving: these can be worked out again."""
+        self._flood_cache.clear()
+        self._overlap_cache.clear()
 
     def walls_of_tiles(self, tiles: set[int]) -> list[BoundarySegment]:
         return [segment for tile in tiles for segment in self._tile_segments.get(tile, [])]
@@ -168,6 +246,17 @@ class Level:
 def snap_to_float32(value: float) -> Fraction:
     """The data files print the scale to 14 digits. The game held a float32, so recover that."""
     return Fraction(struct.unpack("f", struct.pack("f", value))[0])
+
+
+def _nearest_on_edge(position: tuple[float, float], a: Point, b: Point) -> tuple[float, float]:
+    """In floats: this only decides the order in which tiles are reached."""
+    ax, az, bx, bz = float(a[0]), float(a[1]), float(b[0]), float(b[1])
+    length2 = (bx - ax) ** 2 + (bz - az) ** 2
+    if length2 == 0:
+        return (ax, az)
+    t = ((position[0] - ax) * (bx - ax) + (position[1] - az) * (bz - az)) / length2
+    t = max(0.0, min(1.0, t))
+    return (ax + t * (bx - ax), az + t * (bz - az))
 
 
 def load_level(name: str, data: ModuleType, removed: dict[int, str] | None = None) -> Level:
