@@ -1,12 +1,15 @@
-"""Writes a survey out as tables and maps, under output/gaps/<level>/.
+"""Writes a survey out as tables and maps, under output/00_gaps/<level>/.
 
-  gaps.csv        one row per gap, easiest warps first
+  gaps.csv        one row per gap which survives the filters, easiest warps first
+  filtered.csv    the gaps which were filtered out, each with the filter and its reason
+  filter_contradictions.csv   should be empty, see gaps/filters/generic.py
   decisions.csv   every pair of walls closer than Bond's diameter, and why it was kept or dismissed
   touching.csv    unrelated walls which touch (gaps of width zero)
-  overview_*.png  each part of the level, with the gaps numbered and the walls involved highlighted
-  gap_NNN.png     a close-up of each gap
+  overview_*.svg  each part of the level, with the gaps numbered and the walls involved highlighted
+  gap_NNN.svg     a close-up of each gap, as vector graphics so it can be zoomed without limit.
+                  Filtered gaps and hairlines are only drawn faintly on the overviews
 
-and output/gaps/summary.csv, which lists the warps of every surveyed level together.
+and output/00_gaps/summary.csv, which lists the warps of every surveyed level together.
 
 The maps are deliberately plain: tiles, walls and object outlines only. As on the other maps in
 this repo, x is flipped so that they match the game's orientation.
@@ -16,18 +19,26 @@ import csv
 import importlib
 from pathlib import Path
 
+import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.axes import Axes
 
-from gaps.mesh import BoundarySegment, Level
+from gaps.filters import Contradiction
+from gaps.mesh import BOND_RADIUS_CM, BoundarySegment, Level
 from gaps.pinch import describe
 from gaps.survey import NO_WARP_FOUND, WARP, WARP_IF_REMOVED, Gap, Survey
 from lib.seperate_tile_groups import seperateGroups
 
-HAIRLINE_WIDTH_WORLD = 1  # narrower gaps (closed doors in their frames) get no number or close-up
-CLOSE_UP_HALF_SIZE_WORLD = 260
-OVERVIEW_TARGET_PIXELS = 4000  # along the longer side, as long as the scale stays within ...
-OVERVIEW_PIXELS_PER_UNIT = (0.5, 2.0)
+matplotlib.rcParams["svg.fonttype"] = "none"  # keep text as text in the close-ups
+
+# The leading 00 lists these first among the folders of output/, in file managers as well as ls
+OUTPUT_ROOT = Path("output/00_gaps")
+HAIRLINE_WIDTH_CM = 1  # narrower gaps (closed doors in their frames) get no number or close-up
+CLOSE_UP_HALF_SIZE_CM = 260  # shows a few metres of surroundings. Nothing depends on the value
+# Overviews are vector graphics, so these only set how big the numbers and lines are drawn
+# relative to the level: as if it were an image this many pixels along its longer side ...
+OVERVIEW_TARGET_PIXELS = 4000
+OVERVIEW_PIXELS_PER_UNIT = (0.5, 2.0)  # ... as long as the scale stays within these
 OVERVIEW_DPI = 100
 STATUS_COLOUR = {WARP: "red", WARP_IF_REMOVED: "darkviolet", NO_WARP_FOUND: "royalblue"}
 TILE_COLOUR = (0.86, 0.86, 0.86)
@@ -35,23 +46,34 @@ WALL_COLOUR = (0.25, 0.25, 0.25)
 OBJECT_COLOUR = "darkorange"
 
 
-def write_report(survey: Survey, output_root: Path = Path("output/gaps")) -> Path:
-    folder = output_root / survey.level.name
+def write_report(
+    survey: Survey,
+    contradictions: list[Contradiction],
+    output_root: Path = OUTPUT_ROOT,
+) -> Path:
+    """Filters must already have been applied to the survey's gaps, see gaps.filters."""
+    level = survey.level
+    folder = output_root / level.name
     folder.mkdir(parents=True, exist_ok=True)
-    for old_image in folder.glob("*.png"):
+    for old_image in [*folder.glob("*.png"), *folder.glob("*.svg")]:
         old_image.unlink()
 
-    gaps = sorted(survey.gaps, key=lambda gap: _ranking(survey.level, gap))
-    for number, gap in enumerate(gaps, start=1):
+    ranked = sorted(survey.gaps, key=lambda gap: _ranking(level, gap))
+    kept = [gap for gap in ranked if gap.filtered_by is None]
+    filtered = [gap for gap in ranked if gap.filtered_by is not None]
+    for number, gap in enumerate(kept, start=1):
         gap.id = number  # number them in the order they are listed
 
-    _write_gap_table(survey.level, gaps, folder / "gaps.csv")
+    _write_gap_table(level, kept, folder / "gaps.csv")
+    _write_filtered(level, filtered, folder / "filtered.csv")
+    _write_contradictions(level, contradictions, folder / "filter_contradictions.csv")
     _write_decisions(survey, folder / "decisions.csv")
     _write_touching(survey, folder / "touching.csv")
-    _draw_overviews(survey.level, gaps, folder)
-    for gap in gaps:
-        if not _is_hairline(survey.level, gap):
-            _draw_close_up(survey.level, gap, folder / f"gap_{gap.id:03d}.png")
+    _write_objects_left_out(level, folder / "objects_left_out.csv")
+    _draw_overviews(level, ranked, folder)
+    for gap in kept:
+        if not _is_hairline(level, gap):
+            draw_close_up(level, gap, folder / f"gap_{gap.id:03d}.svg")
     return folder
 
 
@@ -64,11 +86,11 @@ def _ranking(level: Level, gap: Gap) -> tuple:
 
 
 def _width(level: Level, gap: Gap) -> float:
-    return level.to_world(float((gap.pinch or gap.narrowest).width2) ** 0.5)
+    return level.to_cm(float((gap.pinch or gap.narrowest).width2) ** 0.5)
 
 
 def _is_hairline(level: Level, gap: Gap) -> bool:
-    return _width(level, gap) < HAIRLINE_WIDTH_WORLD
+    return _width(level, gap) < HAIRLINE_WIDTH_CM
 
 
 # ---------------------------------------------------------------------------------------------
@@ -79,13 +101,13 @@ def _write_gap_table(level: Level, gaps: list[Gap], path: Path) -> None:
     with path.open("w", newline="") as file:
         writer = csv.writer(file)
         writer.writerow(
-            ["gap", "status", "width", "step", "walk_round", "x", "z", "room", "between", "and",
-             "objects_forming_gap", "objects_in_the_way", "pinches"]
+            ["gap", "status", "width_cm", "step_cm", "walk_round_cm", "x", "z", "room", "between",
+             "and", "objects_forming_gap", "objects_in_the_way", "pinches", "key"]
         )  # fmt: skip
         for gap in gaps:
             pinch = gap.pinch or gap.narrowest
-            x, z = level.to_world_point(pinch.midpoint)
-            step = level.to_world(float(gap.witness.step2) ** 0.5) if gap.witness else None
+            x, z = level.to_cm_point(pinch.midpoint)
+            step = level.to_cm(float(gap.witness.step2) ** 0.5) if gap.witness else None
             writer.writerow(
                 [
                     gap.id,
@@ -101,6 +123,7 @@ def _write_gap_table(level: Level, gaps: list[Gap], path: Path) -> None:
                     " ".join(f"{obj:#x}" for obj in sorted(gap.needs)),
                     " ".join(f"{obj:#x}" for obj in gap.blockers),
                     len(gap.pinches),
+                    gap.key,
                 ]
             )
 
@@ -109,6 +132,60 @@ def _describe_walk_round(gap: Gap) -> str:
     if gap.witness is None:
         return ""
     return "none found" if gap.walk_round is None else f"{gap.walk_round:.0f}"
+
+
+def _write_filtered(level: Level, filtered: list[Gap], path: Path) -> None:
+    with path.open("w", newline="") as file:
+        writer = csv.writer(file)
+        writer.writerow(
+            ["key", "filter", "reason", "status", "width_cm", "x", "z", "between", "and"]
+        )
+        for gap in filtered:
+            pinch = gap.pinch or gap.narrowest
+            x, z = level.to_cm_point(pinch.midpoint)
+            writer.writerow(
+                [
+                    gap.key,
+                    gap.filtered_by.filter_name,
+                    gap.filtered_by.reason,
+                    gap.status,
+                    f"{_width(level, gap):.3f}",
+                    f"{x:.0f}",
+                    f"{z:.0f}",
+                    describe(level, pinch.first),
+                    describe(level, pinch.second),
+                ]
+            )
+
+
+def _write_contradictions(level: Level, contradictions: list[Contradiction], path: Path) -> None:
+    """Gaps which a generic filter says can't be warped through, but which have a certified warp.
+    They are kept in gaps.csv. This file should only ever hold its heading."""
+    with path.open("w", newline="") as file:
+        writer = csv.writer(file)
+        writer.writerow(["key", "filter", "filter_says", "status", "step_cm"])
+        for contradiction in contradictions:
+            gap = contradiction.gap
+            step = level.to_cm(float(gap.witness.step2) ** 0.5)
+            writer.writerow(
+                [
+                    gap.key,
+                    contradiction.filter_name,
+                    contradiction.reason,
+                    gap.status,
+                    f"{step:.2f}",
+                ]
+            )
+
+
+def _write_objects_left_out(level: Level, path: Path) -> None:
+    """Every object which takes no part in the survey, and why. Most are pick-ups, or have no
+    outline. Any which a level file asked to have removed are here too, with its reason."""
+    with path.open("w", newline="") as file:
+        writer = csv.writer(file)
+        writer.writerow(["object", "type", "reason"])
+        for addr, object_type, reason in sorted(level.skipped_objects, key=lambda entry: entry[2]):
+            writer.writerow([f"{addr:#x}", object_type, reason])
 
 
 def _write_decisions(survey: Survey, path: Path) -> None:
@@ -122,7 +199,7 @@ def _write_decisions(survey: Survey, path: Path) -> None:
                 [
                     describe(level, level.segments[decision.first]),
                     describe(level, level.segments[decision.second]),
-                    f"{decision.width_world:.3f}",
+                    f"{decision.width_cm:.3f}",
                     "yes" if decision.kept else "no",
                     decision.reason,
                     describe(level, blocker) if blocker else "",
@@ -136,7 +213,7 @@ def _write_touching(survey: Survey, path: Path) -> None:
         writer = csv.writer(file)
         writer.writerow(["x", "z", "between", "and"])
         for touch in survey.touching:
-            x, z = level.to_world_point(touch.at)
+            x, z = level.to_cm_point(touch.at)
             writer.writerow(
                 [
                     f"{x:.0f}",
@@ -147,16 +224,18 @@ def _write_touching(survey: Survey, path: Path) -> None:
             )
 
 
-def write_summary(output_root: Path = Path("output/gaps")) -> Path:
+def write_summary(output_root: Path = OUTPUT_ROOT) -> Path:
     """Gathers the warps from every level's gaps.csv into one table, shortest step first.
     Hairlines and gaps with no warp found are left to the per-level tables."""
     rows = []
     for table in sorted(output_root.glob("*/gaps.csv")):
         with table.open(newline="") as file:
             for row in csv.DictReader(file):
-                if row["step"] and float(row["width"]) >= HAIRLINE_WIDTH_WORLD:
+                if "step_cm" not in row:
+                    break  # a table written by an older version of this report
+                if row["step_cm"] and float(row["width_cm"]) >= HAIRLINE_WIDTH_CM:
                     rows.append({"level": table.parent.name, **row})
-    rows.sort(key=lambda row: (row["status"] != WARP, float(row["step"])))
+    rows.sort(key=lambda row: (row["status"] != WARP, float(row["step_cm"])))
 
     path = output_root / "summary.csv"
     with path.open("w", newline="") as file:
@@ -177,8 +256,8 @@ def _draw_overviews(level: Level, gaps: list[Gap], folder: Path) -> None:
         group_gaps = [gap for gap in gaps if (gap.pinch or gap.narrowest).start_tile in tiles]
         if not group_gaps:
             continue
-        xs = [-level.to_world(x) for tile in tiles for x, _ in level.tiles[tile].points]
-        zs = [level.to_world(z) for tile in tiles for _, z in level.tiles[tile].points]
+        xs = [-level.to_cm(x) for tile in tiles for x, _ in level.tiles[tile].points]
+        zs = [level.to_cm(z) for tile in tiles for _, z in level.tiles[tile].points]
         width, height = max(xs) - min(xs) + 200, max(zs) - min(zs) + 200
         # Small levels are drawn larger so that the numbers don't sit on top of each other
         pixels_per_unit = OVERVIEW_TARGET_PIXELS / max(width, height)
@@ -188,35 +267,38 @@ def _draw_overviews(level: Level, gaps: list[Gap], folder: Path) -> None:
         inches_per_unit = pixels_per_unit / OVERVIEW_DPI
         fig, ax = plt.subplots(figsize=(width * inches_per_unit, height * inches_per_unit))
 
-        _draw_level(ax, level, tiles)
+        draw_level(ax, level, tiles)
         for gap in group_gaps:
-            _draw_gap(ax, level, gap, prominent=not _is_hairline(level, gap), numbered=True)
+            faint = _is_hairline(level, gap) or gap.filtered_by is not None
+            draw_gap(ax, level, gap, prominent=not faint, numbered=True)
         ax.set_xlim(min(xs) - 100, max(xs) + 100)
         ax.set_ylim(min(zs) - 100, max(zs) + 100)
-        _finish(fig, ax, folder / f"overview_{index}.png", dpi=OVERVIEW_DPI)
+        finish(fig, ax, folder / f"overview_{index}.svg")
 
 
-def _draw_close_up(level: Level, gap: Gap, path: Path) -> None:
+def draw_close_up(level: Level, gap: Gap, path: Path) -> None:
     pinch = gap.pinch or gap.narrowest
-    x, z = level.to_world_point(pinch.midpoint)
-    half = CLOSE_UP_HALF_SIZE_WORLD
+    x, z = level.to_cm_point(pinch.midpoint)
+    half = _close_up_half_size(level, gap)
     region = tuple(v * float(level.scale) for v in (x - half, x + half, z - half, z + half))
     tiles = level.linked_tiles_within(pinch.start_tile, region)
 
     fig, ax = plt.subplots(figsize=(9, 9))
-    _draw_level(ax, level, tiles, label_objects=True)
-    _draw_gap(ax, level, gap, prominent=True, numbered=False)
+    draw_level(ax, level, tiles, label_objects=True)
+    draw_gap(ax, level, gap, prominent=True, numbered=False)
     if gap.witness is not None:
-        p, q = level.to_world_point(gap.witness.p), level.to_world_point(gap.witness.q)
+        p, q = level.to_cm_point(gap.witness.p), level.to_cm_point(gap.witness.q)
         ax.plot([-p[0], -q[0]], [p[1], q[1]], color="green", linewidth=1.2, zorder=6)
         for centre in (p, q):
             ax.add_patch(
-                plt.Circle((-centre[0], centre[1]), 30, fill=False, color="green", zorder=6)
+                plt.Circle(
+                    (-centre[0], centre[1]), BOND_RADIUS_CM, fill=False, color="green", zorder=6
+                )
             )
 
-    step = f"{level.to_world(float(gap.witness.step2) ** 0.5):.1f}" if gap.witness else "-"
+    step = f"{level.to_cm(float(gap.witness.step2) ** 0.5):.1f}" if gap.witness else "-"
     ax.set_title(
-        f"{level.name} gap {gap.id}: {gap.status}\n"
+        f"{level.name} {_name_of(gap)}: {gap.status}\n"
         f"width {_width(level, gap):.2f}, step {step}, "
         f"walk round {_describe_walk_round(gap) or '-'}\n"
         f"{describe(level, pinch.first)}  /  {describe(level, pinch.second)}",
@@ -224,35 +306,52 @@ def _draw_close_up(level: Level, gap: Gap, path: Path) -> None:
     )
     ax.set_xlim(-x - half, -x + half)
     ax.set_ylim(z - half, z + half)
-    _finish(fig, ax, path, dpi=100)
+    finish(fig, ax, path)
 
 
-def _draw_level(ax: Axes, level: Level, tiles: set[int], label_objects: bool = False) -> None:
+def _close_up_half_size(level: Level, gap: Gap) -> float:
+    """Half the width of the square shown, in centimetres. At least the usual size, and more if
+    that is what it takes to show both ends of the warp with Bond standing at them."""
+    if gap.witness is None:
+        return CLOSE_UP_HALF_SIZE_CM
+    x, z = level.to_cm_point((gap.pinch or gap.narrowest).midpoint)
+    ends = [level.to_cm_point(gap.witness.p), level.to_cm_point(gap.witness.q)]
+    furthest = max(max(abs(end_x - x), abs(end_z - z)) for end_x, end_z in ends)
+    return max(CLOSE_UP_HALF_SIZE_CM, furthest + 2 * BOND_RADIUS_CM)
+
+
+def _name_of(gap: Gap) -> str:
+    if gap.filtered_by is None:
+        return f"gap {gap.id}"
+    return f"filtered gap {gap.key} ({gap.filtered_by.filter_name})"
+
+
+def draw_level(ax: Axes, level: Level, tiles: set[int], label_objects: bool = False) -> None:
     for addr in tiles:
-        xs, zs = _flipped(level, level.tiles[addr].points)
+        xs, zs = flipped(level, level.tiles[addr].points)
         ax.fill(xs, zs, facecolor=TILE_COLOUR, edgecolor=TILE_COLOUR, linewidth=0.3, zorder=1)
     for wall in level.walls_of_tiles(tiles):
         _draw_segment(ax, level, wall, WALL_COLOUR, 0.6, zorder=2)
     for obj in level.objects_among_tiles(tiles):
         outline = level.objects[obj].points
-        xs, zs = _flipped(level, [*outline, outline[0]])
+        xs, zs = flipped(level, [*outline, outline[0]])
         ax.plot(xs, zs, color=OBJECT_COLOUR, linewidth=0.7, zorder=3)
         if label_objects:
             name = f"{level.objects[obj].type} {obj:#x}"
             ax.text(xs[0], zs[0], name, fontsize=5, zorder=3, clip_on=True)
 
 
-def _draw_gap(ax: Axes, level: Level, gap: Gap, prominent: bool, numbered: bool) -> None:
+def draw_gap(ax: Axes, level: Level, gap: Gap, prominent: bool, numbered: bool) -> None:
     """Highlights the walls which form the gap, and dots the line across its narrowest part.
     Hairline gaps are drawn faintly and without a number."""
     colour = STATUS_COLOUR[gap.status] if prominent else "grey"
     for pinch in gap.pinches:
         for wall in (pinch.first, pinch.second):
             _draw_segment(ax, level, wall, colour, 2.2 if prominent else 1.0, zorder=4)
-        xs, zs = _flipped(level, [pinch.a, pinch.b])
+        xs, zs = flipped(level, [pinch.a, pinch.b])
         ax.plot(xs, zs, color=colour, linewidth=1.0, linestyle=":", zorder=5)
     if prominent and numbered:
-        x, z = level.to_world_point((gap.pinch or gap.narrowest).midpoint)
+        x, z = level.to_cm_point((gap.pinch or gap.narrowest).midpoint)
         ax.annotate(
             str(gap.id), (-x, z), xytext=(6, 6), textcoords="offset points", fontsize=9,
             color=colour, fontweight="bold", zorder=7,
@@ -262,20 +361,31 @@ def _draw_gap(ax: Axes, level: Level, gap: Gap, prominent: bool, numbered: bool)
 def _draw_segment(
     ax: Axes, level: Level, segment: BoundarySegment, colour, linewidth: float, zorder: int
 ) -> None:
-    xs, zs = _flipped(level, [segment.a, segment.b])
+    xs, zs = flipped(level, [segment.a, segment.b])
     ax.plot(xs, zs, color=colour, linewidth=linewidth, zorder=zorder, solid_capstyle="round")
 
 
-def _flipped(level: Level, points: list) -> tuple[list[float], list[float]]:
-    world = [level.to_world_point(point) for point in points]
-    return [-x for x, _ in world], [z for _, z in world]
+def flipped(level: Level, points: list) -> tuple[list[float], list[float]]:
+    in_cm = [level.to_cm_point(point) for point in points]
+    return [-x for x, _ in in_cm], [z for _, z in in_cm]
 
 
-def _finish(fig, ax: Axes, path: Path, dpi: int) -> None:
+def finish(fig, ax: Axes, path: Path, dpi: int = 100) -> None:
     ax.set_aspect("equal")
     ax.axis("off")
     fig.savefig(path, dpi=dpi, bbox_inches="tight")
     plt.close(fig)
+    if path.suffix == ".svg":
+        _keep_lines_thin_when_zoomed(path)
+
+
+def _keep_lines_thin_when_zoomed(svg: Path) -> None:
+    """Close-ups are vector graphics so that they can be zoomed into without limit, which matters
+    when a gap is a fraction of a centimetre wide. Ordinarily lines get thicker as you zoom and
+    would cover such a gap, so this tells the viewer to keep every line the same width on screen."""
+    text = svg.read_text()
+    style = "<style>path { vector-effect: non-scaling-stroke; }</style>"
+    svg.write_text(text.replace("<defs>", f"{style}\n <defs>", 1))
 
 
 def _tile_groups(level: Level) -> list[set[int]]:

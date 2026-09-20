@@ -25,8 +25,8 @@ from gaps.mesh import Level
 from gaps.pinch import Pinch
 from gaps.sheet import ObjectsPresent, fits, trace, walls_near
 
-SEARCH_RADIUS_WORLD = 300  # how far back from the pinch Bond may stand, either side
-SAMPLE_SPACING_WORLD = 2  # distance between the positions tried along each line
+SEARCH_RADIUS_CM = 300  # how far back from the pinch Bond may stand, either side
+SAMPLE_SPACING_CM = 2  # distance between the positions tried along each line
 CROSSING_POINTS = (0.5, 0.25, 0.75, 0.1, 0.9)  # where on the pinch line to cross it
 ANGLES_DEGREES = range(-85, 86, 5)  # measured from straight through the gap
 PROPOSALS_TO_CERTIFY = 8
@@ -68,8 +68,8 @@ def find_witness(level: Level, pinch: Pinch, present: ObjectsPresent) -> Witness
 def _propose(level: Level, pinch: Pinch, present: ObjectsPresent) -> list[_Proposal]:
     scale = float(level.scale)
     radius = float(level.bond_radius) + CLEARANCE_MARGIN
-    reach = SEARCH_RADIUS_WORLD * scale
-    spacing = SAMPLE_SPACING_WORLD * scale
+    reach = SEARCH_RADIUS_CM * scale
+    spacing = SAMPLE_SPACING_CM * scale
 
     region = grow_box(bounding_box([pinch.a, pinch.b]), math.ceil(reach + radius))
     walls = walls_near(level, pinch.start_tile, region, present)

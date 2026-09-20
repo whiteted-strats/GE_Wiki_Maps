@@ -2,15 +2,21 @@
 
 Bond moves by teleporting each frame. He needs **line of sight** to where he is going, and he needs
 to **fit** when he gets there, but on the way he has no width. He is 60 wide (radius 30), so any gap
-narrower than 60 is one he can't walk through but might cross in a single step: a warp.
+narrower than 60 cm is one he can't walk through but might cross in a single step: a warp.
 
     python -m gaps train frigate        # or: python -m gaps all
+    python -m gaps all --reuse-surveys  # only redo the filtering and the reports: seconds, not minutes
+    python -m gaps.filters              # lists the filters and the predicates
     python -m unittest discover -s gaps/tests -t .
     ruff check gaps && ruff format gaps  # pip install -r requirements-dev.txt
 
-Results go to `output/gaps/<level>/`: `gaps.csv` (one row per gap, best first), `overview_*.png`
-(each part of the level with the gaps numbered), `gap_NNN.png` (a close-up of each), `decisions.csv`
-(every pair of walls that was looked at, and why it was kept or dismissed) and `touching.csv`.
+The words used here are defined in [terminology.md](terminology.md).
+
+Results go to `output/00_gaps/<level>/`: `gaps.csv` (one row per gap, best first), `overview_*.svg`
+(each part of the level with the gaps numbered), `gap_NNN.svg` (a close-up of each, as vector
+graphics so it can be zoomed into without limit), `decisions.csv`
+(every pair of walls that was looked at, and why it was kept or dismissed), `touching.csv`, and
+`filtered.csv` (the gaps which a filter removed, each with the filter and its reason).
 
 ## How it works, and what is trusted
 
@@ -36,6 +42,25 @@ Read the modules in this order. Each starts with an explanation.
 
 `fast.py` holds the numpy helpers used by the two searches. Nothing in it is trusted.
 
+## Filters
+
+`filters/` marks gaps which are of no interest, without deleting anything. Generic filters are code
+(`filters/generic.py`) and may only remove gaps where no warp was found. Each level can also have a
+plain Python file, `filters/levels/<level>.py`, listing groups of objects to ignore along with what
+is expected of them, so that a wrong ID stops the run. Settings are in `filters/config.py`, in
+metres.
+
+A level file can also list objects to **remove**: ones which are not really there, such as Frigate's
+doors which hang in the air above the room they are attached to. Those are left out of the level
+before it is surveyed, which changes what is found, so it is never done automatically. Removing one takes an entry in the
+level's file, and everything left out of a level is listed in `objects_left_out.csv` with the reason.
+
+To check this work, `python -m gaps all --reuse-surveys --review` draws close-ups into
+`output/00_debug/`: `filter_review/` has every gap a filter removed, named by level and filter, and
+`overhead_objects/` has every object well above its floor, named by level, type and height, with a
+table of them per level. That is how the floating doors were found. It is only an aid (`review.py`):
+nothing in the survey depends on it.
+
 ## Reading the results
 
 - **status** `warp`: works in the level exactly as dumped. `warp if objects removed`: works once the
@@ -46,14 +71,14 @@ Read the modules in this order. Each starts with an explanation.
   could be slightly lower.
 - **objects_forming_gap**: every object is treated as optional, as the data doesn't say which are
   destructible. If one of these is destroyed the gap is gone.
-- Gaps under 1 unit wide are *hairlines*, nearly all of them closed doors sitting a few thousandths
-  of a unit from their frames. They are listed last and drawn in grey without a number.
+- Gaps under 1 cm wide are *hairlines*, nearly all of them closed doors sitting a few thousandths
+  of a centimetre from their frames. They are listed last and drawn in grey without a number.
 - Doors are as they were when the level was dumped, i.e. closed. Guards are ignored.
 
 ## Known limits
 
 - The collision rules are the geometric ones described above, not yet checked against the game's
   own routine in the decompilation.
-- A step may not start further than 300 units from the pinch (`SEARCH_RADIUS_WORLD` in witness.py).
-- The walk round is searched within 400 units on a grid of 4, so a passage only a little wider than
+- A step may not start further than 3 m from the pinch (`SEARCH_RADIUS_CM` in witness.py).
+- The walk round is searched within 4 m on a grid of 4 cm, so a passage only a little wider than
   Bond can be missed, giving "none found" when there is a way.

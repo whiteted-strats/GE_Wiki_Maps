@@ -4,8 +4,8 @@ Units. The game stores tile corners as integers, and the dumper divided them by 
 Multiplying by the scale again recovers those integers exactly, so everything in this package works
 in that integer space ("scaled units"). Object outlines have been rotated by the game so they are
 not integers, but they are exact float32 values and so convert to Fractions without any loss.
-`Level.to_world` converts a scaled length back to the units used everywhere else in this repo,
-where Bond's radius is 30.
+`Level.to_cm` converts a scaled length back to the units used everywhere else in this repo, which
+are centimetres: Bond's radius is 30 cm.
 
 Sheets. Bond moves in XZ, but floors that overlap in XZ do not interact: only tile links join the
 walkable area together. So nothing here ever asks "which tiles are near this point" globally. The
@@ -20,14 +20,25 @@ from dataclasses import dataclass, field
 from fractions import Fraction
 from types import ModuleType
 
-from gaps.exact import Num, Point, bounding_box, boxes_overlap, grow_box
+from gaps.exact import (
+    Num,
+    Point,
+    bounding_box,
+    boxes_overlap,
+    contact_interval,
+    grow_box,
+    point_in_polygon,
+)
 
 Box = tuple[Num, Num, Num, Num]
 
-BOND_RADIUS_WORLD = 30
-BOND_HEIGHT_WORLD = Fraction(1673, 10)  # as lib/misc.py
+BOND_RADIUS_CM = 30
 
 # Objects which Bond walks through: pick-ups, and the locks which sit on doors
+OUTSIDE_WALKABLE_AREA = (
+    "outside the walkable area: seen from above, no part of it is over the floor"
+)
+
 NON_BLOCKING_TYPES = {"weapon", "ammo", "body_armour", "key", "lock"}
 
 
@@ -37,7 +48,7 @@ class Tile:
     name: int
     room: int
     points: list[Point]  # integers, in scaled units
-    heights: list[float]  # world units, one per point
+    heights: list[float]  # centimetres, one per point
     links: list[int]  # links[i] is the tile across the edge points[i] -> points[i+1], 0 for a wall
     box: Box
     is_vertical: bool  # zero area from above: a riser or a ledge
@@ -52,10 +63,13 @@ class LevelObject:
     type: str
     preset: int
     points: list[Point]  # Fractions, in scaled units
+    scale: float  # scaled units per centimetre, as the level's
     box: Box
     anchor_tile: int  # the tile the game says it stands on
-    sheet_tiles: frozenset[int] = frozenset()  # the tiles it stands among, see Level._place_objects
-    height_suspect: bool = False  # its height range doesn't overlap Bond standing on its tile
+    health: float
+    height_range: tuple[float, float] | None  # centimetres, as dumped
+    floor_clearance: float | None  # cm from the top of its tile up to its bottom. See below
+    sheet_tiles: frozenset[int] = frozenset()  # the tiles it stands among
 
     @property
     def is_door(self) -> bool:
@@ -85,20 +99,25 @@ class Level:
     tiles: dict[int, Tile]
     objects: dict[int, LevelObject]
     segments: list[BoundarySegment] = field(default_factory=list)
-    skipped_objects: list[tuple[int, str]] = field(default_factory=list)  # (addr, reason)
+    skipped_objects: list[tuple[int, str, str]] = field(default_factory=list)  # addr, type, why
     _tile_segments: dict[int, list[BoundarySegment]] = field(default_factory=dict)
     _object_segments: dict[int, list[BoundarySegment]] = field(default_factory=dict)
     _objects_on_tile: dict[int, list[int]] = field(default_factory=dict)
+    _walls_at_corner: dict[Point, list[BoundarySegment]] = field(default_factory=dict)
 
     @property
     def bond_radius(self) -> Fraction:
-        return BOND_RADIUS_WORLD * self.scale
+        return BOND_RADIUS_CM * self.scale
 
-    def to_world(self, scaled_length: Num) -> float:
+    def from_metres(self, metres: float) -> Fraction:
+        """A length in metres, as written in the filter settings, in scaled units."""
+        return Fraction(str(metres)) * 100 * self.scale
+
+    def to_cm(self, scaled_length: Num) -> float:
         return float(scaled_length / self.scale)
 
-    def to_world_point(self, p: Point) -> tuple[float, float]:
-        return (self.to_world(p[0]), self.to_world(p[1]))
+    def to_cm_point(self, p: Point) -> tuple[float, float]:
+        return (self.to_cm(p[0]), self.to_cm(p[1]))
 
     def linked_tiles_within(self, start_tile: int, region: Box) -> set[int]:
         """The tiles reachable from start_tile through links, only passing through tiles whose
@@ -123,22 +142,41 @@ class Level:
     def sides_of_object(self, obj: int) -> list[BoundarySegment]:
         return self._object_segments[obj]
 
+    def walls_meeting_at(self, corner: Point) -> list[BoundarySegment]:
+        """The tile walls which have an end at this corner, on whatever floor."""
+        if not self._walls_at_corner:
+            for segment in self.segments:
+                if segment.tile is not None:
+                    for end in (segment.a, segment.b):
+                        self._walls_at_corner.setdefault(end, []).append(segment)
+        return self._walls_at_corner.get(corner, [])
+
+    def room_of_object(self, obj: int) -> int:
+        return self.tiles[self.objects[obj].anchor_tile].room
+
 
 def snap_to_float32(value: float) -> Fraction:
     """The data files print the scale to 14 digits. The game held a float32, so recover that."""
     return Fraction(struct.unpack("f", struct.pack("f", value))[0])
 
 
-def load_level(name: str, data: ModuleType) -> Level:
-    """`data` is a data/<level>.py module, or anything with `tiles`, `objects` and `level_scale`."""
+def load_level(name: str, data: ModuleType, removed: dict[int, str] | None = None) -> Level:
+    """`data` is a data/<level>.py module, or anything with `tiles`, `objects` and `level_scale`.
+
+    `removed` maps objects which are to be left out of the level altogether to the reason why.
+    Only gaps/filters/levels/<level>.py can ask for that, and each one is recorded among the
+    skipped objects.
+    """
     scale = snap_to_float32(data.level_scale)
     tiles = {addr: _load_tile(addr, raw, scale) for addr, raw in data.tiles.items()}
     level = Level(name=name, scale=scale, tiles=tiles, objects={})
 
     _add_tile_walls(level)
     for addr, raw in data.objects.items():
-        _add_object(level, addr, raw)
-    _place_objects(level, data.objects)
+        if removed and addr in removed:
+            level.skipped_objects.append((addr, raw["type"], removed[addr]))
+        else:
+            _add_object(level, addr, raw)
     return level
 
 
@@ -187,10 +225,10 @@ def _add_tile_walls(level: Level) -> None:
 
 def _add_object(level: Level, addr: int, raw: dict) -> None:
     if raw["type"] in NON_BLOCKING_TYPES or raw.get("collectible"):
-        level.skipped_objects.append((addr, "Bond walks through it"))
+        level.skipped_objects.append((addr, raw["type"], "Bond walks through it"))
         return
     if not raw.get("points"):
-        level.skipped_objects.append((addr, "no collision outline in the data"))
+        level.skipped_objects.append((addr, raw["type"], "no collision outline in the data"))
         return
 
     points: list[Point] = []
@@ -201,11 +239,26 @@ def _add_object(level: Level, addr: int, raw: dict) -> None:
     if len(points) > 1 and points[0] == points[-1]:
         points.pop()
     if len(points) < 2:
-        level.skipped_objects.append((addr, "collision outline is a single point"))
+        level.skipped_objects.append((addr, raw["type"], "collision outline is a single point"))
         return
     if raw.get("tile") not in level.tiles:
         # Without its tile there is no telling which floor it is on, so it can't take part
-        level.skipped_objects.append((addr, "the tile it stands on is not in the data"))
+        level.skipped_objects.append(
+            (addr, raw["type"], "the tile it stands on is not in the data")
+        )
+        return
+
+    # Which tiles it stands among. The game gives one tile per object, and outlines usually spill
+    # over that tile's edges, so spread out from it through links as far as the outline (plus
+    # Bond's diameter) reaches, so that it only interacts with the part of the sheet it is on. This
+    # trusts the tile the game gives, which is wrong for a few doors: see gaps/terminology.md,
+    # "overhead object".
+    box = bounding_box(points)
+    sheet_tiles = frozenset(
+        level.linked_tiles_within(raw["tile"], grow_box(box, 2 * level.bond_radius))
+    )
+    if not _is_over_walkable_area(level, points, box):
+        level.skipped_objects.append((addr, raw["type"], OUTSIDE_WALKABLE_AREA))
         return
 
     level.objects[addr] = LevelObject(
@@ -213,9 +266,17 @@ def _add_object(level: Level, addr: int, raw: dict) -> None:
         type=raw["type"],
         preset=raw["preset"],
         points=points,
-        box=bounding_box(points),
+        scale=float(level.scale),
+        box=box,
         anchor_tile=raw["tile"],
+        health=raw.get("health", 0),
+        height_range=raw.get("height_range"),
+        floor_clearance=floor_clearance(level, raw),
+        sheet_tiles=sheet_tiles,
     )
+    for tile in sheet_tiles:
+        level._objects_on_tile.setdefault(tile, []).append(addr)
+
     sides = []
     for i in range(len(points)):
         a, b = points[i], points[(i + 1) % len(points)]
@@ -227,31 +288,40 @@ def _add_object(level: Level, addr: int, raw: dict) -> None:
     level._object_segments[addr] = sides
 
 
-def _place_objects(level: Level, raw_objects: dict) -> None:
-    """Works out which tiles each object stands among.
+def _is_over_walkable_area(level: Level, outline: list[Point], box: Box) -> bool:
+    """Whether any part of the outline, seen from above, is over any tile at all.
 
-    The game gives one tile per object. Outlines usually spill over that tile's edges, so we spread
-    out from it through links, as far as the object's outline (plus Bond's diameter) reaches. That
-    keeps an object on its own floor.
+    An object which isn't can never matter, so it is left out. Gaps are made of walkable area, and
+    objects only ever take away from it: a pinch line has to lie over tiles, as does a line of
+    sight. And such an object can't stop Bond fitting either, because to reach it from a tile you
+    must cross a wall, which is therefore at least as close to him as the object is.
+
+    Every tile of the level is tried, on every storey, rather than only those near the tile which
+    the object is attached to. That attachment can't be relied on: Silo and Frigate have doors
+    attached to a tile in a different room from the one they are drawn in.
     """
-    reach = 2 * level.bond_radius
-    for obj in level.objects.values():
-        obj.sheet_tiles = frozenset(
-            level.linked_tiles_within(obj.anchor_tile, grow_box(obj.box, reach))
-        )
-        for tile in obj.sheet_tiles:
-            level._objects_on_tile.setdefault(tile, []).append(obj.addr)
-        obj.height_suspect = _height_is_suspect(level, obj, raw_objects[obj.addr])
+    sides = [(outline[i], outline[(i + 1) % len(outline)]) for i in range(len(outline))]
+    for tile in level.tiles.values():
+        if not boxes_overlap(tile.box, box):
+            continue
+        if any(point_in_polygon(corner, tile.points) for corner in outline):
+            return True
+        if len(outline) >= 3 and any(point_in_polygon(corner, outline) for corner in tile.points):
+            return True
+        for i in range(len(tile.points)):
+            a, b = tile.edge(i)
+            if a != b and any(contact_interval(p, q, a, b) is not None for p, q in sides):
+                return True
+    return False
 
 
-def _height_is_suspect(level: Level, obj: LevelObject, raw: dict) -> bool:
-    """The dumped height range is known to be nonsense for some doors, so this is only a flag."""
+def floor_clearance(level: Level, raw: dict) -> float | None:
+    """How far the bottom of the object is above the highest point of the tile it is attached to,
+    in centimetres. Negative if it starts below the floor. None if the data has no heights."""
     height_range = raw.get("height_range")
     if not height_range:
-        return False
-    floor = level.tiles[obj.anchor_tile].heights
-    bond_low, bond_high = min(floor), max(floor) + float(BOND_HEIGHT_WORLD)
-    return not (min(height_range) <= bond_high and max(height_range) >= bond_low)
+        return None
+    return min(height_range) - max(level.tiles[raw["tile"]].heights)
 
 
 class SegmentGrid:

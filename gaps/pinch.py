@@ -17,7 +17,6 @@ from gaps.exact import (
     Point,
     bounding_box,
     closest_points_between_segments,
-    dist2,
     dist2_point_segment,
     grow_box,
     lerp,
@@ -57,7 +56,7 @@ class Decision:
 
     first: int  # segment ids
     second: int
-    width_world: float
+    width_cm: float
     kept: bool
     reason: str = ""
     blocker: int | None = None  # the segment id of the wall responsible, where one is
@@ -107,7 +106,7 @@ def _examine(
     if first.tile is None and second.tile is not None:
         first, second, a, b = second, first, b, a
 
-    decision = Decision(first.id, second.id, _world_width(level, width2), kept=False)
+    decision = Decision(first.id, second.id, _width_in_cm(level, width2), kept=False)
     needs = frozenset(seg.obj for seg in (first, second) if seg.obj is not None)
 
     start_tile = first.tile if first.tile is not None else _tile_under(level, first.obj, a)
@@ -179,8 +178,8 @@ def _tile_under(level: Level, obj: int | None, p: Point) -> int | None:
     return None
 
 
-def _world_width(level: Level, width2: Num) -> float:
-    return level.to_world(float(width2) ** 0.5)
+def _width_in_cm(level: Level, width2: Num) -> float:
+    return level.to_cm(float(width2) ** 0.5)
 
 
 def _ceil_sqrt(value: Num) -> int:
@@ -196,5 +195,10 @@ def describe(level: Level, segment: BoundarySegment) -> str:
     return f"{obj.type} {obj.addr:#x} (preset {obj.preset:#06x})"
 
 
-def squared_length(segment: BoundarySegment) -> Num:
-    return dist2(segment.a, segment.b)
+def feature_key(level: Level, segment: BoundarySegment) -> str:
+    """A short name for a wall which doesn't change between runs: the tile's name and which of its
+    edges, or the object's address and which of its sides."""
+    if segment.tile is not None:
+        return f"{level.tiles[segment.tile].name:06X}.{segment.edge_index}"
+    side = level.sides_of_object(segment.obj).index(segment)
+    return f"{segment.obj:#x}.{side}"

@@ -10,7 +10,7 @@ from gaps.witness import find_witness
 
 
 def widths(level, pinches) -> list[float]:
-    return sorted(round(level.to_world(float(pinch.width2) ** 0.5), 3) for pinch in pinches)
+    return sorted(round(level.to_cm(float(pinch.width2) ** 0.5), 3) for pinch in pinches)
 
 
 class NarrowCorridor(unittest.TestCase):
@@ -25,7 +25,7 @@ class NarrowCorridor(unittest.TestCase):
         )
         # The corridor is 40 long. At each end Bond stands in the mouth of it, as far in as the two
         # corners 50 apart allow: sqrt(30^2 - 25^2) = 16.58 back from the opening.
-        self.assertAlmostEqual(level.to_world(float(witness.step2) ** 0.5), 73.17, delta=0.05)
+        self.assertAlmostEqual(level.to_cm(float(witness.step2) ** 0.5), 73.17, delta=0.05)
         self.assertIsNone(walking_distance(level, pinch, witness, present=None))
 
     def test_a_corridor_exactly_as_wide_as_bond_is_not(self):

@@ -6,14 +6,20 @@ of each other are grouped. Each gap is then reported once, by its easiest warp.
 """
 
 import importlib
+import pickle
 from dataclasses import dataclass, field
+from pathlib import Path
 
 from gaps.detour import walking_distance
 from gaps.exact import bounding_box, contact_interval, dist2_point_segment, grow_box
 from gaps.mesh import Level, load_level
-from gaps.pinch import Decision, Pinch, TouchingWalls, find_pinches
+from gaps.pinch import Decision, Pinch, TouchingWalls, feature_key, find_pinches
 from gaps.sheet import ObjectsPresent, walls_near
 from gaps.witness import Witness, find_witness
+
+# Saved surveys are only reused if they were made with this format. Add one whenever a change to
+# the code means that old surveys would be wrong or would no longer load.
+SURVEY_FORMAT = 4
 
 # What was found at a gap
 WARP = "warp"  # a warp exists with the level exactly as dumped
@@ -22,14 +28,24 @@ NO_WARP_FOUND = "no warp found"  # the search found none. This is not proof that
 
 
 @dataclass
+class FilterVerdict:
+    """Which filter decided that a gap is of no interest, and why. See gaps/filters."""
+
+    filter_name: str
+    reason: str
+
+
+@dataclass
 class Gap:
-    id: int
+    id: int  # its number in the report. This changes whenever the ranking does.
     pinches: list[Pinch]
+    key: str = ""  # names the two walls of its narrowest pinch, so it stays the same between runs
     status: str = NO_WARP_FOUND
     pinch: Pinch | None = None  # the pinch which the reported warp goes through
     witness: Witness | None = None
     blockers: list[int] = field(default_factory=list)  # objects in the way, as dumped
-    walk_round: float | None = None  # world units. None: no walk found nearby (approximate)
+    walk_round: float | None = None  # centimetres. None: no walk found nearby (approximate)
+    filtered_by: FilterVerdict | None = None
 
     @property
     def narrowest(self) -> Pinch:
@@ -47,15 +63,41 @@ class Survey:
     gaps: list[Gap]
     touching: list[TouchingWalls]
     decisions: list[Decision]
+    removed: dict[int, str] = field(default_factory=dict)  # objects left out, and why
+    format: int = SURVEY_FORMAT
 
 
-def survey_level(name: str) -> Survey:
-    level = load_level(name, importlib.import_module(f"data.{name}"))
+def survey_level(name: str, removed: dict[int, str] | None = None) -> Survey:
+    """`removed`: objects to leave out of the level, see gaps.filters.objects_to_remove."""
+    removed = removed or {}
+    level = load_level(name, importlib.import_module(f"data.{name}"), removed)
     pinches, touching, decisions = find_pinches(level)
     gaps = [Gap(id=i, pinches=group) for i, group in enumerate(_group_pinches(level, pinches))]
     for gap in gaps:
+        narrowest = gap.narrowest
+        gap.key = " | ".join(
+            sorted(feature_key(level, wall) for wall in (narrowest.first, narrowest.second))
+        )
         _find_best_warp(level, gap)
-    return Survey(level, gaps, touching, decisions)
+    return Survey(level, gaps, touching, decisions, removed)
+
+
+def save_survey(survey: Survey, path: Path) -> None:
+    """Surveying takes a minute or so per level, and filtering and drawing don't need it redone."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("wb") as file:
+        pickle.dump(survey, file)
+
+
+def load_survey(path: Path) -> Survey | None:
+    """None if there is no saved survey, or it was saved by an older version of this code."""
+    if not path.exists():
+        return None
+    with path.open("rb") as file:
+        survey = pickle.load(file)
+    # Looked up on the object itself: a survey saved before there were formats has no such entry,
+    # and would otherwise pick up the default from the class
+    return survey if vars(survey).get("format") == SURVEY_FORMAT else None
 
 
 def _group_pinches(level: Level, pinches: list[Pinch]) -> list[list[Pinch]]:

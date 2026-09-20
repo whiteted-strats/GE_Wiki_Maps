@@ -21,23 +21,23 @@ from gaps.pinch import Pinch
 from gaps.sheet import ObjectsPresent, walls_near
 from gaps.witness import Witness
 
-SEARCH_RADIUS_WORLD = 400  # how far from the warp the walk may stray
-GRID_SPACING_WORLD = 4
+SEARCH_RADIUS_CM = 400  # how far from the warp the walk may stray
+GRID_SPACING_CM = 4
 ROWS_PER_BATCH = 16  # keeps the numpy arrays to a sensible size
 
 
 def walking_distance(
     level: Level, pinch: Pinch, witness: Witness, present: ObjectsPresent
 ) -> float | None:
-    """The length in world units of a walk from p to q staying near the warp, or None if the flood
+    """The length in centimetres of a walk from p to q staying near the warp, or None if the flood
     doesn't find one."""
     scale = float(level.scale)
-    spacing = GRID_SPACING_WORLD * scale
+    spacing = GRID_SPACING_CM * scale
     radius = float(level.bond_radius)
     p = np.array([float(witness.p[0]), float(witness.p[1])])
     q = np.array([float(witness.q[0]), float(witness.q[1])])
 
-    region = grow_box(bounding_box([witness.p, witness.q]), math.ceil(SEARCH_RADIUS_WORLD * scale))
+    region = grow_box(bounding_box([witness.p, witness.q]), math.ceil(SEARCH_RADIUS_CM * scale))
     walls = walls_near(level, pinch.start_tile, region, present)
     starts, ends = wall_arrays(walls)
 
@@ -59,7 +59,7 @@ def walking_distance(
     if start is None or goal is None:
         return None
     grid_distance = _shortest_path(bond_fits, start, goal)
-    return None if grid_distance is None else grid_distance * GRID_SPACING_WORLD
+    return None if grid_distance is None else grid_distance * GRID_SPACING_CM
 
 
 def _nearest_fitting_node(
