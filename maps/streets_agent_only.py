@@ -340,6 +340,6 @@ def main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GROUP_N
 
 
 if __name__ == "__main__":
-    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_STREETS_START, "streets/streets_start")
-    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_STREETS_MID, "streets/streets_mid")
-    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_STREETS_END, "streets/streets_end")
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_STREETS_START, "streets/streets_agent_start")
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_STREETS_MID, "streets/streets_agent_mid")
+    main(plt, tiles, dividingTiles, startTileName, objects, level_scale, GRP_STREETS_END, "streets/streets_agent_end")
