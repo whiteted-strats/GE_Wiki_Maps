@@ -7,6 +7,7 @@
   filter_contradictions.csv   should be empty, see gaps/filters/generic.py
   decisions.csv   every pair of walls closer than Bond's diameter, and why it was kept or dismissed
   touching.csv    unrelated walls which touch (gaps of width zero)
+  vertical_edges_left_out.csv  edges of vertical tiles which no floor leads into, so not walls
   overview_*.svg  each part of the level, with the gaps numbered and the walls involved highlighted
   gap_NNN.svg     a close-up of each gap (NNN_name.svg if it is a known warp), as vector graphics
                   so it can be zoomed without limit.
@@ -95,6 +96,7 @@ def write_report(
     _write_decisions(survey, folder / "decisions.csv")
     _write_touching(survey, folder / "touching.csv")
     _write_objects_left_out(level, folder / "objects_left_out.csv")
+    _write_vertical_edges_left_out(level, folder / "vertical_edges_left_out.csv")
 
     # Filtered and suppressed gaps are drawn faintly and without a number
     faint_keys = {gap.key for gap in [*filtered, *suppressed]}
@@ -295,6 +297,28 @@ def _write_objects_left_out(level: Level, path: Path) -> None:
         writer.writerow(["object", "type", "reason"])
         for addr, object_type, reason in sorted(level.skipped_objects, key=lambda entry: entry[2]):
             writer.writerow([f"{addr:#x}", object_type, reason])
+
+
+def _write_vertical_edges_left_out(level: Level, path: Path) -> None:
+    """Unlinked edges of vertical tiles which are not walls, or not all the way along, as no floor
+    leads into them there. See gaps.mesh."""
+    with path.open("w", newline="") as file:
+        writer = csv.writer(file)
+        writer.writerow(["edge", "room", "from_x", "from_z", "to_x", "to_z", "still_a_wall_along"])
+        for addr, edge_index, stretches in level.vertical_edges_left_out:
+            tile = level.tiles[addr]
+            (from_x, from_z), (to_x, to_z) = (level.to_cm_point(p) for p in tile.edge(edge_index))
+            kept = "; ".join(
+                "({:.1f}, {:.1f}) to ({:.1f}, {:.1f})".format(
+                    *level.to_cm_point(start), *level.to_cm_point(end)
+                )
+                for start, end in stretches
+            )
+            writer.writerow(
+                [f"{tile.name:06X}.{edge_index}", f"{tile.room:#04x}"]
+                + [f"{value:.1f}" for value in (from_x, from_z, to_x, to_z)]
+                + [kept or "none of it"]
+            )
 
 
 def _write_decisions(survey: Survey, path: Path) -> None:

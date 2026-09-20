@@ -19,7 +19,7 @@ from gaps.witness import Witness, find_witness
 
 # Saved surveys are only reused if they were made with this format. Add one whenever a change to
 # the code means that old surveys would be wrong or would no longer load.
-SURVEY_FORMAT = 5
+SURVEY_FORMAT = 7
 
 # What was found at a gap
 WARP = "warp"  # a warp exists with the level exactly as dumped

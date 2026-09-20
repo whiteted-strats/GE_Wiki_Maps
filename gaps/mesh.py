@@ -26,8 +26,14 @@ from gaps.exact import (
     bounding_box,
     boxes_overlap,
     contact_interval,
+    cross,
+    divide,
+    dot,
     grow_box,
+    lerp,
+    merge_intervals,
     point_in_polygon,
+    sub,
 )
 
 Box = tuple[Num, Num, Num, Num]
@@ -100,6 +106,10 @@ class Level:
     objects: dict[int, LevelObject]
     segments: list[BoundarySegment] = field(default_factory=list)
     skipped_objects: list[tuple[int, str, str]] = field(default_factory=list)  # addr, type, why
+    # Vertical tiles' edges which aren't walls all the way along: tile, edge, the parts which are
+    vertical_edges_left_out: list[tuple[int, int, list[tuple[Point, Point]]]] = field(
+        default_factory=list
+    )
     _tile_segments: dict[int, list[BoundarySegment]] = field(default_factory=dict)
     _object_segments: dict[int, list[BoundarySegment]] = field(default_factory=dict)
     _objects_on_tile: dict[int, list[int]] = field(default_factory=dict)
@@ -207,20 +217,72 @@ def _load_tile(addr: int, raw: dict, scale: Fraction) -> Tile:
 
 
 def _add_tile_walls(level: Level) -> None:
+    """Every edge with no link is a wall. On vertical tiles, only where floor leads into it.
+
+    The game only meets an edge by walking into its tile through links, and then only when trying
+    to leave across it (see walkAcrossTiles in lib/path_finding.py). From above a vertical tile is
+    a line, so it can only be walked into across a floor tile's edge which is linked to it. Where
+    that happens and the vertical tile has no link onwards, the floor has a wall there: the floor
+    tile's own edge doesn't show it, being linked. Anywhere else along it, nothing can be stopped
+    by the vertical tile's edge. One lies right across a doorway which Bond walks through: the
+    skirting of Facility's room 0x3d, by door 0x1c9794. Those stretches are recorded in
+    `vertical_edges_left_out`.
+    """
     for tile in level.tiles.values():
         for i, neighbour in enumerate(tile.links):
             a, b = tile.edge(i)
             if neighbour != 0 or a == b:
                 continue  # a == b is the end of a vertical tile, which has no length from above
-            segment = BoundarySegment(
-                id=len(level.segments),
-                a=a,
-                b=b,
-                tile=tile.addr,
-                edge_index=i,
-            )
-            level.segments.append(segment)
-            level._tile_segments.setdefault(tile.addr, []).append(segment)
+            stretches = [(a, b)]
+            if tile.is_vertical:
+                stretches = _stretches_floor_leads_into(level, tile, a, b)
+                if stretches != [(a, b)]:
+                    level.vertical_edges_left_out.append((tile.addr, i, stretches))
+            for start, end in stretches:
+                segment = BoundarySegment(
+                    id=len(level.segments), a=start, b=end, tile=tile.addr, edge_index=i
+                )
+                level.segments.append(segment)
+                level._tile_segments.setdefault(tile.addr, []).append(segment)
+
+
+def _stretches_floor_leads_into(
+    level: Level, vertical: Tile, a: Point, b: Point
+) -> list[tuple[Point, Point]]:
+    """The parts of a vertical tile's edge ab which lie along a floor tile's edge that is linked
+    to the vertical tile, or to another vertical tile joined to it in the same line."""
+    direction = sub(b, a)
+    length2 = dot(direction, direction)
+
+    def in_line(tile: Tile) -> bool:
+        return tile.is_vertical and all(cross(direction, sub(p, a)) == 0 for p in tile.points)
+
+    joined = {vertical.addr}
+    to_visit = [vertical]
+    while to_visit:
+        for neighbour in to_visit.pop().links:
+            if (
+                neighbour in level.tiles
+                and neighbour not in joined
+                and in_line(level.tiles[neighbour])
+            ):
+                joined.add(neighbour)
+                to_visit.append(level.tiles[neighbour])
+
+    # Every floor tile which leads in is itself a link of one of the joined tiles
+    leading_in = []
+    for addr in joined:
+        for neighbour in level.tiles[addr].links:
+            floor = level.tiles.get(neighbour)
+            if floor is None or floor.is_vertical:
+                continue
+            for i, link in enumerate(floor.links):
+                if link in joined:
+                    along = [divide(dot(sub(p, a), direction), length2) for p in floor.edge(i)]
+                    leading_in.append((max(0, min(along)), min(1, max(along))))
+    covered = merge_intervals([(low, high) for low, high in leading_in if low < high])
+    return [(a, b) if (low, high) == (0, 1) else (lerp(a, b, low), lerp(a, b, high))
+            for low, high in covered]  # fmt: skip
 
 
 def _add_object(level: Level, addr: int, raw: dict) -> None:

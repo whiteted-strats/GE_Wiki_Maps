@@ -20,4 +20,13 @@ KNOWN_WARPS = [
         objects_forming_gap=[0x1C5018],
         notes="Room 0x13, between another box and the same wall.",
     ),
+    KnownWarp(
+        name="closed elevator door warp",
+        walls="0x1cd580.0 | 0x1cd680.3",
+        status=WARP,
+        width_cm=0.0,
+        step_cm=67.46,
+        objects_forming_gap=[0x1CD580, 0x1CD680],
+        notes="Room 0x3f, between the two doors of the elevator. A hairline: 0.00024 cm.",
+    ),
 ]
