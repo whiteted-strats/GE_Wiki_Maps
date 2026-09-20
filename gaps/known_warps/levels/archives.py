@@ -39,4 +39,13 @@ KNOWN_WARPS = [
         notes="Room 0x37, upstairs. A hairline: 0.000080 cm. There is a pane in the same place "
         "downstairs.",
     ),
+    KnownWarp(
+        name="TAS final door warp",
+        walls="017510.1 | 0x1d23c8.2",
+        status=WARP,
+        width_cm=0.0,
+        step_cm=95.52,
+        objects_forming_gap=[0x1D23C8],
+        notes="Room 0x2f. A hairline: 0.0000083 cm. The closed door between the safe and the end.",
+    ),
 ]
