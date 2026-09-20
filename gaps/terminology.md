@@ -105,6 +105,18 @@ interesting than a squeeze past a crate. This is approximate. (`detour.py`.)
 narrowest pinch, e.g. `142310.0 | 142510.1` (tile name and which edge) or `0x1e990c.2` (object and
 which side). Gap *numbers* are friendlier but change whenever the ranking or the filters do.
 
+**Variant** - a gap which is really the same warp as another: the step found for one passes
+through a pinch line of the other, as when a slot has two tight spots, or the same squeeze is
+measured against two different objects. Gaps joined like this form one warp. The one with the
+shortest step is the *main* gap, and is what the tables, maps and names refer to. The rest are its
+variants: listed in `variants.csv`, and drawn only with `--variants`. (`variants.py`.)
+
+**Known warp** - a gap which has been given a name, in `known_warps/levels/<level>.py`, together
+with what the survey found for it: its status, width, step and objects. It is tied to the two
+walls of one of its pinches, not to its number. Every run checks that each is still there, still
+unfiltered, still as recorded, and that a warp no longer than the recorded step is still found, which makes them a regression test of the whole tool.
+Their close-ups are named after them: `006_pipe-warp.svg`.
+
 ## Filters
 
 **Filter** - a rule which marks a gap as being of no interest. Nothing is deleted: the gap gains a
@@ -160,6 +172,10 @@ that pinch. Walking from his centre parallel to the pinch line, you leave the po
 radius, and since you can't cross the pinch line that way, you left through a wall. Measured in any
 other direction his disc might only be poking out through the opening. (`filters/pocket.py`.)
 
+There are three ways for a level's file to hide things, from strongest to mildest: *remove* an
+object (it isn't really there), *ignore* objects (gaps they form are of no interest), and
+*suppress* a single warp (it is real, but not worth telling anyone about).
+
 **Ignored objects** - per level, in `filters/levels/<level>.py`: a named group of objects of no
 interest to the speedrun, with a reason. A gap is filtered if every one of its pinches is formed by
 an object of the group.
@@ -178,6 +194,17 @@ as an aid to finding them. It takes an entry in the level's file to remove one.
 
 **Floor clearance** - how far the bottom of an object is above the highest point of the tile it is
 attached to. Negative if it starts below the floor.
+
+**Suppressed warp** - a real warp which a level's file hides, one at a time, because it is of no
+interest: usually a big gap beside a crate which anyone looking at the map would see. Unlike a
+generic filter it makes no claim that the warp is impossible. Each entry gives a reason and is
+checked: its status, its exact width, a step no longer than recorded, and the complete list of
+*nearby objects*. Listed in `suppressed.csv`, drawn faintly. (`filters/suppressed.py`.)
+
+**Nearby objects** - for a suppressed warp, every object any part of which is within 2 m of its
+pinch line, on the same sheet, each given by address with the predicates it should pass. If
+anything unlisted is near, the run stops: the warp is not as simple as was claimed. Measured from
+the pinch line, which is exact, rather than from the ends of the step, which come from a search.
 
 **Expectations** - what a level file says its group should look like: how many objects, which room,
 which predicates they all pass, how spread out they may be, and how far above the floor they are. They repeat what the list of objects

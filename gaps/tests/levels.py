@@ -58,20 +58,29 @@ def crate(addr: int, tile_addr: int, x: float, z: float, size: float) -> dict:
     }
 
 
-def two_rooms(corridor_width: int, riser: bool = False) -> Level:
-    """Two 300 x 300 rooms joined by a corridor 40 long. With `riser`, a vertical tile (one with no
-    area from above, like the face of a step) sits across the middle of the corridor."""
+def two_rooms(corridor_width: int, riser: bool = False, corridor_length: int = 40) -> Level:
+    """Two 300 x 300 rooms joined by a corridor, 40 long unless told otherwise. With `riser`, a
+    vertical tile (one with no area from above, like the face of a step) sits across the middle of
+    the corridor."""
     low, high = 150 - corridor_width // 2, 150 - corridor_width // 2 + corridor_width
+    middle, far = 300 + corridor_length // 2, 300 + corridor_length
     tiles = {
         "left room": [(0, 0), (0, 300), (300, 300), (300, high), (300, low), (300, 0)],
-        "right room": [(340, 0), (340, low), (340, high), (340, 300), (640, 300), (640, 0)],
+        "right room": [
+            (far, 0),
+            (far, low),
+            (far, high),
+            (far, 300),
+            (far + 300, 300),
+            (far + 300, 0),
+        ],
     }
     if riser:
-        tiles["corridor, near half"] = [(300, low), (300, high), (320, high), (320, low)]
-        tiles["riser"] = [(320, low), (320, high), (320, high), (320, low)]
-        tiles["corridor, far half"] = [(320, low), (320, high), (340, high), (340, low)]
+        tiles["corridor, near half"] = [(300, low), (300, high), (middle, high), (middle, low)]
+        tiles["riser"] = [(middle, low), (middle, high), (middle, high), (middle, low)]
+        tiles["corridor, far half"] = [(middle, low), (middle, high), (far, high), (far, low)]
     else:
-        tiles["corridor"] = [(300, low), (300, high), (340, high), (340, low)]
+        tiles["corridor"] = [(300, low), (300, high), (far, high), (far, low)]
     return build(tiles)
 
 

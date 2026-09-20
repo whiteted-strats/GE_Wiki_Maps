@@ -19,7 +19,7 @@ from gaps.witness import Witness, find_witness
 
 # Saved surveys are only reused if they were made with this format. Add one whenever a change to
 # the code means that old surveys would be wrong or would no longer load.
-SURVEY_FORMAT = 4
+SURVEY_FORMAT = 5
 
 # What was found at a gap
 WARP = "warp"  # a warp exists with the level exactly as dumped
@@ -40,12 +40,15 @@ class Gap:
     id: int  # its number in the report. This changes whenever the ranking does.
     pinches: list[Pinch]
     key: str = ""  # names the two walls of its narrowest pinch, so it stays the same between runs
+    name: str = ""  # if it is a known warp, see gaps/known_warps
+    variant_of: str = ""  # the key of its main gap, if it is a variant: see gaps/variants.py
     status: str = NO_WARP_FOUND
     pinch: Pinch | None = None  # the pinch which the reported warp goes through
     witness: Witness | None = None
     blockers: list[int] = field(default_factory=list)  # objects in the way, as dumped
     walk_round: float | None = None  # centimetres. None: no walk found nearby (approximate)
     filtered_by: FilterVerdict | None = None
+    suppressed_by: FilterVerdict | None = None  # a real warp, hidden: see filters/suppressed.py
 
     @property
     def narrowest(self) -> Pinch:

@@ -50,6 +50,10 @@ plain Python file, `filters/levels/<level>.py`, listing groups of objects to ign
 is expected of them, so that a wrong ID stops the run. Settings are in `filters/config.py`, in
 metres.
 
+A level file can also **suppress** a real warp, one at a time, with a reason and with checks that it
+is as obvious as claimed, including the complete list of objects within 2 m of it
+(`filters/suppressed.py`). This is the only way a real warp is ever hidden.
+
 A level file can also list objects to **remove**: ones which are not really there, such as Frigate's
 doors which hang in the air above the room they are attached to. Those are left out of the level
 before it is surveyed, which changes what is found, so it is never done automatically. Removing one takes an entry in the
@@ -74,6 +78,30 @@ nothing in the survey depends on it.
 - Gaps under 1 cm wide are *hairlines*, nearly all of them closed doors sitting a few thousandths
   of a centimetre from their frames. They are listed last and drawn in grey without a number.
 - Doors are as they were when the level was dumped, i.e. closed. Guards are ignored.
+
+## Known warps
+
+`known_warps/levels/<level>.py` names particular warps and records what was found for each. Every
+run checks them and says loudly if one has gone, been filtered out, or changed at all, and the run
+then exits with an error. Their names appear in the tables, on the maps and in the file names.
+
+## Parked, to come back to
+
+**Warps which imagine objects missing, and the chaining of pinches into gaps.** Two things which
+turn out to be the same question.
+
+- Pinches are grouped into a gap if each is within 30 cm of another, and that chains: Bunker 1's
+  glass (six door objects, 41 pinches, 2.3 m across) is a single gap, so only one of the six
+  different warps through it is reported, and its mirror image on the other side is hidden. 24 of
+  the 1,161 gaps are chains longer than 60 cm, nearly all among objects. For gaps with a warp the
+  variants rule is the better way to group, but it can't replace chaining for pinches with no
+  warp, as it needs a step to test.
+- "Warp if objects removed" imagines every object gone except those forming the pinch, and lists as
+  in the way only those the step found collides with. It doesn't consider which removals are real
+  states of the game. The panes of the glass are surely one door, so "one pane gone" never happens.
+
+Fixing the grouping first would mostly produce more warps of the second kind. So decide first
+which objects are independent and which removals are real (destroyed, opened), then regroup.
 
 ## Known limits
 

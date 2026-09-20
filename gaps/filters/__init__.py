@@ -4,7 +4,9 @@ Nothing is ever deleted. A filtered gap keeps everything that was found out abou
 `filtered_by` saying which filter caught it and why. The report lists them all in filtered.csv.
 
   generic.py      rules for every level, in code. They claim a warp is impossible.
-  levels/*.py     per level: objects which are of no interest to the speedrun, as plain data
+  levels/*.py     per level, as plain data: objects to ignore, objects to remove, and real warps
+                  to suppress
+  suppressed.py   hiding a real warp, which only ever happens one warp at a time, with checks
   predicates.py   the named tests which level files use to describe their objects
   config.py       the settings of the generic filters
 """
@@ -15,6 +17,7 @@ from types import ModuleType
 
 from gaps.filters.generic import GENERIC_FILTERS
 from gaps.filters.groups import ObjectGroup, check_group
+from gaps.filters.suppressed import apply_suppressions
 from gaps.mesh import Level, load_level
 from gaps.survey import NO_WARP_FOUND, FilterVerdict, Gap
 
@@ -53,6 +56,12 @@ def apply_filters(level: Level, gaps: list[Gap]) -> list[Contradiction]:
 
 def ignored_groups(level: Level) -> list[ObjectGroup]:
     return _groups_in_level_file(level.name, "IGNORE_OBJECTS")
+
+
+def suppress_warps(level: Level, gaps: list[Gap]) -> None:
+    """Hides the real warps listed as SUPPRESSED_WARPS in gaps/filters/levels/<level>.py. To be
+    called once variants have been marked. See gaps/filters/suppressed.py."""
+    apply_suppressions(level, gaps, _groups_in_level_file(level.name, "SUPPRESSED_WARPS"))
 
 
 def objects_to_remove(name: str, data: ModuleType) -> dict[int, str]:

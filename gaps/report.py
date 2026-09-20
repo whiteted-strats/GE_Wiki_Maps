@@ -1,12 +1,15 @@
 """Writes a survey out as tables and maps, under output/00_gaps/<level>/.
 
   gaps.csv        one row per gap which survives the filters, easiest warps first
+  variants.csv    gaps which are the same warp as a shorter one in gaps.csv: see gaps/variants.py
   filtered.csv    the gaps which were filtered out, each with the filter and its reason
+  suppressed.csv  real warps hidden by the level's file, each with its reason
   filter_contradictions.csv   should be empty, see gaps/filters/generic.py
   decisions.csv   every pair of walls closer than Bond's diameter, and why it was kept or dismissed
   touching.csv    unrelated walls which touch (gaps of width zero)
   overview_*.svg  each part of the level, with the gaps numbered and the walls involved highlighted
-  gap_NNN.svg     a close-up of each gap, as vector graphics so it can be zoomed without limit.
+  gap_NNN.svg     a close-up of each gap (NNN_name.svg if it is a known warp), as vector graphics
+                  so it can be zoomed without limit.
                   Filtered gaps and hairlines are only drawn faintly on the overviews
 
 and output/00_gaps/summary.csv, which lists the warps of every surveyed level together.
@@ -17,6 +20,8 @@ this repo, x is flipped so that they match the game's orientation.
 
 import csv
 import importlib
+import re
+from collections import Counter
 from pathlib import Path
 
 import matplotlib
@@ -49,9 +54,11 @@ OBJECT_COLOUR = "darkorange"
 def write_report(
     survey: Survey,
     contradictions: list[Contradiction],
+    draw_variants: bool = False,
     output_root: Path = OUTPUT_ROOT,
 ) -> Path:
-    """Filters must already have been applied to the survey's gaps, see gaps.filters."""
+    """Filters must already have been applied to the survey's gaps, and variants marked: see
+    gaps.filters and gaps.variants."""
     level = survey.level
     folder = output_root / level.name
     folder.mkdir(parents=True, exist_ok=True)
@@ -59,22 +66,53 @@ def write_report(
         old_image.unlink()
 
     ranked = sorted(survey.gaps, key=lambda gap: _ranking(level, gap))
-    kept = [gap for gap in ranked if gap.filtered_by is None]
+    by_key = {gap.key: gap for gap in ranked}
     filtered = [gap for gap in ranked if gap.filtered_by is not None]
+    # A suppressed warp takes its variants with it
+    suppressed = [
+        gap
+        for gap in ranked
+        if gap.filtered_by is None and by_key[gap.variant_of or gap.key].suppressed_by is not None
+    ]
+    unsuppressed = [gap for gap in ranked if gap.filtered_by is None and gap not in suppressed]
+    variants = [gap for gap in unsuppressed if gap.variant_of]
+    kept = [gap for gap in unsuppressed if not gap.variant_of]
     for number, gap in enumerate(kept, start=1):
         gap.id = number  # number them in the order they are listed
+    main_of = {gap.key: gap for gap in kept}
 
     _write_gap_table(level, kept, folder / "gaps.csv")
+    _write_variants(level, variants, main_of, folder / "variants.csv")
     _write_filtered(level, filtered, folder / "filtered.csv")
+    _write_suppressed(level, suppressed, by_key, folder / "suppressed.csv")
     _write_contradictions(level, contradictions, folder / "filter_contradictions.csv")
     _write_decisions(survey, folder / "decisions.csv")
     _write_touching(survey, folder / "touching.csv")
     _write_objects_left_out(level, folder / "objects_left_out.csv")
-    _draw_overviews(level, ranked, folder)
+
+    # Filtered and suppressed gaps are drawn faintly and without a number
+    faint_keys = {gap.key for gap in [*filtered, *suppressed]}
+    shown = [gap for gap in ranked if draw_variants or not gap.variant_of or gap.key in faint_keys]
+    _draw_overviews(level, shown, faint_keys, folder)
     for gap in kept:
         if not _is_hairline(level, gap):
-            draw_close_up(level, gap, folder / f"gap_{gap.id:03d}.svg")
+            draw_close_up(level, gap, folder / f"{file_name_of(gap)}.svg")
+    if draw_variants:
+        numbers: Counter = Counter()
+        for gap in variants:
+            main = main_of[gap.variant_of]
+            numbers[main.key] += 1
+            gap.id = main.id  # so that it is titled and labelled as belonging to its main gap
+            gap.name = f"{main.name} variant {numbers[main.key]}".strip()
+            draw_close_up(level, gap, folder / f"{file_name_of(gap)}.svg")
     return folder
+
+
+def file_name_of(gap: Gap) -> str:
+    """gap_003, or 003_pipe-warp if it is a known warp."""
+    if not gap.name:
+        return f"gap_{gap.id:03d}"
+    return f"{gap.id:03d}_" + re.sub(r"[^a-z0-9]+", "-", gap.name.lower()).strip("-")
 
 
 def _ranking(level: Level, gap: Gap) -> tuple:
@@ -101,8 +139,8 @@ def _write_gap_table(level: Level, gaps: list[Gap], path: Path) -> None:
     with path.open("w", newline="") as file:
         writer = csv.writer(file)
         writer.writerow(
-            ["gap", "status", "width_cm", "step_cm", "walk_round_cm", "x", "z", "room", "between",
-             "and", "objects_forming_gap", "objects_in_the_way", "pinches", "key"]
+            ["gap", "name", "status", "width_cm", "step_cm", "walk_round_cm", "x", "z", "room",
+             "between", "and", "objects_forming_gap", "objects_in_the_way", "pinches", "key"]
         )  # fmt: skip
         for gap in gaps:
             pinch = gap.pinch or gap.narrowest
@@ -111,6 +149,7 @@ def _write_gap_table(level: Level, gaps: list[Gap], path: Path) -> None:
             writer.writerow(
                 [
                     gap.id,
+                    gap.name,
                     gap.status,
                     f"{_width(level, gap):.3f}",
                     f"{step:.2f}" if step is not None else "",
@@ -134,6 +173,35 @@ def _describe_walk_round(gap: Gap) -> str:
     return "none found" if gap.walk_round is None else f"{gap.walk_round:.0f}"
 
 
+def _write_variants(level: Level, variants: list[Gap], main_of: dict[str, Gap], path: Path) -> None:
+    """Gaps which the step of another, shorter warp passes through, so are counted as that warp."""
+    with path.open("w", newline="") as file:
+        writer = csv.writer(file)
+        writer.writerow(
+            ["variant_of_gap", "name", "key", "status", "width_cm", "step_cm", "x", "z", "between",
+             "and", "objects_forming_gap", "objects_in_the_way"]
+        )  # fmt: skip
+        for gap in variants:
+            main = main_of[gap.variant_of]
+            x, z = level.to_cm_point(gap.pinch.midpoint)
+            writer.writerow(
+                [
+                    main.id,
+                    main.name,
+                    gap.key,
+                    gap.status,
+                    f"{_width(level, gap):.3f}",
+                    f"{level.to_cm(float(gap.witness.step2) ** 0.5):.2f}",
+                    f"{x:.0f}",
+                    f"{z:.0f}",
+                    describe(level, gap.pinch.first),
+                    describe(level, gap.pinch.second),
+                    " ".join(f"{obj:#x}" for obj in sorted(gap.needs)),
+                    " ".join(f"{obj:#x}" for obj in gap.blockers),
+                ]
+            )
+
+
 def _write_filtered(level: Level, filtered: list[Gap], path: Path) -> None:
     with path.open("w", newline="") as file:
         writer = csv.writer(file)
@@ -154,6 +222,33 @@ def _write_filtered(level: Level, filtered: list[Gap], path: Path) -> None:
                     f"{z:.0f}",
                     describe(level, pinch.first),
                     describe(level, pinch.second),
+                ]
+            )
+
+
+def _write_suppressed(
+    level: Level, suppressed: list[Gap], by_key: dict[str, Gap], path: Path
+) -> None:
+    """Real warps which the level's file says to hide, and why. See gaps/filters/suppressed.py."""
+    with path.open("w", newline="") as file:
+        writer = csv.writer(file)
+        writer.writerow(
+            ["key", "reason", "status", "width_cm", "step_cm", "x", "z", "between", "and"]
+        )
+        for gap in suppressed:
+            main = by_key[gap.variant_of or gap.key]
+            x, z = level.to_cm_point(gap.pinch.midpoint)
+            writer.writerow(
+                [
+                    gap.key,
+                    main.suppressed_by.reason + (" (a variant of it)" if gap.variant_of else ""),
+                    gap.status,
+                    f"{_width(level, gap):.3f}",
+                    f"{level.to_cm(float(gap.witness.step2) ** 0.5):.2f}",
+                    f"{x:.0f}",
+                    f"{z:.0f}",
+                    describe(level, gap.pinch.first),
+                    describe(level, gap.pinch.second),
                 ]
             )
 
@@ -239,7 +334,8 @@ def write_summary(output_root: Path = OUTPUT_ROOT) -> Path:
 
     path = output_root / "summary.csv"
     with path.open("w", newline="") as file:
-        writer = csv.DictWriter(file, fieldnames=list(rows[0]) if rows else ["level"])
+        columns = list(dict.fromkeys(column for row in rows for column in row)) or ["level"]
+        writer = csv.DictWriter(file, fieldnames=columns, restval="")
         writer.writeheader()
         writer.writerows(rows)
     return path
@@ -249,7 +345,7 @@ def write_summary(output_root: Path = OUTPUT_ROOT) -> Path:
 # Maps
 
 
-def _draw_overviews(level: Level, gaps: list[Gap], folder: Path) -> None:
+def _draw_overviews(level: Level, gaps: list[Gap], faint_keys: set[str], folder: Path) -> None:
     """One map per part of the level, split up the same way as the level's own maps so that floors
     which overlap from above are drawn separately."""
     for index, tiles in enumerate(_tile_groups(level)):
@@ -269,7 +365,7 @@ def _draw_overviews(level: Level, gaps: list[Gap], folder: Path) -> None:
 
         draw_level(ax, level, tiles)
         for gap in group_gaps:
-            faint = _is_hairline(level, gap) or gap.filtered_by is not None
+            faint = _is_hairline(level, gap) or gap.key in faint_keys
             draw_gap(ax, level, gap, prominent=not faint, numbered=True)
         ax.set_xlim(min(xs) - 100, max(xs) + 100)
         ax.set_ylim(min(zs) - 100, max(zs) + 100)
@@ -321,8 +417,10 @@ def _close_up_half_size(level: Level, gap: Gap) -> float:
 
 
 def _name_of(gap: Gap) -> str:
+    if gap.suppressed_by is not None:
+        return f"suppressed warp {gap.key}"
     if gap.filtered_by is None:
-        return f"gap {gap.id}"
+        return f"gap {gap.id}" + (f" ({gap.name})" if gap.name else "")
     return f"filtered gap {gap.key} ({gap.filtered_by.filter_name})"
 
 
@@ -353,7 +451,8 @@ def draw_gap(ax: Axes, level: Level, gap: Gap, prominent: bool, numbered: bool) 
     if prominent and numbered:
         x, z = level.to_cm_point((gap.pinch or gap.narrowest).midpoint)
         ax.annotate(
-            str(gap.id), (-x, z), xytext=(6, 6), textcoords="offset points", fontsize=9,
+            f"{gap.id} {gap.name}".strip(), (-x, z), xytext=(6, 6), textcoords="offset points",
+            fontsize=9,
             color=colour, fontweight="bold", zorder=7,
         )  # fmt: skip
 

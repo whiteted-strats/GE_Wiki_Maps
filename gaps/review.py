@@ -3,6 +3,7 @@
 `python -m gaps <levels> --review` writes, for every level together, under output/00_debug/:
 
   filter_review/      a close-up of every gap which a filter removed, to check the filters
+  suppressed_review/  a close-up of every real warp which a level's file hides
   overhead_objects/   a close-up of every object which is well above the tile it is attached to,
                       and a table of them per level. This is how Frigate's floating doors were
                       found. It only points objects out: leaving one out of a level takes an entry
@@ -30,6 +31,8 @@ def write_review(survey: Survey) -> None:
     """Filters must already have been applied to the survey's gaps."""
     filtered = [gap for gap in survey.gaps if gap.filtered_by is not None]
     _draw_filtered_for_review(survey.level, filtered, DEBUG_ROOT / "filter_review")
+    suppressed = [gap for gap in survey.gaps if gap.suppressed_by is not None]
+    _draw_suppressed_for_review(survey.level, suppressed, DEBUG_ROOT / "suppressed_review")
 
     overhead = _overhead_objects(survey)
     folder = DEBUG_ROOT / "overhead_objects"
@@ -51,6 +54,16 @@ def _draw_filtered_for_review(level: Level, filtered: list[Gap], folder: Path) -
         numbers[filter_name] += 1
         name = f"{level.name}_{filter_name}_{numbers[filter_name]:03d}.svg"
         report.draw_close_up(level, gap, folder / name)
+
+
+def _draw_suppressed_for_review(level: Level, suppressed: list[Gap], folder: Path) -> None:
+    """Close-ups of the real warps which the level's file hides, for checking that each is as
+    obvious as its entry says: bunker_2_001.svg."""
+    folder.mkdir(parents=True, exist_ok=True)
+    for old_image in folder.glob(f"{level.name}_*.svg"):
+        old_image.unlink()
+    for number, gap in enumerate(suppressed, start=1):
+        report.draw_close_up(level, gap, folder / f"{level.name}_{number:03d}.svg")
 
 
 @dataclass

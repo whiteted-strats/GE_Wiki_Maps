@@ -6,6 +6,7 @@ python -m gaps all --reuse-surveys
 
 import argparse
 import importlib
+import sys
 import time
 from collections import Counter
 
@@ -14,10 +15,12 @@ import matplotlib
 matplotlib.use("Agg")
 
 import data
-from gaps.filters import apply_filters, objects_to_remove
+from gaps.filters import apply_filters, objects_to_remove, suppress_warps
+from gaps.known_warps import check_known_warps
 from gaps.report import OUTPUT_ROOT, write_report, write_summary
 from gaps.review import write_review
 from gaps.survey import load_survey, save_survey, survey_level
+from gaps.variants import mark_variants
 
 
 def main() -> None:
@@ -30,6 +33,12 @@ def main() -> None:
         "filtering and the reports. Use this when working on filters.",
     )
     parser.add_argument(
+        "--variants",
+        action="store_true",
+        help="also draw the variants of each warp: other gaps which the same step passes through. "
+        "They are always listed in variants.csv",
+    )
+    parser.add_argument(
         "--review",
         action="store_true",
         help="also draw the close-ups for checking our own work, into output/00_debug/: every gap "
@@ -37,6 +46,7 @@ def main() -> None:
     )
     arguments = parser.parse_args()
 
+    anything_wrong = False
     for name in data.__all__ if arguments.levels == ["all"] else arguments.levels:
         started = time.time()
         saved = OUTPUT_ROOT / name / "survey.pickle"
@@ -52,24 +62,36 @@ def main() -> None:
             save_survey(survey, saved)
 
         contradictions = apply_filters(survey.level, survey.gaps)
-        folder = write_report(survey, contradictions)
+        mark_variants(survey.level, survey.gaps)
+        suppress_warps(survey.level, survey.gaps)
+        problems = check_known_warps(survey.level, survey.gaps)
+        anything_wrong = anything_wrong or bool(contradictions or problems)
+        folder = write_report(survey, contradictions, arguments.variants)
         if arguments.review:
             write_review(survey)
 
-        kept = [gap for gap in survey.gaps if gap.filtered_by is None]
+        unfiltered = [gap for gap in survey.gaps if gap.filtered_by is None]
+        suppressed = [gap for gap in unfiltered if gap.suppressed_by is not None]
+        kept = [gap for gap in unfiltered if not gap.variant_of and gap.suppressed_by is None]
         filters_used = Counter(
             gap.filtered_by.filter_name for gap in survey.gaps if gap.filtered_by
         )
         print(
             f"{name}: {len(kept)} gaps {dict(Counter(gap.status for gap in kept))}, "
-            f"{len(survey.gaps) - len(kept)} filtered {dict(filters_used)}, "
+            f"{len(suppressed)} suppressed, "
+            f"{len(unfiltered) - len(kept) - len(suppressed)} variants, "
+            f"{len(survey.gaps) - len(unfiltered)} filtered {dict(filters_used)}, "
             f"{time.time() - started:.0f}s -> {folder}"
         )
         for contradiction in contradictions:
             print(
                 f"  [!] {contradiction.filter_name} contradicts a warp at {contradiction.gap.key}"
             )
+        for problem in problems:
+            print(f'  [!] known warp "{problem.warp.name}": {problem.what}')
     print(f"every level's warps together: {write_summary()}")
+    if anything_wrong:
+        sys.exit("[!] Something is wrong: see the lines marked [!] above")
 
 
 if __name__ == "__main__":
