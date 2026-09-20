@@ -1,0 +1,13 @@
+object,type,reason
+0x1da500,ammo,Bond walks through it
+0x1da5b4,ammo,Bond walks through it
+0x1da668,ammo,Bond walks through it
+0x1daa70,key,Bond walks through it
+0x1da8e0,monitor,no collision outline in the data
+0x1da9e0,generic,no collision outline in the data
+0x1db784,drone,no collision outline in the data
+0x1db86c,drone,no collision outline in the data
+0x1db954,drone,no collision outline in the data
+0x1db124,door,"outside the walkable area: seen from above, no part of it is over the floor"
+0x1db224,door,"outside the walkable area: seen from above, no part of it is over the floor"
+0x1dba3c,generic,the tile it stands on is not in the data

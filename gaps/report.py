@@ -38,6 +38,9 @@ from gaps.survey import NO_WARP_FOUND, WARP, WARP_IF_REMOVED, Gap, Survey
 from lib.seperate_tile_groups import seperateGroups
 
 matplotlib.rcParams["svg.fonttype"] = "none"  # keep text as text in the close-ups
+# With these two, drawing the same thing twice gives the same file, so the images can be committed
+matplotlib.rcParams["svg.hashsalt"] = "gaps"
+SVG_METADATA = {"Date": None}
 
 # The leading 00 lists these first among the folders of output/, in file managers as well as ls
 OUTPUT_ROOT = Path("output/00_gaps")
@@ -153,7 +156,7 @@ def _is_hairline(level: Level, gap: Gap) -> bool:
 
 def _write_gap_table(level: Level, gaps: list[Gap], path: Path) -> None:
     with path.open("w", newline="") as file:
-        writer = csv.writer(file)
+        writer = csv.writer(file, lineterminator="\n")
         writer.writerow(
             ["gap", "name", "status", "width_cm", "step_cm", "walk_round_cm", "x", "z", "room",
              "between", "and", "objects_forming_gap", "objects_in_the_way", "pinches", "key"]
@@ -192,7 +195,7 @@ def _describe_walk_round(gap: Gap) -> str:
 def _write_variants(level: Level, variants: list[Gap], main_of: dict[str, Gap], path: Path) -> None:
     """Gaps which the step of another, shorter warp passes through, so are counted as that warp."""
     with path.open("w", newline="") as file:
-        writer = csv.writer(file)
+        writer = csv.writer(file, lineterminator="\n")
         writer.writerow(
             ["variant_of_gap", "name", "key", "status", "width_cm", "step_cm", "x", "z", "between",
              "and", "objects_forming_gap", "objects_in_the_way"]
@@ -220,7 +223,7 @@ def _write_variants(level: Level, variants: list[Gap], main_of: dict[str, Gap], 
 
 def _write_filtered(level: Level, filtered: list[Gap], path: Path) -> None:
     with path.open("w", newline="") as file:
-        writer = csv.writer(file)
+        writer = csv.writer(file, lineterminator="\n")
         writer.writerow(
             ["key", "filter", "reason", "status", "width_cm", "x", "z", "between", "and"]
         )
@@ -247,7 +250,7 @@ def _write_suppressed(
 ) -> None:
     """Real warps which the level's file says to hide, and why. See gaps/filters/suppressed.py."""
     with path.open("w", newline="") as file:
-        writer = csv.writer(file)
+        writer = csv.writer(file, lineterminator="\n")
         writer.writerow(
             ["key", "reason", "status", "width_cm", "step_cm", "x", "z", "between", "and"]
         )
@@ -273,7 +276,7 @@ def _write_contradictions(level: Level, contradictions: list[Contradiction], pat
     """Gaps which a generic filter says can't be warped through, but which have a certified warp.
     They are kept in gaps.csv. This file should only ever hold its heading."""
     with path.open("w", newline="") as file:
-        writer = csv.writer(file)
+        writer = csv.writer(file, lineterminator="\n")
         writer.writerow(["key", "filter", "filter_says", "status", "step_cm"])
         for contradiction in contradictions:
             gap = contradiction.gap
@@ -293,7 +296,7 @@ def _write_objects_left_out(level: Level, path: Path) -> None:
     """Every object which takes no part in the survey, and why. Most are pick-ups, or have no
     outline. Any which a level file asked to have removed are here too, with its reason."""
     with path.open("w", newline="") as file:
-        writer = csv.writer(file)
+        writer = csv.writer(file, lineterminator="\n")
         writer.writerow(["object", "type", "reason"])
         for addr, object_type, reason in sorted(level.skipped_objects, key=lambda entry: entry[2]):
             writer.writerow([f"{addr:#x}", object_type, reason])
@@ -303,7 +306,7 @@ def _write_vertical_edges_left_out(level: Level, path: Path) -> None:
     """Unlinked edges of vertical tiles which are not walls, or not all the way along, as no floor
     leads into them there. See gaps.mesh."""
     with path.open("w", newline="") as file:
-        writer = csv.writer(file)
+        writer = csv.writer(file, lineterminator="\n")
         writer.writerow(["edge", "room", "from_x", "from_z", "to_x", "to_z", "still_a_wall_along"])
         for addr, edge_index, stretches in level.vertical_edges_left_out:
             tile = level.tiles[addr]
@@ -324,7 +327,7 @@ def _write_vertical_edges_left_out(level: Level, path: Path) -> None:
 def _write_decisions(survey: Survey, path: Path) -> None:
     level = survey.level
     with path.open("w", newline="") as file:
-        writer = csv.writer(file)
+        writer = csv.writer(file, lineterminator="\n")
         writer.writerow(["between", "and", "width", "kept", "reason", "because_of"])
         for decision in survey.decisions:
             blocker = level.segments[decision.blocker] if decision.blocker is not None else None
@@ -343,7 +346,7 @@ def _write_decisions(survey: Survey, path: Path) -> None:
 def _write_touching(survey: Survey, path: Path) -> None:
     level = survey.level
     with path.open("w", newline="") as file:
-        writer = csv.writer(file)
+        writer = csv.writer(file, lineterminator="\n")
         writer.writerow(["x", "z", "between", "and"])
         for touch in survey.touching:
             x, z = level.to_cm_point(touch.at)
@@ -373,7 +376,7 @@ def write_summary(output_root: Path = OUTPUT_ROOT) -> Path:
     path = output_root / "summary.csv"
     with path.open("w", newline="") as file:
         columns = list(dict.fromkeys(column for row in rows for column in row)) or ["level"]
-        writer = csv.DictWriter(file, fieldnames=columns, restval="")
+        writer = csv.DictWriter(file, fieldnames=columns, restval="", lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
     return path
@@ -521,7 +524,8 @@ def flipped(level: Level, points: list) -> tuple[list[float], list[float]]:
 def finish(fig, ax: Axes, path: Path, dpi: int = 100) -> None:
     ax.set_aspect("equal")
     ax.axis("off")
-    fig.savefig(path, dpi=dpi, bbox_inches="tight")
+    metadata = SVG_METADATA if path.suffix == ".svg" else None
+    fig.savefig(path, dpi=dpi, bbox_inches="tight", metadata=metadata)
     plt.close(fig)
     if path.suffix == ".svg":
         _keep_lines_thin_when_zoomed(path)

@@ -1,0 +1,40 @@
+gap,name,status,width_cm,step_cm,walk_round_cm,x,z,room,between,and,objects_forming_gap,objects_in_the_way,pinches,key
+1,,warp,58.903,55.70,none found,5020,-18035,0x1e,wall of tile 1A2700 (room 0x1e),generic 0x1dc3c8 (preset 0x275c),0x1dc3c8,,2,0x1dc3c8.0 | 1A2700.2
+2,,warp,53.403,58.46,none found,5117,-17958,0x1e,wall of tile 279900 (room 0x1e),generic 0x1dc3c8 (preset 0x275c),0x1dc3c8,,3,0x1dc3c8.3 | 279900.0
+3,,warp,58.180,64.20,none found,6252,-18625,0x10,generic 0x1dcbc8 (preset 0x2719),generic 0x1dcfc8 (preset 0x2721),0x1dcbc8 0x1dcfc8,,2,0x1dcbc8.3 | 0x1dcfc8.0
+4,,warp,46.456,64.30,782,5469,-19338,0x10,generic 0x1dce48 (preset 0x271e),generic 0x1dd1c8 (preset 0x2723),0x1dce48 0x1dd1c8,,2,0x1dce48.1 | 0x1dd1c8.4
+5,,warp,46.160,64.75,365,5177,-18533,0x1e,generic 0x1dc1c8 (preset 0x275b),generic 0x1dca48 (preset 0x002b),0x1dc1c8 0x1dca48,,2,0x1dc1c8.1 | 0x1dca48.0
+6,,warp,49.464,67.06,none found,6406,-18347,0x10,generic 0x1dd3c8 (preset 0x2727),generic 0x1dd448 (preset 0x2728),0x1dd3c8 0x1dd448,,2,0x1dd3c8.0 | 0x1dd448.2
+7,,warp,47.726,67.67,none found,-6498,-7982,0x1a,wall of tile 24CD02 (room 0x1a),generic 0x1de450 (preset 0x274d),0x1de450,,2,0x1de450.2 | 24CD02.2
+8,,warp,42.539,76.32,none found,5301,-19177,0x10,generic 0x1dcd48 (preset 0x271c),generic 0x1dcdc8 (preset 0x271d),0x1dcd48 0x1dcdc8,,2,0x1dcd48.3 | 0x1dcdc8.0
+9,,warp,42.227,76.52,none found,6212,-18598,0x10,generic 0x1dcb48 (preset 0x2718),generic 0x1dcbc8 (preset 0x2719),0x1dcb48 0x1dcbc8,,2,0x1dcb48.0 | 0x1dcbc8.4
+10,,warp,42.171,76.56,none found,9630,-15287,0x1c,generic 0x1dc0c8 (preset 0x2758),generic 0x1dc148 (preset 0x2757),0x1dc0c8 0x1dc148,,2,0x1dc0c8.0 | 0x1dc148.3
+11,,warp,42.002,76.67,none found,6379,-18592,0x10,generic 0x1dcf48 (preset 0x2720),generic 0x1dcfc8 (preset 0x2721),0x1dcf48 0x1dcfc8,,2,0x1dcf48.0 | 0x1dcfc8.3
+12,,warp,49.287,89.79,none found,6402,-18302,0x10,generic 0x1dd348 (preset 0x2726),generic 0x1dd448 (preset 0x2728),0x1dd348 0x1dd448,,2,0x1dd348.0 | 0x1dd448.2
+13,,warp,35.328,90.41,none found,6451,-18318,0x10,generic 0x1dd348 (preset 0x2726),generic 0x1dd3c8 (preset 0x2727),0x1dd348 0x1dd3c8,,2,0x1dd348.1 | 0x1dd3c8.4
+14,,warp,35.743,94.05,782,-11679,-15007,0x05,wall of tile 113E00 (room 0x05),generic 0x1dd4c8 (preset 0x2729),0x1dd4c8,,2,0x1dd4c8.4 | 113E00.0
+15,,warp,48.577,96.11,none found,-11702,-15120,0x05,generic 0x1dd4c8 (preset 0x2729),generic 0x1dd5c8 (preset 0x272b),0x1dd4c8 0x1dd5c8,,2,0x1dd4c8.0 | 0x1dd5c8.2
+16,,warp,29.744,96.26,none found,5964,-19575,0x1d,generic 0x1dd148 (preset 0x2760),generic 0x1dd848 (preset 0x275f),0x1dd148 0x1dd848,,6,0x1dd148.4 | 0x1dd848.1
+17,,warp,47.868,97.43,none found,-5584,-20243,0x07,generic 0x1dd648 (preset 0x272c),generic 0x1dd748 (preset 0x272e),0x1dd648 0x1dd748,,2,0x1dd648.2 | 0x1dd748.0
+18,,warp,36.342,100.09,none found,-5901,-20386,0x07,wall of tile 31A500 (room 0x07),wall of tile 30FB00 (room 0x07),,,2,30FB00.1 | 31A500.2
+19,,warp,56.969,102.84,none found,5394,-19355,0x10,generic 0x1dccc8 (preset 0x271b),generic 0x1dce48 (preset 0x271e),0x1dccc8 0x1dce48,,2,0x1dccc8.3 | 0x1dce48.0
+20,,warp,56.967,102.91,none found,6472,-18769,0x10,generic 0x1dcec8 (preset 0x271f),generic 0x1dd048 (preset 0x2722),0x1dcec8 0x1dd048,,2,0x1dcec8.0 | 0x1dd048.2
+21,,warp,56.824,103.26,none found,6012,-18590,0x10,generic 0x1dcac8 (preset 0x2717),generic 0x1dcc48 (preset 0x271a),0x1dcac8 0x1dcc48,,2,0x1dcac8.0 | 0x1dcc48.4
+22,,warp,56.942,103.53,none found,9702,-15428,0x1c,generic 0x1dbfc8 (preset 0x2756),generic 0x1dc048 (preset 0x2755),0x1dbfc8 0x1dc048,,1,0x1dbfc8.3 | 0x1dc048.0
+23,,warp,48.326,106.96,none found,-11699,-15164,0x05,generic 0x1dd548 (preset 0x272a),generic 0x1dd5c8 (preset 0x272b),0x1dd548 0x1dd5c8,,2,0x1dd548.0 | 0x1dd5c8.2
+24,,warp,32.701,117.50,none found,6113,-18551,0x10,generic 0x1dcac8 (preset 0x2717),generic 0x1dcb48 (preset 0x2718),0x1dcac8 0x1dcb48,,2,0x1dcac8.2 | 0x1dcb48.0
+25,,warp,41.536,122.96,none found,6117,-18628,0x10,generic 0x1dcbc8 (preset 0x2719),generic 0x1dcc48 (preset 0x271a),0x1dcbc8 0x1dcc48,,2,0x1dcbc8.0 | 0x1dcc48.2
+26,,warp,39.923,127.54,577,5502,-19447,0x10,generic 0x1dd1c8 (preset 0x2723),generic 0x1dd248 (preset 0x2724),0x1dd1c8 0x1dd248,,9,0x1dd1c8.0 | 0x1dd248.3
+27,,warp,30.289,134.11,496,-11809,-14776,0x18,generic 0x1ddfe8 (preset 0x2746),generic 0x1de168 (preset 0x2748),0x1ddfe8 0x1de168,,2,0x1ddfe8.3 | 0x1de168.0
+28,,warp,20.151,138.98,1045,-11566,-14633,0x18,generic 0x1ddee8 (preset 0x2744),generic 0x1ddf68 (preset 0x2745),0x1ddee8 0x1ddf68,,2,0x1ddee8.2 | 0x1ddf68.0
+29,,warp,8.950,156.10,439,-6769,-8344,0x1a,generic 0x1de350 (preset 0x274b),generic 0x1de550 (preset 0x274f),0x1de350 0x1de550,,2,0x1de350.3 | 0x1de550.0
+30,,warp,17.528,164.00,321,8121,-15349,0x1b,generic 0x1db814 (preset 0x2751),generic 0x1dbd14 (preset 0x0020),0x1db814 0x1dbd14,,2,0x1db814.5 | 0x1dbd14.2
+31,,warp,42.473,295.32,761,5012,-18580,0x1e,wall of tile 1A2700 (room 0x1e),generic 0x1dc1c8 (preset 0x275b),0x1dc1c8,,2,0x1dc1c8.0 | 1A2700.2
+32,,warp if objects removed,46.649,64.31,241,8250,-15339,0x1b,wall of tile 27EC00 (room 0x1b),generic 0x1dba14 (preset 0x001a),0x1dba14,0x1db814,3,0x1dba14.1 | 27EC00.1
+33,,warp if objects removed,58.698,95.90,322,7806,-15102,0x1b,wall of tile 243B02 (room 0x1b),generic 0x1dbd94 (preset 0x0024),0x1dbd94,0x1db794,3,0x1dbd94.0 | 243B02.2
+34,,warp if objects removed,14.868,153.73,441,-11719,-14667,0x18,generic 0x1ddee8 (preset 0x2744),generic 0x1de068 (preset 0x2749),0x1ddee8 0x1de068,0x1de168,2,0x1ddee8.0 | 0x1de068.3
+35,,no warp found,7.235,,,-5459,-20316,0x07,wall of tile 308900 (room 0x07),generic 0x1dd6c8 (preset 0x272d),0x1dd6c8,,2,0x1dd6c8.2 | 308900.2
+36,,no warp found,21.787,,,9773,-14833,0x1c,wall of tile 27E700 (room 0x1c),generic 0x1dbec8 (preset 0x0026),0x1dbec8,,4,0x1dbec8.4 | 27E700.1
+37,,no warp found,43.111,,,7894,-15080,0x1b,generic 0x1db794 (preset 0x2752),generic 0x1dbd94 (preset 0x0024),0x1db794 0x1dbd94,,2,0x1db794.0 | 0x1dbd94.4
+38,,no warp found,53.041,,,183,239,0x0f,wall of tile 1DBF01 (room 0x0f),wall of tile 1DC701 (room 0x0f),,,1,1DBF01.0 | 1DC701.0
+39,,no warp found,53.041,,,-183,239,0x0f,wall of tile 1DBF02 (room 0x0f),wall of tile 1DC802 (room 0x0f),,,1,1DBF02.1 | 1DC802.1

@@ -93,7 +93,7 @@ def _overhead_objects(survey: Survey) -> list[OverheadObject]:
 
 def _write_overhead_objects(overhead: list[OverheadObject], path: Path) -> None:
     with path.open("w", newline="") as file:
-        writer = csv.writer(file)
+        writer = csv.writer(file, lineterminator="\n")
         writer.writerow(
             ["object", "type", "room", "bottom_above_floor_m", "height_m", "in_the_level", "forms"]
         )

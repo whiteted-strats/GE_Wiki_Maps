@@ -1,0 +1,12 @@
+gap,name,status,width_cm,step_cm,walk_round_cm,x,z,room,between,and,objects_forming_gap,objects_in_the_way,pinches,key
+1,,warp,58.996,10.93,none found,-4496,681,0x1b,wall of tile 161D10 (room 0x1b),wall of tile 167E10 (room 0x1b),,,4,161D10.2 | 167E10.0
+2,block warp,warp,33.442,86.58,1425,-8380,1354,0x13,wall of tile 14A510 (room 0x13),wall of tile 14A210 (room 0x13),,,2,14A210.0 | 14A510.0
+3,,warp,34.198,91.81,749,-4110,288,0x1a,wall of tile 160610 (room 0x1a),wall of tile 160410 (room 0x1a),,,2,160410.0 | 160610.2
+4,secret area in,warp,28.459,117.40,none found,-12044,208,0x0f,wall of tile 0C5008 (room 0x0f),wall of tile 0C2408 (room 0x0f),,,2,0C2408.2 | 0C5008.1
+5,secret area out,warp,57.370,146.93,none found,-12339,310,0x10,wall of tile 0C2608 (room 0x10),wall of tile 0C3408 (room 0x10),,,2,0C2608.1 | 0C3408.1
+6,,warp,28.015,208.61,none found,-11047,434,0x11,wall of tile 0C1708 (room 0x11),wall of tile 0C1A08 (room 0x11),,,2,0C1708.0 | 0C1A08.2
+7,,warp,13.111,301.69,none found,-4744,974,0x1b,wall of tile 161810 (room 0x1b),wall of tile 166610 (room 0x1b),,,2,161810.1 | 166610.0
+8,,warp,19.198,358.68,639,-15033,4795,0x0c,wall of tile 109308 (room 0x0c),wall of tile 109A08 (room 0x0c),,,2,109308.2 | 109A08.1
+9,,no warp found,23.977,,,-4467,373,0x1a,wall of tile 160B10 (room 0x1a),wall of tile 167110 (room 0x1a),,,2,160B10.1 | 167110.0
+10,,no warp found,26.478,,,-10179,-1515,0x12,wall of tile 0AD908 (room 0x12),wall of tile 10BD08 (room 0x12),,,2,0AD908.1 | 10BD08.0
+11,,no warp found,27.856,,,-12110,175,0x0f,wall of tile 0C3608 (room 0x0f),wall of tile 0C3208 (room 0x10),,,2,0C3208.2 | 0C3608.1

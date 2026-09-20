@@ -1,0 +1,23 @@
+variant_of_gap,name,key,status,width_cm,step_cm,x,z,between,and,objects_forming_gap,objects_in_the_way
+33,,017D00.1 | 0x1cd8ec.1,warp,30.531,113.11,-400,-498,wall of tile 017D00 (room 0x03),generic 0x1cd8ec (preset 0x2738),0x1cd8ec,
+46,,0x1cc6ec.1 | 106709.1,warp,11.581,177.56,-1825,1056,wall of tile 106709 (room 0x1c),generic 0x1cc6ec (preset 0x27ef),0x1cc6ec,
+55,,0x1cddec.4 | 0x1cdeec.2,warp,4.028,236.99,-829,-888,generic 0x1cddec (preset 0x2742),generic 0x1cdeec (preset 0x2744),0x1cddec 0x1cdeec,
+69,,0x1ce66c.2 | 0x1ce6ec.0,warp,11.366,254.00,-3324,-2410,generic 0x1ce76c (preset 0x2756),generic 0x1ce7ec (preset 0x2758),0x1ce76c 0x1ce7ec,
+51,attic warp,04B421.1 | 04B422.2,warp,35.518,266.77,-3186,-3593,wall of tile 04B421 (room 0x3d),wall of tile 04B422 (room 0x3d),,
+51,attic warp,04B322.2 | 04B421.1,warp,35.518,266.77,-3289,-3593,wall of tile 04B421 (room 0x3d),wall of tile 04B322 (room 0x3d),,
+52,,0x1cdcec.2 | 0x1cdd6c.4,warp,21.050,269.25,-940,-1082,generic 0x1cdcec (preset 0x2740),generic 0x1cdd6c (preset 0x2741),0x1cdcec 0x1cdd6c,
+52,,0x1cdbec.0 | 0x1cdcec.3,warp,46.943,272.86,-928,-980,generic 0x1cdcec (preset 0x2740),generic 0x1cde6c (preset 0x2743),0x1cdcec 0x1cde6c,
+53,,07D408.0 | 0x1ccd6c.2,warp,15.544,330.66,-1348,1152,wall of tile 07D408 (room 0x11),generic 0x1ccd6c (preset 0x2806),0x1ccd6c,
+56,,0x1cefec.3 | 0x1d2ec8.1,warp if objects removed,8.136,81.56,-2815,-3891,wall of tile 03CC10 (room 0x2b),generic 0x1cefec (preset 0x276f),0x1cefec,0x1cef6c 0x1cf06c 0x1cf0ec 0x1d2ec8
+55,,0x1cdeec.2 | 0x1cdfec.5,warp if objects removed,50.205,129.61,-742,-897,generic 0x1cdfec (preset 0x2746),generic 0x1ce16c (preset 0x2749),0x1cdfec 0x1ce16c,0x1cddec 0x1cde6c 0x1cdeec
+60,,0F7708.1 | 0x1cc5ec.5,warp if objects removed,5.747,158.00,-1774,984,wall of tile 0F7708 (room 0x1f),generic 0x1cc5ec (preset 0x27ed),0x1cc5ec,0x1cc66c 0x1cc86c
+65,,0x1cc76c.0 | 0x1cc8ec.5,warp if objects removed,2.579,158.73,-2038,1319,generic 0x1cc76c (preset 0x27f0),generic 0x1cc8ec (preset 0x27f3),0x1cc76c 0x1cc8ec,0x1cc9ec
+68,,0x1ce96c.5 | 0x1cea6c.0,warp if objects removed,7.656,159.97,-3047,-2993,generic 0x1ce96c (preset 0x275f),generic 0x1cea6c (preset 0x2761),0x1ce96c 0x1cea6c,0x1ce9ec
+67,,0x1cf76c.2 | 0x1cf86c.4,warp if objects removed,3.653,172.79,-2153,-1612,generic 0x1cf76c (preset 0x279a),generic 0x1cf86c (preset 0x279c),0x1cf76c 0x1cf86c,0x1cf7ec
+56,,0x1cf0ec.0 | 0x1d2ec8.3,warp if objects removed,43.415,181.95,-2763,-3878,generic 0x1cef6c (preset 0x276e),generic 0x1cf0ec (preset 0x2771),0x1cef6c 0x1cf0ec,0x1cefec 0x1cf06c 0x1d2dc8 0x1d2ec8
+71,,00F518.0 | 0x1cf8ec.2,warp if objects removed,37.244,186.73,-2110,-4712,wall of tile 00F518 (room 0x33),generic 0x1cf8ec (preset 0x279d),0x1cf8ec,0x1cf9ec
+62,,0x1d0ff0.0 | 1AAB09.1,warp if objects removed,23.679,192.71,-363,1141,wall of tile 1AAB09 (room 0x0a),generic 0x1d0ff0 (preset 0x282f),0x1d0ff0,0x1d40c8
+56,,03CC10.1 | 0x1cf0ec.0,warp if objects removed,25.646,196.53,-2803,-3763,wall of tile 03CC10 (room 0x2b),generic 0x1cf0ec (preset 0x2771),0x1cf0ec,0x1cef6c 0x1cefec 0x1d2ec8
+55,,0x1cddec.4 | 0x1cdfec.0,warp if objects removed,3.334,200.01,-821,-934,generic 0x1cddec (preset 0x2742),generic 0x1cdfec (preset 0x2746),0x1cddec 0x1cdfec,0x1cdd6c 0x1cde6c 0x1cdeec 0x1ce06c 0x1ce0ec 0x1ce16c
+37,,0x1cc2ec.2 | 0x1cc36c.4,warp if objects removed,11.577,252.73,-888,841,generic 0x1cc2ec (preset 0x27e6),generic 0x1cc36c (preset 0x27e7),0x1cc2ec 0x1cc36c,0x1cc4ec
+60,,0x1cc5ec.1 | 0x1cc66c.3,warp if objects removed,7.499,337.56,-1843,945,generic 0x1cc5ec (preset 0x27ed),generic 0x1cc66c (preset 0x27ee),0x1cc5ec 0x1cc66c,0x1cc6ec 0x1cc7ec 0x1cc86c

@@ -1,0 +1,14 @@
+gap,name,status,width_cm,step_cm,walk_round_cm,x,z,room,between,and,objects_forming_gap,objects_in_the_way,pinches,key
+1,,warp,47.346,65.75,484,963,-582,0x08,wall of tile 048408 (room 0x08),generic 0x1ce87c (preset 0x002d),0x1ce87c,,2,048408.0 | 0x1ce87c.1
+2,mainframe meme,warp,12.363,81.65,477,-1409,618,0x11,generic 0x1d13e0 (preset 0x0031),generic 0x1d1470 (preset 0x0032),0x1d13e0 0x1d1470,,2,0x1d13e0.2 | 0x1d1470.0
+3,,warp,23.241,83.85,564,-1815,1240,0x11,wall of tile 010812 (room 0x11),generic 0x1ce57c (preset 0x0025),0x1ce57c,,2,010812.2 | 0x1ce57c.2
+4,TAS closed end door warp,warp,0.0000031,102.53,none found,-35,-2461,0x04,wall of tile 016601 (room 0x04),door 0x1d24f0 (preset 0x0006),0x1d24f0,,2,016601.1 | 0x1d24f0.0
+5,,warp,0.000041,106.14,none found,-1975,1922,0x0b,wall of tile 07C812 (room 0x0b),door 0x1d15f0 (preset 0x0009),0x1d15f0,,4,07C812.1 | 0x1d15f0.0
+6,,warp,43.238,121.33,322,-1544,3060,0x1a,generic 0x1ce47c (preset 0x001e),generic 0x1cfc6c (preset 0x2744),0x1ce47c 0x1cfc6c,,2,0x1ce47c.2 | 0x1cfc6c.2
+7,,warp,39.793,141.21,381,-2526,2586,0x0e,wall of tile 003612 (room 0x0e),generic 0x1ce9fc (preset 0x002e),0x1ce9fc,,2,003612.3 | 0x1ce9fc.0
+8,,warp,15.688,260.58,405,-2303,2862,0x0e,wall of tile 06AC11 (room 0x0e),generic 0x1ce97c (preset 0x002b),0x1ce97c,,2,06AC11.1 | 0x1ce97c.1
+9,,warp,18.465,285.40,422,-1107,2641,0x13,wall of tile 075812 (room 0x13),generic 0x1ce77c (preset 0x002a),0x1ce77c,,2,075812.1 | 0x1ce77c.0
+10,,warp,16.864,301.29,451,-2031,1866,0x0b,wall of tile 075C12 (room 0x0b),generic 0x1ce6fc (preset 0x0028),0x1ce6fc,,3,075C12.1 | 0x1ce6fc.3
+11,,warp,28.643,328.05,532,-529,3801,0x18,wall of tile 005712 (room 0x18),generic 0x1ce7fc (preset 0x0024),0x1ce7fc,,2,005712.2 | 0x1ce7fc.0
+12,,warp if objects removed,34.837,55.27,260,62,-558,0x01,door 0x1d1ef0 (preset 0x0000),door 0x1d20f0 (preset 0x0002),0x1d1ef0 0x1d20f0,0x1d1ff0,41,014F01.0 | 0x1d21f0.0
+13,,no warp found,22.182,,,-1235,3134,0x1a,wall of tile 036B19 (room 0x1a),generic 0x1cf96c (preset 0x2740),0x1cf96c,,2,036B19.0 | 0x1cf96c.4
