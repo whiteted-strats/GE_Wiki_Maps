@@ -78,8 +78,11 @@ and why. All of them are in `decisions.csv`.
 **Touching walls** - two unrelated walls at no distance at all: a gap of width zero. Bond can't
 pass, but they are listed in `touching.csv`.
 
-**Hairline** - a gap less than 1 cm wide. Nearly all are closed doors which sit a few thousandths
-of a centimetre from their frames. Listed last, drawn faintly, no close-up.
+**Hairline** - a gap less than 1 cm wide. Nearly all are closed doors which sit a few millionths
+of a centimetre from their frames. However narrow, one with a warp through it is a warp: they are
+treated like any other gap. A warp through one is drawn in orange rather than red, and their close-ups
+have the width written on them. A hairline's width is always given to two significant figures,
+written out in full: 0.93, 0.0042, 0.0000066.
 
 **Witness** - an actual warp through a pinch: two positions where Bond fits, with line of sight
 between them through it. A witness is proposed by a fast search and then *certified* exactly, so a

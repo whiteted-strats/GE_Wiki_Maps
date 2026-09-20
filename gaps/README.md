@@ -75,8 +75,9 @@ nothing in the survey depends on it.
   could be slightly lower.
 - **objects_forming_gap**: every object is treated as optional, as the data doesn't say which are
   destructible. If one of these is destroyed the gap is gone.
-- Gaps under 1 cm wide are *hairlines*, nearly all of them closed doors sitting a few thousandths
-  of a centimetre from their frames. They are listed last and drawn in grey without a number.
+- Gaps under 1 cm wide are *hairlines*, nearly all of them closed doors sitting a few millionths
+  of a centimetre from their frames. There is no lower limit: they are gaps like any other, drawn
+  with the width written on the close-up. A warp through one is drawn in orange rather than red.
 - Doors are as they were when the level was dumped, i.e. closed. Guards are ignored.
 
 ## Known warps

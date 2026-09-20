@@ -10,7 +10,8 @@
   overview_*.svg  each part of the level, with the gaps numbered and the walls involved highlighted
   gap_NNN.svg     a close-up of each gap (NNN_name.svg if it is a known warp), as vector graphics
                   so it can be zoomed without limit.
-                  Filtered gaps and hairlines are only drawn faintly on the overviews
+                  Filtered gaps are only drawn faintly on the overviews. Warps through
+                  hairlines are orange
 
 and output/00_gaps/summary.csv, which lists the warps of every surveyed level together.
 
@@ -20,6 +21,7 @@ this repo, x is flipped so that they match the game's orientation.
 
 import csv
 import importlib
+import math
 import re
 from collections import Counter
 from pathlib import Path
@@ -38,7 +40,10 @@ matplotlib.rcParams["svg.fonttype"] = "none"  # keep text as text in the close-u
 
 # The leading 00 lists these first among the folders of output/, in file managers as well as ls
 OUTPUT_ROOT = Path("output/00_gaps")
-HAIRLINE_WIDTH_CM = 1  # narrower gaps (closed doors in their frames) get no number or close-up
+# Narrower gaps are hairlines: a warp through one is drawn in a colour of its own, and the width
+# is written on the close-up.
+# They are treated like any other gap otherwise. However narrow, a gap with a warp is a warp.
+HAIRLINE_WIDTH_CM = 1
 CLOSE_UP_HALF_SIZE_CM = 260  # shows a few metres of surroundings. Nothing depends on the value
 # Overviews are vector graphics, so these only set how big the numbers and lines are drawn
 # relative to the level: as if it were an image this many pixels along its longer side ...
@@ -48,7 +53,8 @@ OVERVIEW_DPI = 100
 STATUS_COLOUR = {WARP: "red", WARP_IF_REMOVED: "darkviolet", NO_WARP_FOUND: "royalblue"}
 TILE_COLOUR = (0.86, 0.86, 0.86)
 WALL_COLOUR = (0.25, 0.25, 0.25)
-OBJECT_COLOUR = "darkorange"
+HAIRLINE_COLOUR = "orange"
+OBJECT_COLOUR = "sienna"  # well away from the orange of hairlines
 
 
 def write_report(
@@ -95,8 +101,7 @@ def write_report(
     shown = [gap for gap in ranked if draw_variants or not gap.variant_of or gap.key in faint_keys]
     _draw_overviews(level, shown, faint_keys, folder)
     for gap in kept:
-        if not _is_hairline(level, gap):
-            draw_close_up(level, gap, folder / f"{file_name_of(gap)}.svg")
+        draw_close_up(level, gap, folder / f"{file_name_of(gap)}.svg")
     if draw_variants:
         numbers: Counter = Counter()
         for gap in variants:
@@ -116,15 +121,24 @@ def file_name_of(gap: Gap) -> str:
 
 
 def _ranking(level: Level, gap: Gap) -> tuple:
-    """Warps in the level as dumped first, then by the step needed, shortest first. Hairline gaps
-    go to the very end whatever their status: there are many, and they are the least practical."""
+    """Warps in the level as dumped first, then by the step needed, shortest first."""
     order = [WARP, WARP_IF_REMOVED, NO_WARP_FOUND].index(gap.status)
     step = float(gap.witness.step2) if gap.witness else 0
-    return (_is_hairline(level, gap), order, step, _width(level, gap))
+    return (order, step, _width(level, gap))
 
 
 def _width(level: Level, gap: Gap) -> float:
     return level.to_cm(float((gap.pinch or gap.narrowest).width2) ** 0.5)
+
+
+def _width_text(level: Level, gap: Gap) -> str:
+    """To a thousandth of a centimetre, except for hairlines, which are given to two significant
+    figures: a door in its frame can be a millionth of a centimetre from it."""
+    width = _width(level, gap)
+    if width >= HAIRLINE_WIDTH_CM:
+        return f"{width:.3f}"
+    decimal_places = 1 - math.floor(math.log10(width))  # a gap is never of no width at all
+    return f"{width:.{decimal_places}f}"
 
 
 def _is_hairline(level: Level, gap: Gap) -> bool:
@@ -151,7 +165,7 @@ def _write_gap_table(level: Level, gaps: list[Gap], path: Path) -> None:
                     gap.id,
                     gap.name,
                     gap.status,
-                    f"{_width(level, gap):.3f}",
+                    _width_text(level, gap),
                     f"{step:.2f}" if step is not None else "",
                     _describe_walk_round(gap),
                     f"{x:.0f}",
@@ -190,7 +204,7 @@ def _write_variants(level: Level, variants: list[Gap], main_of: dict[str, Gap], 
                     main.name,
                     gap.key,
                     gap.status,
-                    f"{_width(level, gap):.3f}",
+                    _width_text(level, gap),
                     f"{level.to_cm(float(gap.witness.step2) ** 0.5):.2f}",
                     f"{x:.0f}",
                     f"{z:.0f}",
@@ -217,7 +231,7 @@ def _write_filtered(level: Level, filtered: list[Gap], path: Path) -> None:
                     gap.filtered_by.filter_name,
                     gap.filtered_by.reason,
                     gap.status,
-                    f"{_width(level, gap):.3f}",
+                    _width_text(level, gap),
                     f"{x:.0f}",
                     f"{z:.0f}",
                     describe(level, pinch.first),
@@ -243,7 +257,7 @@ def _write_suppressed(
                     gap.key,
                     main.suppressed_by.reason + (" (a variant of it)" if gap.variant_of else ""),
                     gap.status,
-                    f"{_width(level, gap):.3f}",
+                    _width_text(level, gap),
                     f"{level.to_cm(float(gap.witness.step2) ** 0.5):.2f}",
                     f"{x:.0f}",
                     f"{z:.0f}",
@@ -321,14 +335,14 @@ def _write_touching(survey: Survey, path: Path) -> None:
 
 def write_summary(output_root: Path = OUTPUT_ROOT) -> Path:
     """Gathers the warps from every level's gaps.csv into one table, shortest step first.
-    Hairlines and gaps with no warp found are left to the per-level tables."""
+    Gaps with no warp found are left to the per-level tables."""
     rows = []
     for table in sorted(output_root.glob("*/gaps.csv")):
         with table.open(newline="") as file:
             for row in csv.DictReader(file):
                 if "step_cm" not in row:
                     break  # a table written by an older version of this report
-                if row["step_cm"] and float(row["width_cm"]) >= HAIRLINE_WIDTH_CM:
+                if row["step_cm"]:
                     rows.append({"level": table.parent.name, **row})
     rows.sort(key=lambda row: (row["status"] != WARP, float(row["step_cm"])))
 
@@ -365,8 +379,7 @@ def _draw_overviews(level: Level, gaps: list[Gap], faint_keys: set[str], folder:
 
         draw_level(ax, level, tiles)
         for gap in group_gaps:
-            faint = _is_hairline(level, gap) or gap.key in faint_keys
-            draw_gap(ax, level, gap, prominent=not faint, numbered=True)
+            draw_gap(ax, level, gap, prominent=gap.key not in faint_keys, numbered=True)
         ax.set_xlim(min(xs) - 100, max(xs) + 100)
         ax.set_ylim(min(zs) - 100, max(zs) + 100)
         finish(fig, ax, folder / f"overview_{index}.svg")
@@ -382,6 +395,11 @@ def draw_close_up(level: Level, gap: Gap, path: Path) -> None:
     fig, ax = plt.subplots(figsize=(9, 9))
     draw_level(ax, level, tiles, label_objects=True)
     draw_gap(ax, level, gap, prominent=True, numbered=False)
+    if _is_hairline(level, gap):
+        ax.annotate(
+            f"{_width_text(level, gap)} cm", (-x, z), xytext=(8, 8), textcoords="offset points",
+            fontsize=9, color=_colour_of(level, gap), fontweight="bold", zorder=7,
+        )  # fmt: skip
     if gap.witness is not None:
         p, q = level.to_cm_point(gap.witness.p), level.to_cm_point(gap.witness.q)
         ax.plot([-p[0], -q[0]], [p[1], q[1]], color="green", linewidth=1.2, zorder=6)
@@ -395,7 +413,7 @@ def draw_close_up(level: Level, gap: Gap, path: Path) -> None:
     step = f"{level.to_cm(float(gap.witness.step2) ** 0.5):.1f}" if gap.witness else "-"
     ax.set_title(
         f"{level.name} {_name_of(gap)}: {gap.status}\n"
-        f"width {_width(level, gap):.2f}, step {step}, "
+        f"width {_width_text(level, gap)}, step {step}, "
         f"walk round {_describe_walk_round(gap) or '-'}\n"
         f"{describe(level, pinch.first)}  /  {describe(level, pinch.second)}",
         fontsize=9,
@@ -439,10 +457,17 @@ def draw_level(ax: Axes, level: Level, tiles: set[int], label_objects: bool = Fa
             ax.text(xs[0], zs[0], name, fontsize=5, zorder=3, clip_on=True)
 
 
+def _colour_of(level: Level, gap: Gap) -> str:
+    """By status, except that a warp through a hairline is set apart from other warps."""
+    if gap.status == WARP and _is_hairline(level, gap):
+        return HAIRLINE_COLOUR
+    return STATUS_COLOUR[gap.status]
+
+
 def draw_gap(ax: Axes, level: Level, gap: Gap, prominent: bool, numbered: bool) -> None:
     """Highlights the walls which form the gap, and dots the line across its narrowest part.
-    Hairline gaps are drawn faintly and without a number."""
-    colour = STATUS_COLOUR[gap.status] if prominent else "grey"
+    See _colour_of."""
+    colour = _colour_of(level, gap) if prominent else "grey"
     for pinch in gap.pinches:
         for wall in (pinch.first, pinch.second):
             _draw_segment(ax, level, wall, colour, 2.2 if prominent else 1.0, zorder=4)
