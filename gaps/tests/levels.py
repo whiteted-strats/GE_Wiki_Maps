@@ -76,15 +76,47 @@ def two_rooms(corridor_width: int, riser: bool = False) -> Level:
 
 
 def notched_room(
-    length: int, notch_from: int, notch_to: int, clearance: int, pieces: int = 1
+    length: int,
+    notch_from: int,
+    notch_to: int,
+    clearance: int,
+    pieces: int = 1,
+    left_end: int | None = None,
 ) -> Level:
     """A room `length` long and 400 deep whose far wall has a notch cut down into it, stopping
-    `clearance` short of the near wall, which is straight. The notch comes to a point if notch_from
-    equals notch_to, and otherwise has a flat end parallel to the near wall. With `pieces`, the
-    near wall is made of that many pieces end to end, still in one straight line."""
-    near_wall = [(length - i * length // pieces, 0) for i in range(pieces)] + [(0, 0)]
+    `clearance` short of the near wall, which is straight and lies along z = 0. The notch comes to
+    a point if notch_from equals notch_to, and otherwise has a flat end parallel to the near wall.
+    With `pieces`, the near wall is made of that many pieces end to end, still in one line.
+
+    Normally both ends of the near wall are corners of the room. With `left_end`, the floor carries
+    on for 3 m beyond the left end, and the wall there turns through a right angle for that many
+    centimetres first: upwards into the room if positive, so that it juts out, and downwards away
+    from it if negative, which makes the end of the near wall an outside corner."""
+    near_wall = [(length - i * length // pieces, 0) for i in range(pieces)]
     middle = (notch_from + notch_to) // 2
     notch = [(middle - 50, 400), (notch_from, clearance), (notch_to, clearance), (middle + 50, 400)]
     if notch_from == notch_to:
         notch.pop(1)
-    return build({"room": [(0, 0), (0, 400), *notch, (length, 400), *near_wall[:-1]]})
+    if left_end is None:
+        left = [(0, 0), (0, 400)]
+    else:
+        left = [(0, 0), (0, left_end), (-300, left_end), (-300, 400)]
+    return build({"room": [*left, *notch, (length, 400), *near_wall]})
+
+
+def room_with_a_slot(slot_width: int, slot_length: int, widens_to: int | None = None) -> Level:
+    """A 300 x 300 room with a dead-end slot leading off the middle of its right hand wall. With
+    `widens_to`, the slot opens out into a chamber of that width at its far end."""
+    low, high = 150 - slot_width // 2, 150 - slot_width // 2 + slot_width
+    far = 300 + slot_length
+    tiles = {
+        "room": [(0, 0), (0, 300), (300, 300), (300, high), (300, low), (300, 0)],
+        "slot": [(300, low), (300, high), (far, high), (far, low)],
+    }
+    if widens_to is not None:
+        c_low, c_high = 150 - widens_to // 2, 150 + widens_to // 2
+        end = far + 100
+        tiles["chamber"] = [
+            (far, c_low), (far, low), (far, high), (far, c_high), (end, c_high), (end, c_low)
+        ]  # fmt: skip
+    return build(tiles)

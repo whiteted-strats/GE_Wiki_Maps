@@ -155,6 +155,21 @@ def point_in_polygon(p: Point, polygon: list[Point]) -> bool:
     return inside
 
 
+def is_convex(polygon: list[Point]) -> bool:
+    """Whether the outline never turns back on itself: every corner turns the same way, or not at
+    all. Repeated and in-line corners are allowed."""
+    n = len(polygon)
+    turns = {
+        _sign(cross(sub(polygon[(i + 1) % n], polygon[i]), sub(polygon[(i + 2) % n], polygon[i])))
+        for i in range(n)
+    }
+    return not ({1, -1} <= turns)
+
+
+def _sign(value: Num) -> int:
+    return (value > 0) - (value < 0)
+
+
 def segment_inside_polygon(p: Point, q: Point, polygon: list[Point]) -> list[Interval]:
     """The parts of segment pq that are inside the polygon (or on its edge), as parameter intervals.
 

@@ -119,9 +119,46 @@ wrong, so the gap is kept and the clash is reported. There should never be any.
 **Anvil and hammer** - the first generic filter. The *anvil* is a long wall in one straight line,
 made of one piece or several. The *hammer* is a corner, or an edge parallel to the anvil, less than
 Bond's radius from it. No step can pass between them, because Bond's centre stays at least his
-radius from the anvil throughout. The anvil must run for half its required length beyond the hammer
-in both directions, measured from both ends of a parallel edge, since close to an end Bond could
-angle in round it. A doorway in the wall ends the anvil, as he could angle in through that too.
+radius from the anvil throughout. The only other way past is for an end of the step to be beyond an end of the anvil, angling in
+round it. For each end, such a step is ruled out or shown to be impractically long in one of three
+ways: the anvil runs on for half its required length; or it ends at a *protrusion*; or, failing
+those, the *slow-rise bound* is long enough. A doorway in the wall ends the anvil.
+
+**Hammer point** - a corner closer to the anvil than Bond's radius, over the anvil and on its
+walkable side. The hammer of a pinch is always at least one hammer point.
+
+**Hammer head** - an edge both of whose ends are hammer points. A step can't cross an edge, so one
+which passes under a hammer head passes under both of its points, and the slow-rise bound is
+measured to the further of them. Heads are never joined into anything longer than one edge. If the
+pinch's hammer is a side of an object whose outline is convex, every side of that object which is
+a hammer head counts, since a straight line which misses a convex shape has all of it to one side:
+a step under the corner of a crate passes under the whole crate.
+
+**Protrusion** - a wall at the end of an anvil which turns towards the walkable side and rises at
+least as far from the anvil's line as the hammer is. A step from beyond it passes over its tip,
+so higher than the hammer, and then has to drop under the hammer. It therefore keeps dropping and
+can't end over the anvil, where Bond must be 30 cm up. It can still end beyond the *other* end of
+the anvil, so a protrusion only counts if the other end has one too, or is long. Nothing is
+assumed about what lies beyond a protrusion, as the wall may bend back again: an end of an anvil
+is never called "closed". Depot's gap `04557A.1 | 0x1eed40.2` is the example to remember, a warp
+over a protrusion, under a door corner and out past the other end of an anvil under a metre long.
+
+**Slow-rise bound** - a lower limit on the length of a step which comes in round an end of the
+anvil: `min(anvil length, distance x 30 / d)`, where `d` is the hammer's distance from the anvil
+and `distance` is measured from that end of the anvil to the furthest hammer point which the
+step must pass: the far end of the hammer head, if there is one. The step can't
+cross the anvil and must pass under the hammer, so it rises no faster than `d` over that distance,
+and Bond doesn't fit until it has risen 30 cm. Or it ends beyond the other end of the anvil, having
+covered the anvil's whole length. If the bound reaches `ANVIL_LENGTH_M` the step is impractical.
+
+**Pocket** (in the narrow pocket filter) - everywhere that can be reached from one side of a pinch
+line without crossing the pinch line itself, following every link and going round corners.
+
+**Narrow pocket** - the second generic filter. If a pocket extends less than Bond's width,
+measured in the direction of the pinch line, he fits nowhere in it, so there is no warp through
+that pinch. Walking from his centre parallel to the pinch line, you leave the pocket within his
+radius, and since you can't cross the pinch line that way, you left through a wall. Measured in any
+other direction his disc might only be poking out through the opening. (`filters/pocket.py`.)
 
 **Ignored objects** - per level, in `filters/levels/<level>.py`: a named group of objects of no
 interest to the speedrun, with a reason. A gap is filtered if every one of its pinches is formed by

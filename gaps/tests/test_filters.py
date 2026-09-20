@@ -15,11 +15,12 @@ from gaps.filters.groups import (
     check_group,
     footprint_m2,
 )
+from gaps.filters.pocket import narrow_pocket
 from gaps.filters.predicates import is_crate, is_door, is_lying_flat, is_overhead, is_square
 from gaps.mesh import OUTSIDE_WALKABLE_AREA, load_level
 from gaps.pinch import find_pinches
 from gaps.survey import NO_WARP_FOUND, Gap, survey_level
-from gaps.tests.levels import build, crate, notched_room
+from gaps.tests.levels import build, crate, notched_room, room_with_a_slot, two_rooms
 
 
 def pinches_under_the_notch(level):
@@ -29,7 +30,11 @@ def pinches_under_the_notch(level):
 
 
 class AnvilAndHammer(unittest.TestCase):
-    """The anvil has to be 6 m long: 3 m either side of the hammer."""
+    """In these rooms the near wall is the anvil. At its right hand end the wall always turns up
+    into the room for 4 m: a protrusion far higher than any hammer here. `left_end` says what
+    happens at its left hand end."""
+
+    OUTSIDE_CORNER = -300
 
     def matches(self, level) -> list[bool]:
         pinches = pinches_under_the_notch(level)
@@ -37,11 +42,43 @@ class AnvilAndHammer(unittest.TestCase):
         return [anvil_and_hammer(level, pinch) is not None for pinch in pinches]
 
     def test_a_corner_close_over_the_middle_of_a_long_wall(self):
-        self.assertTrue(all(self.matches(notched_room(1000, 500, 500, clearance=20))))
+        room = notched_room(1000, 500, 500, clearance=20, left_end=self.OUTSIDE_CORNER)
+        self.assertTrue(all(self.matches(room)))
 
-    def test_the_same_corner_near_the_end_of_the_wall_is_left_alone(self):
-        # Only 1 m of wall to one side, so Bond could angle in round its end
-        self.assertFalse(any(self.matches(notched_room(1000, 100, 100, clearance=20))))
+    def test_the_same_corner_near_an_end_with_no_protrusion_is_left_alone(self):
+        # Only 1 m of wall to the left, and Bond can stand round the end of it and angle in
+        room = notched_room(1000, 100, 100, clearance=20, left_end=self.OUTSIDE_CORNER)
+        self.assertFalse(any(self.matches(room)))
+
+    def test_with_a_high_protrusion_at_both_ends_it_is_caught_however_short_the_anvil(self):
+        self.assertTrue(all(self.matches(notched_room(1000, 100, 100, clearance=20))))
+
+    def test_a_protrusion_must_rise_at_least_as_far_as_the_hammer(self):
+        self.assertTrue(all(self.matches(notched_room(1000, 100, 100, clearance=20, left_end=20))))
+        self.assertFalse(any(self.matches(notched_room(1000, 100, 100, clearance=20, left_end=19))))
+
+    def test_near_an_end_with_no_protrusion_it_is_caught_if_a_step_round_it_rises_too_slowly(self):
+        # The corner is 1 m from the open end. A step brushing it rises 5 cm in that metre, so
+        # takes 6 m to rise Bond's 30 cm: just long enough. At 6 cm it takes only 5 m.
+        room = notched_room(1000, 100, 100, clearance=5, left_end=self.OUTSIDE_CORNER)
+        self.assertTrue(all(self.matches(room)))
+        room = notched_room(1000, 100, 100, clearance=6, left_end=self.OUTSIDE_CORNER)
+        self.assertFalse(any(self.matches(room)))
+
+    def test_a_step_under_the_corner_of_a_crate_must_pass_under_the_whole_hammer_head(self):
+        # A crate 80 cm square, 8 cm from the near wall, its near corner 1 m from the end with no
+        # protrusion. Brushing that corner alone a step would need 1 m x 30 / 8 = 3.75 m. But the
+        # crate's long side is a hammer head reaching to 1.8 m, and passing that takes 6.75 m.
+        room = notched_room(1000, 500, 500, clearance=200, left_end=self.OUTSIDE_CORNER)
+        with_crate = build(
+            {"room": room.tiles[0x1000].points}, {0x9000: crate(0x9000, 0x1000, 100, 8, 80)}
+        )
+        self.assertTrue(all(self.matches(with_crate)))
+        # Nudged 35 cm nearer the end, its far end is at 1.45 m: 5.4 m, which isn't enough
+        nearer = build(
+            {"room": room.tiles[0x1000].points}, {0x9000: crate(0x9000, 0x1000, 65, 8, 80)}
+        )
+        self.assertFalse(any(self.matches(nearer)))
 
     def test_a_hammer_at_exactly_bonds_radius_can_be_passed_so_is_left_alone(self):
         self.assertFalse(any(self.matches(notched_room(1000, 500, 500, clearance=30))))
@@ -49,14 +86,39 @@ class AnvilAndHammer(unittest.TestCase):
 
     def test_a_wall_in_several_pieces_is_one_anvil_if_they_are_in_line(self):
         # Three pieces of 3.3 m: no single piece has 3 m either side of the corner
-        self.assertTrue(all(self.matches(notched_room(1000, 500, 500, clearance=20, pieces=3))))
+        room = notched_room(1000, 500, 500, clearance=20, pieces=3, left_end=self.OUTSIDE_CORNER)
+        self.assertTrue(all(self.matches(room)))
 
     def test_a_parallel_edge_is_measured_from_both_of_its_ends(self):
-        # The flat end of the notch runs from 4.5 m to 5.5 m along the wall
-        self.assertTrue(all(self.matches(notched_room(1000, 450, 550, clearance=20))))
-        # 8 m wall: 3 m beyond the middle of the notch, but only 2.5 m beyond its far end. The
-        # pinch with the flat end doesn't match, and a gap is only filtered if all its pinches do.
-        self.assertFalse(all(self.matches(notched_room(800, 450, 550, clearance=20))))
+        # The flat end of the notch runs from 3.5 m to 4.5 m along the wall
+        room = notched_room(1000, 350, 450, clearance=20, left_end=self.OUTSIDE_CORNER)
+        self.assertTrue(all(self.matches(room)))
+        # From 2.5 m to 3.5 m: 3 m of wall to the left of its middle, but only 2.5 m to the left
+        # of its near end. The pinch with the flat end doesn't match, and a gap is only filtered
+        # if all of its pinches do.
+        room = notched_room(1000, 250, 350, clearance=20, left_end=self.OUTSIDE_CORNER)
+        self.assertFalse(all(self.matches(room)))
+
+
+class NarrowPocket(unittest.TestCase):
+    def matches(self, level) -> list[bool]:
+        pinches, _, _ = find_pinches(level)
+        self.assertTrue(pinches)
+        return [narrow_pocket(level, pinch) is not None for pinch in pinches]
+
+    def test_a_dead_end_slot_narrower_than_bond(self):
+        self.assertTrue(all(self.matches(room_with_a_slot(slot_width=50, slot_length=200))))
+
+    def test_a_corridor_between_two_rooms_is_not_a_pocket(self):
+        self.assertFalse(any(self.matches(two_rooms(corridor_width=50))))
+
+    def test_a_slot_which_opens_into_a_chamber_bond_fits_in_is_not_a_pocket(self):
+        level = room_with_a_slot(slot_width=50, slot_length=200, widens_to=80)
+        self.assertFalse(any(self.matches(level)))
+
+    def test_a_chamber_still_too_narrow_for_bond_is(self):
+        level = room_with_a_slot(slot_width=40, slot_length=200, widens_to=58)
+        self.assertTrue(all(self.matches(level)))
 
 
 class IgnoredObjects(unittest.TestCase):

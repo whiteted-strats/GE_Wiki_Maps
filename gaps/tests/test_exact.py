@@ -4,6 +4,7 @@ from fractions import Fraction
 from gaps.exact import (
     closest_points_between_segments,
     contact_interval,
+    is_convex,
     point_in_polygon,
     segment_inside_polygon,
 )
@@ -45,6 +46,15 @@ class ClosestPoints(unittest.TestCase):
 
     def test_crossing_walls_touch(self):
         self.assertEqual(closest_points_between_segments((0, 0), (10, 10), (0, 10), (10, 0))[0], 0)
+
+
+class Convex(unittest.TestCase):
+    def test_a_square_is_and_an_l_shape_is_not(self):
+        self.assertTrue(is_convex(SQUARE))
+        self.assertFalse(is_convex(L_SHAPE))
+
+    def test_repeated_and_in_line_corners_are_allowed(self):
+        self.assertTrue(is_convex([(0, 0), (0, 0), (0, 5), (0, 10), (10, 10), (10, 0)]))
 
 
 class InsidePolygon(unittest.TestCase):
