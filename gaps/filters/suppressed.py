@@ -25,7 +25,7 @@ from gaps.filters.predicates import Predicate
 from gaps.known_warps import normalise_walls, pinch_keys
 from gaps.mesh import Level
 from gaps.pinch import Pinch
-from gaps.survey import FilterVerdict, Gap
+from gaps.survey import FilterVerdict, Gap, width_text
 
 NEARBY_M = 2.0
 
@@ -67,9 +67,9 @@ def apply_suppressions(level: Level, gaps: list[Gap], wanted: list[SuppressedWar
         if gap.witness is None or gap.status != entry.status:
             fail(f"its status is {gap.status!r}, not {entry.status!r}")
 
-        width_cm = round(level.to_cm(float(gap.pinch.width2) ** 0.5), 3)
-        if width_cm != entry.width_cm:
-            fail(f"its width is {width_cm} cm, not {entry.width_cm} cm")
+        width_cm = width_text(level.to_cm(float(gap.pinch.width2) ** 0.5))
+        if width_cm != width_text(entry.width_cm):
+            fail(f"its width is {width_cm} cm, not {width_text(entry.width_cm)} cm")
         step_cm = round(level.to_cm(float(gap.witness.step2) ** 0.5), 2)
         if step_cm > entry.step_cm:
             fail(f"the shortest step found is {step_cm} cm, longer than {entry.step_cm} cm")

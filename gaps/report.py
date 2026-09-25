@@ -334,7 +334,7 @@ def _write_decisions(survey: Survey, path: Path) -> None:
                 [
                     describe(level, level.segments[decision.first]),
                     describe(level, level.segments[decision.second]),
-                    f"{decision.width_cm:.3f}",
+                    width_text(decision.width_cm),
                     "yes" if decision.kept else "no",
                     decision.reason,
                     describe(level, blocker) if blocker else "",

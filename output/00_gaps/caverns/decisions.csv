@@ -9,20 +9,20 @@ wall of tile 003330 (room 0x3f),door 0x1cd580 (preset 0x006d),52.192,no,"the lin
 wall of tile 004A30 (room 0x3f),wall of tile 042720 (room 0x3b),18.640,no,the line between them touches another wall,wall of tile 042520 (room 0x3b)
 wall of tile 004A30 (room 0x3f),wall of tile 03FA20 (room 0x3b),33.552,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 004A30 (room 0x3f),door 0x1cd580 (preset 0x006d),7.456,no,the line between them touches another wall,door 0x1cd580 (preset 0x006d)
-wall of tile 004A30 (room 0x3f),door 0x1cd580 (preset 0x006d),0.000,no,the line between them touches another wall,door 0x1cd580 (preset 0x006d)
-wall of tile 004A30 (room 0x3f),door 0x1cd580 (preset 0x006d),0.000,no,the line between them touches another wall,wall of tile 042520 (room 0x3b)
+wall of tile 004A30 (room 0x3f),door 0x1cd580 (preset 0x006d),0.00012,no,the line between them touches another wall,door 0x1cd580 (preset 0x006d)
+wall of tile 004A30 (room 0x3f),door 0x1cd580 (preset 0x006d),0.00012,no,the line between them touches another wall,wall of tile 042520 (room 0x3b)
 wall of tile 047F20 (room 0x3b),wall of tile 000830 (room 0x3f),55.919,no,the line between them touches another wall,wall of tile 003530 (room 0x3f)
 wall of tile 047F20 (room 0x3b),wall of tile 040420 (room 0x3b),23.870,no,the line between them touches another wall,wall of tile 042620 (room 0x3b)
-wall of tile 047F20 (room 0x3b),door 0x1cd680 (preset 0x006e),0.000,yes,,
+wall of tile 047F20 (room 0x3b),door 0x1cd680 (preset 0x006e),0.00024,yes,,
 wall of tile 047F20 (room 0x3b),door 0x1cd680 (preset 0x006e),7.456,no,"another wall pokes into the space between them, so a tighter pair covers this gap",door 0x1cd680 (preset 0x006e)
 wall of tile 047F20 (room 0x3b),door 0x1cd680 (preset 0x006e),7.456,no,"another wall pokes into the space between them, so a tighter pair covers this gap",door 0x1cd680 (preset 0x006e)
-wall of tile 047F20 (room 0x3b),door 0x1cd680 (preset 0x006e),0.000,yes,,
+wall of tile 047F20 (room 0x3b),door 0x1cd680 (preset 0x006e),0.00024,yes,,
 wall of tile 003530 (room 0x3f),wall of tile 042620 (room 0x3b),18.640,no,the line between them touches another wall,wall of tile 047F20 (room 0x3b)
 wall of tile 003530 (room 0x3f),wall of tile 040420 (room 0x3b),33.552,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
-wall of tile 003530 (room 0x3f),door 0x1cd680 (preset 0x006e),0.000,yes,,
+wall of tile 003530 (room 0x3f),door 0x1cd680 (preset 0x006e),0.00024,yes,,
 wall of tile 003530 (room 0x3f),door 0x1cd680 (preset 0x006e),7.456,no,"another wall pokes into the space between them, so a tighter pair covers this gap",door 0x1cd680 (preset 0x006e)
 wall of tile 003530 (room 0x3f),door 0x1cd680 (preset 0x006e),7.456,no,"another wall pokes into the space between them, so a tighter pair covers this gap",door 0x1cd680 (preset 0x006e)
-wall of tile 003530 (room 0x3f),door 0x1cd680 (preset 0x006e),0.000,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 047F20 (room 0x3b)
+wall of tile 003530 (room 0x3f),door 0x1cd680 (preset 0x006e),0.00035,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 047F20 (room 0x3b)
 wall of tile 000830 (room 0x3f),wall of tile 042620 (room 0x3b),50.155,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 000830 (room 0x3f),wall of tile 040420 (room 0x3b),33.552,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 000830 (room 0x3f),door 0x1cd680 (preset 0x006e),55.920,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 003530 (room 0x3f)
@@ -31,7 +31,7 @@ wall of tile 000830 (room 0x3f),door 0x1cd680 (preset 0x006e),55.920,no,"another
 wall of tile 000830 (room 0x3f),door 0x1cd680 (preset 0x006e),55.920,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 042520 (room 0x3b),wall of tile 03FA20 (room 0x3b),21.089,no,the line between them touches another wall,wall of tile 042720 (room 0x3b)
 wall of tile 042520 (room 0x3b),door 0x1cd580 (preset 0x006d),7.456,no,the line between them touches another wall,door 0x1cd580 (preset 0x006d)
-wall of tile 042520 (room 0x3b),door 0x1cd580 (preset 0x006d),0.000,no,the line between them touches another wall,door 0x1cd580 (preset 0x006d)
+wall of tile 042520 (room 0x3b),door 0x1cd580 (preset 0x006d),0.00012,no,the line between them touches another wall,door 0x1cd580 (preset 0x006d)
 wall of tile 042720 (room 0x3b),door 0x1cd580 (preset 0x006d),26.096,no,the line between them touches another wall,door 0x1cd580 (preset 0x006d)
 wall of tile 042720 (room 0x3b),door 0x1cd580 (preset 0x006d),18.640,no,the line between them touches another wall,wall of tile 004A30 (room 0x3f)
 wall of tile 042720 (room 0x3b),door 0x1cd580 (preset 0x006d),18.640,no,the line between them touches another wall,wall of tile 042520 (room 0x3b)
@@ -135,15 +135,15 @@ wall of tile 0B6D19 (room 0x30),wall of tile 0B5118 (room 0x2e),26.096,no,the li
 wall of tile 0B6D19 (room 0x30),wall of tile 089219 (room 0x2d),58.352,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 0B6B1A (room 0x2e),wall of tile 089F19 (room 0x2f),52.191,no,the line between them touches another wall,wall of tile 089718 (room 0x2e)
 wall of tile 0B6B19 (room 0x2e),wall of tile 089219 (room 0x2d),52.192,no,the line between them touches another wall,wall of tile 0B5118 (room 0x2e)
-wall of tile 088B1A (room 0x2c),door 0x1cd7b0 (preset 0x006f),0.000,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
+wall of tile 088B1A (room 0x2c),door 0x1cd7b0 (preset 0x006f),0.00049,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 088B1A (room 0x2c),door 0x1cd7b0 (preset 0x006f),18.604,no,the line between them touches another wall,wall of tile 05E719 (room 0x28)
 wall of tile 088B19 (room 0x2c),door 0x1cd7b0 (preset 0x006f),18.604,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 05E71A (room 0x28)
-wall of tile 088B19 (room 0x2c),door 0x1cd7b0 (preset 0x006f),0.000,yes,,
-wall of tile 088B19 (room 0x2c),door 0x1cd7b0 (preset 0x006f),0.000,yes,,
-wall of tile 05E71A (room 0x28),door 0x1cd7b0 (preset 0x006f),0.000,yes,,
-wall of tile 05E71A (room 0x28),door 0x1cd7b0 (preset 0x006f),0.000,yes,,
+wall of tile 088B19 (room 0x2c),door 0x1cd7b0 (preset 0x006f),0.00024,yes,,
+wall of tile 088B19 (room 0x2c),door 0x1cd7b0 (preset 0x006f),0.00024,yes,,
+wall of tile 05E71A (room 0x28),door 0x1cd7b0 (preset 0x006f),0.00024,yes,,
+wall of tile 05E71A (room 0x28),door 0x1cd7b0 (preset 0x006f),0.00024,yes,,
 wall of tile 05E71A (room 0x28),door 0x1cd7b0 (preset 0x006f),18.676,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 088B19 (room 0x2c)
-wall of tile 05E719 (room 0x28),door 0x1cd7b0 (preset 0x006f),0.000,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
+wall of tile 05E719 (room 0x28),door 0x1cd7b0 (preset 0x006f),0.00049,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 05E719 (room 0x28),door 0x1cd7b0 (preset 0x006f),18.676,no,the line between them touches another wall,wall of tile 088B1A (room 0x2c)
 wall of tile 075518 (room 0x28),generic 0x1c5434 (preset 0x008c),56.424,yes,,
 wall of tile 075518 (room 0x28),generic 0x1c5434 (preset 0x008c),56.424,yes,,
@@ -162,7 +162,7 @@ wall of tile 075918 (room 0x27),glass 0x1caa08 (preset 0x275b),41.028,no,"anothe
 wall of tile 075918 (room 0x27),glass 0x1caa08 (preset 0x275b),41.008,no,the line between them touches another wall,wall of tile 075818 (room 0x27)
 wall of tile 075918 (room 0x27),glass 0x1caa9c (preset 0x275c),1.290,no,the line between them touches another wall,glass 0x1caa9c (preset 0x275c)
 wall of tile 075918 (room 0x27),glass 0x1caa9c (preset 0x275c),55.920,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
-wall of tile 075918 (room 0x27),glass 0x1caa9c (preset 0x275c),0.000,no,the line between them touches another wall,wall of tile 075818 (room 0x27)
+wall of tile 075918 (room 0x27),glass 0x1caa9c (preset 0x275c),0.00049,no,the line between them touches another wall,wall of tile 075818 (room 0x27)
 wall of tile 076118 (room 0x27),wall of tile 075C18 (room 0x27),41.008,no,the line between them touches another wall,wall of tile 075D1A (room 0x27)
 wall of tile 076118 (room 0x27),glass 0x1ca8e0 (preset 0x2759),41.008,no,the line between them touches another wall,wall of tile 075D1A (room 0x27)
 wall of tile 076118 (room 0x27),glass 0x1ca8e0 (preset 0x2759),41.028,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 075D1A (room 0x27)
@@ -170,7 +170,7 @@ wall of tile 075D1A (room 0x27),glass 0x1ca8e0 (preset 0x2759),1.291,no,the line
 wall of tile 075D1A (room 0x27),glass 0x1ca8e0 (preset 0x2759),55.919,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 075C18 (room 0x27),wall of tile 02F018 (room 0x27),41.008,no,the line between them touches another wall,wall of tile 075E18 (room 0x27)
 wall of tile 075C18 (room 0x27),glass 0x1ca8e0 (preset 0x2759),1.291,no,the line between them touches another wall,glass 0x1ca8e0 (preset 0x2759)
-wall of tile 075C18 (room 0x27),glass 0x1ca8e0 (preset 0x2759),0.000,no,the line between them touches another wall,wall of tile 075E18 (room 0x27)
+wall of tile 075C18 (room 0x27),glass 0x1ca8e0 (preset 0x2759),0.00049,no,the line between them touches another wall,wall of tile 075E18 (room 0x27)
 wall of tile 075C18 (room 0x27),glass 0x1ca8e0 (preset 0x2759),55.919,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 075C18 (room 0x27),glass 0x1ca974 (preset 0x275a),41.008,no,the line between them touches another wall,wall of tile 075E18 (room 0x27)
 wall of tile 075C18 (room 0x27),glass 0x1ca974 (preset 0x275a),41.028,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 075E18 (room 0x27)
@@ -185,22 +185,22 @@ wall of tile 02F018 (room 0x27),glass 0x1ca974 (preset 0x275a),1.291,no,the line
 wall of tile 02F018 (room 0x27),glass 0x1ca974 (preset 0x275a),55.919,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 02F018 (room 0x27),glass 0x1cad80 (preset 0x2761),47.449,no,the line between them touches another wall,wall of tile 075B18 (room 0x27)
 wall of tile 02F018 (room 0x27),glass 0x1cad80 (preset 0x2761),47.450,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 075B18 (room 0x27)
-wall of tile 075B18 (room 0x27),glass 0x1ca974 (preset 0x275a),0.913,no,"another wall pokes into the space between them, so a tighter pair covers this gap",glass 0x1ca974 (preset 0x275a)
+wall of tile 075B18 (room 0x27),glass 0x1ca974 (preset 0x275a),0.91,no,"another wall pokes into the space between them, so a tighter pair covers this gap",glass 0x1ca974 (preset 0x275a)
 wall of tile 075B18 (room 0x27),glass 0x1ca974 (preset 0x275a),55.919,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
-wall of tile 075B18 (room 0x27),glass 0x1cad80 (preset 0x2761),0.133,no,the line between them touches another wall,glass 0x1cad80 (preset 0x2761)
+wall of tile 075B18 (room 0x27),glass 0x1cad80 (preset 0x2761),0.13,no,the line between them touches another wall,glass 0x1cad80 (preset 0x2761)
 wall of tile 075A18 (room 0x27),wall of tile 075718 (room 0x27),47.449,no,the line between them touches another wall,wall of tile 02EE18 (room 0x27)
 wall of tile 075A18 (room 0x27),glass 0x1ca974 (preset 0x275a),46.546,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 075B18 (room 0x27)
 wall of tile 075A18 (room 0x27),glass 0x1ca974 (preset 0x275a),46.546,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 075B18 (room 0x27)
 wall of tile 075A18 (room 0x27),glass 0x1caa08 (preset 0x275b),46.545,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 02EE18 (room 0x27)
 wall of tile 075A18 (room 0x27),glass 0x1caa08 (preset 0x275b),46.545,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 02EE18 (room 0x27)
-wall of tile 075A18 (room 0x27),glass 0x1cad80 (preset 0x2761),0.132,no,"another wall pokes into the space between them, so a tighter pair covers this gap",glass 0x1cad80 (preset 0x2761)
-wall of tile 02EE18 (room 0x27),glass 0x1caa08 (preset 0x275b),0.912,no,"another wall pokes into the space between them, so a tighter pair covers this gap",glass 0x1caa08 (preset 0x275b)
+wall of tile 075A18 (room 0x27),glass 0x1cad80 (preset 0x2761),0.13,no,"another wall pokes into the space between them, so a tighter pair covers this gap",glass 0x1cad80 (preset 0x2761)
+wall of tile 02EE18 (room 0x27),glass 0x1caa08 (preset 0x275b),0.91,no,"another wall pokes into the space between them, so a tighter pair covers this gap",glass 0x1caa08 (preset 0x275b)
 wall of tile 02EE18 (room 0x27),glass 0x1caa08 (preset 0x275b),55.919,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
-wall of tile 02EE18 (room 0x27),glass 0x1cad80 (preset 0x2761),0.132,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 075A18 (room 0x27)
-wall of tile 02EE18 (room 0x27),glass 0x1cad80 (preset 0x2761),0.000,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 075A18 (room 0x27)
+wall of tile 02EE18 (room 0x27),glass 0x1cad80 (preset 0x2761),0.13,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 075A18 (room 0x27)
+wall of tile 02EE18 (room 0x27),glass 0x1cad80 (preset 0x2761),0.00035,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 075A18 (room 0x27)
 wall of tile 075718 (room 0x27),glass 0x1caa08 (preset 0x275b),1.291,no,the line between them touches another wall,glass 0x1caa08 (preset 0x275b)
 wall of tile 075718 (room 0x27),glass 0x1caa08 (preset 0x275b),55.919,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
-wall of tile 075718 (room 0x27),glass 0x1caa08 (preset 0x275b),0.000,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
+wall of tile 075718 (room 0x27),glass 0x1caa08 (preset 0x275b),0.00049,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 075718 (room 0x27),glass 0x1caa9c (preset 0x275c),41.028,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 075818 (room 0x27)
 wall of tile 075718 (room 0x27),glass 0x1caa9c (preset 0x275c),41.007,no,the line between them touches another wall,wall of tile 075818 (room 0x27)
 wall of tile 075718 (room 0x27),glass 0x1cad80 (preset 0x2761),47.450,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 02EE18 (room 0x27)
@@ -347,8 +347,8 @@ wall of tile 11FB10 (room 0x16),generic 0x1c85d8 (preset 0x2727),59.687,no,"the 
 wall of tile 120710 (room 0x16),generic 0x1c8558 (preset 0x2726),49.166,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 120810 (room 0x16)
 wall of tile 120710 (room 0x16),generic 0x1c8558 (preset 0x2726),49.176,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 120810 (room 0x16)
 wall of tile 120710 (room 0x16),generic 0x1c8558 (preset 0x2726),49.177,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 120810 (room 0x16)
-wall of tile 120710 (room 0x16),generic 0x1c85d8 (preset 0x2727),0.696,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
-wall of tile 120710 (room 0x16),generic 0x1c85d8 (preset 0x2727),0.727,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
+wall of tile 120710 (room 0x16),generic 0x1c85d8 (preset 0x2727),0.70,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
+wall of tile 120710 (room 0x16),generic 0x1c85d8 (preset 0x2727),0.73,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 120710 (room 0x16),generic 0x1c85d8 (preset 0x2727),52.671,no,the line between them touches another wall,generic 0x1c85d8 (preset 0x2727)
 wall of tile 120810 (room 0x16),generic 0x1c8558 (preset 0x2726),43.703,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8558 (preset 0x2726)
 wall of tile 120810 (room 0x16),generic 0x1c8558 (preset 0x2726),43.689,yes,,
@@ -370,7 +370,7 @@ wall of tile 120910 (room 0x16),generic 0x1c8458 (preset 0x2724),48.592,no,"the 
 wall of tile 120910 (room 0x16),generic 0x1c8458 (preset 0x2724),48.592,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 120910 (room 0x16),generic 0x1c84d8 (preset 0x2725),1.048,no,the line between them touches another wall,generic 0x1c84d8 (preset 0x2725)
 wall of tile 120910 (room 0x16),generic 0x1c84d8 (preset 0x2725),50.300,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
-wall of tile 120910 (room 0x16),generic 0x1c8558 (preset 0x2726),0.185,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8558 (preset 0x2726)
+wall of tile 120910 (room 0x16),generic 0x1c8558 (preset 0x2726),0.18,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8558 (preset 0x2726)
 wall of tile 120910 (room 0x16),generic 0x1c85d8 (preset 0x2727),58.188,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c85d8 (preset 0x2727)
 wall of tile 120910 (room 0x16),generic 0x1c85d8 (preset 0x2727),58.168,yes,,
 wall of tile 121E10 (room 0x18),generic 0x1c86d8 (preset 0x2733),41.007,yes,,
@@ -392,9 +392,9 @@ wall of tile 097E18 (room 0x35),generic 0x1c86d8 (preset 0x2733),41.008,no,"anot
 wall of tile 097E18 (room 0x35),generic 0x1c8758 (preset 0x2734),41.160,no,the line between them touches another wall,generic 0x1c8758 (preset 0x2734)
 wall of tile 097E18 (room 0x35),generic 0x1c8758 (preset 0x2734),41.160,no,the line between them touches another wall,generic 0x1c8758 (preset 0x2734)
 wall of tile 097E18 (room 0x35),generic 0x1c8758 (preset 0x2734),0.089,no,the line between them touches another wall,generic 0x1c8758 (preset 0x2734)
-wall of tile 097E18 (room 0x35),generic 0x1c87d8 (preset 0x2735),0.000,no,the line between them touches another wall,generic 0x1c87d8 (preset 0x2735)
+wall of tile 097E18 (room 0x35),generic 0x1c87d8 (preset 0x2735),0.00020,no,the line between them touches another wall,generic 0x1c87d8 (preset 0x2735)
 wall of tile 097E18 (room 0x35),generic 0x1c87d8 (preset 0x2735),0.032,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
-wall of tile 097C18 (room 0x35),generic 0x1c8658 (preset 0x2732),0.000,no,the line between them touches another wall,generic 0x1c8658 (preset 0x2732)
+wall of tile 097C18 (room 0x35),generic 0x1c8658 (preset 0x2732),0.00020,no,the line between them touches another wall,generic 0x1c8658 (preset 0x2732)
 wall of tile 097C18 (room 0x35),generic 0x1c8658 (preset 0x2732),29.824,no,the line between them touches another wall,generic 0x1c8658 (preset 0x2732)
 wall of tile 097C18 (room 0x35),generic 0x1c8658 (preset 0x2732),0.032,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 097C18 (room 0x35),generic 0x1c86d8 (preset 0x2733),29.672,yes,,
@@ -463,10 +463,10 @@ wall of tile 071F18 (room 0x33),generic 0x1c83d8 (preset 0x2731),10.429,no,"anot
 wall of tile 071F18 (room 0x33),generic 0x1c83d8 (preset 0x2731),10.460,no,the line between them touches another wall,generic 0x1c83d8 (preset 0x2731)
 wall of tile 071F18 (room 0x33),generic 0x1c83d8 (preset 0x2731),7.835,yes,,
 wall of tile 071F18 (room 0x33),generic 0x1c83d8 (preset 0x2731),7.835,yes,,
-wall of tile 05EC18 (room 0x33),generic 0x1c8158 (preset 0x272c),0.798,yes,,
-wall of tile 05EC18 (room 0x33),generic 0x1c8158 (preset 0x272c),0.819,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8158 (preset 0x272c)
+wall of tile 05EC18 (room 0x33),generic 0x1c8158 (preset 0x272c),0.80,yes,,
+wall of tile 05EC18 (room 0x33),generic 0x1c8158 (preset 0x272c),0.82,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8158 (preset 0x272c)
 wall of tile 05EC18 (room 0x33),generic 0x1c8158 (preset 0x272c),46.656,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 071F18 (room 0x33)
-wall of tile 05EC18 (room 0x33),generic 0x1c8158 (preset 0x272c),0.798,yes,,
+wall of tile 05EC18 (room 0x33),generic 0x1c8158 (preset 0x272c),0.80,yes,,
 wall of tile 05EC18 (room 0x33),generic 0x1c81d8 (preset 0x272d),46.568,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 071F18 (room 0x33)
 wall of tile 05EC18 (room 0x33),generic 0x1c81d8 (preset 0x272d),46.583,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 071F18 (room 0x33)
 wall of tile 05EC18 (room 0x33),generic 0x1c81d8 (preset 0x272d),46.568,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 071F18 (room 0x33)
@@ -562,24 +562,24 @@ wall of tile 01A308 (room 0x14),wall of tile 01EE08 (room 0x10),40.826,no,the fa
 wall of tile 01A308 (room 0x14),wall of tile 01EC08 (room 0x10),6.850,no,the far wall faces the other way (it belongs to floor which isn't linked here),
 wall of tile 01A308 (room 0x14),glass 0x1ca568 (preset 0x271e),47.146,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 01A108 (room 0x14)
 wall of tile 01A308 (room 0x14),glass 0x1ca568 (preset 0x271e),47.169,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 01A108 (room 0x14)
-wall of tile 01A308 (room 0x14),glass 0x1ca5fc (preset 0x271f),0.344,no,the line between them touches another wall,glass 0x1ca5fc (preset 0x271f)
-wall of tile 01A308 (room 0x14),glass 0x1ca5fc (preset 0x271f),0.000,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
-wall of tile 01A308 (room 0x14),glass 0x1ca5fc (preset 0x271f),0.801,no,the line between them touches another wall,glass 0x1ca5fc (preset 0x271f)
+wall of tile 01A308 (room 0x14),glass 0x1ca5fc (preset 0x271f),0.34,no,the line between them touches another wall,glass 0x1ca5fc (preset 0x271f)
+wall of tile 01A308 (room 0x14),glass 0x1ca5fc (preset 0x271f),0.00017,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
+wall of tile 01A308 (room 0x14),glass 0x1ca5fc (preset 0x271f),0.80,no,the line between them touches another wall,glass 0x1ca5fc (preset 0x271f)
 wall of tile 01A308 (room 0x14),glass 0x1ca690 (preset 0x2720),50.658,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 01A308 (room 0x14),glass 0x1ca690 (preset 0x2720),50.706,no,the line between them touches another wall,wall of tile 01A508 (room 0x14)
-wall of tile 01A108 (room 0x14),glass 0x1ca568 (preset 0x271e),0.000,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
+wall of tile 01A108 (room 0x14),glass 0x1ca568 (preset 0x271e),0.000054,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 01A108 (room 0x14),glass 0x1ca568 (preset 0x271e),2.446,no,"another wall pokes into the space between them, so a tighter pair covers this gap",glass 0x1ca568 (preset 0x271e)
-wall of tile 01A108 (room 0x14),glass 0x1ca5fc (preset 0x271f),0.801,no,the line between them touches another wall,glass 0x1ca5fc (preset 0x271f)
+wall of tile 01A108 (room 0x14),glass 0x1ca5fc (preset 0x271f),0.80,no,the line between them touches another wall,glass 0x1ca5fc (preset 0x271f)
 wall of tile 01A008 (room 0x14),wall of tile 01A908 (room 0x14),50.706,no,the line between them touches another wall,wall of tile 019F08 (room 0x14)
 wall of tile 01A008 (room 0x14),wall of tile 020C08 (room 0x10),39.857,no,the far wall faces the other way (it belongs to floor which isn't linked here),
 wall of tile 01A008 (room 0x14),wall of tile 01EC08 (room 0x10),5.822,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
-wall of tile 01A008 (room 0x14),glass 0x1ca568 (preset 0x271e),0.344,no,the line between them touches another wall,glass 0x1ca568 (preset 0x271e)
-wall of tile 01A008 (room 0x14),glass 0x1ca568 (preset 0x271e),0.801,no,the line between them touches another wall,glass 0x1ca568 (preset 0x271e)
+wall of tile 01A008 (room 0x14),glass 0x1ca568 (preset 0x271e),0.34,no,the line between them touches another wall,glass 0x1ca568 (preset 0x271e)
+wall of tile 01A008 (room 0x14),glass 0x1ca568 (preset 0x271e),0.80,no,the line between them touches another wall,glass 0x1ca568 (preset 0x271e)
 wall of tile 01A008 (room 0x14),glass 0x1ca5fc (preset 0x271f),46.802,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 01A008 (room 0x14),glass 0x1ca5fc (preset 0x271f),46.835,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 01A108 (room 0x14)
 wall of tile 019F08 (room 0x14),wall of tile 020C08 (room 0x10),30.906,no,the far wall faces the other way (it belongs to floor which isn't linked here),
 wall of tile 019F08 (room 0x14),wall of tile 01EC08 (room 0x10),50.913,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
-wall of tile 019F08 (room 0x14),glass 0x1ca568 (preset 0x271e),0.801,no,the line between them touches another wall,glass 0x1ca568 (preset 0x271e)
+wall of tile 019F08 (room 0x14),glass 0x1ca568 (preset 0x271e),0.80,no,the line between them touches another wall,glass 0x1ca568 (preset 0x271e)
 wall of tile 01A908 (room 0x14),glass 0x1ca568 (preset 0x271e),50.314,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 01A908 (room 0x14),glass 0x1ca568 (preset 0x271e),50.404,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 019F08 (room 0x14)
 wall of tile 01A508 (room 0x14),wall of tile 01EE08 (room 0x10),25.555,no,the far wall faces the other way (it belongs to floor which isn't linked here),
@@ -589,7 +589,7 @@ wall of tile 01A608 (room 0x14),wall of tile 01A808 (room 0x14),50.706,no,the li
 wall of tile 01A608 (room 0x14),glass 0x1ca5fc (preset 0x271f),50.658,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 01A508 (room 0x14)
 wall of tile 01A608 (room 0x14),glass 0x1ca5fc (preset 0x271f),50.658,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 01A508 (room 0x14)
 wall of tile 01A708 (room 0x14),wall of tile 01EE08 (room 0x10),12.005,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
-wall of tile 01A708 (room 0x14),glass 0x1ca690 (preset 0x2720),0.000,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
+wall of tile 01A708 (room 0x14),glass 0x1ca690 (preset 0x2720),0.000048,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 01A708 (room 0x14),glass 0x1ca690 (preset 0x2720),1.645,no,"another wall pokes into the space between them, so a tighter pair covers this gap",glass 0x1ca690 (preset 0x2720)
 wall of tile 01A808 (room 0x14),wall of tile 01EE08 (room 0x10),27.276,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 01A808 (room 0x14),glass 0x1ca690 (preset 0x2720),50.661,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 01A708 (room 0x14)
@@ -991,11 +991,11 @@ wall of tile 073900 (room 0x01),door 0x1cd480 (preset 0x006c),18.640,no,the line
 wall of tile 073900 (room 0x01),door 0x1cd480 (preset 0x006c),18.640,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 073900 (room 0x01),door 0x1cd480 (preset 0x006c),26.096,no,the line between them touches another wall,door 0x1cd480 (preset 0x006c)
 wall of tile 073A00 (room 0x01),wall of tile 000828 (room 0x3e),52.192,no,the line between them touches another wall,wall of tile 003528 (room 0x3e)
-wall of tile 073A00 (room 0x01),door 0x1cd480 (preset 0x006c),0.157,no,the line between them touches another wall,wall of tile 003528 (room 0x3e)
+wall of tile 073A00 (room 0x01),door 0x1cd480 (preset 0x006c),0.16,no,the line between them touches another wall,wall of tile 003528 (room 0x3e)
 wall of tile 073A00 (room 0x01),door 0x1cd480 (preset 0x006c),7.456,no,the line between them touches another wall,door 0x1cd480 (preset 0x006c)
 wall of tile 073C00 (room 0x01),wall of tile 003328 (room 0x3e),55.919,no,the line between them touches another wall,wall of tile 004A28 (room 0x3e)
 wall of tile 073C00 (room 0x01),wall of tile 073700 (room 0x01),23.871,no,the line between them touches another wall,wall of tile 072200 (room 0x01)
-wall of tile 073C00 (room 0x01),door 0x1cd380 (preset 0x006b),0.158,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
+wall of tile 073C00 (room 0x01),door 0x1cd380 (preset 0x006b),0.16,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 073C00 (room 0x01),door 0x1cd380 (preset 0x006b),7.456,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
 wall of tile 073C00 (room 0x01),door 0x1cd380 (preset 0x006b),7.456,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
 wall of tile 072200 (room 0x01),wall of tile 004A28 (room 0x3e),18.640,no,the line between them touches another wall,wall of tile 073C00 (room 0x01)
@@ -1006,7 +1006,7 @@ wall of tile 072200 (room 0x01),door 0x1cd380 (preset 0x006b),26.096,no,"the lin
 wall of tile 072200 (room 0x01),door 0x1cd380 (preset 0x006b),26.096,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 004A28 (room 0x3e),wall of tile 073700 (room 0x01),33.552,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 004A28 (room 0x3e),wall of tile 073500 (room 0x01),55.920,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
-wall of tile 004A28 (room 0x3e),door 0x1cd380 (preset 0x006b),0.000,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
+wall of tile 004A28 (room 0x3e),door 0x1cd380 (preset 0x006b),0.00030,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
 wall of tile 004A28 (room 0x3e),door 0x1cd380 (preset 0x006b),7.456,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
 wall of tile 004A28 (room 0x3e),door 0x1cd380 (preset 0x006b),7.456,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
 wall of tile 003328 (room 0x3e),wall of tile 073700 (room 0x01),33.552,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
@@ -1019,7 +1019,7 @@ wall of tile 000828 (room 0x3e),door 0x1cd480 (preset 0x006c),52.192,no,"the lin
 wall of tile 000828 (room 0x3e),door 0x1cd480 (preset 0x006c),52.035,no,the line between them touches another wall,wall of tile 003528 (room 0x3e)
 wall of tile 000828 (room 0x3e),door 0x1cd480 (preset 0x006c),52.035,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 003528 (room 0x3e)
 wall of tile 000828 (room 0x3e),door 0x1cd480 (preset 0x006c),52.035,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 003528 (room 0x3e)
-wall of tile 003528 (room 0x3e),door 0x1cd480 (preset 0x006c),0.000,no,the line between them touches another wall,wall of tile 073A00 (room 0x01)
+wall of tile 003528 (room 0x3e),door 0x1cd480 (preset 0x006c),0.00012,no,the line between them touches another wall,wall of tile 073A00 (room 0x01)
 wall of tile 003528 (room 0x3e),door 0x1cd480 (preset 0x006c),7.456,no,the line between them touches another wall,door 0x1cd480 (preset 0x006c)
 wall of tile 073700 (room 0x01),door 0x1cd380 (preset 0x006b),38.305,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 073700 (room 0x01),door 0x1cd380 (preset 0x006b),38.305,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
@@ -1214,7 +1214,7 @@ wall of tile 074E18 (room 0x28),glass 0x1ca468 (preset 0x2751),26.095,no,the lin
 wall of tile 08C419 (room 0x28),wall of tile 078718 (room 0x29),30.056,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 08C419 (room 0x28),wall of tile 078718 (room 0x29),26.096,no,the line between them touches another wall,wall of tile 087919 (room 0x28)
 wall of tile 087919 (room 0x28),wall of tile 078718 (room 0x29),14.838,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 078718 (room 0x29)
-wall of tile 087919 (room 0x28),glass 0x1ca468 (preset 0x2751),0.000,no,the line between them touches another wall,glass 0x1ca468 (preset 0x2751)
+wall of tile 087919 (room 0x28),glass 0x1ca468 (preset 0x2751),0.00049,no,the line between them touches another wall,glass 0x1ca468 (preset 0x2751)
 wall of tile 078818 (room 0x29),wall of tile 08C21A (room 0x28),26.096,no,the line between them touches another wall,wall of tile 087A19 (room 0x28)
 wall of tile 078818 (room 0x29),wall of tile 074518 (room 0x28),52.191,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 wall of tile 078818 (room 0x29),wall of tile 074418 (room 0x2b),42.505,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
@@ -1342,7 +1342,7 @@ wall of tile 087A19 (room 0x28),wall of tile 074718 (room 0x28),55.043,no,"the l
 wall of tile 087A19 (room 0x28),generic 0x1cb620 (preset 0x00af),45.941,yes,,
 wall of tile 087A19 (room 0x28),generic 0x1cb620 (preset 0x00af),45.941,yes,,
 wall of tile 08C21A (room 0x28),wall of tile 074718 (room 0x28),48.464,no,the line between them touches another wall,wall of tile 074518 (room 0x28)
-wall of tile 08C21A (room 0x28),glass 0x1ca4e8 (preset 0x2752),0.000,no,the line between them touches another wall,glass 0x1ca4e8 (preset 0x2752)
+wall of tile 08C21A (room 0x28),glass 0x1ca4e8 (preset 0x2752),0.00049,no,the line between them touches another wall,glass 0x1ca4e8 (preset 0x2752)
 wall of tile 074518 (room 0x28),wall of tile 074418 (room 0x2b),36.905,no,the line between them touches another wall,wall of tile 074718 (room 0x28)
 wall of tile 074518 (room 0x28),glass 0x1ca4e8 (preset 0x2752),26.096,no,the line between them touches another wall,glass 0x1ca4e8 (preset 0x2752)
 wall of tile 074518 (room 0x28),glass 0x1ca4e8 (preset 0x2752),26.096,no,the line between them touches another wall,wall of tile 08C21A (room 0x28)
@@ -1429,7 +1429,7 @@ generic 0x1c7204 (preset 0x0074),generic 0x1c7494 (preset 0x0075),16.542,no,"ano
 generic 0x1c7f58 (preset 0x2728),generic 0x1c7f58 (preset 0x2728),59.794,no,the line between them touches another wall,generic 0x1c7f58 (preset 0x2728)
 generic 0x1c7f58 (preset 0x2728),generic 0x1c7fd8 (preset 0x2729),59.647,no,the line between them touches another wall,generic 0x1c7fd8 (preset 0x2729)
 generic 0x1c7f58 (preset 0x2728),generic 0x1c7fd8 (preset 0x2729),59.647,no,the line between them touches another wall,generic 0x1c7fd8 (preset 0x2729)
-generic 0x1c7f58 (preset 0x2728),generic 0x1c7fd8 (preset 0x2729),0.147,no,the line between them touches another wall,generic 0x1c7f58 (preset 0x2728)
+generic 0x1c7f58 (preset 0x2728),generic 0x1c7fd8 (preset 0x2729),0.15,no,the line between them touches another wall,generic 0x1c7f58 (preset 0x2728)
 generic 0x1c7f58 (preset 0x2728),generic 0x1c7fd8 (preset 0x2729),0.084,no,the line between them touches another wall,generic 0x1c7fd8 (preset 0x2729)
 generic 0x1c7f58 (preset 0x2728),generic 0x1c8058 (preset 0x272a),59.501,yes,,
 generic 0x1c7f58 (preset 0x2728),generic 0x1c8058 (preset 0x272a),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8058 (preset 0x272a)
@@ -1438,9 +1438,9 @@ generic 0x1c7f58 (preset 0x2728),generic 0x1c7f58 (preset 0x2728),59.795,no,the 
 generic 0x1c7f58 (preset 0x2728),generic 0x1c7f58 (preset 0x2728),0.031,no,the line between them touches another wall,generic 0x1c7f58 (preset 0x2728)
 generic 0x1c7f58 (preset 0x2728),generic 0x1c7fd8 (preset 0x2729),59.647,no,the line between them touches another wall,generic 0x1c7fd8 (preset 0x2729)
 generic 0x1c7f58 (preset 0x2728),generic 0x1c7fd8 (preset 0x2729),59.647,no,the line between them touches another wall,generic 0x1c7fd8 (preset 0x2729)
-generic 0x1c7f58 (preset 0x2728),generic 0x1c7fd8 (preset 0x2729),0.147,no,the line between them touches another wall,generic 0x1c7f58 (preset 0x2728)
-generic 0x1c7f58 (preset 0x2728),generic 0x1c7fd8 (preset 0x2729),0.147,no,the line between them touches another wall,generic 0x1c7f58 (preset 0x2728)
-generic 0x1c7f58 (preset 0x2728),generic 0x1c7fd8 (preset 0x2729),0.115,no,the line between them touches another wall,generic 0x1c7fd8 (preset 0x2729)
+generic 0x1c7f58 (preset 0x2728),generic 0x1c7fd8 (preset 0x2729),0.15,no,the line between them touches another wall,generic 0x1c7f58 (preset 0x2728)
+generic 0x1c7f58 (preset 0x2728),generic 0x1c7fd8 (preset 0x2729),0.15,no,the line between them touches another wall,generic 0x1c7f58 (preset 0x2728)
+generic 0x1c7f58 (preset 0x2728),generic 0x1c7fd8 (preset 0x2729),0.12,no,the line between them touches another wall,generic 0x1c7fd8 (preset 0x2729)
 generic 0x1c7f58 (preset 0x2728),generic 0x1c8058 (preset 0x272a),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8058 (preset 0x272a)
 generic 0x1c7f58 (preset 0x2728),generic 0x1c8058 (preset 0x272a),59.501,yes,,
 generic 0x1c7f58 (preset 0x2728),generic 0x1c8058 (preset 0x272a),59.501,yes,,
@@ -1449,7 +1449,7 @@ generic 0x1c7f58 (preset 0x2728),generic 0x1c7f58 (preset 0x2728),0.031,no,the l
 generic 0x1c7f58 (preset 0x2728),generic 0x1c7fd8 (preset 0x2729),59.647,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c7f58 (preset 0x2728)
 generic 0x1c7f58 (preset 0x2728),generic 0x1c7fd8 (preset 0x2729),0.084,no,the line between them touches another wall,generic 0x1c7f58 (preset 0x2728)
 generic 0x1c7f58 (preset 0x2728),generic 0x1c7fd8 (preset 0x2729),0.084,no,the line between them touches another wall,generic 0x1c7f58 (preset 0x2728)
-generic 0x1c7f58 (preset 0x2728),generic 0x1c7fd8 (preset 0x2729),0.115,no,the line between them touches another wall,generic 0x1c7f58 (preset 0x2728)
+generic 0x1c7f58 (preset 0x2728),generic 0x1c7fd8 (preset 0x2729),0.12,no,the line between them touches another wall,generic 0x1c7f58 (preset 0x2728)
 generic 0x1c7f58 (preset 0x2728),generic 0x1c8058 (preset 0x272a),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c7f58 (preset 0x2728)
 generic 0x1c7f58 (preset 0x2728),generic 0x1c8058 (preset 0x272a),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c7f58 (preset 0x2728)
 generic 0x1c7f58 (preset 0x2728),generic 0x1c8058 (preset 0x272a),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c7f58 (preset 0x2728)
@@ -1468,7 +1468,7 @@ generic 0x1c7f58 (preset 0x2728),generic 0x1c8058 (preset 0x272a),59.501,no,"ano
 generic 0x1c7fd8 (preset 0x2729),generic 0x1c7fd8 (preset 0x2729),59.794,no,the line between them touches another wall,generic 0x1c7fd8 (preset 0x2729)
 generic 0x1c7fd8 (preset 0x2729),generic 0x1c8058 (preset 0x272a),59.648,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
 generic 0x1c7fd8 (preset 0x2729),generic 0x1c8058 (preset 0x272a),59.648,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
-generic 0x1c7fd8 (preset 0x2729),generic 0x1c8058 (preset 0x272a),0.147,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
+generic 0x1c7fd8 (preset 0x2729),generic 0x1c8058 (preset 0x272a),0.15,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
 generic 0x1c7fd8 (preset 0x2729),generic 0x1c8058 (preset 0x272a),0.084,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
 generic 0x1c7fd8 (preset 0x2729),generic 0x1c80d8 (preset 0x272b),59.501,yes,,
 generic 0x1c7fd8 (preset 0x2729),generic 0x1c80d8 (preset 0x272b),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c80d8 (preset 0x272b)
@@ -1477,9 +1477,9 @@ generic 0x1c7fd8 (preset 0x2729),generic 0x1c7fd8 (preset 0x2729),59.795,no,the 
 generic 0x1c7fd8 (preset 0x2729),generic 0x1c7fd8 (preset 0x2729),0.031,no,the line between them touches another wall,generic 0x1c7fd8 (preset 0x2729)
 generic 0x1c7fd8 (preset 0x2729),generic 0x1c8058 (preset 0x272a),59.648,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
 generic 0x1c7fd8 (preset 0x2729),generic 0x1c8058 (preset 0x272a),59.648,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
-generic 0x1c7fd8 (preset 0x2729),generic 0x1c8058 (preset 0x272a),0.147,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
-generic 0x1c7fd8 (preset 0x2729),generic 0x1c8058 (preset 0x272a),0.147,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
-generic 0x1c7fd8 (preset 0x2729),generic 0x1c8058 (preset 0x272a),0.115,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
+generic 0x1c7fd8 (preset 0x2729),generic 0x1c8058 (preset 0x272a),0.15,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
+generic 0x1c7fd8 (preset 0x2729),generic 0x1c8058 (preset 0x272a),0.15,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
+generic 0x1c7fd8 (preset 0x2729),generic 0x1c8058 (preset 0x272a),0.12,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
 generic 0x1c7fd8 (preset 0x2729),generic 0x1c80d8 (preset 0x272b),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c80d8 (preset 0x272b)
 generic 0x1c7fd8 (preset 0x2729),generic 0x1c80d8 (preset 0x272b),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c80d8 (preset 0x272b)
 generic 0x1c7fd8 (preset 0x2729),generic 0x1c80d8 (preset 0x272b),59.501,yes,,
@@ -1488,7 +1488,7 @@ generic 0x1c7fd8 (preset 0x2729),generic 0x1c7fd8 (preset 0x2729),0.031,no,the l
 generic 0x1c7fd8 (preset 0x2729),generic 0x1c8058 (preset 0x272a),59.648,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8058 (preset 0x272a)
 generic 0x1c7fd8 (preset 0x2729),generic 0x1c8058 (preset 0x272a),0.084,no,the line between them touches another wall,generic 0x1c7fd8 (preset 0x2729)
 generic 0x1c7fd8 (preset 0x2729),generic 0x1c8058 (preset 0x272a),0.084,no,the line between them touches another wall,generic 0x1c7fd8 (preset 0x2729)
-generic 0x1c7fd8 (preset 0x2729),generic 0x1c8058 (preset 0x272a),0.115,no,the line between them touches another wall,generic 0x1c7fd8 (preset 0x2729)
+generic 0x1c7fd8 (preset 0x2729),generic 0x1c8058 (preset 0x272a),0.12,no,the line between them touches another wall,generic 0x1c7fd8 (preset 0x2729)
 generic 0x1c7fd8 (preset 0x2729),generic 0x1c80d8 (preset 0x272b),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c7fd8 (preset 0x2729)
 generic 0x1c7fd8 (preset 0x2729),generic 0x1c80d8 (preset 0x272b),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c7fd8 (preset 0x2729)
 generic 0x1c7fd8 (preset 0x2729),generic 0x1c80d8 (preset 0x272b),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c80d8 (preset 0x272b)
@@ -1505,18 +1505,18 @@ generic 0x1c7fd8 (preset 0x2729),generic 0x1c8058 (preset 0x272a),0.084,no,the l
 generic 0x1c7fd8 (preset 0x2729),generic 0x1c80d8 (preset 0x272b),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c7fd8 (preset 0x2729)
 generic 0x1c7fd8 (preset 0x2729),generic 0x1c80d8 (preset 0x272b),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c80d8 (preset 0x272b)
 generic 0x1c8058 (preset 0x272a),generic 0x1c8058 (preset 0x272a),59.794,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
-generic 0x1c8058 (preset 0x272a),generic 0x1c80d8 (preset 0x272b),0.147,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
+generic 0x1c8058 (preset 0x272a),generic 0x1c80d8 (preset 0x272b),0.15,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
 generic 0x1c8058 (preset 0x272a),generic 0x1c80d8 (preset 0x272b),0.089,no,the line between them touches another wall,generic 0x1c80d8 (preset 0x272b)
 generic 0x1c8058 (preset 0x272a),generic 0x1c8058 (preset 0x272a),59.794,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
 generic 0x1c8058 (preset 0x272a),generic 0x1c8058 (preset 0x272a),59.795,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
 generic 0x1c8058 (preset 0x272a),generic 0x1c8058 (preset 0x272a),0.031,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
-generic 0x1c8058 (preset 0x272a),generic 0x1c80d8 (preset 0x272b),0.147,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
-generic 0x1c8058 (preset 0x272a),generic 0x1c80d8 (preset 0x272b),0.147,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
-generic 0x1c8058 (preset 0x272a),generic 0x1c80d8 (preset 0x272b),0.120,no,the line between them touches another wall,generic 0x1c80d8 (preset 0x272b)
+generic 0x1c8058 (preset 0x272a),generic 0x1c80d8 (preset 0x272b),0.15,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
+generic 0x1c8058 (preset 0x272a),generic 0x1c80d8 (preset 0x272b),0.15,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
+generic 0x1c8058 (preset 0x272a),generic 0x1c80d8 (preset 0x272b),0.12,no,the line between them touches another wall,generic 0x1c80d8 (preset 0x272b)
 generic 0x1c8058 (preset 0x272a),generic 0x1c8058 (preset 0x272a),0.031,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
 generic 0x1c8058 (preset 0x272a),generic 0x1c80d8 (preset 0x272b),0.084,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8058 (preset 0x272a)
 generic 0x1c8058 (preset 0x272a),generic 0x1c80d8 (preset 0x272b),0.084,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
-generic 0x1c8058 (preset 0x272a),generic 0x1c80d8 (preset 0x272b),0.115,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
+generic 0x1c8058 (preset 0x272a),generic 0x1c80d8 (preset 0x272b),0.12,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
 generic 0x1c8058 (preset 0x272a),generic 0x1c80d8 (preset 0x272b),59.647,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
 generic 0x1c8058 (preset 0x272a),generic 0x1c80d8 (preset 0x272b),59.647,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
 generic 0x1c8058 (preset 0x272a),generic 0x1c80d8 (preset 0x272b),59.647,no,the line between them touches another wall,generic 0x1c8058 (preset 0x272a)
@@ -1540,13 +1540,13 @@ generic 0x1c8158 (preset 0x272c),generic 0x1c81d8 (preset 0x272d),59.647,no,"ano
 generic 0x1c8158 (preset 0x272c),generic 0x1c81d8 (preset 0x272d),59.647,no,the line between them touches another wall,generic 0x1c8158 (preset 0x272c)
 generic 0x1c8158 (preset 0x272c),generic 0x1c8158 (preset 0x272c),0.031,no,the line between them touches another wall,generic 0x1c8158 (preset 0x272c)
 generic 0x1c8158 (preset 0x272c),generic 0x1c81d8 (preset 0x272d),0.089,no,the line between them touches another wall,generic 0x1c81d8 (preset 0x272d)
-generic 0x1c8158 (preset 0x272c),generic 0x1c81d8 (preset 0x272d),0.147,no,the line between them touches another wall,generic 0x1c81d8 (preset 0x272d)
+generic 0x1c8158 (preset 0x272c),generic 0x1c81d8 (preset 0x272d),0.15,no,the line between them touches another wall,generic 0x1c81d8 (preset 0x272d)
 generic 0x1c8158 (preset 0x272c),generic 0x1c81d8 (preset 0x272d),0.089,no,the line between them touches another wall,generic 0x1c81d8 (preset 0x272d)
-generic 0x1c8158 (preset 0x272c),generic 0x1c81d8 (preset 0x272d),0.147,no,the line between them touches another wall,generic 0x1c81d8 (preset 0x272d)
-generic 0x1c8158 (preset 0x272c),generic 0x1c81d8 (preset 0x272d),0.147,no,the line between them touches another wall,generic 0x1c81d8 (preset 0x272d)
-generic 0x1c8158 (preset 0x272c),generic 0x1c81d8 (preset 0x272d),0.120,no,the line between them touches another wall,generic 0x1c81d8 (preset 0x272d)
+generic 0x1c8158 (preset 0x272c),generic 0x1c81d8 (preset 0x272d),0.15,no,the line between them touches another wall,generic 0x1c81d8 (preset 0x272d)
+generic 0x1c8158 (preset 0x272c),generic 0x1c81d8 (preset 0x272d),0.15,no,the line between them touches another wall,generic 0x1c81d8 (preset 0x272d)
+generic 0x1c8158 (preset 0x272c),generic 0x1c81d8 (preset 0x272d),0.12,no,the line between them touches another wall,generic 0x1c81d8 (preset 0x272d)
 generic 0x1c8158 (preset 0x272c),generic 0x1c81d8 (preset 0x272d),0.084,no,the line between them touches another wall,generic 0x1c8158 (preset 0x272c)
-generic 0x1c8158 (preset 0x272c),generic 0x1c81d8 (preset 0x272d),0.115,no,the line between them touches another wall,generic 0x1c8158 (preset 0x272c)
+generic 0x1c8158 (preset 0x272c),generic 0x1c81d8 (preset 0x272d),0.12,no,the line between them touches another wall,generic 0x1c8158 (preset 0x272c)
 generic 0x1c8158 (preset 0x272c),generic 0x1c81d8 (preset 0x272d),0.084,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8158 (preset 0x272c)
 generic 0x1c81d8 (preset 0x272d),generic 0x1c81d8 (preset 0x272d),0.031,no,the line between them touches another wall,generic 0x1c81d8 (preset 0x272d)
 generic 0x1c81d8 (preset 0x272d),generic 0x1c81d8 (preset 0x272d),0.031,no,the line between them touches another wall,generic 0x1c81d8 (preset 0x272d)
@@ -1555,15 +1555,15 @@ generic 0x1c81d8 (preset 0x272d),generic 0x1c8258 (preset 0x272e),59.647,no,the 
 generic 0x1c81d8 (preset 0x272d),generic 0x1c8258 (preset 0x272e),59.647,no,the line between them touches another wall,generic 0x1c8258 (preset 0x272e)
 generic 0x1c81d8 (preset 0x272d),generic 0x1c82d8 (preset 0x272f),59.500,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c81d8 (preset 0x272d)
 generic 0x1c81d8 (preset 0x272d),generic 0x1c82d8 (preset 0x272f),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c82d8 (preset 0x272f)
-generic 0x1c81d8 (preset 0x272d),generic 0x1c8258 (preset 0x272e),0.147,no,the line between them touches another wall,generic 0x1c81d8 (preset 0x272d)
+generic 0x1c81d8 (preset 0x272d),generic 0x1c8258 (preset 0x272e),0.15,no,the line between them touches another wall,generic 0x1c81d8 (preset 0x272d)
 generic 0x1c81d8 (preset 0x272d),generic 0x1c8258 (preset 0x272e),0.084,no,the line between them touches another wall,generic 0x1c8258 (preset 0x272e)
 generic 0x1c81d8 (preset 0x272d),generic 0x1c8258 (preset 0x272e),59.647,no,the line between them touches another wall,generic 0x1c8258 (preset 0x272e)
 generic 0x1c81d8 (preset 0x272d),generic 0x1c8258 (preset 0x272e),59.647,no,the line between them touches another wall,generic 0x1c8258 (preset 0x272e)
 generic 0x1c81d8 (preset 0x272d),generic 0x1c82d8 (preset 0x272f),59.500,yes,,
 generic 0x1c81d8 (preset 0x272d),generic 0x1c82d8 (preset 0x272f),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c82d8 (preset 0x272f)
-generic 0x1c81d8 (preset 0x272d),generic 0x1c8258 (preset 0x272e),0.147,no,the line between them touches another wall,generic 0x1c81d8 (preset 0x272d)
-generic 0x1c81d8 (preset 0x272d),generic 0x1c8258 (preset 0x272e),0.147,no,the line between them touches another wall,generic 0x1c81d8 (preset 0x272d)
-generic 0x1c81d8 (preset 0x272d),generic 0x1c8258 (preset 0x272e),0.115,no,the line between them touches another wall,generic 0x1c8258 (preset 0x272e)
+generic 0x1c81d8 (preset 0x272d),generic 0x1c8258 (preset 0x272e),0.15,no,the line between them touches another wall,generic 0x1c81d8 (preset 0x272d)
+generic 0x1c81d8 (preset 0x272d),generic 0x1c8258 (preset 0x272e),0.15,no,the line between them touches another wall,generic 0x1c81d8 (preset 0x272d)
+generic 0x1c81d8 (preset 0x272d),generic 0x1c8258 (preset 0x272e),0.12,no,the line between them touches another wall,generic 0x1c8258 (preset 0x272e)
 generic 0x1c81d8 (preset 0x272d),generic 0x1c8258 (preset 0x272e),59.647,no,the line between them touches another wall,generic 0x1c8258 (preset 0x272e)
 generic 0x1c81d8 (preset 0x272d),generic 0x1c8258 (preset 0x272e),59.647,no,the line between them touches another wall,generic 0x1c8258 (preset 0x272e)
 generic 0x1c81d8 (preset 0x272d),generic 0x1c82d8 (preset 0x272f),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 071F18 (room 0x33)
@@ -1571,7 +1571,7 @@ generic 0x1c81d8 (preset 0x272d),generic 0x1c82d8 (preset 0x272f),59.500,yes,,
 generic 0x1c81d8 (preset 0x272d),generic 0x1c82d8 (preset 0x272f),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c81d8 (preset 0x272d)
 generic 0x1c81d8 (preset 0x272d),generic 0x1c82d8 (preset 0x272f),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 071F18 (room 0x33)
 generic 0x1c81d8 (preset 0x272d),generic 0x1c8258 (preset 0x272e),0.089,no,the line between them touches another wall,generic 0x1c81d8 (preset 0x272d)
-generic 0x1c81d8 (preset 0x272d),generic 0x1c8258 (preset 0x272e),0.120,no,the line between them touches another wall,generic 0x1c81d8 (preset 0x272d)
+generic 0x1c81d8 (preset 0x272d),generic 0x1c8258 (preset 0x272e),0.12,no,the line between them touches another wall,generic 0x1c81d8 (preset 0x272d)
 generic 0x1c81d8 (preset 0x272d),generic 0x1c8258 (preset 0x272e),59.648,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 071F18 (room 0x33)
 generic 0x1c81d8 (preset 0x272d),generic 0x1c8258 (preset 0x272e),0.089,no,the line between them touches another wall,generic 0x1c81d8 (preset 0x272d)
 generic 0x1c81d8 (preset 0x272d),generic 0x1c82d8 (preset 0x272f),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 071F18 (room 0x33)
@@ -1594,15 +1594,15 @@ generic 0x1c8258 (preset 0x272e),generic 0x1c82d8 (preset 0x272f),59.647,no,the 
 generic 0x1c8258 (preset 0x272e),generic 0x1c82d8 (preset 0x272f),59.647,no,the line between them touches another wall,generic 0x1c82d8 (preset 0x272f)
 generic 0x1c8258 (preset 0x272e),generic 0x1c8358 (preset 0x2730),59.500,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8258 (preset 0x272e)
 generic 0x1c8258 (preset 0x272e),generic 0x1c8358 (preset 0x2730),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8358 (preset 0x2730)
-generic 0x1c8258 (preset 0x272e),generic 0x1c82d8 (preset 0x272f),0.147,no,the line between them touches another wall,generic 0x1c8258 (preset 0x272e)
+generic 0x1c8258 (preset 0x272e),generic 0x1c82d8 (preset 0x272f),0.15,no,the line between them touches another wall,generic 0x1c8258 (preset 0x272e)
 generic 0x1c8258 (preset 0x272e),generic 0x1c82d8 (preset 0x272f),0.084,no,the line between them touches another wall,generic 0x1c82d8 (preset 0x272f)
 generic 0x1c8258 (preset 0x272e),generic 0x1c82d8 (preset 0x272f),59.647,no,the line between them touches another wall,generic 0x1c82d8 (preset 0x272f)
 generic 0x1c8258 (preset 0x272e),generic 0x1c82d8 (preset 0x272f),59.647,no,the line between them touches another wall,generic 0x1c82d8 (preset 0x272f)
 generic 0x1c8258 (preset 0x272e),generic 0x1c8358 (preset 0x2730),59.500,yes,,
 generic 0x1c8258 (preset 0x272e),generic 0x1c8358 (preset 0x2730),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8358 (preset 0x2730)
-generic 0x1c8258 (preset 0x272e),generic 0x1c82d8 (preset 0x272f),0.147,no,the line between them touches another wall,generic 0x1c8258 (preset 0x272e)
-generic 0x1c8258 (preset 0x272e),generic 0x1c82d8 (preset 0x272f),0.147,no,the line between them touches another wall,generic 0x1c8258 (preset 0x272e)
-generic 0x1c8258 (preset 0x272e),generic 0x1c82d8 (preset 0x272f),0.115,no,the line between them touches another wall,generic 0x1c82d8 (preset 0x272f)
+generic 0x1c8258 (preset 0x272e),generic 0x1c82d8 (preset 0x272f),0.15,no,the line between them touches another wall,generic 0x1c8258 (preset 0x272e)
+generic 0x1c8258 (preset 0x272e),generic 0x1c82d8 (preset 0x272f),0.15,no,the line between them touches another wall,generic 0x1c8258 (preset 0x272e)
+generic 0x1c8258 (preset 0x272e),generic 0x1c82d8 (preset 0x272f),0.12,no,the line between them touches another wall,generic 0x1c82d8 (preset 0x272f)
 generic 0x1c8258 (preset 0x272e),generic 0x1c82d8 (preset 0x272f),59.647,no,the line between them touches another wall,generic 0x1c82d8 (preset 0x272f)
 generic 0x1c8258 (preset 0x272e),generic 0x1c82d8 (preset 0x272f),59.647,no,the line between them touches another wall,generic 0x1c82d8 (preset 0x272f)
 generic 0x1c8258 (preset 0x272e),generic 0x1c8358 (preset 0x2730),59.500,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 071F18 (room 0x33)
@@ -1610,7 +1610,7 @@ generic 0x1c8258 (preset 0x272e),generic 0x1c8358 (preset 0x2730),59.500,yes,,
 generic 0x1c8258 (preset 0x272e),generic 0x1c8358 (preset 0x2730),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8258 (preset 0x272e)
 generic 0x1c8258 (preset 0x272e),generic 0x1c8358 (preset 0x2730),59.500,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 071F18 (room 0x33)
 generic 0x1c8258 (preset 0x272e),generic 0x1c82d8 (preset 0x272f),0.084,no,the line between them touches another wall,generic 0x1c8258 (preset 0x272e)
-generic 0x1c8258 (preset 0x272e),generic 0x1c82d8 (preset 0x272f),0.115,no,the line between them touches another wall,generic 0x1c8258 (preset 0x272e)
+generic 0x1c8258 (preset 0x272e),generic 0x1c82d8 (preset 0x272f),0.12,no,the line between them touches another wall,generic 0x1c8258 (preset 0x272e)
 generic 0x1c8258 (preset 0x272e),generic 0x1c82d8 (preset 0x272f),59.647,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 071F18 (room 0x33)
 generic 0x1c8258 (preset 0x272e),generic 0x1c82d8 (preset 0x272f),0.084,no,the line between them touches another wall,generic 0x1c8258 (preset 0x272e)
 generic 0x1c8258 (preset 0x272e),generic 0x1c8358 (preset 0x2730),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 071F18 (room 0x33)
@@ -1633,15 +1633,15 @@ generic 0x1c82d8 (preset 0x272f),generic 0x1c8358 (preset 0x2730),59.647,no,the 
 generic 0x1c82d8 (preset 0x272f),generic 0x1c8358 (preset 0x2730),59.647,no,the line between them touches another wall,generic 0x1c8358 (preset 0x2730)
 generic 0x1c82d8 (preset 0x272f),generic 0x1c83d8 (preset 0x2731),59.500,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c82d8 (preset 0x272f)
 generic 0x1c82d8 (preset 0x272f),generic 0x1c83d8 (preset 0x2731),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c83d8 (preset 0x2731)
-generic 0x1c82d8 (preset 0x272f),generic 0x1c8358 (preset 0x2730),0.147,no,the line between them touches another wall,generic 0x1c82d8 (preset 0x272f)
+generic 0x1c82d8 (preset 0x272f),generic 0x1c8358 (preset 0x2730),0.15,no,the line between them touches another wall,generic 0x1c82d8 (preset 0x272f)
 generic 0x1c82d8 (preset 0x272f),generic 0x1c8358 (preset 0x2730),0.084,no,the line between them touches another wall,generic 0x1c8358 (preset 0x2730)
 generic 0x1c82d8 (preset 0x272f),generic 0x1c8358 (preset 0x2730),59.647,no,the line between them touches another wall,generic 0x1c8358 (preset 0x2730)
 generic 0x1c82d8 (preset 0x272f),generic 0x1c8358 (preset 0x2730),59.647,no,the line between them touches another wall,generic 0x1c8358 (preset 0x2730)
 generic 0x1c82d8 (preset 0x272f),generic 0x1c83d8 (preset 0x2731),59.500,yes,,
 generic 0x1c82d8 (preset 0x272f),generic 0x1c83d8 (preset 0x2731),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c83d8 (preset 0x2731)
-generic 0x1c82d8 (preset 0x272f),generic 0x1c8358 (preset 0x2730),0.147,no,the line between them touches another wall,generic 0x1c82d8 (preset 0x272f)
-generic 0x1c82d8 (preset 0x272f),generic 0x1c8358 (preset 0x2730),0.147,no,the line between them touches another wall,generic 0x1c82d8 (preset 0x272f)
-generic 0x1c82d8 (preset 0x272f),generic 0x1c8358 (preset 0x2730),0.115,no,the line between them touches another wall,generic 0x1c8358 (preset 0x2730)
+generic 0x1c82d8 (preset 0x272f),generic 0x1c8358 (preset 0x2730),0.15,no,the line between them touches another wall,generic 0x1c82d8 (preset 0x272f)
+generic 0x1c82d8 (preset 0x272f),generic 0x1c8358 (preset 0x2730),0.15,no,the line between them touches another wall,generic 0x1c82d8 (preset 0x272f)
+generic 0x1c82d8 (preset 0x272f),generic 0x1c8358 (preset 0x2730),0.12,no,the line between them touches another wall,generic 0x1c8358 (preset 0x2730)
 generic 0x1c82d8 (preset 0x272f),generic 0x1c8358 (preset 0x2730),59.647,no,the line between them touches another wall,generic 0x1c8358 (preset 0x2730)
 generic 0x1c82d8 (preset 0x272f),generic 0x1c8358 (preset 0x2730),59.647,no,the line between them touches another wall,generic 0x1c8358 (preset 0x2730)
 generic 0x1c82d8 (preset 0x272f),generic 0x1c83d8 (preset 0x2731),59.500,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 071F18 (room 0x33)
@@ -1649,7 +1649,7 @@ generic 0x1c82d8 (preset 0x272f),generic 0x1c83d8 (preset 0x2731),59.500,yes,,
 generic 0x1c82d8 (preset 0x272f),generic 0x1c83d8 (preset 0x2731),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c82d8 (preset 0x272f)
 generic 0x1c82d8 (preset 0x272f),generic 0x1c83d8 (preset 0x2731),59.500,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 071F18 (room 0x33)
 generic 0x1c82d8 (preset 0x272f),generic 0x1c8358 (preset 0x2730),0.084,no,the line between them touches another wall,generic 0x1c82d8 (preset 0x272f)
-generic 0x1c82d8 (preset 0x272f),generic 0x1c8358 (preset 0x2730),0.115,no,the line between them touches another wall,generic 0x1c82d8 (preset 0x272f)
+generic 0x1c82d8 (preset 0x272f),generic 0x1c8358 (preset 0x2730),0.12,no,the line between them touches another wall,generic 0x1c82d8 (preset 0x272f)
 generic 0x1c82d8 (preset 0x272f),generic 0x1c8358 (preset 0x2730),59.647,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 071F18 (room 0x33)
 generic 0x1c82d8 (preset 0x272f),generic 0x1c8358 (preset 0x2730),0.084,no,the line between them touches another wall,generic 0x1c82d8 (preset 0x272f)
 generic 0x1c82d8 (preset 0x272f),generic 0x1c83d8 (preset 0x2731),59.501,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 071F18 (room 0x33)
@@ -1670,17 +1670,17 @@ generic 0x1c8358 (preset 0x2730),generic 0x1c8358 (preset 0x2730),0.031,no,the l
 generic 0x1c8358 (preset 0x2730),generic 0x1c83d8 (preset 0x2731),0.084,no,the line between them touches another wall,generic 0x1c83d8 (preset 0x2731)
 generic 0x1c8358 (preset 0x2730),generic 0x1c83d8 (preset 0x2731),59.647,no,the line between them touches another wall,generic 0x1c83d8 (preset 0x2731)
 generic 0x1c8358 (preset 0x2730),generic 0x1c83d8 (preset 0x2731),59.647,no,the line between them touches another wall,generic 0x1c83d8 (preset 0x2731)
-generic 0x1c8358 (preset 0x2730),generic 0x1c83d8 (preset 0x2731),0.147,no,the line between them touches another wall,generic 0x1c8358 (preset 0x2730)
+generic 0x1c8358 (preset 0x2730),generic 0x1c83d8 (preset 0x2731),0.15,no,the line between them touches another wall,generic 0x1c8358 (preset 0x2730)
 generic 0x1c8358 (preset 0x2730),generic 0x1c83d8 (preset 0x2731),0.084,no,the line between them touches another wall,generic 0x1c83d8 (preset 0x2731)
 generic 0x1c8358 (preset 0x2730),generic 0x1c83d8 (preset 0x2731),59.647,no,the line between them touches another wall,generic 0x1c83d8 (preset 0x2731)
 generic 0x1c8358 (preset 0x2730),generic 0x1c83d8 (preset 0x2731),59.647,no,the line between them touches another wall,generic 0x1c83d8 (preset 0x2731)
-generic 0x1c8358 (preset 0x2730),generic 0x1c83d8 (preset 0x2731),0.147,no,the line between them touches another wall,generic 0x1c8358 (preset 0x2730)
-generic 0x1c8358 (preset 0x2730),generic 0x1c83d8 (preset 0x2731),0.147,no,the line between them touches another wall,generic 0x1c8358 (preset 0x2730)
-generic 0x1c8358 (preset 0x2730),generic 0x1c83d8 (preset 0x2731),0.115,no,the line between them touches another wall,generic 0x1c83d8 (preset 0x2731)
+generic 0x1c8358 (preset 0x2730),generic 0x1c83d8 (preset 0x2731),0.15,no,the line between them touches another wall,generic 0x1c8358 (preset 0x2730)
+generic 0x1c8358 (preset 0x2730),generic 0x1c83d8 (preset 0x2731),0.15,no,the line between them touches another wall,generic 0x1c8358 (preset 0x2730)
+generic 0x1c8358 (preset 0x2730),generic 0x1c83d8 (preset 0x2731),0.12,no,the line between them touches another wall,generic 0x1c83d8 (preset 0x2731)
 generic 0x1c8358 (preset 0x2730),generic 0x1c83d8 (preset 0x2731),59.647,no,the line between them touches another wall,generic 0x1c83d8 (preset 0x2731)
 generic 0x1c8358 (preset 0x2730),generic 0x1c83d8 (preset 0x2731),59.647,no,the line between them touches another wall,generic 0x1c83d8 (preset 0x2731)
 generic 0x1c8358 (preset 0x2730),generic 0x1c83d8 (preset 0x2731),0.084,no,the line between them touches another wall,generic 0x1c8358 (preset 0x2730)
-generic 0x1c8358 (preset 0x2730),generic 0x1c83d8 (preset 0x2731),0.115,no,the line between them touches another wall,generic 0x1c8358 (preset 0x2730)
+generic 0x1c8358 (preset 0x2730),generic 0x1c83d8 (preset 0x2731),0.12,no,the line between them touches another wall,generic 0x1c8358 (preset 0x2730)
 generic 0x1c8358 (preset 0x2730),generic 0x1c83d8 (preset 0x2731),59.647,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 071F18 (room 0x33)
 generic 0x1c8358 (preset 0x2730),generic 0x1c83d8 (preset 0x2731),0.084,no,the line between them touches another wall,generic 0x1c8358 (preset 0x2730)
 generic 0x1c83d8 (preset 0x2731),generic 0x1c83d8 (preset 0x2731),59.794,no,the line between them touches another wall,generic 0x1c83d8 (preset 0x2731)
@@ -1694,7 +1694,7 @@ generic 0x1c8458 (preset 0x2724),generic 0x1c84d8 (preset 0x2725),58.924,no,neit
 generic 0x1c8458 (preset 0x2724),generic 0x1c84d8 (preset 0x2725),0.032,no,neither wall could be placed on a tile,
 generic 0x1c8458 (preset 0x2724),generic 0x1c84d8 (preset 0x2725),2.027,no,the line between them touches another wall,generic 0x1c84d8 (preset 0x2725)
 generic 0x1c8458 (preset 0x2724),generic 0x1c84d8 (preset 0x2725),2.070,no,the line between them touches another wall,generic 0x1c84d8 (preset 0x2725)
-generic 0x1c8458 (preset 0x2724),generic 0x1c84d8 (preset 0x2725),0.451,no,the line between them touches another wall,generic 0x1c84d8 (preset 0x2725)
+generic 0x1c8458 (preset 0x2724),generic 0x1c84d8 (preset 0x2725),0.45,no,the line between them touches another wall,generic 0x1c84d8 (preset 0x2725)
 generic 0x1c8458 (preset 0x2724),generic 0x1c8558 (preset 0x2726),58.168,no,neither wall could be placed on a tile,
 generic 0x1c8458 (preset 0x2724),generic 0x1c8558 (preset 0x2726),58.168,no,neither wall could be placed on a tile,
 generic 0x1c8458 (preset 0x2724),generic 0x1c8558 (preset 0x2726),58.170,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8558 (preset 0x2726)
@@ -1706,8 +1706,8 @@ generic 0x1c8458 (preset 0x2724),generic 0x1c8558 (preset 0x2726),58.169,no,neit
 generic 0x1c8458 (preset 0x2724),generic 0x1c8558 (preset 0x2726),58.169,no,neither wall could be placed on a tile,
 generic 0x1c8458 (preset 0x2724),generic 0x1c84d8 (preset 0x2725),58.925,no,neither wall could be placed on a tile,
 generic 0x1c8458 (preset 0x2724),generic 0x1c84d8 (preset 0x2725),58.924,no,neither wall could be placed on a tile,
-generic 0x1c8458 (preset 0x2724),generic 0x1c84d8 (preset 0x2725),0.000,no,neither wall could be placed on a tile,
-generic 0x1c8458 (preset 0x2724),generic 0x1c84d8 (preset 0x2725),0.000,no,neither wall could be placed on a tile,
+generic 0x1c8458 (preset 0x2724),generic 0x1c84d8 (preset 0x2725),0.000040,no,neither wall could be placed on a tile,
+generic 0x1c8458 (preset 0x2724),generic 0x1c84d8 (preset 0x2725),0.000040,no,neither wall could be placed on a tile,
 generic 0x1c8458 (preset 0x2724),generic 0x1c8558 (preset 0x2726),58.170,no,neither wall could be placed on a tile,
 generic 0x1c8458 (preset 0x2724),generic 0x1c8558 (preset 0x2726),58.170,no,neither wall could be placed on a tile,
 generic 0x1c8458 (preset 0x2724),generic 0x1c8458 (preset 0x2724),0.032,no,the line between them touches another wall,generic 0x1c8458 (preset 0x2724)
@@ -1719,30 +1719,30 @@ generic 0x1c8458 (preset 0x2724),generic 0x1c84d8 (preset 0x2725),58.925,no,the 
 generic 0x1c8458 (preset 0x2724),generic 0x1c84d8 (preset 0x2725),58.926,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8458 (preset 0x2724)
 generic 0x1c8458 (preset 0x2724),generic 0x1c84d8 (preset 0x2725),58.926,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8458 (preset 0x2724)
 generic 0x1c8458 (preset 0x2724),generic 0x1c84d8 (preset 0x2725),58.925,no,the line between them touches another wall,generic 0x1c84d8 (preset 0x2725)
-generic 0x1c8458 (preset 0x2724),generic 0x1c84d8 (preset 0x2725),0.419,no,the line between them touches another wall,generic 0x1c84d8 (preset 0x2725)
-generic 0x1c8458 (preset 0x2724),generic 0x1c84d8 (preset 0x2725),0.451,no,the line between them touches another wall,generic 0x1c84d8 (preset 0x2725)
+generic 0x1c8458 (preset 0x2724),generic 0x1c84d8 (preset 0x2725),0.42,no,the line between them touches another wall,generic 0x1c84d8 (preset 0x2725)
+generic 0x1c8458 (preset 0x2724),generic 0x1c84d8 (preset 0x2725),0.45,no,the line between them touches another wall,generic 0x1c84d8 (preset 0x2725)
 generic 0x1c8458 (preset 0x2724),generic 0x1c8558 (preset 0x2726),58.168,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8458 (preset 0x2724)
 generic 0x1c8458 (preset 0x2724),generic 0x1c8558 (preset 0x2726),58.170,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8558 (preset 0x2726)
 generic 0x1c8458 (preset 0x2724),generic 0x1c8558 (preset 0x2726),58.170,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8558 (preset 0x2726)
 generic 0x1c84d8 (preset 0x2725),generic 0x1c84d8 (preset 0x2725),0.032,no,the line between them touches another wall,generic 0x1c84d8 (preset 0x2725)
-generic 0x1c84d8 (preset 0x2725),generic 0x1c8558 (preset 0x2726),0.756,no,the line between them touches another wall,generic 0x1c84d8 (preset 0x2725)
-generic 0x1c84d8 (preset 0x2725),generic 0x1c8558 (preset 0x2726),0.756,no,the line between them touches another wall,generic 0x1c8558 (preset 0x2726)
-generic 0x1c84d8 (preset 0x2725),generic 0x1c8558 (preset 0x2726),0.000,no,the line between them touches another wall,generic 0x1c8558 (preset 0x2726)
+generic 0x1c84d8 (preset 0x2725),generic 0x1c8558 (preset 0x2726),0.76,no,the line between them touches another wall,generic 0x1c84d8 (preset 0x2725)
+generic 0x1c84d8 (preset 0x2725),generic 0x1c8558 (preset 0x2726),0.76,no,the line between them touches another wall,generic 0x1c8558 (preset 0x2726)
+generic 0x1c84d8 (preset 0x2725),generic 0x1c8558 (preset 0x2726),0.000045,no,the line between them touches another wall,generic 0x1c8558 (preset 0x2726)
 generic 0x1c84d8 (preset 0x2725),generic 0x1c85d8 (preset 0x2727),58.168,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c85d8 (preset 0x2727)
 generic 0x1c84d8 (preset 0x2725),generic 0x1c85d8 (preset 0x2727),58.168,yes,,
 generic 0x1c84d8 (preset 0x2725),generic 0x1c85d8 (preset 0x2727),58.168,yes,,
 generic 0x1c84d8 (preset 0x2725),generic 0x1c85d8 (preset 0x2727),58.168,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c85d8 (preset 0x2727)
-generic 0x1c84d8 (preset 0x2725),generic 0x1c8558 (preset 0x2726),0.419,no,the line between them touches another wall,generic 0x1c84d8 (preset 0x2725)
-generic 0x1c84d8 (preset 0x2725),generic 0x1c8558 (preset 0x2726),0.865,no,the line between them touches another wall,generic 0x1c84d8 (preset 0x2725)
+generic 0x1c84d8 (preset 0x2725),generic 0x1c8558 (preset 0x2726),0.42,no,the line between them touches another wall,generic 0x1c84d8 (preset 0x2725)
+generic 0x1c84d8 (preset 0x2725),generic 0x1c8558 (preset 0x2726),0.86,no,the line between them touches another wall,generic 0x1c84d8 (preset 0x2725)
 generic 0x1c84d8 (preset 0x2725),generic 0x1c85d8 (preset 0x2727),58.170,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c84d8 (preset 0x2725)
 generic 0x1c84d8 (preset 0x2725),generic 0x1c85d8 (preset 0x2727),58.170,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c84d8 (preset 0x2725)
-generic 0x1c84d8 (preset 0x2725),generic 0x1c8558 (preset 0x2726),0.451,no,the line between them touches another wall,generic 0x1c84d8 (preset 0x2725)
-generic 0x1c84d8 (preset 0x2725),generic 0x1c8558 (preset 0x2726),0.451,no,the line between them touches another wall,generic 0x1c84d8 (preset 0x2725)
+generic 0x1c84d8 (preset 0x2725),generic 0x1c8558 (preset 0x2726),0.45,no,the line between them touches another wall,generic 0x1c84d8 (preset 0x2725)
+generic 0x1c84d8 (preset 0x2725),generic 0x1c8558 (preset 0x2726),0.45,no,the line between them touches another wall,generic 0x1c84d8 (preset 0x2725)
 generic 0x1c84d8 (preset 0x2725),generic 0x1c85d8 (preset 0x2727),58.170,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c84d8 (preset 0x2725)
 generic 0x1c84d8 (preset 0x2725),generic 0x1c85d8 (preset 0x2727),58.170,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c84d8 (preset 0x2725)
 generic 0x1c84d8 (preset 0x2725),generic 0x1c84d8 (preset 0x2725),0.032,no,the line between them touches another wall,generic 0x1c84d8 (preset 0x2725)
 generic 0x1c84d8 (preset 0x2725),generic 0x1c8558 (preset 0x2726),0.032,no,the line between them touches another wall,generic 0x1c84d8 (preset 0x2725)
-generic 0x1c84d8 (preset 0x2725),generic 0x1c8558 (preset 0x2726),0.000,no,the line between them touches another wall,generic 0x1c8558 (preset 0x2726)
+generic 0x1c84d8 (preset 0x2725),generic 0x1c8558 (preset 0x2726),0.000045,no,the line between them touches another wall,generic 0x1c8558 (preset 0x2726)
 generic 0x1c84d8 (preset 0x2725),generic 0x1c85d8 (preset 0x2727),58.174,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c85d8 (preset 0x2727)
 generic 0x1c84d8 (preset 0x2725),generic 0x1c85d8 (preset 0x2727),58.174,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c84d8 (preset 0x2725)
 generic 0x1c84d8 (preset 0x2725),generic 0x1c85d8 (preset 0x2727),58.174,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c84d8 (preset 0x2725)
@@ -1750,9 +1750,9 @@ generic 0x1c8558 (preset 0x2726),generic 0x1c8558 (preset 0x2726),0.032,no,the l
 generic 0x1c8558 (preset 0x2726),generic 0x1c85d8 (preset 0x2727),0.032,no,the line between them touches another wall,generic 0x1c85d8 (preset 0x2727)
 generic 0x1c8558 (preset 0x2726),generic 0x1c85d8 (preset 0x2727),3.505,no,the line between them touches another wall,generic 0x1c8558 (preset 0x2726)
 generic 0x1c8558 (preset 0x2726),generic 0x1c85d8 (preset 0x2727),3.505,no,the line between them touches another wall,generic 0x1c8558 (preset 0x2726)
-generic 0x1c8558 (preset 0x2726),generic 0x1c85d8 (preset 0x2727),0.000,no,the line between them touches another wall,generic 0x1c85d8 (preset 0x2727)
+generic 0x1c8558 (preset 0x2726),generic 0x1c85d8 (preset 0x2727),0.0000050,no,the line between them touches another wall,generic 0x1c85d8 (preset 0x2727)
 generic 0x1c8558 (preset 0x2726),generic 0x1c85d8 (preset 0x2727),3.505,no,the line between them touches another wall,generic 0x1c85d8 (preset 0x2727)
-generic 0x1c8558 (preset 0x2726),generic 0x1c85d8 (preset 0x2727),0.000,no,the line between them touches another wall,generic 0x1c85d8 (preset 0x2727)
+generic 0x1c8558 (preset 0x2726),generic 0x1c85d8 (preset 0x2727),0.00000011,no,the line between them touches another wall,generic 0x1c85d8 (preset 0x2727)
 generic 0x1c8558 (preset 0x2726),generic 0x1c8558 (preset 0x2726),0.032,no,the line between them touches another wall,generic 0x1c8558 (preset 0x2726)
 generic 0x1c8558 (preset 0x2726),generic 0x1c85d8 (preset 0x2727),58.925,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 120910 (room 0x16)
 generic 0x1c8558 (preset 0x2726),generic 0x1c85d8 (preset 0x2727),58.925,no,the line between them touches another wall,generic 0x1c8558 (preset 0x2726)
@@ -1761,9 +1761,9 @@ generic 0x1c8558 (preset 0x2726),generic 0x1c85d8 (preset 0x2727),58.925,no,the 
 generic 0x1c8558 (preset 0x2726),generic 0x1c85d8 (preset 0x2727),58.930,no,the line between them touches another wall,generic 0x1c8558 (preset 0x2726)
 generic 0x1c8558 (preset 0x2726),generic 0x1c85d8 (preset 0x2727),58.930,no,the line between them touches another wall,generic 0x1c8558 (preset 0x2726)
 generic 0x1c8558 (preset 0x2726),generic 0x1c85d8 (preset 0x2727),58.930,no,the line between them touches another wall,generic 0x1c8558 (preset 0x2726)
-generic 0x1c8558 (preset 0x2726),generic 0x1c85d8 (preset 0x2727),0.851,no,the line between them touches another wall,generic 0x1c8558 (preset 0x2726)
-generic 0x1c8558 (preset 0x2726),generic 0x1c85d8 (preset 0x2727),0.819,no,the line between them touches another wall,generic 0x1c8558 (preset 0x2726)
-generic 0x1c8558 (preset 0x2726),generic 0x1c85d8 (preset 0x2727),0.819,no,the line between them touches another wall,generic 0x1c8558 (preset 0x2726)
+generic 0x1c8558 (preset 0x2726),generic 0x1c85d8 (preset 0x2727),0.85,no,the line between them touches another wall,generic 0x1c8558 (preset 0x2726)
+generic 0x1c8558 (preset 0x2726),generic 0x1c85d8 (preset 0x2727),0.82,no,the line between them touches another wall,generic 0x1c8558 (preset 0x2726)
+generic 0x1c8558 (preset 0x2726),generic 0x1c85d8 (preset 0x2727),0.82,no,the line between them touches another wall,generic 0x1c8558 (preset 0x2726)
 generic 0x1c85d8 (preset 0x2727),generic 0x1c85d8 (preset 0x2727),0.032,no,neither wall could be placed on a tile,
 generic 0x1c85d8 (preset 0x2727),generic 0x1c85d8 (preset 0x2727),0.032,no,the line between them touches another wall,generic 0x1c85d8 (preset 0x2727)
 generic 0x1c8658 (preset 0x2732),generic 0x1c8658 (preset 0x2732),59.799,no,neither wall could be placed on a tile,
@@ -1783,15 +1783,15 @@ generic 0x1c8658 (preset 0x2732),generic 0x1c86d8 (preset 0x2733),59.647,no,the 
 generic 0x1c8658 (preset 0x2732),generic 0x1c86d8 (preset 0x2733),59.647,no,the line between them touches another wall,generic 0x1c86d8 (preset 0x2733)
 generic 0x1c8658 (preset 0x2732),generic 0x1c8758 (preset 0x2734),59.495,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8658 (preset 0x2732)
 generic 0x1c8658 (preset 0x2732),generic 0x1c8758 (preset 0x2734),59.495,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8758 (preset 0x2734)
-generic 0x1c8658 (preset 0x2732),generic 0x1c86d8 (preset 0x2733),0.152,no,the line between them touches another wall,generic 0x1c8658 (preset 0x2732)
+generic 0x1c8658 (preset 0x2732),generic 0x1c86d8 (preset 0x2733),0.15,no,the line between them touches another wall,generic 0x1c8658 (preset 0x2732)
 generic 0x1c8658 (preset 0x2732),generic 0x1c86d8 (preset 0x2733),0.084,no,the line between them touches another wall,generic 0x1c86d8 (preset 0x2733)
 generic 0x1c8658 (preset 0x2732),generic 0x1c86d8 (preset 0x2733),59.647,no,the line between them touches another wall,generic 0x1c86d8 (preset 0x2733)
 generic 0x1c8658 (preset 0x2732),generic 0x1c86d8 (preset 0x2733),59.647,no,the line between them touches another wall,generic 0x1c86d8 (preset 0x2733)
 generic 0x1c8658 (preset 0x2732),generic 0x1c8758 (preset 0x2734),59.495,yes,,
 generic 0x1c8658 (preset 0x2732),generic 0x1c8758 (preset 0x2734),59.495,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8758 (preset 0x2734)
-generic 0x1c8658 (preset 0x2732),generic 0x1c86d8 (preset 0x2733),0.152,no,the line between them touches another wall,generic 0x1c8658 (preset 0x2732)
-generic 0x1c8658 (preset 0x2732),generic 0x1c86d8 (preset 0x2733),0.152,no,the line between them touches another wall,generic 0x1c8658 (preset 0x2732)
-generic 0x1c8658 (preset 0x2732),generic 0x1c86d8 (preset 0x2733),0.116,no,the line between them touches another wall,generic 0x1c86d8 (preset 0x2733)
+generic 0x1c8658 (preset 0x2732),generic 0x1c86d8 (preset 0x2733),0.15,no,the line between them touches another wall,generic 0x1c8658 (preset 0x2732)
+generic 0x1c8658 (preset 0x2732),generic 0x1c86d8 (preset 0x2733),0.15,no,the line between them touches another wall,generic 0x1c8658 (preset 0x2732)
+generic 0x1c8658 (preset 0x2732),generic 0x1c86d8 (preset 0x2733),0.12,no,the line between them touches another wall,generic 0x1c86d8 (preset 0x2733)
 generic 0x1c8658 (preset 0x2732),generic 0x1c86d8 (preset 0x2733),59.647,no,the line between them touches another wall,generic 0x1c86d8 (preset 0x2733)
 generic 0x1c8658 (preset 0x2732),generic 0x1c86d8 (preset 0x2733),59.647,no,the line between them touches another wall,generic 0x1c86d8 (preset 0x2733)
 generic 0x1c8658 (preset 0x2732),generic 0x1c8758 (preset 0x2734),59.495,yes,,
@@ -1799,7 +1799,7 @@ generic 0x1c8658 (preset 0x2732),generic 0x1c8758 (preset 0x2734),59.495,yes,,
 generic 0x1c8658 (preset 0x2732),generic 0x1c8758 (preset 0x2734),59.495,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8658 (preset 0x2732)
 generic 0x1c8658 (preset 0x2732),generic 0x1c8758 (preset 0x2734),59.495,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8758 (preset 0x2734)
 generic 0x1c8658 (preset 0x2732),generic 0x1c86d8 (preset 0x2733),0.084,no,the line between them touches another wall,generic 0x1c8658 (preset 0x2732)
-generic 0x1c8658 (preset 0x2732),generic 0x1c86d8 (preset 0x2733),0.116,no,the line between them touches another wall,generic 0x1c8658 (preset 0x2732)
+generic 0x1c8658 (preset 0x2732),generic 0x1c86d8 (preset 0x2733),0.12,no,the line between them touches another wall,generic 0x1c8658 (preset 0x2732)
 generic 0x1c8658 (preset 0x2732),generic 0x1c86d8 (preset 0x2733),59.647,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8658 (preset 0x2732)
 generic 0x1c8658 (preset 0x2732),generic 0x1c86d8 (preset 0x2733),0.084,no,the line between them touches another wall,generic 0x1c8658 (preset 0x2732)
 generic 0x1c8658 (preset 0x2732),generic 0x1c8758 (preset 0x2734),59.495,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c8658 (preset 0x2732)
@@ -1822,15 +1822,15 @@ generic 0x1c86d8 (preset 0x2733),generic 0x1c8758 (preset 0x2734),59.647,no,the 
 generic 0x1c86d8 (preset 0x2733),generic 0x1c8758 (preset 0x2734),59.647,no,the line between them touches another wall,generic 0x1c8758 (preset 0x2734)
 generic 0x1c86d8 (preset 0x2733),generic 0x1c87d8 (preset 0x2735),59.495,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c86d8 (preset 0x2733)
 generic 0x1c86d8 (preset 0x2733),generic 0x1c87d8 (preset 0x2735),59.495,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c87d8 (preset 0x2735)
-generic 0x1c86d8 (preset 0x2733),generic 0x1c8758 (preset 0x2734),0.152,no,the line between them touches another wall,generic 0x1c8758 (preset 0x2734)
+generic 0x1c86d8 (preset 0x2733),generic 0x1c8758 (preset 0x2734),0.15,no,the line between them touches another wall,generic 0x1c8758 (preset 0x2734)
 generic 0x1c86d8 (preset 0x2733),generic 0x1c8758 (preset 0x2734),0.084,no,the line between them touches another wall,generic 0x1c8758 (preset 0x2734)
 generic 0x1c86d8 (preset 0x2733),generic 0x1c8758 (preset 0x2734),59.647,no,the line between them touches another wall,generic 0x1c8758 (preset 0x2734)
 generic 0x1c86d8 (preset 0x2733),generic 0x1c8758 (preset 0x2734),59.647,no,the line between them touches another wall,generic 0x1c8758 (preset 0x2734)
 generic 0x1c86d8 (preset 0x2733),generic 0x1c87d8 (preset 0x2735),59.495,yes,,
 generic 0x1c86d8 (preset 0x2733),generic 0x1c87d8 (preset 0x2735),59.495,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c87d8 (preset 0x2735)
-generic 0x1c86d8 (preset 0x2733),generic 0x1c8758 (preset 0x2734),0.152,no,the line between them touches another wall,generic 0x1c8758 (preset 0x2734)
-generic 0x1c86d8 (preset 0x2733),generic 0x1c8758 (preset 0x2734),0.152,no,the line between them touches another wall,generic 0x1c8758 (preset 0x2734)
-generic 0x1c86d8 (preset 0x2733),generic 0x1c8758 (preset 0x2734),0.116,no,the line between them touches another wall,generic 0x1c8758 (preset 0x2734)
+generic 0x1c86d8 (preset 0x2733),generic 0x1c8758 (preset 0x2734),0.15,no,the line between them touches another wall,generic 0x1c8758 (preset 0x2734)
+generic 0x1c86d8 (preset 0x2733),generic 0x1c8758 (preset 0x2734),0.15,no,the line between them touches another wall,generic 0x1c8758 (preset 0x2734)
+generic 0x1c86d8 (preset 0x2733),generic 0x1c8758 (preset 0x2734),0.12,no,the line between them touches another wall,generic 0x1c8758 (preset 0x2734)
 generic 0x1c86d8 (preset 0x2733),generic 0x1c8758 (preset 0x2734),59.647,no,the line between them touches another wall,generic 0x1c8758 (preset 0x2734)
 generic 0x1c86d8 (preset 0x2733),generic 0x1c8758 (preset 0x2734),59.647,no,the line between them touches another wall,generic 0x1c8758 (preset 0x2734)
 generic 0x1c86d8 (preset 0x2733),generic 0x1c87d8 (preset 0x2735),59.495,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 097E18 (room 0x35)
@@ -1838,7 +1838,7 @@ generic 0x1c86d8 (preset 0x2733),generic 0x1c87d8 (preset 0x2735),59.495,yes,,
 generic 0x1c86d8 (preset 0x2733),generic 0x1c87d8 (preset 0x2735),59.495,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1c86d8 (preset 0x2733)
 generic 0x1c86d8 (preset 0x2733),generic 0x1c87d8 (preset 0x2735),59.495,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 generic 0x1c86d8 (preset 0x2733),generic 0x1c8758 (preset 0x2734),0.084,no,the line between them touches another wall,generic 0x1c86d8 (preset 0x2733)
-generic 0x1c86d8 (preset 0x2733),generic 0x1c8758 (preset 0x2734),0.116,no,the line between them touches another wall,generic 0x1c86d8 (preset 0x2733)
+generic 0x1c86d8 (preset 0x2733),generic 0x1c8758 (preset 0x2734),0.12,no,the line between them touches another wall,generic 0x1c86d8 (preset 0x2733)
 generic 0x1c86d8 (preset 0x2733),generic 0x1c8758 (preset 0x2734),59.647,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 generic 0x1c86d8 (preset 0x2733),generic 0x1c8758 (preset 0x2734),0.084,no,the line between them touches another wall,generic 0x1c86d8 (preset 0x2733)
 generic 0x1c86d8 (preset 0x2733),generic 0x1c87d8 (preset 0x2735),59.495,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
@@ -1859,17 +1859,17 @@ generic 0x1c8758 (preset 0x2734),generic 0x1c8758 (preset 0x2734),0.032,no,the l
 generic 0x1c8758 (preset 0x2734),generic 0x1c87d8 (preset 0x2735),0.084,no,the line between them touches another wall,generic 0x1c87d8 (preset 0x2735)
 generic 0x1c8758 (preset 0x2734),generic 0x1c87d8 (preset 0x2735),59.647,no,the line between them touches another wall,generic 0x1c87d8 (preset 0x2735)
 generic 0x1c8758 (preset 0x2734),generic 0x1c87d8 (preset 0x2735),59.647,no,the line between them touches another wall,generic 0x1c87d8 (preset 0x2735)
-generic 0x1c8758 (preset 0x2734),generic 0x1c87d8 (preset 0x2735),0.152,no,the line between them touches another wall,generic 0x1c8758 (preset 0x2734)
+generic 0x1c8758 (preset 0x2734),generic 0x1c87d8 (preset 0x2735),0.15,no,the line between them touches another wall,generic 0x1c8758 (preset 0x2734)
 generic 0x1c8758 (preset 0x2734),generic 0x1c87d8 (preset 0x2735),0.084,no,the line between them touches another wall,generic 0x1c87d8 (preset 0x2735)
 generic 0x1c8758 (preset 0x2734),generic 0x1c87d8 (preset 0x2735),59.647,no,the line between them touches another wall,generic 0x1c87d8 (preset 0x2735)
 generic 0x1c8758 (preset 0x2734),generic 0x1c87d8 (preset 0x2735),59.647,no,the line between them touches another wall,generic 0x1c87d8 (preset 0x2735)
-generic 0x1c8758 (preset 0x2734),generic 0x1c87d8 (preset 0x2735),0.152,no,neither wall could be placed on a tile,
-generic 0x1c8758 (preset 0x2734),generic 0x1c87d8 (preset 0x2735),0.152,no,the line between them touches another wall,generic 0x1c8758 (preset 0x2734)
-generic 0x1c8758 (preset 0x2734),generic 0x1c87d8 (preset 0x2735),0.116,no,the line between them touches another wall,generic 0x1c87d8 (preset 0x2735)
+generic 0x1c8758 (preset 0x2734),generic 0x1c87d8 (preset 0x2735),0.15,no,neither wall could be placed on a tile,
+generic 0x1c8758 (preset 0x2734),generic 0x1c87d8 (preset 0x2735),0.15,no,the line between them touches another wall,generic 0x1c8758 (preset 0x2734)
+generic 0x1c8758 (preset 0x2734),generic 0x1c87d8 (preset 0x2735),0.12,no,the line between them touches another wall,generic 0x1c87d8 (preset 0x2735)
 generic 0x1c8758 (preset 0x2734),generic 0x1c87d8 (preset 0x2735),59.647,no,the line between them touches another wall,generic 0x1c87d8 (preset 0x2735)
 generic 0x1c8758 (preset 0x2734),generic 0x1c87d8 (preset 0x2735),59.647,no,the line between them touches another wall,generic 0x1c87d8 (preset 0x2735)
 generic 0x1c8758 (preset 0x2734),generic 0x1c87d8 (preset 0x2735),0.084,no,neither wall could be placed on a tile,
-generic 0x1c8758 (preset 0x2734),generic 0x1c87d8 (preset 0x2735),0.116,no,neither wall could be placed on a tile,
+generic 0x1c8758 (preset 0x2734),generic 0x1c87d8 (preset 0x2735),0.12,no,neither wall could be placed on a tile,
 generic 0x1c8758 (preset 0x2734),generic 0x1c87d8 (preset 0x2735),59.647,no,neither wall could be placed on a tile,
 generic 0x1c8758 (preset 0x2734),generic 0x1c87d8 (preset 0x2735),0.084,no,neither wall could be placed on a tile,
 generic 0x1c87d8 (preset 0x2735),generic 0x1c87d8 (preset 0x2735),59.799,no,neither wall could be placed on a tile,
@@ -1877,32 +1877,32 @@ generic 0x1c87d8 (preset 0x2735),generic 0x1c87d8 (preset 0x2735),59.799,no,the 
 generic 0x1c87d8 (preset 0x2735),generic 0x1c87d8 (preset 0x2735),59.800,no,the line between them touches another wall,generic 0x1c87d8 (preset 0x2735)
 generic 0x1c87d8 (preset 0x2735),generic 0x1c87d8 (preset 0x2735),0.032,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 generic 0x1c87d8 (preset 0x2735),generic 0x1c87d8 (preset 0x2735),0.032,no,the line between them touches another wall,generic 0x1c87d8 (preset 0x2735)
-monitor 0x1c8b00 (preset 0x2710),monitor 0x1c8b00 (preset 0x2710),0.616,no,the line between them touches another wall,monitor 0x1c8b00 (preset 0x2710)
-monitor 0x1c8b00 (preset 0x2710),monitor 0x1c8b00 (preset 0x2710),0.616,no,the line between them touches another wall,monitor 0x1c8b00 (preset 0x2710)
-monitor 0x1c8d64 (preset 0x2711),monitor 0x1c8d64 (preset 0x2711),0.616,no,the line between them touches another wall,monitor 0x1c8d64 (preset 0x2711)
-monitor 0x1c8d64 (preset 0x2711),monitor 0x1c8d64 (preset 0x2711),0.616,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
-monitor 0x1c8fc8 (preset 0x2712),monitor 0x1c8fc8 (preset 0x2712),0.616,no,the line between them touches another wall,monitor 0x1c8fc8 (preset 0x2712)
-monitor 0x1c8fc8 (preset 0x2712),monitor 0x1c8fc8 (preset 0x2712),0.616,no,the line between them touches another wall,monitor 0x1c8fc8 (preset 0x2712)
-monitor 0x1c922c (preset 0x2713),monitor 0x1c922c (preset 0x2713),0.616,no,neither wall could be placed on a tile,
-monitor 0x1c922c (preset 0x2713),monitor 0x1c922c (preset 0x2713),0.616,no,the line between them touches another wall,monitor 0x1c922c (preset 0x2713)
-monitor 0x1c9774 (preset 0x274d),monitor 0x1c9774 (preset 0x274d),0.616,no,the line between them touches another wall,monitor 0x1c9774 (preset 0x274d)
-monitor 0x1c9774 (preset 0x274d),monitor 0x1c9774 (preset 0x274d),0.616,no,the line between them touches another wall,monitor 0x1c9774 (preset 0x274d)
+monitor 0x1c8b00 (preset 0x2710),monitor 0x1c8b00 (preset 0x2710),0.62,no,the line between them touches another wall,monitor 0x1c8b00 (preset 0x2710)
+monitor 0x1c8b00 (preset 0x2710),monitor 0x1c8b00 (preset 0x2710),0.62,no,the line between them touches another wall,monitor 0x1c8b00 (preset 0x2710)
+monitor 0x1c8d64 (preset 0x2711),monitor 0x1c8d64 (preset 0x2711),0.62,no,the line between them touches another wall,monitor 0x1c8d64 (preset 0x2711)
+monitor 0x1c8d64 (preset 0x2711),monitor 0x1c8d64 (preset 0x2711),0.62,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
+monitor 0x1c8fc8 (preset 0x2712),monitor 0x1c8fc8 (preset 0x2712),0.62,no,the line between them touches another wall,monitor 0x1c8fc8 (preset 0x2712)
+monitor 0x1c8fc8 (preset 0x2712),monitor 0x1c8fc8 (preset 0x2712),0.62,no,the line between them touches another wall,monitor 0x1c8fc8 (preset 0x2712)
+monitor 0x1c922c (preset 0x2713),monitor 0x1c922c (preset 0x2713),0.62,no,neither wall could be placed on a tile,
+monitor 0x1c922c (preset 0x2713),monitor 0x1c922c (preset 0x2713),0.62,no,the line between them touches another wall,monitor 0x1c922c (preset 0x2713)
+monitor 0x1c9774 (preset 0x274d),monitor 0x1c9774 (preset 0x274d),0.62,no,the line between them touches another wall,monitor 0x1c9774 (preset 0x274d)
+monitor 0x1c9774 (preset 0x274d),monitor 0x1c9774 (preset 0x274d),0.62,no,the line between them touches another wall,monitor 0x1c9774 (preset 0x274d)
 monitor 0x1c9774 (preset 0x274d),monitor 0x1c99d8 (preset 0x274e),0.071,no,the line between them touches another wall,monitor 0x1c99d8 (preset 0x274e)
-monitor 0x1c9774 (preset 0x274d),monitor 0x1c99d8 (preset 0x274e),0.148,no,the line between them touches another wall,monitor 0x1c99d8 (preset 0x274e)
+monitor 0x1c9774 (preset 0x274d),monitor 0x1c99d8 (preset 0x274e),0.15,no,the line between them touches another wall,monitor 0x1c99d8 (preset 0x274e)
 monitor 0x1c9774 (preset 0x274d),monitor 0x1c99d8 (preset 0x274e),0.071,no,the line between them touches another wall,monitor 0x1c99d8 (preset 0x274e)
-monitor 0x1c9774 (preset 0x274d),monitor 0x1c99d8 (preset 0x274e),0.763,no,the line between them touches another wall,monitor 0x1c9774 (preset 0x274d)
-monitor 0x1c9774 (preset 0x274d),monitor 0x1c99d8 (preset 0x274e),0.104,no,the line between them touches another wall,monitor 0x1c99d8 (preset 0x274e)
+monitor 0x1c9774 (preset 0x274d),monitor 0x1c99d8 (preset 0x274e),0.76,no,the line between them touches another wall,monitor 0x1c9774 (preset 0x274d)
+monitor 0x1c9774 (preset 0x274d),monitor 0x1c99d8 (preset 0x274e),0.10,no,the line between them touches another wall,monitor 0x1c99d8 (preset 0x274e)
 monitor 0x1c9774 (preset 0x274d),monitor 0x1c99d8 (preset 0x274e),2.506,no,the line between them touches another wall,monitor 0x1c99d8 (preset 0x274e)
 monitor 0x1c9774 (preset 0x274d),monitor 0x1c99d8 (preset 0x274e),2.510,no,the line between them touches another wall,monitor 0x1c99d8 (preset 0x274e)
 monitor 0x1c9774 (preset 0x274d),monitor 0x1c99d8 (preset 0x274e),2.506,no,the line between them touches another wall,monitor 0x1c99d8 (preset 0x274e)
 monitor 0x1c9774 (preset 0x274d),monitor 0x1c99d8 (preset 0x274e),2.472,no,"another wall pokes into the space between them, so a tighter pair covers this gap",monitor 0x1c99d8 (preset 0x274e)
-monitor 0x1c99d8 (preset 0x274e),monitor 0x1c99d8 (preset 0x274e),0.616,no,the line between them touches another wall,monitor 0x1c99d8 (preset 0x274e)
-monitor 0x1c99d8 (preset 0x274e),monitor 0x1c99d8 (preset 0x274e),0.616,no,the line between them touches another wall,monitor 0x1c99d8 (preset 0x274e)
-monitor 0x1c9c3c (preset 0x274f),monitor 0x1c9c3c (preset 0x274f),0.616,no,neither wall could be placed on a tile,
-monitor 0x1c9c3c (preset 0x274f),monitor 0x1c9c3c (preset 0x274f),0.616,no,the line between them touches another wall,monitor 0x1c9c3c (preset 0x274f)
-monitor 0x1c9ea0 (preset 0x2750),monitor 0x1c9ea0 (preset 0x2750),0.616,no,the line between them touches another wall,monitor 0x1c9ea0 (preset 0x2750)
-monitor 0x1c9ea0 (preset 0x2750),monitor 0x1c9ea0 (preset 0x2750),0.616,no,neither wall could be placed on a tile,
-monitor 0x1ca104 (preset 0x274c),monitor 0x1ca104 (preset 0x274c),0.616,no,the line between them touches another wall,monitor 0x1ca104 (preset 0x274c)
+monitor 0x1c99d8 (preset 0x274e),monitor 0x1c99d8 (preset 0x274e),0.62,no,the line between them touches another wall,monitor 0x1c99d8 (preset 0x274e)
+monitor 0x1c99d8 (preset 0x274e),monitor 0x1c99d8 (preset 0x274e),0.62,no,the line between them touches another wall,monitor 0x1c99d8 (preset 0x274e)
+monitor 0x1c9c3c (preset 0x274f),monitor 0x1c9c3c (preset 0x274f),0.62,no,neither wall could be placed on a tile,
+monitor 0x1c9c3c (preset 0x274f),monitor 0x1c9c3c (preset 0x274f),0.62,no,the line between them touches another wall,monitor 0x1c9c3c (preset 0x274f)
+monitor 0x1c9ea0 (preset 0x2750),monitor 0x1c9ea0 (preset 0x2750),0.62,no,the line between them touches another wall,monitor 0x1c9ea0 (preset 0x2750)
+monitor 0x1c9ea0 (preset 0x2750),monitor 0x1c9ea0 (preset 0x2750),0.62,no,neither wall could be placed on a tile,
+monitor 0x1ca104 (preset 0x274c),monitor 0x1ca104 (preset 0x274c),0.62,no,the line between them touches another wall,monitor 0x1ca104 (preset 0x274c)
 monitor 0x1ca104 (preset 0x274c),generic 0x1cb220 (preset 0x00a7),27.828,yes,,
 monitor 0x1ca104 (preset 0x274c),generic 0x1cb220 (preset 0x00a7),27.828,yes,,
 monitor 0x1ca104 (preset 0x274c),generic 0x1cb720 (preset 0x00b5),10.080,yes,,
@@ -1911,7 +1911,7 @@ monitor 0x1ca104 (preset 0x274c),generic 0x1cb720 (preset 0x00b5),15.197,no,"ano
 monitor 0x1ca104 (preset 0x274c),generic 0x1cb8a0 (preset 0x00b3),58.527,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1cb8a0 (preset 0x00b3)
 monitor 0x1ca104 (preset 0x274c),generic 0x1cb8a0 (preset 0x00b3),54.136,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1cb8a0 (preset 0x00b3)
 monitor 0x1ca104 (preset 0x274c),generic 0x1cb8a0 (preset 0x00b3),53.190,yes,,
-monitor 0x1ca104 (preset 0x274c),monitor 0x1ca104 (preset 0x274c),0.616,no,the line between them touches another wall,monitor 0x1ca104 (preset 0x274c)
+monitor 0x1ca104 (preset 0x274c),monitor 0x1ca104 (preset 0x274c),0.62,no,the line between them touches another wall,monitor 0x1ca104 (preset 0x274c)
 monitor 0x1ca104 (preset 0x274c),generic 0x1cb220 (preset 0x00a7),52.354,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1cb220 (preset 0x00a7)
 monitor 0x1ca104 (preset 0x274c),generic 0x1cb220 (preset 0x00a7),49.701,no,"another wall pokes into the space between them, so a tighter pair covers this gap",monitor 0x1ca104 (preset 0x274c)
 monitor 0x1ca104 (preset 0x274c),generic 0x1cb520 (preset 0x00ad),26.657,no,"another wall pokes into the space between them, so a tighter pair covers this gap",monitor 0x1ca104 (preset 0x274c)
@@ -1925,8 +1925,8 @@ monitor 0x1ca104 (preset 0x274c),generic 0x1cb520 (preset 0x00ad),26.204,yes,,
 monitor 0x1ca104 (preset 0x274c),generic 0x1cb520 (preset 0x00ad),26.251,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1cb520 (preset 0x00ad)
 monitor 0x1ca104 (preset 0x274c),generic 0x1cb520 (preset 0x00ad),26.204,yes,,
 monitor 0x1ca104 (preset 0x274c),generic 0x1cb520 (preset 0x00ad),26.251,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1cb520 (preset 0x00ad)
-glass 0x1ca468 (preset 0x2751),glass 0x1ca468 (preset 0x2751),0.000,no,the line between them touches another wall,glass 0x1ca468 (preset 0x2751)
-glass 0x1ca4e8 (preset 0x2752),glass 0x1ca4e8 (preset 0x2752),0.000,no,the line between them touches another wall,glass 0x1ca4e8 (preset 0x2752)
+glass 0x1ca468 (preset 0x2751),glass 0x1ca468 (preset 0x2751),0.00049,no,the line between them touches another wall,glass 0x1ca468 (preset 0x2751)
+glass 0x1ca4e8 (preset 0x2752),glass 0x1ca4e8 (preset 0x2752),0.00049,no,the line between them touches another wall,glass 0x1ca4e8 (preset 0x2752)
 glass 0x1ca4e8 (preset 0x2752),generic 0x1cb620 (preset 0x00af),49.347,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1cb620 (preset 0x00af)
 glass 0x1ca4e8 (preset 0x2752),generic 0x1cb620 (preset 0x00af),42.738,yes,,
 glass 0x1ca4e8 (preset 0x2752),generic 0x1cb620 (preset 0x00af),42.738,yes,,
@@ -1939,31 +1939,31 @@ glass 0x1ca568 (preset 0x271e),glass 0x1ca5fc (preset 0x271f),46.802,no,neither 
 glass 0x1ca568 (preset 0x271e),glass 0x1ca5fc (preset 0x271f),46.807,no,neither wall could be placed on a tile,
 glass 0x1ca568 (preset 0x271e),glass 0x1ca724 (preset 0x2721),1.302,no,neither wall could be placed on a tile,
 glass 0x1ca568 (preset 0x271e),glass 0x1ca724 (preset 0x2721),48.987,no,neither wall could be placed on a tile,
-glass 0x1ca568 (preset 0x271e),glass 0x1ca724 (preset 0x2721),0.823,no,neither wall could be placed on a tile,
+glass 0x1ca568 (preset 0x271e),glass 0x1ca724 (preset 0x2721),0.82,no,neither wall could be placed on a tile,
 glass 0x1ca568 (preset 0x271e),glass 0x1ca7b8 (preset 0x2722),46.802,no,neither wall could be placed on a tile,
 glass 0x1ca568 (preset 0x271e),glass 0x1ca7b8 (preset 0x2722),46.802,no,neither wall could be placed on a tile,
 glass 0x1ca568 (preset 0x271e),glass 0x1ca5fc (preset 0x271f),46.802,no,neither wall could be placed on a tile,
 glass 0x1ca568 (preset 0x271e),glass 0x1ca5fc (preset 0x271f),46.807,no,neither wall could be placed on a tile,
 glass 0x1ca568 (preset 0x271e),glass 0x1ca5fc (preset 0x271f),46.802,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 01A108 (room 0x14)
 glass 0x1ca568 (preset 0x271e),glass 0x1ca724 (preset 0x2721),48.988,no,neither wall could be placed on a tile,
-glass 0x1ca568 (preset 0x271e),glass 0x1ca724 (preset 0x2721),0.344,no,neither wall could be placed on a tile,
-glass 0x1ca568 (preset 0x271e),glass 0x1ca724 (preset 0x2721),0.344,no,neither wall could be placed on a tile,
+glass 0x1ca568 (preset 0x271e),glass 0x1ca724 (preset 0x2721),0.34,no,neither wall could be placed on a tile,
+glass 0x1ca568 (preset 0x271e),glass 0x1ca724 (preset 0x2721),0.34,no,neither wall could be placed on a tile,
 glass 0x1ca568 (preset 0x271e),glass 0x1ca7b8 (preset 0x2722),46.802,no,neither wall could be placed on a tile,
 glass 0x1ca568 (preset 0x271e),glass 0x1ca7b8 (preset 0x2722),46.802,no,neither wall could be placed on a tile,
 glass 0x1ca568 (preset 0x271e),glass 0x1ca5fc (preset 0x271f),46.807,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 01A108 (room 0x14)
 glass 0x1ca568 (preset 0x271e),glass 0x1ca5fc (preset 0x271f),46.807,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 01A108 (room 0x14)
 glass 0x1ca5fc (preset 0x271f),glass 0x1ca724 (preset 0x2721),47.146,no,neither wall could be placed on a tile,
 glass 0x1ca5fc (preset 0x271f),glass 0x1ca724 (preset 0x2721),47.146,no,neither wall could be placed on a tile,
-glass 0x1ca5fc (preset 0x271f),glass 0x1ca7b8 (preset 0x2722),0.000,no,neither wall could be placed on a tile,
+glass 0x1ca5fc (preset 0x271f),glass 0x1ca7b8 (preset 0x2722),0.000055,no,neither wall could be placed on a tile,
 glass 0x1ca5fc (preset 0x271f),glass 0x1ca7b8 (preset 0x2722),48.954,no,neither wall could be placed on a tile,
 glass 0x1ca5fc (preset 0x271f),glass 0x1ca690 (preset 0x2720),50.658,no,neither wall could be placed on a tile,
 glass 0x1ca5fc (preset 0x271f),glass 0x1ca690 (preset 0x2720),50.671,no,neither wall could be placed on a tile,
 glass 0x1ca5fc (preset 0x271f),glass 0x1ca724 (preset 0x2721),47.146,no,neither wall could be placed on a tile,
 glass 0x1ca5fc (preset 0x271f),glass 0x1ca724 (preset 0x2721),47.170,no,neither wall could be placed on a tile,
-glass 0x1ca5fc (preset 0x271f),glass 0x1ca7b8 (preset 0x2722),0.000,no,neither wall could be placed on a tile,
+glass 0x1ca5fc (preset 0x271f),glass 0x1ca7b8 (preset 0x2722),0.000055,no,neither wall could be placed on a tile,
 glass 0x1ca5fc (preset 0x271f),glass 0x1ca7b8 (preset 0x2722),48.953,no,neither wall could be placed on a tile,
 glass 0x1ca5fc (preset 0x271f),glass 0x1ca7b8 (preset 0x2722),1.866,no,neither wall could be placed on a tile,
-glass 0x1ca5fc (preset 0x271f),glass 0x1ca7b8 (preset 0x2722),0.823,no,neither wall could be placed on a tile,
+glass 0x1ca5fc (preset 0x271f),glass 0x1ca7b8 (preset 0x2722),0.82,no,neither wall could be placed on a tile,
 glass 0x1ca5fc (preset 0x271f),glass 0x1ca84c (preset 0x2723),49.012,no,neither wall could be placed on a tile,
 glass 0x1ca5fc (preset 0x271f),glass 0x1ca84c (preset 0x2723),49.012,no,neither wall could be placed on a tile,
 glass 0x1ca5fc (preset 0x271f),glass 0x1ca690 (preset 0x2720),50.658,no,"another wall pokes into the space between them, so a tighter pair covers this gap",wall of tile 01A508 (room 0x14)
@@ -1983,10 +1983,10 @@ glass 0x1ca690 (preset 0x2720),glass 0x1ca7b8 (preset 0x2722),48.792,no,neither 
 glass 0x1ca690 (preset 0x2720),glass 0x1ca7b8 (preset 0x2722),48.833,no,neither wall could be placed on a tile,
 glass 0x1ca690 (preset 0x2720),glass 0x1ca84c (preset 0x2723),1.646,no,neither wall could be placed on a tile,
 glass 0x1ca690 (preset 0x2720),glass 0x1ca84c (preset 0x2723),48.856,no,neither wall could be placed on a tile,
-glass 0x1ca690 (preset 0x2720),glass 0x1ca84c (preset 0x2723),0.910,no,neither wall could be placed on a tile,
+glass 0x1ca690 (preset 0x2720),glass 0x1ca84c (preset 0x2723),0.91,no,neither wall could be placed on a tile,
 glass 0x1ca690 (preset 0x2720),glass 0x1ca84c (preset 0x2723),48.857,no,neither wall could be placed on a tile,
-glass 0x1ca690 (preset 0x2720),glass 0x1ca84c (preset 0x2723),0.343,no,neither wall could be placed on a tile,
-glass 0x1ca690 (preset 0x2720),glass 0x1ca84c (preset 0x2723),0.343,no,neither wall could be placed on a tile,
+glass 0x1ca690 (preset 0x2720),glass 0x1ca84c (preset 0x2723),0.34,no,neither wall could be placed on a tile,
+glass 0x1ca690 (preset 0x2720),glass 0x1ca84c (preset 0x2723),0.34,no,neither wall could be placed on a tile,
 glass 0x1ca724 (preset 0x2721),glass 0x1ca724 (preset 0x2721),49.810,no,neither wall could be placed on a tile,
 glass 0x1ca724 (preset 0x2721),glass 0x1ca7b8 (preset 0x2722),47.146,no,neither wall could be placed on a tile,
 glass 0x1ca724 (preset 0x2721),glass 0x1ca7b8 (preset 0x2722),47.150,no,neither wall could be placed on a tile,
@@ -2056,8 +2056,8 @@ generic 0x1cb220 (preset 0x00a7),generic 0x1cb8a0 (preset 0x00b3),19.108,no,the 
 generic 0x1cb220 (preset 0x00a7),generic 0x1cb2a0 (preset 0x00a8),33.062,no,the line between them touches another wall,generic 0x1cb220 (preset 0x00a7)
 generic 0x1cb220 (preset 0x00a7),generic 0x1cb2a0 (preset 0x00a8),40.034,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1cb2a0 (preset 0x00a8)
 generic 0x1cb220 (preset 0x00a7),generic 0x1cb2a0 (preset 0x00a8),12.869,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1cb220 (preset 0x00a7)
-generic 0x1cb220 (preset 0x00a7),generic 0x1cb720 (preset 0x00b5),0.119,yes,,
-generic 0x1cb220 (preset 0x00a7),generic 0x1cb720 (preset 0x00b5),0.119,yes,,
+generic 0x1cb220 (preset 0x00a7),generic 0x1cb720 (preset 0x00b5),0.12,yes,,
+generic 0x1cb220 (preset 0x00a7),generic 0x1cb720 (preset 0x00b5),0.12,yes,,
 generic 0x1cb220 (preset 0x00a7),generic 0x1cb820 (preset 0x00b2),32.102,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1cb220 (preset 0x00a7)
 generic 0x1cb220 (preset 0x00a7),generic 0x1cb820 (preset 0x00b2),32.102,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1cb220 (preset 0x00a7)
 generic 0x1cb220 (preset 0x00a7),generic 0x1cb8a0 (preset 0x00b3),29.578,no,the line between them touches another wall,generic 0x1cb220 (preset 0x00a7)
@@ -2219,12 +2219,12 @@ generic 0x1cb3a0 (preset 0x00aa),generic 0x1cb920 (preset 0x00b4),26.141,no,the 
 generic 0x1cb420 (preset 0x00ab),generic 0x1cb5a0 (preset 0x00ae),41.687,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1cb420 (preset 0x00ab)
 generic 0x1cb420 (preset 0x00ab),generic 0x1cb5a0 (preset 0x00ae),57.837,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1cb420 (preset 0x00ab)
 generic 0x1cb420 (preset 0x00ab),generic 0x1cb7a0 (preset 0x00b1),30.044,no,the line between them touches another wall,generic 0x1cb7a0 (preset 0x00b1)
-generic 0x1cb420 (preset 0x00ab),generic 0x1cb7a0 (preset 0x00b1),0.854,no,the line between them touches another wall,generic 0x1cb7a0 (preset 0x00b1)
+generic 0x1cb420 (preset 0x00ab),generic 0x1cb7a0 (preset 0x00b1),0.85,no,the line between them touches another wall,generic 0x1cb7a0 (preset 0x00b1)
 generic 0x1cb420 (preset 0x00ab),generic 0x1cb7a0 (preset 0x00b1),38.956,no,the line between them touches another wall,generic 0x1cb420 (preset 0x00ab)
 generic 0x1cb420 (preset 0x00ab),generic 0x1cb920 (preset 0x00b4),22.181,yes,,
 generic 0x1cb420 (preset 0x00ab),generic 0x1cb920 (preset 0x00b4),22.181,yes,,
 generic 0x1cb420 (preset 0x00ab),generic 0x1cb7a0 (preset 0x00b1),30.044,no,the line between them touches another wall,generic 0x1cb7a0 (preset 0x00b1)
-generic 0x1cb420 (preset 0x00ab),generic 0x1cb7a0 (preset 0x00b1),0.854,no,the line between them touches another wall,generic 0x1cb7a0 (preset 0x00b1)
+generic 0x1cb420 (preset 0x00ab),generic 0x1cb7a0 (preset 0x00b1),0.85,no,the line between them touches another wall,generic 0x1cb7a0 (preset 0x00b1)
 generic 0x1cb420 (preset 0x00ab),generic 0x1cba20 (preset 0x2758),42.570,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1cb420 (preset 0x00ab)
 generic 0x1cb420 (preset 0x00ab),generic 0x1cba20 (preset 0x2758),42.570,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1cb420 (preset 0x00ab)
 generic 0x1cb420 (preset 0x00ab),generic 0x1cba20 (preset 0x2758),42.570,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1cb420 (preset 0x00ab)
@@ -2240,8 +2240,8 @@ generic 0x1cb420 (preset 0x00ab),generic 0x1cba20 (preset 0x2758),15.828,no,"ano
 generic 0x1cb420 (preset 0x00ab),generic 0x1cb5a0 (preset 0x00ae),41.687,yes,,
 generic 0x1cb420 (preset 0x00ab),generic 0x1cb5a0 (preset 0x00ae),41.687,yes,,
 generic 0x1cb420 (preset 0x00ab),generic 0x1cb7a0 (preset 0x00b1),30.056,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1cb420 (preset 0x00ab)
-generic 0x1cb420 (preset 0x00ab),generic 0x1cb7a0 (preset 0x00b1),0.854,no,the line between them touches another wall,generic 0x1cb420 (preset 0x00ab)
-generic 0x1cb420 (preset 0x00ab),generic 0x1cb7a0 (preset 0x00b1),0.854,no,the line between them touches another wall,generic 0x1cb420 (preset 0x00ab)
+generic 0x1cb420 (preset 0x00ab),generic 0x1cb7a0 (preset 0x00b1),0.85,no,the line between them touches another wall,generic 0x1cb420 (preset 0x00ab)
+generic 0x1cb420 (preset 0x00ab),generic 0x1cb7a0 (preset 0x00b1),0.85,no,the line between them touches another wall,generic 0x1cb420 (preset 0x00ab)
 generic 0x1cb420 (preset 0x00ab),generic 0x1cb920 (preset 0x00b4),22.261,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1cb420 (preset 0x00ab)
 generic 0x1cb420 (preset 0x00ab),generic 0x1cb920 (preset 0x00b4),22.261,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1cb420 (preset 0x00ab)
 generic 0x1cb420 (preset 0x00ab),generic 0x1cba20 (preset 0x2758),12.681,yes,,
@@ -2353,12 +2353,12 @@ generic 0x1cb9a0 (preset 0x2757),generic 0x1cbd60 (preset 0x2756),41.845,no,the 
 generic 0x1cb9a0 (preset 0x2757),generic 0x1cbd60 (preset 0x2756),6.649,no,the line between them touches another wall,generic 0x1cb9a0 (preset 0x2757)
 generic 0x1cb9a0 (preset 0x2757),generic 0x1cbd60 (preset 0x2756),6.645,no,the line between them touches another wall,generic 0x1cb9a0 (preset 0x2757)
 generic 0x1cb9a0 (preset 0x2757),generic 0x1cbd60 (preset 0x2756),6.645,no,the line between them touches another wall,generic 0x1cb9a0 (preset 0x2757)
-generic 0x1cba20 (preset 0x2758),generic 0x1cba20 (preset 0x2758),0.000,no,the line between them touches another wall,generic 0x1cba20 (preset 0x2758)
+generic 0x1cba20 (preset 0x2758),generic 0x1cba20 (preset 0x2758),0.00024,no,the line between them touches another wall,generic 0x1cba20 (preset 0x2758)
 generic 0x1cba20 (preset 0x2758),generic 0x1cbcd0 (preset 0x2755),4.150,no,the line between them touches another wall,generic 0x1cba20 (preset 0x2758)
 generic 0x1cba20 (preset 0x2758),generic 0x1cbcd0 (preset 0x2755),4.145,no,the line between them touches another wall,generic 0x1cba20 (preset 0x2758)
 generic 0x1cba20 (preset 0x2758),generic 0x1cbcd0 (preset 0x2755),4.145,no,the line between them touches another wall,generic 0x1cba20 (preset 0x2758)
 generic 0x1cba20 (preset 0x2758),generic 0x1cbcd0 (preset 0x2755),39.345,no,the line between them touches another wall,generic 0x1cba20 (preset 0x2758)
-generic 0x1cba20 (preset 0x2758),generic 0x1cba20 (preset 0x2758),0.000,no,the line between them touches another wall,generic 0x1cba20 (preset 0x2758)
+generic 0x1cba20 (preset 0x2758),generic 0x1cba20 (preset 0x2758),0.00024,no,the line between them touches another wall,generic 0x1cba20 (preset 0x2758)
 generic 0x1cba20 (preset 0x2758),generic 0x1cbcd0 (preset 0x2755),54.280,no,the line between them touches another wall,generic 0x1cba20 (preset 0x2758)
 generic 0x1cba20 (preset 0x2758),generic 0x1cbcd0 (preset 0x2755),3.884,no,the line between them touches another wall,generic 0x1cba20 (preset 0x2758)
 generic 0x1cba20 (preset 0x2758),generic 0x1cbcd0 (preset 0x2755),3.880,no,the line between them touches another wall,generic 0x1cba20 (preset 0x2758)
@@ -2402,54 +2402,54 @@ generic 0x1cbee0 (preset 0x00a4),generic 0x1cbfe0 (preset 0x00a6),24.581,yes,,
 generic 0x1cbee0 (preset 0x00a4),generic 0x1cbfe0 (preset 0x00a6),45.948,no,"another wall pokes into the space between them, so a tighter pair covers this gap",generic 0x1cbfe0 (preset 0x00a6)
 generic 0x1cbee0 (preset 0x00a4),generic 0x1cbfe0 (preset 0x00a6),24.581,yes,,
 door 0x1cd060 (preset 0x0068),door 0x1cd060 (preset 0x0068),33.552,no,the line between them touches another wall,door 0x1cd060 (preset 0x0068)
-door 0x1cd380 (preset 0x006b),door 0x1cd380 (preset 0x006b),0.157,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
-door 0x1cd380 (preset 0x006b),door 0x1cd380 (preset 0x006b),0.157,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
+door 0x1cd380 (preset 0x006b),door 0x1cd380 (preset 0x006b),0.16,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
+door 0x1cd380 (preset 0x006b),door 0x1cd380 (preset 0x006b),0.16,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
 door 0x1cd380 (preset 0x006b),door 0x1cd380 (preset 0x006b),7.456,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
 door 0x1cd380 (preset 0x006b),door 0x1cd380 (preset 0x006b),7.456,no,neither wall could be placed on a tile,
-door 0x1cd380 (preset 0x006b),door 0x1cd480 (preset 0x006c),0.000,no,the line between them touches another wall,door 0x1cd480 (preset 0x006c)
+door 0x1cd380 (preset 0x006b),door 0x1cd480 (preset 0x006c),0.000061,no,the line between them touches another wall,door 0x1cd480 (preset 0x006c)
 door 0x1cd380 (preset 0x006b),door 0x1cd480 (preset 0x006c),7.456,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
 door 0x1cd380 (preset 0x006b),door 0x1cd480 (preset 0x006c),7.456,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
 door 0x1cd380 (preset 0x006b),door 0x1cd380 (preset 0x006b),7.456,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
-door 0x1cd380 (preset 0x006b),door 0x1cd480 (preset 0x006c),0.158,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
-door 0x1cd380 (preset 0x006b),door 0x1cd480 (preset 0x006c),0.000,no,the line between them touches another wall,door 0x1cd480 (preset 0x006c)
+door 0x1cd380 (preset 0x006b),door 0x1cd480 (preset 0x006c),0.16,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
+door 0x1cd380 (preset 0x006b),door 0x1cd480 (preset 0x006c),0.000061,no,the line between them touches another wall,door 0x1cd480 (preset 0x006c)
 door 0x1cd380 (preset 0x006b),door 0x1cd480 (preset 0x006c),7.456,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
 door 0x1cd380 (preset 0x006b),door 0x1cd480 (preset 0x006c),7.456,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
-door 0x1cd380 (preset 0x006b),door 0x1cd480 (preset 0x006c),0.315,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
-door 0x1cd380 (preset 0x006b),door 0x1cd480 (preset 0x006c),0.000,no,the line between them touches another wall,door 0x1cd480 (preset 0x006c)
-door 0x1cd380 (preset 0x006b),door 0x1cd480 (preset 0x006c),0.158,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
-door 0x1cd380 (preset 0x006b),door 0x1cd480 (preset 0x006c),0.000,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
+door 0x1cd380 (preset 0x006b),door 0x1cd480 (preset 0x006c),0.31,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
+door 0x1cd380 (preset 0x006b),door 0x1cd480 (preset 0x006c),0.00030,no,the line between them touches another wall,door 0x1cd480 (preset 0x006c)
+door 0x1cd380 (preset 0x006b),door 0x1cd480 (preset 0x006c),0.16,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
+door 0x1cd380 (preset 0x006b),door 0x1cd480 (preset 0x006c),0.00030,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
 door 0x1cd380 (preset 0x006b),door 0x1cd480 (preset 0x006c),7.456,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
-door 0x1cd380 (preset 0x006b),door 0x1cd480 (preset 0x006c),0.000,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
-door 0x1cd380 (preset 0x006b),door 0x1cd480 (preset 0x006c),0.000,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
-door 0x1cd480 (preset 0x006c),door 0x1cd480 (preset 0x006c),0.157,no,the line between them touches another wall,door 0x1cd480 (preset 0x006c)
-door 0x1cd480 (preset 0x006c),door 0x1cd480 (preset 0x006c),0.157,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
+door 0x1cd380 (preset 0x006b),door 0x1cd480 (preset 0x006c),0.00018,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
+door 0x1cd380 (preset 0x006b),door 0x1cd480 (preset 0x006c),0.00018,no,the line between them touches another wall,door 0x1cd380 (preset 0x006b)
+door 0x1cd480 (preset 0x006c),door 0x1cd480 (preset 0x006c),0.16,no,the line between them touches another wall,door 0x1cd480 (preset 0x006c)
+door 0x1cd480 (preset 0x006c),door 0x1cd480 (preset 0x006c),0.16,no,"the line between them leaves the walkable area (a wall's thickness, or another floor)",
 door 0x1cd480 (preset 0x006c),door 0x1cd480 (preset 0x006c),7.456,no,the line between them touches another wall,door 0x1cd480 (preset 0x006c)
 door 0x1cd480 (preset 0x006c),door 0x1cd480 (preset 0x006c),7.456,no,the line between them touches another wall,door 0x1cd480 (preset 0x006c)
 door 0x1cd480 (preset 0x006c),door 0x1cd480 (preset 0x006c),7.456,no,the line between them touches another wall,door 0x1cd480 (preset 0x006c)
-door 0x1cd580 (preset 0x006d),door 0x1cd580 (preset 0x006d),0.000,no,the line between them touches another wall,door 0x1cd580 (preset 0x006d)
-door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),0.000,no,"another wall pokes into the space between them, so a tighter pair covers this gap",door 0x1cd580 (preset 0x006d)
-door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),0.000,yes,,
-door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),0.000,yes,,
-door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),0.000,yes,,
+door 0x1cd580 (preset 0x006d),door 0x1cd580 (preset 0x006d),0.00024,no,the line between them touches another wall,door 0x1cd580 (preset 0x006d)
+door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),0.00044,no,"another wall pokes into the space between them, so a tighter pair covers this gap",door 0x1cd580 (preset 0x006d)
+door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),0.00024,yes,,
+door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),0.00024,yes,,
+door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),0.00024,yes,,
 door 0x1cd580 (preset 0x006d),door 0x1cd580 (preset 0x006d),7.456,no,the line between them touches another wall,door 0x1cd580 (preset 0x006d)
-door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),0.000,no,"another wall pokes into the space between them, so a tighter pair covers this gap",door 0x1cd680 (preset 0x006e)
-door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),0.000,yes,,
+door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),0.00027,no,"another wall pokes into the space between them, so a tighter pair covers this gap",door 0x1cd680 (preset 0x006e)
+door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),0.00024,yes,,
 door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),7.456,no,"another wall pokes into the space between them, so a tighter pair covers this gap",door 0x1cd580 (preset 0x006d)
 door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),7.456,no,"another wall pokes into the space between them, so a tighter pair covers this gap",door 0x1cd580 (preset 0x006d)
 door 0x1cd580 (preset 0x006d),door 0x1cd580 (preset 0x006d),7.456,no,the line between them touches another wall,door 0x1cd580 (preset 0x006d)
 door 0x1cd580 (preset 0x006d),door 0x1cd580 (preset 0x006d),7.456,no,the line between them touches another wall,door 0x1cd580 (preset 0x006d)
-door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),0.000,no,"another wall pokes into the space between them, so a tighter pair covers this gap",door 0x1cd680 (preset 0x006e)
-door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),0.000,yes,,
+door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),0.00027,no,"another wall pokes into the space between them, so a tighter pair covers this gap",door 0x1cd680 (preset 0x006e)
+door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),0.00024,yes,,
 door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),7.456,no,"another wall pokes into the space between them, so a tighter pair covers this gap",door 0x1cd580 (preset 0x006d)
 door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),7.456,no,"another wall pokes into the space between them, so a tighter pair covers this gap",door 0x1cd580 (preset 0x006d)
-door 0x1cd580 (preset 0x006d),door 0x1cd580 (preset 0x006d),0.000,no,the line between them touches another wall,wall of tile 004A30 (room 0x3f)
+door 0x1cd580 (preset 0x006d),door 0x1cd580 (preset 0x006d),0.00024,no,the line between them touches another wall,wall of tile 004A30 (room 0x3f)
 door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),7.457,no,"another wall pokes into the space between them, so a tighter pair covers this gap",door 0x1cd580 (preset 0x006d)
-door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),0.000,no,"another wall pokes into the space between them, so a tighter pair covers this gap",door 0x1cd580 (preset 0x006d)
-door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),0.000,no,"another wall pokes into the space between them, so a tighter pair covers this gap",door 0x1cd580 (preset 0x006d)
-door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),0.000,no,"another wall pokes into the space between them, so a tighter pair covers this gap",door 0x1cd580 (preset 0x006d)
-door 0x1cd680 (preset 0x006e),door 0x1cd680 (preset 0x006e),0.000,no,the line between them touches another wall,door 0x1cd680 (preset 0x006e)
+door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),0.00044,no,"another wall pokes into the space between them, so a tighter pair covers this gap",door 0x1cd580 (preset 0x006d)
+door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),0.00027,no,"another wall pokes into the space between them, so a tighter pair covers this gap",door 0x1cd580 (preset 0x006d)
+door 0x1cd580 (preset 0x006d),door 0x1cd680 (preset 0x006e),0.00027,no,"another wall pokes into the space between them, so a tighter pair covers this gap",door 0x1cd580 (preset 0x006d)
+door 0x1cd680 (preset 0x006e),door 0x1cd680 (preset 0x006e),0.00024,no,the line between them touches another wall,door 0x1cd680 (preset 0x006e)
 door 0x1cd680 (preset 0x006e),door 0x1cd680 (preset 0x006e),7.456,no,the line between them touches another wall,door 0x1cd680 (preset 0x006e)
 door 0x1cd680 (preset 0x006e),door 0x1cd680 (preset 0x006e),7.456,no,the line between them touches another wall,door 0x1cd680 (preset 0x006e)
 door 0x1cd680 (preset 0x006e),door 0x1cd680 (preset 0x006e),7.456,no,the line between them touches another wall,door 0x1cd680 (preset 0x006e)
-door 0x1cd680 (preset 0x006e),door 0x1cd680 (preset 0x006e),0.000,no,the line between them touches another wall,door 0x1cd680 (preset 0x006e)
+door 0x1cd680 (preset 0x006e),door 0x1cd680 (preset 0x006e),0.00024,no,the line between them touches another wall,door 0x1cd680 (preset 0x006e)
 door 0x1cd7b0 (preset 0x006f),door 0x1cd7b0 (preset 0x006f),37.280,no,the line between them touches another wall,door 0x1cd7b0 (preset 0x006f)

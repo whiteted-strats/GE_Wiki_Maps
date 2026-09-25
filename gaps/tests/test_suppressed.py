@@ -43,7 +43,7 @@ class SuppressedWarps(unittest.TestCase):
 
     def test_every_check_stops_the_run_when_it_fails(self):
         wrong = {
-            "its width is 45.0 cm, not 44.0 cm": self.entry(width_cm=44.0),
+            "its width is 45.000 cm, not 44.000 cm": self.entry(width_cm=44.0),
             "its status is 'warp', not": self.entry(status=WARP_IF_REMOVED),
             "longer than 10.0 cm": self.entry(step_cm=10.0),
             "0 gaps have a pinch between those walls": self.entry(walls="001000.0 | 0x9009.0"),
