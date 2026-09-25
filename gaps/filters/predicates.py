@@ -45,7 +45,7 @@ def is_lying_flat(obj: LevelObject) -> bool:
     if obj.height_range is None:
         return False
     top_to_bottom = max(obj.height_range) - min(obj.height_range)
-    return top_to_bottom < FLAT_RATIO * min(_side_lengths_cm(obj))
+    return top_to_bottom < FLAT_RATIO * min(_side_lengths(obj))
 
 
 @predicate
@@ -84,12 +84,6 @@ def is_square(obj: LevelObject) -> bool:
 def is_crate(obj: LevelObject) -> bool:
     """Generic, square, and with standard health. The data has nothing more specific to go on."""
     return is_generic(obj) and is_square(obj) and has_standard_health(obj)
-
-
-def _side_lengths_cm(obj: LevelObject) -> list[float]:
-    """As _side_lengths, but in centimetres, for comparing with heights. Outlines are in scaled
-    units, and the first corner of any object converts between the two."""
-    return [length / obj.scale for length in _side_lengths(obj)]
 
 
 def _side_lengths(obj: LevelObject) -> list[float]:

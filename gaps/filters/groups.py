@@ -104,7 +104,7 @@ def footprint_m2(obj: LevelObject) -> float:
         - points[(i + 1) % len(points)][0] * points[i][1]
         for i in range(len(points))
     )
-    return abs(float(doubled)) / 2 / (obj.scale * 100) ** 2
+    return abs(float(doubled)) / 2 / 100**2
 
 
 def _centre(obj: LevelObject) -> tuple:

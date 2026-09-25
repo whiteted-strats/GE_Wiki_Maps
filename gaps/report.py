@@ -416,7 +416,7 @@ def draw_close_up(level: Level, gap: Gap, path: Path) -> None:
     pinch = gap.pinch or gap.narrowest
     x, z = level.to_cm_point(pinch.midpoint)
     half = _close_up_half_size(level, gap)
-    region = tuple(v * float(level.scale) for v in (x - half, x + half, z - half, z + half))
+    region = (x - half, x + half, z - half, z + half)
     tiles = level.linked_tiles_within(pinch.start_tile, region)
 
     fig, ax = plt.subplots(figsize=(9, 9))

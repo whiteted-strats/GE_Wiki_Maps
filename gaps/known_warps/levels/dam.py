@@ -20,12 +20,12 @@ KNOWN_WARPS = [
     ),
     KnownWarp(
         name="Window C",
-        walls="0x1e19d0.0 | 309621.0",
+        walls="0x1e19d0.0 | 309A22.1",
         status=WARP,
         width_cm=51.450,
         step_cm=49.24,
         notes=(
-            "Room 0x7a. The gap is named by its narrowest pinch, a pane of glass against the wall, "
+            "Room 0x7a. The gap is named by its narrowest pinch, a pane of glass against a wall, "
             "but the warp goes between the walls of tiles 309B22 and 309A22."
         ),
     ),

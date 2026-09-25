@@ -1,5 +1,5 @@
 from gaps.known_warps import KnownWarp
-from gaps.survey import WARP
+from gaps.survey import NO_WARP_FOUND, WARP
 
 KNOWN_WARPS = [
     KnownWarp(
@@ -17,19 +17,15 @@ KNOWN_WARPS = [
     KnownWarp(
         name="bathroom door meme warp",
         walls="037F02.1 | 0x1c6d0c.1",
-        status=WARP,
+        status=NO_WARP_FOUND,
         width_cm=0.0,
-        step_cm=99.79,
+        step_cm=0.0,  # not checked: there is no step
         objects_forming_gap=[0x1C6D0C],
-        notes="Room 0x09. A hairline: 0.00000085 cm.",
-    ),
-    KnownWarp(
-        name="Ted waz ere TASing",
-        walls="0x1c9484.0 | 10F30A.1",
-        status=WARP,
-        width_cm=0.0,
-        step_cm=121.03,
-        objects_forming_gap=[0x1C9484],
-        notes="Room 0x1b. A hairline: 0.0000066 cm. Warped in a TAS by Whiteted.",
+        notes="Room 0x09. Kept as the example of a gap far below the local float32 step, made by "
+        "float32 geometry: the door's back edge is tilted by one float32 step over its length, "
+        "and its corner sits 1.5e-5 cm beyond the end of the wall, so the wall's corner is "
+        "2e-11 cm "
+        "from the tilted edge. The game has no number for that: in its arithmetic they touch. "
+        "It was a 0.00000085 cm warp when object outlines were the printed decimals.",
     ),
 ]

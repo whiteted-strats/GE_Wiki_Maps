@@ -1,6 +1,6 @@
 x,z,between,and
+-853,-305,wall of tile 00820A (room 0x0c),door 0x1d8bfc (preset 0x0003)
 -844,-305,wall of tile 00820A (room 0x0c),door 0x1d8bfc (preset 0x0003)
--853,-305,wall of tile 04D312 (room 0x12),door 0x1d8bfc (preset 0x0003)
 -2041,93,wall of tile 04D212 (room 0x12),door 0x1d8d0c (preset 0x0004)
 -2041,-47,wall of tile 04D211 (room 0x12),door 0x1d8d0c (preset 0x0004)
 -2053,93,wall of tile 00F10A (room 0x0a),door 0x1d8d0c (preset 0x0004)
@@ -11,8 +11,8 @@ x,z,between,and
 2053,-93,wall of tile 00D50A (room 0x0e),door 0x1d8aec (preset 0x0002)
 2041,47,wall of tile 04D512 (room 0x11),door 0x1d8aec (preset 0x0002)
 2041,-93,wall of tile 04D511 (room 0x11),door 0x1d8aec (preset 0x0002)
-853,305,wall of tile 04D412 (room 0x11),door 0x1d89dc (preset 0x0001)
 844,305,wall of tile 008309 (room 0x0c),door 0x1d89dc (preset 0x0001)
+853,305,wall of tile 008309 (room 0x0c),door 0x1d89dc (preset 0x0001)
 1141,-276,wall of tile 001C10 (room 0x11),monitor 0x1d84fc (preset 0x2710)
 1209,-276,wall of tile 001C10 (room 0x11),monitor 0x1d84fc (preset 0x2710)
 -267,-242,wall of tile 008502 (room 0x06),door 0x1d8e1c (preset 0x0005)

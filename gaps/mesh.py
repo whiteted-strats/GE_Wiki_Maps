@@ -1,11 +1,14 @@
 """Loads a level from data/<level>.py into exact coordinates.
 
-Units. The game stores tile corners as integers, and the dumper divided them by the level's scale.
-Multiplying by the scale again recovers those integers exactly, so everything in this package works
-in that integer space ("scaled units"). Object outlines have been rotated by the game so they are
-not integers, but they are exact float32 values and so convert to Fractions without any loss.
-`Level.to_cm` converts a scaled length back to the units used everywhere else in this repo, which
-are centimetres: Bond's radius is 30 cm.
+Units. Everything here is in world coordinates, the ones the game computes in and the data files
+hold, treated as centimetres: Bond's radius is 30. Every coordinate is a float32 in the game, and
+float32s are rationals, so they are held as Fractions and all the geometry is exact. The data files
+print values to 14 digits, enough to say which float32 each was, and that float32 is recovered:
+- object outlines and height ranges are float32s read straight from memory, so are just snapped
+- tile corners and heights are stored by the game as int16s, which the dumper divided by the
+  level's scale in a double. The int16 is recovered, and the float32 the game gets from the same
+  division is recomputed from it exactly (a single float32 division is correctly rounded).
+`Level.to_cm` is left over from when this package worked in other units, and is now the identity.
 
 Sheets. Bond moves in XZ, but floors that overlap in XZ do not interact: only tile links join the
 walkable area together. So nothing here ever asks "which tiles are near this point" globally. The
@@ -58,8 +61,8 @@ class Tile:
     addr: int
     name: int
     room: int
-    points: list[Point]  # integers, in scaled units
-    heights: list[float]  # centimetres, one per point
+    points: list[Point]  # float32s as Fractions, in world coordinates (cm)
+    heights: list[float]  # float32s, one per point
     links: list[int]  # links[i] is the tile across the edge points[i] -> points[i+1], 0 for a wall
     box: Box
     is_vertical: bool  # zero area from above: a riser or a ledge
@@ -91,8 +94,7 @@ class LevelObject:
     addr: int
     type: str
     preset: int
-    points: list[Point]  # Fractions, in scaled units
-    scale: float  # scaled units per centimetre, as the level's
+    points: list[Point]  # float32s as Fractions, in world coordinates (cm)
     box: Box
     anchor_tile: int  # the tile the game says it stands on
     health: float
@@ -141,15 +143,15 @@ class Level:
     _overlap_cache: dict[tuple[int, int], bool] = field(default_factory=dict)
 
     @property
-    def bond_radius(self) -> Fraction:
-        return BOND_RADIUS_CM * self.scale
+    def bond_radius(self) -> int:
+        return BOND_RADIUS_CM
 
     def from_metres(self, metres: float) -> Fraction:
-        """A length in metres, as written in the filter settings, in scaled units."""
-        return Fraction(str(metres)) * 100 * self.scale
+        """A length in metres, as written in the filter settings, in centimetres."""
+        return Fraction(str(metres)) * 100
 
-    def to_cm(self, scaled_length: Num) -> float:
-        return float(scaled_length / self.scale)
+    def to_cm(self, length: Num) -> float:
+        return float(length)
 
     def to_cm_point(self, p: Point) -> tuple[float, float]:
         return (self.to_cm(p[0]), self.to_cm(p[1]))
@@ -244,8 +246,48 @@ class Level:
 
 
 def snap_to_float32(value: float) -> Fraction:
-    """The data files print the scale to 14 digits. The game held a float32, so recover that."""
+    """The data files print values to 14 digits. Where the game held a float32, that is enough to
+    tell which one, so recover it exactly."""
     return Fraction(struct.unpack("f", struct.pack("f", value))[0])
+
+
+def nearest_float32(value: Fraction) -> Fraction:
+    """The float32 nearest to an exact value, ties to even: what one correctly rounded float32
+    operation gives. Done in integers, so no double gets in the way."""
+    if value == 0:
+        return Fraction(0)
+    magnitude = abs(value)
+    exponent = magnitude.numerator.bit_length() - magnitude.denominator.bit_length()
+    # 2**exponent <= magnitude < 2**(exponent + 2); settle which
+    if magnitude < Fraction(2) ** exponent:
+        exponent -= 1
+    elif magnitude >= Fraction(2) ** (exponent + 1):
+        exponent += 1
+    unit = Fraction(2) ** (exponent - 23)  # a 24-bit significand
+    scaled = magnitude / unit
+    whole, remainder = divmod(scaled.numerator, scaled.denominator)
+    twice = 2 * remainder
+    if twice > scaled.denominator or (twice == scaled.denominator and whole % 2 == 1):
+        whole += 1
+    result = whole * unit
+    return -result if value < 0 else result
+
+
+def _stored_int16(level: Level, tile_addr: int, what: str, printed: float) -> Fraction:
+    """A tile coordinate, as the game has it: the int16 it stores, divided by the scale in one
+    float32 operation. The dumper did that division in a double, so the int16 is recovered from
+    the printed value and the division redone."""
+    stored = round(printed * float(level.scale))
+    if abs(printed * float(level.scale) - stored) > 1e-6 or not -32768 <= stored <= 32767:
+        raise ValueError(f"tile {tile_addr:#x}: {what} {printed!r} is not an int16 / scale")
+    return nearest_float32(Fraction(stored) / level.scale)
+
+
+def _snapped_range(height_range: tuple[float, float] | None) -> tuple[float, float] | None:
+    if height_range is None:
+        return None
+    low, high = height_range
+    return (float(snap_to_float32(low)), float(snap_to_float32(high)))
 
 
 def _nearest_on_edge(position: tuple[float, float], a: Point, b: Point) -> tuple[float, float]:
@@ -266,9 +308,9 @@ def load_level(name: str, data: ModuleType, removed: dict[int, str] | None = Non
     Only gaps/filters/levels/<level>.py can ask for that, and each one is recorded among the
     skipped objects.
     """
-    scale = snap_to_float32(data.level_scale)
-    tiles = {addr: _load_tile(addr, raw, scale) for addr, raw in data.tiles.items()}
-    level = Level(name=name, scale=scale, tiles=tiles, objects={})
+    level = Level(name=name, scale=snap_to_float32(data.level_scale), tiles={}, objects={})
+    for addr, raw in data.tiles.items():
+        level.tiles[addr] = _load_tile(level, addr, raw)
 
     _add_tile_walls(level)
     for addr, raw in data.objects.items():
@@ -279,14 +321,12 @@ def load_level(name: str, data: ModuleType, removed: dict[int, str] | None = Non
     return level
 
 
-def _load_tile(addr: int, raw: dict, scale: Fraction) -> Tile:
-    points: list[Point] = []
-    for x, z in raw["points"]:
-        scaled = (x * float(scale), z * float(scale))
-        rounded = (round(scaled[0]), round(scaled[1]))
-        if max(abs(scaled[0] - rounded[0]), abs(scaled[1] - rounded[1])) > 1e-6:
-            raise ValueError(f"tile {addr:#x} has a corner which is not an integer once scaled")
-        points.append(rounded)
+def _load_tile(level: Level, addr: int, raw: dict) -> Tile:
+    points: list[Point] = [
+        (_stored_int16(level, addr, "x", x), _stored_int16(level, addr, "z", z))
+        for x, z in raw["points"]
+    ]
+    heights = [float(_stored_int16(level, addr, "y", h)) for h in raw["heights"]]
 
     n = len(points)
     doubled_area = sum(
@@ -298,7 +338,7 @@ def _load_tile(addr: int, raw: dict, scale: Fraction) -> Tile:
         name=raw["name"],
         room=raw["room"],
         points=points,
-        heights=list(raw["heights"]),
+        heights=heights,
         links=list(raw["links"]),
         box=bounding_box(points),
         is_vertical=(doubled_area == 0),
@@ -384,7 +424,8 @@ def _add_object(level: Level, addr: int, raw: dict) -> None:
 
     points: list[Point] = []
     for x, z in raw["points"]:
-        point = (Fraction(x) * level.scale, Fraction(z) * level.scale)
+        # Read from memory by the dumper, so the float32 is what the game has
+        point = (snap_to_float32(x), snap_to_float32(z))
         if not points or point != points[-1]:
             points.append(point)
     if len(points) > 1 and points[0] == points[-1]:
@@ -417,11 +458,10 @@ def _add_object(level: Level, addr: int, raw: dict) -> None:
         type=raw["type"],
         preset=raw["preset"],
         points=points,
-        scale=float(level.scale),
         box=box,
         anchor_tile=raw["tile"],
         health=raw.get("health", 0),
-        height_range=raw.get("height_range"),
+        height_range=_snapped_range(raw.get("height_range")),
         floor_clearance=floor_clearance(level, raw),
         sheet_tiles=sheet_tiles,
     )
@@ -469,7 +509,7 @@ def _is_over_walkable_area(level: Level, outline: list[Point], box: Box) -> bool
 def floor_clearance(level: Level, raw: dict) -> float | None:
     """How far the bottom of the object is above the highest point of the tile it is attached to,
     in centimetres. Negative if it starts below the floor. None if the data has no heights."""
-    height_range = raw.get("height_range")
+    height_range = _snapped_range(raw.get("height_range"))
     if not height_range:
         return None
     return min(height_range) - max(level.tiles[raw["tile"]].heights)

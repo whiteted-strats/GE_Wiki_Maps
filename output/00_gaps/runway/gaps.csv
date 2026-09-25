@@ -1,9 +1,9 @@
 gap,name,status,width_cm,step_cm,walk_round_cm,x,z,room,between,and,objects_forming_gap,objects_in_the_way,pinches,key
-1,,warp,0.00016,93.49,none found,5660,-6900,0x0e,wall of tile 0F3C02 (room 0x0e),door 0x1db34c (preset 0x000a),0x1db34c,,3,0F3C02.1 | 0x1db34c.0
-2,,warp,9.222,102.37,none found,7060,-5805,0x01,wall of tile 100601 (room 0x01),door 0x1db54c (preset 0x0009),0x1db54c,,2,0x1db54c.0 | 100601.1
-3,,warp,41.744,173.72,471,9178,-5607,0x01,wall of tile 101500 (room 0x01),generic 0x1daf9c (preset 0x0022),0x1daf9c,,1,0x1daf9c.0 | 101500.1
-4,,warp if objects removed,20.387,95.51,none found,7481,-5839,0x01,wall of tile 100602 (room 0x01),door 0x1db54c (preset 0x0009),0x1db54c,0x1dae9c,2,0x1db54c.2 | 100602.2
-5,,no warp found,18.158,,,5988,-7515,0x10,generic 0x1da7e0 (preset 0x0051),generic 0x1da860 (preset 0x004f),0x1da7e0 0x1da860,,2,0x1da7e0.0 | 0x1da860.2
-6,,no warp found,19.893,,,7897,-5335,0x01,wall of tile 0DBF00 (room 0x01),generic 0x1daf1c (preset 0x0021),0x1daf1c,,2,0DBF00.1 | 0x1daf1c.1
-7,,no warp found,48.030,,,5571,-7527,0x10,generic 0x1dab1c (preset 0x0052),generic 0x1dac1c (preset 0x0054),0x1dab1c 0x1dac1c,,2,0x1dab1c.5 | 0x1dac1c.2
+1,,warp,9.222,102.37,none found,7060,-5805,0x01,wall of tile 100601 (room 0x01),door 0x1db54c (preset 0x0009),0x1db54c,,2,0x1db54c.0 | 100601.1
+2,,warp,41.743,173.72,478,9178,-5607,0x01,wall of tile 101500 (room 0x01),generic 0x1daf9c (preset 0x0022),0x1daf9c,,1,0x1daf9c.0 | 101500.1
+3,,warp if objects removed,20.387,95.51,none found,7481,-5839,0x01,wall of tile 100602 (room 0x01),door 0x1db54c (preset 0x0009),0x1db54c,0x1dae9c,2,0x1db54c.2 | 100602.2
+4,,no warp found,18.158,,,5988,-7515,0x10,generic 0x1da7e0 (preset 0x0051),generic 0x1da860 (preset 0x004f),0x1da7e0 0x1da860,,2,0x1da7e0.0 | 0x1da860.2
+5,,no warp found,19.892,,,7897,-5335,0x01,wall of tile 0DBF00 (room 0x01),generic 0x1daf1c (preset 0x0021),0x1daf1c,,2,0DBF00.1 | 0x1daf1c.1
+6,,no warp found,48.030,,,5571,-7558,0x10,generic 0x1dab1c (preset 0x0052),generic 0x1dac1c (preset 0x0054),0x1dab1c 0x1dac1c,,1,0x1dab1c.5 | 0x1dac1c.2
+7,,no warp found,48.030,,,5571,-7527,0x10,generic 0x1dab1c (preset 0x0052),generic 0x1dac1c (preset 0x0054),0x1dab1c 0x1dac1c,,1,0x1dab1c.5 | 0x1dac1c.3
 8,,no warp found,52.908,,,7752,-5345,0x01,wall of tile 01C000 (room 0x01),generic 0x1daf1c (preset 0x0021),0x1daf1c,,3,01C000.2 | 0x1daf1c.2

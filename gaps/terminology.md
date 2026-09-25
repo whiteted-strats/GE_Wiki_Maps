@@ -65,8 +65,25 @@ storey which goes. The metre is there because tiles of one floor overlap slightl
 drawn carelessly, and both of those must be kept. Storeys are 2 m apart or more. This is the only
 use made of heights. (`Level.linked_tiles_within` in `mesh.py`.)
 
-**Scaled units** - the whole-number units which tiles are stored in. Centimetres multiplied by the
-level's scale. All exact arithmetic is done in these; reports convert back to centimetres.
+**World coordinates** - the coordinates the game computes in, and the ones in the data files: the
+level scripts in `maps/` draw them as they are. Treated as centimetres throughout. Tile corners are
+stored in the game as `int16`, and the dump divides them by `level_scale` to give world
+coordinates. Object collision outlines are float32 world coordinates already, read straight from
+memory (`Data_and_utilities`: `PositionData.lua`, `ObjectDataReader.lua`).
+
+**Float32 recovery** - the data files print every value to 14 digits, which is enough to say which
+float32 the game held. The tool works with those float32s, held exactly as fractions, never with
+the printed decimals. Object outlines and height ranges were read from memory, so are simply
+snapped. Tile corners and heights are `int16`s the game stores and divides by `level_scale`: the
+dumper did that division in a double, so the tool recovers the `int16` and redoes the division as
+the game does, in one correctly rounded float32 operation (checked once against the printed
+values: they agree everywhere). This assumes the game divides by
+`level_scale`, as the dumper does, rather than multiplying by its inverse; that hasn't been
+checked, and the word "scaled" is used the other way round in `lib/tiles.py`.
+
+A consequence: two things the game holds as the same float32 are at distance zero here, however
+the dump printed them. Most door cracks were narrower than a float32 step (about 6e-5 cm at
+800 cm) and many close up entirely under this treatment.
 
 ## The survey
 

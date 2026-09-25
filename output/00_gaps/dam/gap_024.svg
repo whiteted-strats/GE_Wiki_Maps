@@ -30,65 +30,65 @@ z
   </g>
   <g id="axes_1">
    <g id="patch_2">
-    <path d="M -321.868871 411.938704 
-L 692.537972 518.718372 
-L 943.0595 -195.88402 
+    <path d="M -321.86847 411.938317 
+L 692.537975 518.71883 
+L 943.059974 -195.88432 
 z
 " clip-path="url(#pb5d509a0ce)" style="fill: #dbdbdb; stroke: #dbdbdb; stroke-width: 0.3; stroke-linejoin: miter"/>
    </g>
    <g id="patch_3">
-    <path d="M 943.0595 -195.88402 
-L 265.419301 -23.393787 
-L 142.211992 95.706611 
+    <path d="M 943.059974 -195.88432 
+L 265.419669 -23.394163 
+L 142.212682 95.706674 
 z
 " clip-path="url(#pb5d509a0ce)" style="fill: #dbdbdb; stroke: #dbdbdb; stroke-width: 0.3; stroke-linejoin: miter"/>
    </g>
    <g id="patch_4">
-    <path d="M 257.205481 843.164285 
-L 692.537972 518.718372 
-L -321.868871 411.938704 
+    <path d="M 257.205495 843.164647 
+L 692.537975 518.71883 
+L -321.86847 411.938317 
 z
 " clip-path="url(#pb5d509a0ce)" style="fill: #dbdbdb; stroke: #dbdbdb; stroke-width: 0.3; stroke-linejoin: miter"/>
    </g>
    <g id="patch_5">
-    <path d="M 943.0595 -195.88402 
-L 142.211992 95.706611 
-L -321.868871 411.938704 
+    <path d="M 943.059974 -195.88432 
+L 142.212682 95.706674 
+L -321.86847 411.938317 
 z
 " clip-path="url(#pb5d509a0ce)" style="fill: #dbdbdb; stroke: #dbdbdb; stroke-width: 0.3; stroke-linejoin: miter"/>
    </g>
    <g id="patch_6">
-    <path d="M 257.205481 843.164285 
-L 359.878238 1048.5098 
-L 692.537972 518.718372 
+    <path d="M 257.205495 843.164647 
+L 359.877985 1048.509626 
+L 692.537975 518.71883 
 z
 " clip-path="url(#pb5d509a0ce)" style="fill: #dbdbdb; stroke: #dbdbdb; stroke-width: 0.3; stroke-linejoin: miter"/>
    </g>
    <g id="patch_7">
-    <path d="M 1263.398503 1208.679302 
-L 692.537972 518.718372 
-L 359.878238 1048.5098 
+    <path d="M 1263.397766 1208.679459 
+L 692.537975 518.71883 
+L 359.877985 1048.509626 
 z
 " clip-path="url(#pb5d509a0ce)" style="fill: #dbdbdb; stroke: #dbdbdb; stroke-width: 0.3; stroke-linejoin: miter"/>
    </g>
    <g id="patch_8">
-    <path d="M 142.211992 95.706611 
-L -38.492061 95.706611 
-L -321.868871 411.938704 
+    <path d="M 142.212682 95.706674 
+L -38.491649 95.706674 
+L -321.86847 411.938317 
 z
 " clip-path="url(#pb5d509a0ce)" style="fill: #dbdbdb; stroke: #dbdbdb; stroke-width: 0.3; stroke-linejoin: miter"/>
    </g>
    <g id="line2d_1">
-    <path d="M 242.253314 -1 
-L 142.211992 95.706611 
+    <path d="M 242.253439 -1 
+L 142.212682 95.706674 
 " clip-path="url(#pb5d509a0ce)" style="fill: none; stroke: #404040; stroke-width: 0.6; stroke-linecap: round"/>
    </g>
    <g id="line2d_2">
     <path clip-path="url(#pb5d509a0ce)" style="fill: none; stroke: #404040; stroke-width: 0.6; stroke-linecap: round"/>
    </g>
    <g id="line2d_3">
-    <path d="M 142.211992 95.706611 
-L -1 95.706611 
+    <path d="M 142.212682 95.706674 
+L -1 95.706674 
 " clip-path="url(#pb5d509a0ce)" style="fill: none; stroke: #404040; stroke-width: 0.6; stroke-linecap: round"/>
    </g>
    <g id="line2d_4">
@@ -186,7 +186,7 @@ L 315.087029 402.911721
    </g>
    <g id="text_10">
     <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(215.533828 14.939473)">dam gap 24: warp</text>
-    <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(165.388359 25.741934)">width 33.510, step 85.8, walk round 545</text>
+    <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(165.388359 25.741934)">width 33.510, step 85.8, walk round 538</text>
     <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(92.898984 36.544395)">generic 0x1e2150 (preset 0x0151)  /  generic 0x1e2258 (preset 0x014c)</text>
    </g>
    <g id="line2d_13">

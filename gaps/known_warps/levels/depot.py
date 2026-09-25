@@ -47,22 +47,4 @@ KNOWN_WARPS = [
         objects_forming_gap=[0x1EEC40],
         notes="Room 0x59.",
     ),
-    KnownWarp(
-        name="left ammo dump door crack",
-        walls="0D990A.2 | 0x1edf30.0",
-        status=WARP,
-        width_cm=0.0,
-        step_cm=69.15,
-        objects_forming_gap=[0x1EDF30],
-        notes="Room 0x1d. A hairline: 0.000030 cm.",
-    ),
-    KnownWarp(
-        name="right ammo dump door crack",
-        walls="0D9909.2 | 0x1edf30.2",
-        status=WARP,
-        width_cm=0.0,
-        step_cm=69.15,
-        objects_forming_gap=[0x1EDF30],
-        notes="Room 0x1d. A hairline: 0.000011 cm. The same door as the left crack.",
-    ),
 ]

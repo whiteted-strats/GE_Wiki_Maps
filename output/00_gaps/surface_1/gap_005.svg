@@ -30,16 +30,16 @@ z
   </g>
   <g id="axes_1">
    <g id="patch_2">
-    <path d="M -41.165033 -23.896361 
-L -41.165033 645.415813 
-L 436.010207 645.415813 
+    <path d="M -41.164928 -23.896783 
+L -41.164928 645.415028 
+L 436.010082 645.415028 
 z
 " clip-path="url(#pb5d509a0ce)" style="fill: #dbdbdb; stroke: #dbdbdb; stroke-width: 0.3; stroke-linejoin: miter"/>
    </g>
    <g id="patch_3">
-    <path d="M 436.010207 -285.709325 
-L -41.165033 -23.896361 
-L 436.010207 645.415813 
+    <path d="M 436.010082 -285.710225 
+L -41.164928 -23.896783 
+L 436.010082 645.415028 
 z
 " clip-path="url(#pb5d509a0ce)" style="fill: #dbdbdb; stroke: #dbdbdb; stroke-width: 0.3; stroke-linejoin: miter"/>
    </g>
@@ -50,8 +50,8 @@ z
     <path clip-path="url(#pb5d509a0ce)" style="fill: none; stroke: #404040; stroke-width: 0.6; stroke-linecap: round"/>
    </g>
    <g id="line2d_3">
-    <path d="M 436.010207 549.704395 
-L 436.010207 -1 
+    <path d="M 436.010082 549.704395 
+L 436.010082 -1 
 " clip-path="url(#pb5d509a0ce)" style="fill: none; stroke: #404040; stroke-width: 0.6; stroke-linecap: round"/>
    </g>
    <g id="line2d_4">
@@ -151,7 +151,7 @@ L 142.526607 549.704395
    </g>
    <g id="text_9">
     <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(206.650547 14.939473)">surface_1 gap 5: warp</text>
-    <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(165.388359 25.741934)">width 46.160, step 64.8, walk round 365</text>
+    <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(165.388359 25.741934)">width 46.160, step 64.8, walk round 362</text>
     <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(93.618984 36.544395)">generic 0x1dc1c8 (preset 0x275b)  /  generic 0x1dca48 (preset 0x002b)</text>
    </g>
    <g id="line2d_12">

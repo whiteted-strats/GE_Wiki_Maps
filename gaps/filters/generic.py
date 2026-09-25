@@ -109,7 +109,7 @@ def _shortest_step_round_the_end2(
     level: Level, to_far_end_of_hammer2: Num, hammer_distance2: Num, anvil_length2: Num
 ) -> Num:
     """A lower bound on the length of a step which comes in round an end of the anvil, squared and
-    in scaled units: min(anvil length, distance x 30 / d).
+    in centimetres: min(anvil length, distance x 30 / d).
 
     Picture the anvil as a floor with that end at the left. The step can't cross the anvil, so at
     the end of it the step is at height 0 or more, wherever Bond is actually standing. It has to
@@ -225,8 +225,8 @@ def _protrusion_as_high_as_hammer(
     return False
 
 
-def _metres(level: Level, squared_scaled_length: Num) -> float:
-    return level.to_cm(float(squared_scaled_length) ** 0.5) / 100
+def _metres(level: Level, squared_length: Num) -> float:
+    return level.to_cm(float(squared_length) ** 0.5) / 100
 
 
 def _hammer_points_the_step_must_pass(

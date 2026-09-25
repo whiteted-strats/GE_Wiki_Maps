@@ -41,7 +41,7 @@ class Pinch:
     second: BoundarySegment
     a: Point  # the closest point on `first` ...
     b: Point  # ... and on `second`. The line a -> b is the narrowest part of the gap.
-    width2: Num  # squared width, scaled units
+    width2: Num  # squared width, cm
     start_tile: int  # a tile that `a` is on, from which the gap can be reached through links
     needs: frozenset[int]  # objects which form this gap. Without them it isn't there.
 

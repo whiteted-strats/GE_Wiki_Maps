@@ -47,7 +47,7 @@ def narrow_pocket(level: Level, pinch: Pinch) -> str | None:
 
 
 def _extent_of_pocket2(level: Level, pinch: Pinch, side: Side) -> Num | None:
-    """The squared extent of the pocket on this side, measured along the pinch line, in scaled
+    """The squared extent of the pocket on this side, measured along the pinch line, in
     units. None as soon as it reaches Bond's diameter, or if the pocket can't be worked out."""
     line = _PinchLine(pinch.a, pinch.b)
     diameter2_times_length2 = (2 * level.bond_radius) ** 2 * line.length2

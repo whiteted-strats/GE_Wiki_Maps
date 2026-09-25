@@ -31,13 +31,12 @@ def walking_distance(
 ) -> float | None:
     """The length in centimetres of a walk from p to q staying near the warp, or None if the flood
     doesn't find one."""
-    scale = float(level.scale)
-    spacing = GRID_SPACING_CM * scale
+    spacing = float(GRID_SPACING_CM)
     radius = float(level.bond_radius)
     p = np.array([float(witness.p[0]), float(witness.p[1])])
     q = np.array([float(witness.q[0]), float(witness.q[1])])
 
-    region = grow_box(bounding_box([witness.p, witness.q]), math.ceil(SEARCH_RADIUS_CM * scale))
+    region = grow_box(bounding_box([witness.p, witness.q]), SEARCH_RADIUS_CM)
     walls = walls_near(level, pinch.start_tile, region, present)
     starts, ends = wall_arrays(walls)
 

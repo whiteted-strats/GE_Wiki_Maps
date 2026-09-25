@@ -127,7 +127,7 @@ def _draw_overhead_for_review(survey: Survey, overhead: list[OverheadObject], fo
         x = level.to_cm((obj.box[0] + obj.box[1]) / 2)
         z = level.to_cm((obj.box[2] + obj.box[3]) / 2)
         half = report.CLOSE_UP_HALF_SIZE_CM
-        region = tuple(v * float(level.scale) for v in (x - half, x + half, z - half, z + half))
+        region = (x - half, x + half, z - half, z + half)
 
         fig, ax = plt.subplots(figsize=(9, 9))
         report.draw_level(ax, level, level.linked_tiles_within(obj.anchor_tile, region), True)

@@ -1,6 +1,6 @@
 variant_of_gap,name,key,status,width_cm,step_cm,x,z,between,and,objects_forming_gap,objects_in_the_way
-4,,01C700.0 | 0x1dae9c.0,warp,41.744,170.41,7526,-5773,wall of tile 01C700 (room 0x01),generic 0x1dae9c (preset 0x0020),0x1dae9c,
-4,,0x1dae9c.0 | 100602.2,warp,51.092,172.56,7471,-5778,generic 0x1dae9c (preset 0x0020),door 0x1db54c (preset 0x0009),0x1dae9c 0x1db54c,
-4,,01C700.0 | 0x1dae9c.1,warp,41.744,173.05,7561,-5773,wall of tile 01C700 (room 0x01),generic 0x1dae9c (preset 0x0020),0x1dae9c,
-3,,0x1daf9c.1 | 101500.1,warp,41.744,173.72,9178,-5549,wall of tile 101500 (room 0x01),generic 0x1daf9c (preset 0x0022),0x1daf9c,
-3,,0x1daf9c.2 | 101500.1,warp,41.744,173.72,9178,-5490,wall of tile 101500 (room 0x01),generic 0x1daf9c (preset 0x0022),0x1daf9c,
+3,,01C700.0 | 0x1dae9c.0,warp,41.744,170.41,7526,-5773,wall of tile 01C700 (room 0x01),generic 0x1dae9c (preset 0x0020),0x1dae9c,
+3,,0x1dae9c.0 | 100602.2,warp,51.092,172.56,7471,-5778,generic 0x1dae9c (preset 0x0020),door 0x1db54c (preset 0x0009),0x1dae9c 0x1db54c,
+3,,01C700.0 | 0x1dae9c.1,warp,41.744,173.05,7561,-5773,wall of tile 01C700 (room 0x01),generic 0x1dae9c (preset 0x0020),0x1dae9c,
+2,,0x1daf9c.1 | 101500.1,warp,41.743,173.72,9178,-5549,wall of tile 101500 (room 0x01),generic 0x1daf9c (preset 0x0022),0x1daf9c,
+2,,0x1daf9c.2 | 101500.1,warp,41.743,173.72,9178,-5490,wall of tile 101500 (room 0x01),generic 0x1daf9c (preset 0x0022),0x1daf9c,

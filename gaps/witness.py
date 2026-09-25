@@ -42,9 +42,9 @@ CLEARANCE_MARGIN = 1e-6  # floats propose positions this much clear of walls, so
 
 @dataclass
 class Witness:
-    p: Point  # exact positions, scaled units
+    p: Point  # exact positions, world coordinates
     q: Point
-    step2: Fraction  # squared step length, scaled units
+    step2: Fraction  # squared step length, cm
     tile_p: int
     tile_q: int
 
@@ -60,7 +60,7 @@ class _Proposal:
 
 def find_witness(level: Level, pinch: Pinch, present: ObjectsPresent) -> Witness | None:
     for search_radius_cm in SEARCH_RADII_CM:
-        reach = search_radius_cm * float(level.scale)
+        reach = float(search_radius_cm)
         margin = math.ceil(reach + float(level.bond_radius) + CLEARANCE_MARGIN)
         region = grow_box(bounding_box([pinch.a, pinch.b]), margin)
         walls = walls_near(level, pinch.start_tile, region, present)
@@ -90,7 +90,7 @@ def _propose(
     level: Level, pinch: Pinch, walls: list[BoundarySegment], reach: float
 ) -> list[_Proposal]:
     radius = float(level.bond_radius) + CLEARANCE_MARGIN
-    spacing = SAMPLE_SPACING_CM * float(level.scale)
+    spacing = float(SAMPLE_SPACING_CM)
     starts, ends = wall_arrays(walls)
 
     a = np.array([float(pinch.a[0]), float(pinch.a[1])])
