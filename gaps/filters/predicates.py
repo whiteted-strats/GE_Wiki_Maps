@@ -13,6 +13,7 @@ from gaps.mesh import LevelObject
 Predicate = Callable[[LevelObject], bool]
 
 STANDARD_HEALTH = 1000
+RECTANGLE_TOLERANCE = 0.01  # opposite sides of a rectangle may differ by this much
 SQUARE_TOLERANCE = 0.10  # the shorter sides may be up to this much shorter than the longer ones
 FLAT_RATIO = 0.2  # how thin, from top to bottom, counts as lying flat
 NEGLIGIBLE_SIDE = 0.01  # outlines repeat some corners, giving sides of almost no length
@@ -69,13 +70,18 @@ def is_rectangle(obj: LevelObject) -> bool:
     sides = _side_lengths(obj)
     if len(sides) != 4:
         return False
-    return _nearly_equal(sides[0], sides[2], 0.01) and _nearly_equal(sides[1], sides[3], 0.01)
+    return _nearly_equal(sides[0], sides[2], RECTANGLE_TOLERANCE) and _nearly_equal(
+        sides[1], sides[3], RECTANGLE_TOLERANCE
+    )
 
 
 @predicate
 def is_square(obj: LevelObject) -> bool:
-    """A rectangle whose shorter sides are within 10% of its longer ones. Crates are rarely quite
-    square: those on Frigate are 78 by 83 cm."""
+    """A rectangle whose shorter sides are within 10% of its longer ones.
+
+    That is loose for "square" because crates aren't: Frigate's pipes room crates, the only use
+    so far, are 78 by 83 cm, 6% off. This only ever checks objects listed by address in a level
+    file, it never picks objects out."""
     sides = _side_lengths(obj)
     return is_rectangle(obj) and _nearly_equal(min(sides), max(sides), SQUARE_TOLERANCE)
 
