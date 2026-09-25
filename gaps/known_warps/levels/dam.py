@@ -14,7 +14,7 @@ KNOWN_WARPS = [
         name="Window B",
         walls="2FE621.1 | 2FF520.3",
         status=WARP,
-        width_cm=55.301,
+        width_cm=55.300,
         step_cm=66.22,
         notes="Room 0x6f.",
     ),

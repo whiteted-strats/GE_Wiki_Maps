@@ -23,8 +23,6 @@ from gaps.mesh import Level
 from gaps.pinch import feature_key
 from gaps.survey import Gap
 
-WIDTH_TOLERANCE_CM = 0.0015  # see _same
-
 
 @dataclass
 class KnownWarp:
@@ -82,14 +80,6 @@ def check_known_warps(level: Level, gaps: list[Gap]) -> list[Problem]:
     return problems
 
 
-def _same(expected, found) -> bool:
-    """Widths are recorded to a thousandth of a centimetre, and the last digit depends on float32
-    rounding, so a difference of one there is allowed. Everything else must match exactly."""
-    if isinstance(expected, float):
-        return abs(expected - found) <= WIDTH_TOLERANCE_CM
-    return expected == found
-
-
 def _differences(level: Level, warp: KnownWarp, gap: Gap) -> list[str]:
     pinch = gap.pinch or gap.narrowest
     found = {
@@ -107,7 +97,7 @@ def _differences(level: Level, warp: KnownWarp, gap: Gap) -> list[str]:
     differences = [
         f"{what} was {expected[what]!r} and is now {found[what]!r}"
         for what in expected
-        if not _same(expected[what], found[what])
+        if expected[what] != found[what]
     ]
     if gap.witness is not None:
         step_cm = round(level.to_cm(float(gap.witness.step2) ** 0.5), 2)

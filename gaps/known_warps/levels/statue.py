@@ -14,7 +14,7 @@ KNOWN_WARPS = [
         name="secret area out",
         walls="0C2608.1 | 0C3408.1",
         status=WARP,
-        width_cm=57.370,
+        width_cm=57.371,
         step_cm=146.93,
         notes="Room 0x10, between two tile walls.",
     ),

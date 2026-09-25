@@ -14,7 +14,7 @@ KNOWN_WARPS = [
         name="harder pipe warp",
         walls="003719.1 | 07691A.2",
         status=WARP,
-        width_cm=12.352,
+        width_cm=12.353,
         step_cm=84.78,
     ),
     KnownWarp(
