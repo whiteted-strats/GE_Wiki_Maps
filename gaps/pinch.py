@@ -22,7 +22,7 @@ from gaps.exact import (
     lerp,
     point_in_polygon,
 )
-from gaps.mesh import BoundarySegment, Level, SegmentGrid
+from gaps.mesh import BoundarySegment, Level, SegmentGrid, float32_step, nearest_float32
 from gaps.sheet import trace, walls_near
 
 # Reasons for dismissing a pair of walls. Each is an exact test.
@@ -48,6 +48,37 @@ class Pinch:
     @property
     def midpoint(self) -> Point:
         return lerp(self.a, self.b, Fraction(1, 2))
+
+    @property
+    def one_float32_step(self) -> bool:
+        """Whether this is the extreme kind of hairline: two axis-aligned walls, with nothing
+        between them in the game's arithmetic because their coordinates are adjacent float32s.
+
+        The game has no number for anything between the two walls, so a straight step through has
+        its line on one wall or the other. Whether Bond gets through is decided by the inequalities
+        in the game's collision code, not by geometry, and is untested. See gaps/terminology.md.
+        """
+        # The narrowest line must run along an axis, between two walls which each run along an
+        # axis (the same one, for two parallel walls; or perpendicular, for a corner against a wall)
+        axis = _axis_of(self.a, self.b)
+        if axis is None or _axis_of(self.first.a, self.first.b) is None:
+            return False
+        if _axis_of(self.second.a, self.second.b) is None:
+            return False
+        across = 0 if axis == "x" else 1  # the coordinate which differs across the gap
+        low, high = sorted((self.a[across], self.b[across]), key=abs)
+        if nearest_float32(low) != low or nearest_float32(high) != high:
+            return False
+        return abs(high) - abs(low) == float32_step(low) and (low >= 0) == (high >= 0)
+
+
+def _axis_of(p: Point, q: Point) -> str | None:
+    """'x' if the segment runs along x (z constant), 'z' if along z, None otherwise."""
+    if p[1] == q[1] and p[0] != q[0]:
+        return "x"
+    if p[0] == q[0] and p[1] != q[1]:
+        return "z"
+    return None
 
 
 @dataclass

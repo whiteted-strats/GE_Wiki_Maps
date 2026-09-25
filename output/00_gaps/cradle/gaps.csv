@@ -1,3 +1,3 @@
-gap,name,status,width_cm,step_cm,walk_round_cm,x,z,room,between,and,objects_forming_gap,objects_in_the_way,pinches,key
-1,,no warp found,0.000059,,,-853,-428,0x0c,wall of tile 00820A (room 0x0c),door 0x1d8bfc (preset 0x0003),0x1d8bfc,,4,00820A.1 | 0x1d8bfc.0
-2,,no warp found,0.000059,,,853,428,0x11,wall of tile 04D411 (room 0x11),door 0x1d89dc (preset 0x0001),0x1d89dc,,4,04D411.1 | 0x1d89dc.3
+gap,name,status,width_cm,one_float32_step,step_cm,walk_round_cm,x,z,room,between,and,objects_forming_gap,objects_in_the_way,pinches,key
+1,,no warp found,0.000059,,,,-853,-428,0x0c,wall of tile 00820A (room 0x0c),door 0x1d8bfc (preset 0x0003),0x1d8bfc,,4,00820A.1 | 0x1d8bfc.0
+2,,no warp found,0.000059,,,,853,428,0x11,wall of tile 04D411 (room 0x11),door 0x1d89dc (preset 0x0001),0x1d89dc,,4,04D411.1 | 0x1d89dc.3

@@ -70,6 +70,11 @@ class Gap:
         return min(self.pinches, key=lambda pinch: pinch.width2)
 
     @property
+    def one_float32_step(self) -> bool:
+        """See Pinch.one_float32_step: of the pinch the warp goes through, or the narrowest."""
+        return (self.pinch or self.narrowest).one_float32_step
+
+    @property
     def needs(self) -> frozenset[int]:
         """The objects which form the gap. Destroying one of them removes the gap."""
         return (self.pinch or self.narrowest).needs

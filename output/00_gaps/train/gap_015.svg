@@ -454,47 +454,47 @@ L 256.679531 285.635827
    <g id="line2d_29">
     <path d="M 256.680469 292.024395 
 L 339.731146 292.024395 
-" clip-path="url(#pb5d509a0ce)" style="fill: none; stroke: #ffa500; stroke-width: 2.2; stroke-linecap: round"/>
+" clip-path="url(#pb5d509a0ce)" style="fill: none; stroke: #000000; stroke-width: 2.2; stroke-linecap: round"/>
    </g>
    <g id="line2d_30">
     <path d="M 256.679531 285.635893 
 L 256.679531 292.024424 
-" clip-path="url(#pb5d509a0ce)" style="fill: none; stroke: #ffa500; stroke-width: 2.2; stroke-linecap: round"/>
+" clip-path="url(#pb5d509a0ce)" style="fill: none; stroke: #000000; stroke-width: 2.2; stroke-linecap: round"/>
    </g>
    <g id="line2d_31">
     <path d="M 256.680469 304.801442 
 L 256.680469 292.024395 
-" clip-path="url(#pb5d509a0ce)" style="fill: none; stroke: #ffa500; stroke-width: 2.2; stroke-linecap: round"/>
+" clip-path="url(#pb5d509a0ce)" style="fill: none; stroke: #000000; stroke-width: 2.2; stroke-linecap: round"/>
    </g>
    <g id="line2d_32">
     <path d="M 256.679531 285.635893 
 L 256.679531 292.024424 
-" clip-path="url(#pb5d509a0ce)" style="fill: none; stroke: #ffa500; stroke-width: 2.2; stroke-linecap: round"/>
+" clip-path="url(#pb5d509a0ce)" style="fill: none; stroke: #000000; stroke-width: 2.2; stroke-linecap: round"/>
    </g>
    <g id="line2d_33">
     <path d="M 256.680469 304.801442 
 L 256.680469 292.024395 
-" clip-path="url(#pb5d509a0ce)" style="fill: none; stroke: #ffa500; stroke-width: 2.2; stroke-linecap: round"/>
+" clip-path="url(#pb5d509a0ce)" style="fill: none; stroke: #000000; stroke-width: 2.2; stroke-linecap: round"/>
    </g>
    <g id="line2d_34">
     <path d="M 256.679531 292.024424 
 L 173.628854 292.024395 
-" clip-path="url(#pb5d509a0ce)" style="fill: none; stroke: #ffa500; stroke-width: 2.2; stroke-linecap: round"/>
+" clip-path="url(#pb5d509a0ce)" style="fill: none; stroke: #000000; stroke-width: 2.2; stroke-linecap: round"/>
    </g>
    <g id="line2d_35">
     <path d="M 256.680469 292.024395 
 L 256.679531 292.024395 
-" clip-path="url(#pb5d509a0ce)" style="fill: none; stroke-dasharray: 1,1.65; stroke-dashoffset: 0; stroke: #ffa500"/>
+" clip-path="url(#pb5d509a0ce)" style="fill: none; stroke-dasharray: 1,1.65; stroke-dashoffset: 0; stroke: #000000"/>
    </g>
    <g id="line2d_36">
     <path d="M 256.680469 292.024409 
 L 256.679531 292.024409 
-" clip-path="url(#pb5d509a0ce)" style="fill: none; stroke-dasharray: 1,1.65; stroke-dashoffset: 0; stroke: #ffa500"/>
+" clip-path="url(#pb5d509a0ce)" style="fill: none; stroke-dasharray: 1,1.65; stroke-dashoffset: 0; stroke: #000000"/>
    </g>
    <g id="line2d_37">
     <path d="M 256.680469 292.024424 
 L 256.679531 292.024424 
-" clip-path="url(#pb5d509a0ce)" style="fill: none; stroke-dasharray: 1,1.65; stroke-dashoffset: 0; stroke: #ffa500"/>
+" clip-path="url(#pb5d509a0ce)" style="fill: none; stroke-dasharray: 1,1.65; stroke-dashoffset: 0; stroke: #000000"/>
    </g>
    <g id="line2d_38">
     <path d="M 229.031162 324.97455 
@@ -530,7 +530,8 @@ z
 " clip-path="url(#pb5d509a0ce)" style="fill: none; stroke: #008000; stroke-linejoin: miter"/>
    </g>
    <g id="text_5">
-    <text style="font-weight: 700; font-size: 9px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #ffa500" x="264.68" y="284.024395" transform="rotate(-0 264.68 284.024395)">0.00098 cm</text>
+    <text style="font-weight: 700; font-size: 9px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(264.68 273.221934)">0.00098 cm</text>
+    <text style="font-weight: 700; font-size: 9px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(264.68 284.024395)">(one float32 step)</text>
    </g>
   </g>
  </g>

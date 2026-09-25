@@ -108,6 +108,16 @@ treated like any other gap. A warp through one is drawn in orange rather than re
 have the width written on them. A hairline's width is always given to two significant figures,
 written out in full: 0.93, 0.0042, 0.0000066.
 
+**One float32 step** - the extreme kind of hairline: two axis-aligned walls whose coordinates are
+adjacent float32s, so that the game has no number for anything between them. Facility's
+"objective A door" (a door one step off its frame) and Control's "Main room locked double door"
+(two doors one step apart) are the named examples, and there are about sixty in all. The tool's
+exact geometry finds a warp through many of them, by a line halfway between the two which the game
+can't represent: whether the game lets Bond through comes down to the inequalities in its
+collision code, and is untested. A warp through one is drawn in black, its close-up says
+"(one float32 step)" under the width, and gaps.csv has a column for it. Only the exact one-step
+case is picked out: Frigate's DLTK roller door, at two steps, is left as an ordinary hairline.
+
 **Witness** - an actual warp through a pinch: two positions where Bond fits, with line of sight
 between them through it. A witness is proposed by a fast search and then *certified* exactly, so a
 reported warp is real. (`witness.py`.)

@@ -273,6 +273,19 @@ def nearest_float32(value: Fraction) -> Fraction:
     return -result if value < 0 else result
 
 
+def float32_step(value: Fraction) -> Fraction:
+    """The distance from a float32 to the next one up in magnitude: one unit in its last place."""
+    magnitude = abs(value)
+    if magnitude == 0:
+        return Fraction(2) ** -149
+    exponent = magnitude.numerator.bit_length() - magnitude.denominator.bit_length()
+    if magnitude < Fraction(2) ** exponent:
+        exponent -= 1
+    elif magnitude >= Fraction(2) ** (exponent + 1):
+        exponent += 1
+    return Fraction(2) ** (exponent - 23)
+
+
 def _stored_int16(level: Level, tile_addr: int, what: str, printed: float) -> Fraction:
     """A tile coordinate, as the game has it: the int16 it stores, divided by the scale in one
     float32 operation. The dumper did that division in a double, so the int16 is recovered from

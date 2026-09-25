@@ -1,13 +1,13 @@
-variant_of_gap,name,key,status,width_cm,step_cm,x,z,between,and,objects_forming_gap,objects_in_the_way
-25,,0B3E18.2 | 0x1c99d8.0,warp,57.895,148.36,-1654,-1206,wall of tile 0B3E18 (room 0x35),monitor 0x1c99d8 (preset 0x274e),0x1c99d8,
-31,,0x1cbee0.0 | 0x1cbfe0.3,warp,24.581,174.83,-3953,-6968,generic 0x1cbee0 (preset 0x00a4),generic 0x1cbfe0 (preset 0x00a6),0x1cbee0 0x1cbfe0,
-29,,078918.0 | 0x1cb6a0.1,warp,46.477,186.03,-3457,-6792,wall of tile 078918 (room 0x29),generic 0x1cb6a0 (preset 0x00b0),0x1cb6a0,
-31,,0x1cbe60.2 | 0x1cbee0.0,warp,7.373,303.93,-4041,-6873,generic 0x1cbe60 (preset 0x00a3),generic 0x1cbee0 (preset 0x00a4),0x1cbe60 0x1cbee0,
-33,,0x1cb420.2 | 0x1cba20.0,warp if objects removed,45.897,40.01,-3677,-7414,generic 0x1cb5a0 (preset 0x00ae),generic 0x1cba20 (preset 0x2758),0x1cb5a0 0x1cba20,0x1cb420 0x1cb7a0
-41,,0x1c7fd8.0 | 0x1c80d8.4,warp if objects removed,59.501,112.42,-4064,-861,generic 0x1c7f58 (preset 0x2728),generic 0x1c8058 (preset 0x272a),0x1c7f58 0x1c8058,0x1c7fd8
-41,,0x1c7f58.1 | 0x1c8058.4,warp if objects removed,59.501,112.42,-4063,-913,generic 0x1c7f58 (preset 0x2728),generic 0x1c8058 (preset 0x272a),0x1c7f58 0x1c8058,0x1c7fd8
-36,,0x1c8658.3 | 0x1c8758.1,warp if objects removed,59.495,116.16,-1965,-246,generic 0x1c8658 (preset 0x2732),generic 0x1c8758 (preset 0x2734),0x1c8658 0x1c8758,0x1c86d8
-36,,0x1c8658.4 | 0x1c8758.1,warp if objects removed,59.495,116.16,-1965,-192,generic 0x1c8658 (preset 0x2732),generic 0x1c8758 (preset 0x2734),0x1c8658 0x1c8758,0x1c86d8
-40,,0x1ca104.2 | 0x1cb220.0,warp if objects removed,27.828,116.29,-4033,-7419,monitor 0x1ca104 (preset 0x274c),generic 0x1cb220 (preset 0x00a7),0x1ca104 0x1cb220,0x1cb720
-34,,0x1c84d8.0 | 0x1c85d8.3,warp if objects removed,58.168,124.06,-1803,725,generic 0x1c84d8 (preset 0x2725),generic 0x1c85d8 (preset 0x2727),0x1c84d8 0x1c85d8,0x1c8558
-33,,0x1cb3a0.2 | 0x1cb5a0.1,warp if objects removed,4.140,191.74,-3753,-7410,generic 0x1cb3a0 (preset 0x00aa),generic 0x1cb5a0 (preset 0x00ae),0x1cb3a0 0x1cb5a0,0x1cb2a0 0x1cb320 0x1cb820 0x1cb920 0x1cba20
+variant_of_gap,name,key,status,width_cm,one_float32_step,step_cm,x,z,between,and,objects_forming_gap,objects_in_the_way
+25,,0B3E18.2 | 0x1c99d8.0,warp,57.895,,148.36,-1654,-1206,wall of tile 0B3E18 (room 0x35),monitor 0x1c99d8 (preset 0x274e),0x1c99d8,
+31,,0x1cbee0.0 | 0x1cbfe0.3,warp,24.581,,174.83,-3953,-6968,generic 0x1cbee0 (preset 0x00a4),generic 0x1cbfe0 (preset 0x00a6),0x1cbee0 0x1cbfe0,
+29,,078918.0 | 0x1cb6a0.1,warp,46.477,,186.03,-3457,-6792,wall of tile 078918 (room 0x29),generic 0x1cb6a0 (preset 0x00b0),0x1cb6a0,
+31,,0x1cbe60.2 | 0x1cbee0.0,warp,7.373,,303.93,-4041,-6873,generic 0x1cbe60 (preset 0x00a3),generic 0x1cbee0 (preset 0x00a4),0x1cbe60 0x1cbee0,
+33,,0x1cb420.2 | 0x1cba20.0,warp if objects removed,45.897,,40.01,-3677,-7414,generic 0x1cb5a0 (preset 0x00ae),generic 0x1cba20 (preset 0x2758),0x1cb5a0 0x1cba20,0x1cb420 0x1cb7a0
+41,,0x1c7fd8.0 | 0x1c80d8.4,warp if objects removed,59.501,,112.42,-4064,-861,generic 0x1c7f58 (preset 0x2728),generic 0x1c8058 (preset 0x272a),0x1c7f58 0x1c8058,0x1c7fd8
+41,,0x1c7f58.1 | 0x1c8058.4,warp if objects removed,59.501,,112.42,-4063,-913,generic 0x1c7f58 (preset 0x2728),generic 0x1c8058 (preset 0x272a),0x1c7f58 0x1c8058,0x1c7fd8
+36,,0x1c8658.3 | 0x1c8758.1,warp if objects removed,59.495,,116.16,-1965,-246,generic 0x1c8658 (preset 0x2732),generic 0x1c8758 (preset 0x2734),0x1c8658 0x1c8758,0x1c86d8
+36,,0x1c8658.4 | 0x1c8758.1,warp if objects removed,59.495,,116.16,-1965,-192,generic 0x1c8658 (preset 0x2732),generic 0x1c8758 (preset 0x2734),0x1c8658 0x1c8758,0x1c86d8
+40,,0x1ca104.2 | 0x1cb220.0,warp if objects removed,27.828,,116.29,-4033,-7419,monitor 0x1ca104 (preset 0x274c),generic 0x1cb220 (preset 0x00a7),0x1ca104 0x1cb220,0x1cb720
+34,,0x1c84d8.0 | 0x1c85d8.3,warp if objects removed,58.168,,124.06,-1803,725,generic 0x1c84d8 (preset 0x2725),generic 0x1c85d8 (preset 0x2727),0x1c84d8 0x1c85d8,0x1c8558
+33,,0x1cb3a0.2 | 0x1cb5a0.1,warp if objects removed,4.140,,191.74,-3753,-7410,generic 0x1cb3a0 (preset 0x00aa),generic 0x1cb5a0 (preset 0x00ae),0x1cb3a0 0x1cb5a0,0x1cb2a0 0x1cb320 0x1cb820 0x1cb920 0x1cba20

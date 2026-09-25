@@ -12,7 +12,7 @@
   gap_NNN.svg     a close-up of each gap (NNN_name.svg if it is a known warp), as vector graphics
                   so it can be zoomed without limit.
                   Filtered gaps are only drawn faintly on the overviews. Warps through
-                  hairlines are orange
+                  hairlines are orange, and through a gap of one float32 step, black
 
 and output/00_gaps/summary.csv, which lists the warps of every surveyed level together.
 
@@ -63,6 +63,7 @@ STATUS_COLOUR = {WARP: "red", WARP_IF_REMOVED: "darkviolet", NO_WARP_FOUND: "roy
 TILE_COLOUR = (0.86, 0.86, 0.86)
 WALL_COLOUR = (0.25, 0.25, 0.25)
 HAIRLINE_COLOUR = "orange"
+ONE_FLOAT32_STEP_COLOUR = "black"  # a warp through a gap the game has no number for: see pinch.py
 OBJECT_COLOUR = "sienna"  # well away from the orange of hairlines
 
 
@@ -157,7 +158,8 @@ def _write_gap_table(level: Level, gaps: list[Gap], path: Path) -> None:
     with path.open("w", newline="") as file:
         writer = csv.writer(file, lineterminator="\n")
         writer.writerow(
-            ["gap", "name", "status", "width_cm", "step_cm", "walk_round_cm", "x", "z", "room",
+            ["gap", "name", "status", "width_cm", "one_float32_step", "step_cm", "walk_round_cm",
+             "x", "z", "room",
              "between", "and", "objects_forming_gap", "objects_in_the_way", "pinches", "key"]
         )  # fmt: skip
         for gap in gaps:
@@ -170,6 +172,7 @@ def _write_gap_table(level: Level, gaps: list[Gap], path: Path) -> None:
                     gap.name,
                     gap.status,
                     _width_text(level, gap),
+                    "yes" if gap.one_float32_step else "",
                     f"{step:.2f}" if step is not None else "",
                     _describe_walk_round(gap),
                     f"{x:.0f}",
@@ -196,7 +199,8 @@ def _write_variants(level: Level, variants: list[Gap], main_of: dict[str, Gap], 
     with path.open("w", newline="") as file:
         writer = csv.writer(file, lineterminator="\n")
         writer.writerow(
-            ["variant_of_gap", "name", "key", "status", "width_cm", "step_cm", "x", "z", "between",
+            ["variant_of_gap", "name", "key", "status", "width_cm", "one_float32_step", "step_cm",
+             "x", "z", "between",
              "and", "objects_forming_gap", "objects_in_the_way"]
         )  # fmt: skip
         for gap in variants:
@@ -209,6 +213,7 @@ def _write_variants(level: Level, variants: list[Gap], main_of: dict[str, Gap], 
                     gap.key,
                     gap.status,
                     _width_text(level, gap),
+                    "yes" if gap.one_float32_step else "",
                     f"{level.to_cm(float(gap.witness.step2) ** 0.5):.2f}",
                     f"{x:.0f}",
                     f"{z:.0f}",
@@ -422,8 +427,11 @@ def draw_close_up(level: Level, gap: Gap, path: Path) -> None:
     draw_level(ax, level, tiles, label_objects=True)
     draw_gap(ax, level, gap, prominent=True, numbered=False)
     if _is_hairline(level, gap):
+        label = f"{_width_text(level, gap)} cm"
+        if gap.one_float32_step:
+            label += "\n(one float32 step)"
         ax.annotate(
-            f"{_width_text(level, gap)} cm", (-x, z), xytext=(8, 8), textcoords="offset points",
+            label, (-x, z), xytext=(8, 8), textcoords="offset points",
             fontsize=9, color=_colour_of(level, gap), fontweight="bold", zorder=7,
         )  # fmt: skip
     if gap.witness is not None:
@@ -484,7 +492,10 @@ def draw_level(ax: Axes, level: Level, tiles: set[int], label_objects: bool = Fa
 
 
 def _colour_of(level: Level, gap: Gap) -> str:
-    """By status, except that a warp through a hairline is set apart from other warps."""
+    """By status, except that a warp through a hairline is set apart from other warps, and one
+    through a gap of exactly one float32 step is set apart again."""
+    if gap.status == WARP and gap.one_float32_step:
+        return ONE_FLOAT32_STEP_COLOUR
     if gap.status == WARP and _is_hairline(level, gap):
         return HAIRLINE_COLOUR
     return STATUS_COLOUR[gap.status]

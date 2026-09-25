@@ -1,2 +1,2 @@
-gap,name,status,width_cm,step_cm,walk_round_cm,x,z,room,between,and,objects_forming_gap,objects_in_the_way,pinches,key
-1,half-a-frame barrier warp,warp,51.641,87.73,none found,3191,13170,0x1a,wall of tile 530911 (room 0x1a),generic 0x1c9448 (preset 0x00c7),0x1c9448,,2,0x1c9448.0 | 530911.0
+gap,name,status,width_cm,one_float32_step,step_cm,walk_round_cm,x,z,room,between,and,objects_forming_gap,objects_in_the_way,pinches,key
+1,half-a-frame barrier warp,warp,51.641,,87.73,none found,3191,13170,0x1a,wall of tile 530911 (room 0x1a),generic 0x1c9448 (preset 0x00c7),0x1c9448,,2,0x1c9448.0 | 530911.0
