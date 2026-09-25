@@ -24,4 +24,6 @@ variant_of_gap,name,key,status,width_cm,step_cm,x,z,between,and,objects_forming_
 11,,0x1b4968.1 | 0x1b4a68.3,warp,9.795,268.45,19301,-4462,generic 0x1b4968 (preset 0x0221),generic 0x1b4a68 (preset 0x0223),0x1b4968 0x1b4a68,
 32,,0x1abb90.3 | 0x1ac390.0,warp,13.437,294.94,6538,-6919,generic 0x1abb90 (preset 0x00a1),generic 0x1ac390 (preset 0x0045),0x1abb90 0x1ac390,
 32,,0x1abb90.2 | 0x1ac390.1,warp,13.437,295.20,6607,-6919,generic 0x1abb90 (preset 0x00a1),generic 0x1ac390 (preset 0x0045),0x1abb90 0x1ac390,
+34,,081800.2 | 0x1a8c10.0,warp,54.032,327.86,586,-1481,wall of tile 081800 (room 0x05),generic 0x1a8c10 (preset 0x0091),0x1a8c10,
 34,,081800.2 | 0x1a8c10.1,warp,54.032,327.86,586,-1417,wall of tile 081800 (room 0x05),generic 0x1a8c10 (preset 0x0091),0x1a8c10,
+34,,081600.2 | 0x1a8c10.2,warp,54.032,327.86,586,-1207,wall of tile 081600 (room 0x05),generic 0x1a8c10 (preset 0x0091),0x1a8c10,

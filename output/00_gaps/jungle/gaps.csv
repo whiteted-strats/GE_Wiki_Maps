@@ -34,5 +34,3 @@ gap,name,status,width_cm,step_cm,walk_round_cm,x,z,room,between,and,objects_form
 33,,warp,5.683,266.03,707,8742,-11350,0x17,generic 0x1adc90 (preset 0x00aa),generic 0x1ade90 (preset 0x0077),0x1adc90 0x1ade90,,1,0x1adc90.0 | 0x1ade90.1
 34,,warp,54.032,327.86,1101,586,-1280,0x05,wall of tile 081600 (room 0x05),generic 0x1a8c10 (preset 0x0091),0x1a8c10,,1,081600.2 | 0x1a8c10.1
 35,,no warp found,31.128,,,19289,-4326,0x26,wall of tile 023318 (room 0x26),generic 0x1b4968 (preset 0x0221),0x1b4968,,2,023318.0 | 0x1b4968.2
-36,,no warp found,54.032,,,586,-1481,0x05,wall of tile 081800 (room 0x05),generic 0x1a8c10 (preset 0x0091),0x1a8c10,,1,081800.2 | 0x1a8c10.0
-37,,no warp found,54.032,,,586,-1207,0x05,wall of tile 081600 (room 0x05),generic 0x1a8c10 (preset 0x0091),0x1a8c10,,1,081600.2 | 0x1a8c10.2
