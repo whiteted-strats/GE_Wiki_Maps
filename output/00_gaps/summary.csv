@@ -183,7 +183,7 @@ bunker_2,13,,warp,5.563,91.89,none found,-3101,4769,0x29,wall of tile 0AFB12 (ro
 jungle,11,,warp,33.482,92.41,579,19200,-4484,0x26,generic 0x1b48e8 (preset 0x0220),generic 0x1b4968 (preset 0x0221),0x1b48e8 0x1b4968,,3,0x1b48e8.2 | 0x1b4968.1
 archives,10,,warp,39.312,92.92,none found,-1691,507,0x0f,generic 0x1d056c (preset 0x2836),generic 0x1d1f30 (preset 0x281c),0x1d056c 0x1d1f30,,2,0x1d056c.4 | 0x1d1f30.0
 silo,11,,warp,0.00012,93.39,none found,1951,-18,0x50,wall of tile 001271 (room 0x50),door 0x1cae6c (preset 0x004c),0x1cae6c,,11,001271.2 | 0x1cae6c.0
-facility,9,,warp,0.000015,93.60,none found,6337,199,0x31,wall of tile 0FD722 (room 0x31),door 0x1c8524 (preset 0x0074),0x1c8524,,4,0FD722.1 | 0x1c8524.0
+facility,9,objective A door,warp,0.000015,93.60,none found,6337,199,0x31,wall of tile 0FD722 (room 0x31),door 0x1c8524 (preset 0x0074),0x1c8524,,4,0FD722.1 | 0x1c8524.0
 facility,10,,warp,0.00012,93.60,none found,7983,-2019,0x3d,wall of tile 032D20 (room 0x3d),door 0x1c8e84 (preset 0x0078),0x1c8e84,,6,032D20.3 | 0x1c8e84.3
 surface_1,14,,warp,35.742,94.05,786,-11679,-15007,0x05,wall of tile 113E00 (room 0x05),generic 0x1dd4c8 (preset 0x2729),0x1dd4c8,,2,0x1dd4c8.4 | 113E00.0
 archives,11,,warp,0.000015,95.52,none found,-197,845,0x0b,wall of tile 1A1E0A (room 0x0b),door 0x1d28c8 (preset 0x012e),0x1d28c8,,6,0x1d28c8.2 | 1A1E0A.1

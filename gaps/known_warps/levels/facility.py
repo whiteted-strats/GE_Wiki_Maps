@@ -28,4 +28,19 @@ KNOWN_WARPS = [
         "from the tilted edge. The game has no number for that: in its arithmetic they touch. "
         "It was a 0.00000085 cm warp when object outlines were the printed decimals.",
     ),
+    KnownWarp(
+        name="objective A door",
+        walls="0FD722.1 | 0x1c8524.0",
+        status=WARP,
+        width_cm=0.0,
+        step_cm=93.60,
+        objects_forming_gap=[0x1C8524],
+        notes="Room 0x31. The simplest possible hairline, and so the one to test in the game: the "
+        "door and its frame are both axis-aligned, and the door sits exactly one float32 step "
+        "(2^-16 cm, 1.53e-5 cm) off the frame's line, uniformly along its whole width. There is "
+        "no float32 between the two, so a step straight through can only have its line on the "
+        "wall's z or on the door's z: whether the game lets Bond through comes down to the "
+        "inequalities in its collision code, which the tool doesn't model. Its exact geometry says "
+        "yes, by a crossing point halfway between the two which the game can't represent.",
+    ),
 ]

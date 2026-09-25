@@ -7,7 +7,7 @@ gap,name,status,width_cm,step_cm,walk_round_cm,x,z,room,between,and,objects_form
 6,,warp,34.903,73.38,473,-296,1029,0x04,generic 0x1cb840 (preset 0x00e9),generic 0x1cc6d0 (preset 0x2724),0x1cb840 0x1cc6d0,,2,0x1cb840.2 | 0x1cc6d0.1
 7,,warp,40.434,76.34,456,7027,490,0x31,wall of tile 0FCA20 (room 0x31),generic 0x1caf94 (preset 0x00de),0x1caf94,,2,0FCA20.2 | 0x1caf94.2
 8,,warp,29.382,78.48,279,632,1580,0x03,wall of tile 01C900 (room 0x03),generic 0x1ca554 (preset 0x00d4),0x1ca554,,4,01C900.0 | 0x1ca554.0
-9,,warp,0.000015,93.60,none found,6337,199,0x31,wall of tile 0FD722 (room 0x31),door 0x1c8524 (preset 0x0074),0x1c8524,,4,0FD722.1 | 0x1c8524.0
+9,objective A door,warp,0.000015,93.60,none found,6337,199,0x31,wall of tile 0FD722 (room 0x31),door 0x1c8524 (preset 0x0074),0x1c8524,,4,0FD722.1 | 0x1c8524.0
 10,,warp,0.00012,93.60,none found,7983,-2019,0x3d,wall of tile 032D20 (room 0x3d),door 0x1c8e84 (preset 0x0078),0x1c8e84,,6,032D20.3 | 0x1c8e84.3
 11,,warp,44.006,106.29,983,7894,-1806,0x3e,wall of tile 034F20 (room 0x3e),generic 0x1cbf50 (preset 0x009f),0x1cbf50,,3,034F20.1 | 0x1cbf50.1
 12,,warp,27.908,112.42,573,711,1654,0x03,generic 0x1ca450 (preset 0x00d3),generic 0x1ca554 (preset 0x00d4),0x1ca450 0x1ca554,,2,0x1ca450.3 | 0x1ca554.1
