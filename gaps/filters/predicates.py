@@ -16,7 +16,12 @@ STANDARD_HEALTH = 1000
 RECTANGLE_TOLERANCE = 0.01  # opposite sides of a rectangle may differ by this much
 SQUARE_TOLERANCE = 0.10  # the shorter sides may be up to this much shorter than the longer ones
 FLAT_RATIO = 0.2  # how thin, from top to bottom, counts as lying flat
-NEGLIGIBLE_SIDE = 0.01  # outlines repeat some corners, giving sides of almost no length
+# Most outlines have six points, not four: the game holds two of the corners twice, computed by
+# two routes, a float32 step or so apart. So a door is really a hexagon with two sides of about
+# 5e-4 cm. The predicates count sides as a person would, leaving out any shorter than this fraction
+# of the longest. The geometry does no such thing: pinches, lines of sight and warps are all
+# computed on every point as the game stores it, tiny sides included.
+NEGLIGIBLE_SIDE = 0.01
 
 PREDICATES: dict[str, Predicate] = {}
 
@@ -94,7 +99,7 @@ def is_crate(obj: LevelObject) -> bool:
 
 def _side_lengths(obj: LevelObject) -> list[float]:
     """The lengths of the outline's sides, leaving out the negligible ones between repeated
-    corners."""
+    corners. See NEGLIGIBLE_SIDE: this is for counting sides, not for geometry."""
     points = obj.points
     lengths = [
         float(dist2(points[i], points[(i + 1) % len(points)])) ** 0.5 for i in range(len(points))
