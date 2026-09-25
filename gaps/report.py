@@ -52,7 +52,7 @@ SVG_METADATA = {"Date": None}
 # The leading 00 lists these first among the folders of output/, in file managers as well as ls
 OUTPUT_ROOT = Path("output/00_gaps")
 # A warp through a hairline is drawn in a colour of its own, and the width is written on the
-# close-up. They are treated like any other gap otherwise. However narrow, a gap with a warp is a warp.
+# close-up. Otherwise hairlines are gaps like any other: however narrow, one with a warp is a warp.
 CLOSE_UP_HALF_SIZE_CM = 260  # shows a few metres of surroundings. Nothing depends on the value
 # Overviews are vector graphics, so these only set how big the numbers and lines are drawn
 # relative to the level: as if it were an image this many pixels along its longer side ...
