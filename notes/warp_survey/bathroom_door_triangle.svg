@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="792pt" height="547.2pt" viewBox="0 0 792 547.2" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-09-25T14:22:47.500906</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 547.2 
+L 792 547.2 
+L 792 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="line2d_1">
+    <path d="M 411.513674 413.793974 
+L 411.513674 521.975762 
+" clip-path="url(#p282e24dd41)" style="fill: none; stroke: #595959; stroke-opacity: 0.18; stroke-width: 6"/>
+   </g>
+   <g id="line2d_2">
+    <path d="M 195.150098 413.793974 
+L 139.539611 312.683997 
+" clip-path="url(#p282e24dd41)" style="fill: none; stroke: #8b5a2b; stroke-opacity: 0.18; stroke-width: 3.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_3">
+    <path d="M 411.513674 413.793974 
+L 645.907547 413.793974 
+" clip-path="url(#p282e24dd41)" style="fill: none; stroke: #595959; stroke-width: 6"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle; fill: #595959; opacity: 0.8" x="541.331819" y="461.223564" transform="rotate(-0 541.331819 461.223564)">wall</text>
+   </g>
+   <g id="line2d_4">
+    <path d="M 195.150098 413.793974 
+L 645.907547 165.877378 
+" clip-path="url(#p282e24dd41)" style="fill: none; stroke: #8b5a2b; stroke-width: 3.5; stroke-linecap: square"/>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #8b5a2b; opacity: 0.8" transform="translate(225.926243 333.636993) rotate(-28.810794)">door</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #8b5a2b" transform="translate(163.23377 435.874538)">door corner</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #8b5a2b" transform="translate(150.197052 449.076687)">(-198.92581, W)</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #595959" transform="translate(422.331852 386.029995)">wall's end corner</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #595959" transform="translate(422.331852 399.232143)">(-198.92580, W)</text>
+   </g>
+   <g id="patch_2">
+    <path d="M 198.600918 460.672749 
+Q 303.331293 460.672749 408.061668 460.672749 
+" style="fill: none; stroke: #000000; stroke-width: 1.3; stroke-linecap: round"/>
+    <path d="M 202.600918 462.672749 
+L 198.600918 460.672749 
+L 202.600918 458.672749 
+" style="fill: none; stroke: #000000; stroke-width: 1.3; stroke-linecap: round"/>
+    <path d="M 404.061668 458.672749 
+L 408.061668 460.672749 
+L 404.061668 462.672749 
+" style="fill: none; stroke: #000000; stroke-width: 1.3; stroke-linecap: round"/>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="303.331886" y="475.863227" transform="rotate(-0 303.331886 475.863227)">1.5e-5 cm  (door corner to wall corner)</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #8b5a2b" transform="translate(477.401827 224.790549) rotate(-28.810794)">door's back edge</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #8b5a2b" transform="translate(424.837989 268.768873) rotate(-28.810794)">slope = 1 float32 step / 11.6 cm = 1.3e-6</text>
+   </g>
+   <g id="patch_3">
+    <path d="M 528.576099 359.638637 
+Q 472.564567 370.222573 414.853532 355.171744 
+" style="fill: none; stroke: #2ca02c; stroke-width: 1.3; stroke-linecap: round"/>
+    <path d="M 418.555942 358.410905 
+L 414.853532 355.171744 
+L 419.666306 354.153313 
+" style="fill: none; stroke: #2ca02c; stroke-width: 1.3; stroke-linecap: round"/>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #2ca02c" transform="translate(461.998508 313.908373)">the pinch (the short leg):</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #2ca02c" transform="translate(461.998508 327.110522)">1.5e-5 cm x 1.3e-6 = 2e-11 cm,</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #2ca02c" transform="translate(461.998508 340.313529)">from the wall's corner straight up to the door's edge.</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #2ca02c" transform="translate(461.998508 353.516537)">This point on the door's edge is not a float32.</text>
+   </g>
+   <g id="line2d_5">
+    <path d="M 195.150098 413.793974 
+L 411.513674 413.793974 
+" clip-path="url(#p282e24dd41)" style="fill: none; stroke-dasharray: 1,1.65; stroke-dashoffset: 0; stroke: #000000"/>
+   </g>
+   <g id="line2d_6">
+    <path d="M 411.513674 413.793974 
+L 411.513674 294.794008 
+" clip-path="url(#p282e24dd41)" style="fill: none; stroke: #2ca02c; stroke-width: 2.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_7">
+    <defs>
+     <path id="mb95ffaa565" d="M -6.5 6.5 
+L 6.5 6.5 
+L 6.5 -6.5 
+L -6.5 -6.5 
+z
+" style="stroke: #595959; stroke-linejoin: miter"/>
+    </defs>
+    <g clip-path="url(#p282e24dd41)">
+     <use xlink:href="#mb95ffaa565" x="411.513674" y="413.793974" style="fill: #595959; stroke: #595959; stroke-linejoin: miter"/>
+    </g>
+   </g>
+   <g id="line2d_8">
+    <defs>
+     <path id="m340607de3d" d="M 0 6 
+C 1.591219 6 3.117479 5.367802 4.242641 4.242641 
+C 5.367802 3.117479 6 1.591219 6 0 
+C 6 -1.591219 5.367802 -3.117479 4.242641 -4.242641 
+C 3.117479 -5.367802 1.591219 -6 0 -6 
+C -1.591219 -6 -3.117479 -5.367802 -4.242641 -4.242641 
+C -5.367802 -3.117479 -6 -1.591219 -6 0 
+C -6 1.591219 -5.367802 3.117479 -4.242641 4.242641 
+C -3.117479 5.367802 -1.591219 6 0 6 
+z
+" style="stroke: #8b5a2b"/>
+    </defs>
+    <g clip-path="url(#p282e24dd41)">
+     <use xlink:href="#m340607de3d" x="195.150098" y="413.793974" style="fill: #8b5a2b; stroke: #8b5a2b"/>
+    </g>
+   </g>
+   <g id="line2d_9">
+    <defs>
+     <path id="m59378b1e67" d="M 0 5.5 
+C 1.458617 5.5 2.857689 4.920485 3.889087 3.889087 
+C 4.920485 2.857689 5.5 1.458617 5.5 0 
+C 5.5 -1.458617 4.920485 -2.857689 3.889087 -3.889087 
+C 2.857689 -4.920485 1.458617 -5.5 0 -5.5 
+C -1.458617 -5.5 -2.857689 -4.920485 -3.889087 -3.889087 
+C -4.920485 -2.857689 -5.5 -1.458617 -5.5 0 
+C -5.5 1.458617 -4.920485 2.857689 -3.889087 3.889087 
+C -2.857689 4.920485 -1.458617 5.5 0 5.5 
+z
+" style="stroke: #2ca02c"/>
+    </defs>
+    <g clip-path="url(#p282e24dd41)">
+     <use xlink:href="#m59378b1e67" x="411.513674" y="294.794008" style="fill: #2ca02c; stroke: #2ca02c"/>
+    </g>
+   </g>
+  </g>
+  <g id="text_8">
+   <text style="font-size: 11.5px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(83.910664 20.833326)">Facility gap 028: the triangle behind the 2e-11 cm pinch between door 0x1c6d0c and the wall of tile 037F02</text>
+   <text style="font-size: 11.5px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(199.256563 34.636471)">Not to scale: the triangle is really 1.5e-5 cm long and 2e-11 cm high</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p282e24dd41">
+   <rect x="40.089536" y="82.036492" width="631.060428" height="454.363508"/>
+  </clipPath>
+ </defs>
+</svg>
