@@ -35,6 +35,8 @@ Piece = tuple[int, Side]  # a tile, or the part of it on that side of the line i
 
 
 def narrow_pocket(level: Level, pinch: Pinch) -> str | None:
+    if pinch.touching:
+        return None  # there is no pinch line to measure along
     for side in (1, -1):
         extent2 = _extent_of_pocket2(level, pinch, side)
         if extent2 is not None:

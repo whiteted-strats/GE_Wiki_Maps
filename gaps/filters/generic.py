@@ -46,7 +46,7 @@ def anvil_and_hammer(level: Level, pinch: Pinch) -> str | None:
       - failing those, a step round this end rises too slowly to be short: see
         `_shortest_step_round_the_end2`.
     """
-    if pinch.width2 >= level.bond_radius**2:
+    if pinch.touching or pinch.width2 >= level.bond_radius**2:
         return None
     half_anvil2 = (level.from_metres(ANVIL_LENGTH_M) / 2) ** 2
 

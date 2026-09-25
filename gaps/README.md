@@ -6,6 +6,7 @@ narrower than 60 cm is one he can't walk through but might cross in a single ste
 
     python -m gaps train frigate        # or: python -m gaps all
     python -m gaps all --reuse-surveys  # only redo the filtering and the reports: seconds, not minutes
+    python -m gaps all --include-touching-gaps  # also survey walls which touch, as gaps of width zero
     python -m gaps.filters              # lists the filters and the predicates
     python -m unittest discover -s gaps/tests -t .
     ruff check gaps && ruff format gaps  # pip install -r requirements-dev.txt
@@ -78,7 +79,8 @@ nothing in the survey depends on it.
 - Gaps under 1 cm wide are *hairlines*, nearly all of them closed doors sitting a few millionths
   of a centimetre from their frames. There is no lower limit: they are gaps like any other, drawn
   with the width written on the close-up. A warp through one is drawn in orange rather than red,
-  or in black if the gap is exactly one float32 step: see terminology.md.
+  or in black if the gap is exactly one float32 step, or is a touching gap
+  (`--include-touching-gaps`): see terminology.md.
 - Doors are as they were when the level was dumped, i.e. closed. Guards are ignored.
 
 ## Known warps

@@ -59,7 +59,12 @@ def crate(addr: int, tile_addr: int, x: float, z: float, size: float) -> dict:
     }
 
 
-def two_rooms(corridor_width: int, riser: bool = False, corridor_length: int = 40) -> Level:
+def two_rooms(
+    corridor_width: int,
+    riser: bool = False,
+    corridor_length: int = 40,
+    objects: dict[int, dict] | None = None,
+) -> Level:
     """Two 300 x 300 rooms joined by a corridor, 40 long unless told otherwise. With `riser`, a
     vertical tile (one with no area from above, like the face of a step) sits across the middle of
     the corridor."""
@@ -82,7 +87,7 @@ def two_rooms(corridor_width: int, riser: bool = False, corridor_length: int = 4
         tiles["corridor, far half"] = [(middle, low), (middle, high), (far, high), (far, low)]
     else:
         tiles["corridor"] = [(300, low), (300, high), (far, high), (far, low)]
-    return build(tiles)
+    return build(tiles, objects)
 
 
 def notched_room(

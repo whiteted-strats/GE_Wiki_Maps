@@ -278,6 +278,36 @@ def overlap_point(
     return None
 
 
+def crosses_properly(p: Point, q: Point, a: Point, b: Point) -> bool:
+    """Whether segments pq and ab cross at a point interior to both: each one's ends are strictly
+    on opposite sides of the other. Touching at an end, or lying along each other, is not a
+    crossing."""
+    pq, ab, pa = sub(q, p), sub(b, a), sub(a, p)
+    denominator = cross(pq, ab)
+    if denominator == 0:
+        return False
+    t = divide(cross(pa, ab), denominator)
+    u = divide(cross(pa, pq), denominator)
+    return 0 < t < 1 and 0 < u < 1
+
+
+def passes_through_interior(p: Point, q: Point, polygon: list[Point]) -> bool:
+    """Whether any part of segment pq is strictly inside the polygon. The segment is cut wherever
+    it meets the outline and the middle of each piece is tested, so a line along a side, or in and
+    out through one corner, has no piece inside, while one which enters through a corner does."""
+    n = len(polygon)
+    cuts: set[Num] = {0, 1}
+    for i in range(n):
+        contact = contact_interval(p, q, polygon[i], polygon[(i + 1) % n])
+        if contact is not None:
+            cuts.update(contact)
+    return any(
+        strictly_inside_polygon(lerp(p, q, divide(low + high, 2)), polygon)
+        for low, high in pairwise(sorted(cuts))
+        if low < high
+    )
+
+
 def bounding_box(points: list[Point]) -> tuple[Num, Num, Num, Num]:
     """(min x, max x, min z, max z)"""
     xs = [p[0] for p in points]

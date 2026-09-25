@@ -34,6 +34,7 @@ SEARCH_RADII_CM = (300, 150, 75)
 SAMPLE_SPACING_CM = 2  # distance between the positions tried along each line
 CROSSING_POINTS = (0.5, 0.25, 0.75, 0.1, 0.9)  # where on the pinch line to cross it
 ANGLES_DEGREES = range(-85, 86, 5)  # measured from straight through the gap
+TOUCHING_ANGLES_DEGREES = range(0, 180, 5)  # a touching gap has no "through": every direction
 PROPOSALS_TO_CERTIFY = 8
 ROUNDS_OF_PROPOSALS = 5  # see find_witness
 REFINEMENT_STEPS = 12  # halvings of the sample spacing when homing in on where Bond first fits
@@ -95,18 +96,33 @@ def _propose(
 
     a = np.array([float(pinch.a[0]), float(pinch.a[1])])
     b = np.array([float(pinch.b[0]), float(pinch.b[1])])
-    across = (b - a) / np.linalg.norm(b - a)
-    through = np.array([-across[1], across[0]])  # straight through the gap
     distances = np.arange(spacing, reach, spacing)
+    if pinch.touching:
+        # No line to cross, only a point, and no direction "through": try every direction from
+        # the point, measured from the direction of the first wall
+        wall = pinch.first
+        through = np.array([float(wall.b[0] - wall.a[0]), float(wall.b[1] - wall.a[1])])
+        through /= np.linalg.norm(through)
+        across = np.array([-through[1], through[0]])
+        sweeps = [(0.0, a, TOUCHING_ANGLES_DEGREES)]
+    else:
+        across = (b - a) / np.linalg.norm(b - a)
+        through = np.array([-across[1], across[0]])  # straight through the gap
+        sweeps = [
+            (crossing, a + crossing * (b - a), ANGLES_DEGREES) for crossing in CROSSING_POINTS
+        ]
 
     proposals = []
-    for crossing in CROSSING_POINTS:
-        origin = a + crossing * (b - a)
-        for degrees in ANGLES_DEGREES:
+    for crossing, origin, angles in sweeps:
+        for degrees in angles:
             angle = math.radians(degrees)
             direction = math.cos(angle) * through + math.sin(angle) * across
-            forward = _first_fit_along(origin, direction, distances, starts, ends, radius)
-            back = _first_fit_along(origin, -direction, distances, starts, ends, radius)
+            forward = _first_fit_along(
+                origin, direction, distances, starts, ends, radius, pinch.touching
+            )
+            back = _first_fit_along(
+                origin, -direction, distances, starts, ends, radius, pinch.touching
+            )
             if forward is not None and back is not None:
                 proposals.append(
                     _Proposal(forward + back, crossing, (direction[0], direction[1]), back, forward)
@@ -121,9 +137,10 @@ def _first_fit_along(
     starts: np.ndarray,
     ends: np.ndarray,
     radius: float,
+    glancing_allowed: bool = False,
 ) -> float | None:
     """The nearest distance along the ray at which Bond fits, before the ray hits a wall."""
-    limit = ray_hits_wall_at(origin, direction, starts, ends)
+    limit = ray_hits_wall_at(origin, direction, starts, ends, glancing_allowed)
     usable = distances[distances < limit]
     if len(usable) == 0:
         return None
@@ -169,8 +186,9 @@ def _certify(
 
     # p and q are either side of the crossing point on one straight line, so if both halves are
     # clear then so is the whole step
-    to_p = trace(level, crossing_tile, crossing_point, p, present)
-    to_q = trace(level, crossing_tile, crossing_point, q, present)
+    # Through a touching gap the line runs along walls by construction, so only crossing blocks
+    to_p = trace(level, crossing_tile, crossing_point, p, present, along_walls=pinch.touching)
+    to_q = trace(level, crossing_tile, crossing_point, q, present, along_walls=pinch.touching)
     for line in (to_p, to_q):
         if not line.clear:
             return (None, line.blocker)

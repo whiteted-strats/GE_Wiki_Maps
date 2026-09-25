@@ -17,7 +17,9 @@ from gaps.exact import (
     Point,
     bounding_box,
     closest_points_between_segments,
+    contact_interval,
     dist2_point_segment,
+    divide,
     grow_box,
     lerp,
     point_in_polygon,
@@ -48,6 +50,12 @@ class Pinch:
     @property
     def midpoint(self) -> Point:
         return lerp(self.a, self.b, Fraction(1, 2))
+
+    @property
+    def touching(self) -> bool:
+        """A gap of width zero: two walls which touch, at the point a == b. Only surveyed with
+        --include-touching-gaps. See gaps/terminology.md, "touching gap"."""
+        return self.width2 == 0
 
     @property
     def one_float32_step(self) -> bool:
@@ -95,14 +103,17 @@ class Decision:
 
 @dataclass
 class TouchingWalls:
-    """Two unrelated walls which touch: a gap of width zero. Bond can't pass, but it is reported."""
+    """Two unrelated walls which touch: a gap of width zero. Listed in touching.csv, and with
+    --include-touching-gaps also surveyed as a pinch."""
 
     first: BoundarySegment
     second: BoundarySegment
     at: Point
 
 
-def find_pinches(level: Level) -> tuple[list[Pinch], list[TouchingWalls], list[Decision]]:
+def find_pinches(
+    level: Level, include_touching: bool = False
+) -> tuple[list[Pinch], list[TouchingWalls], list[Decision]]:
     diameter2 = (2 * level.bond_radius) ** 2
     segments = level.segments
     pinches: list[Pinch] = []
@@ -118,8 +129,14 @@ def find_pinches(level: Level) -> tuple[list[Pinch], list[TouchingWalls], list[D
         if width2 >= diameter2:
             continue
         if width2 == 0:
-            if _on_same_sheet(level, first, second, a):
+            same_sheet = _on_same_sheet(level, first, second, a)
+            if same_sheet:
                 touching.append(TouchingWalls(first, second, a))
+            if include_touching:
+                pinch, decision = _examine_touching(level, first, second, same_sheet)
+                decisions.append(decision)
+                if pinch is not None:
+                    pinches.append(pinch)
             continue
 
         pinch, decision = _examine(level, first, second, a, b, width2)
@@ -175,6 +192,43 @@ def _examine(
 
     decision.kept = True
     return Pinch(first, second, a, b, width2, start_tile, needs), decision
+
+
+def _examine_touching(
+    level: Level, first: BoundarySegment, second: BoundarySegment, same_sheet: bool
+) -> tuple[Pinch | None, Decision]:
+    """A pair of walls at no distance. There is no line between them to check, only a point, so
+    of the rules above only NOT_OVER_FLOOR and WRONG_SIDE apply."""
+    if first.tile is None and second.tile is not None:
+        first, second = second, first
+
+    # The pinch point: where they touch, or the middle of the stretch they lie along together
+    contact = contact_interval(first.a, first.b, second.a, second.b)
+    at = lerp(first.a, first.b, divide(contact[0] + contact[1], 2))
+
+    decision = Decision(first.id, second.id, 0.0, kept=False)
+    needs = frozenset(seg.obj for seg in (first, second) if seg.obj is not None)
+
+    start_tile = first.tile
+    if start_tile is None:
+        start_tile = _tile_under(level, first.obj, at) or _tile_under(level, second.obj, at)
+    if start_tile is None:
+        decision.reason = NOT_OVER_FLOOR
+        return None, decision
+
+    if first.tile is None:
+        # Two objects: on the same sheet if both stand among the floor round the point. (For
+        # touching.csv, _on_same_sheet asks for more, which leaves out crates side by side.)
+        nearby = level.linked_tiles_within(
+            start_tile, grow_box(bounding_box([at]), level.bond_radius)
+        )
+        same_sheet = all(bool(level.objects[obj].sheet_tiles & nearby) for obj in needs)
+    if not same_sheet:
+        decision.reason = WRONG_SIDE
+        return None, decision
+
+    decision.kept = True
+    return Pinch(first, second, at, at, 0, start_tile, needs), decision
 
 
 def _are_neighbours(first: BoundarySegment, second: BoundarySegment) -> bool:

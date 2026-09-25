@@ -6,7 +6,9 @@
   suppressed.csv  real warps hidden by the level's file, each with its reason
   filter_contradictions.csv   should be empty, see gaps/filters/generic.py
   decisions.csv   every pair of walls closer than Bond's diameter, and why it was kept or dismissed
-  touching.csv    unrelated walls which touch (gaps of width zero)
+  touching.csv    unrelated walls which touch (gaps of width zero). With --include-touching-gaps
+                  they are surveyed as gaps too: listed after every other gap, "yes" in the
+                  `touching` column, drawn in black
   vertical_edges_left_out.csv  edges of vertical tiles which no floor leads into, so not walls
   overview_*.svg  each part of the level, with the gaps numbered and the walls involved highlighted
   gap_NNN.svg     a close-up of each gap (NNN_name.svg if it is a known warp), as vector graphics
@@ -132,10 +134,11 @@ def file_name_of(gap: Gap) -> str:
 
 
 def _ranking(level: Level, gap: Gap) -> tuple:
-    """Warps in the level as dumped first, then by the step needed, shortest first."""
+    """Warps in the level as dumped first, then by the step needed, shortest first. Touching gaps
+    come after all the others, so that the numbering is the same with or without them."""
     order = [WARP, WARP_IF_REMOVED, NO_WARP_FOUND].index(gap.status)
     step = float(gap.witness.step2) if gap.witness else 0
-    return (order, step, _width(level, gap))
+    return (gap.touching, order, step, _width(level, gap))
 
 
 def _width(level: Level, gap: Gap) -> float:
@@ -158,8 +161,8 @@ def _write_gap_table(level: Level, gaps: list[Gap], path: Path) -> None:
     with path.open("w", newline="") as file:
         writer = csv.writer(file, lineterminator="\n")
         writer.writerow(
-            ["gap", "name", "status", "width_cm", "one_float32_step", "step_cm", "walk_round_cm",
-             "x", "z", "room",
+            ["gap", "name", "status", "width_cm", "one_float32_step", "touching", "step_cm",
+             "walk_round_cm", "x", "z", "room",
              "between", "and", "objects_forming_gap", "objects_in_the_way", "pinches", "key"]
         )  # fmt: skip
         for gap in gaps:
@@ -173,6 +176,7 @@ def _write_gap_table(level: Level, gaps: list[Gap], path: Path) -> None:
                     gap.status,
                     _width_text(level, gap),
                     "yes" if gap.one_float32_step else "",
+                    "yes" if gap.touching else "",
                     f"{step:.2f}" if step is not None else "",
                     _describe_walk_round(gap),
                     f"{x:.0f}",
@@ -199,8 +203,8 @@ def _write_variants(level: Level, variants: list[Gap], main_of: dict[str, Gap], 
     with path.open("w", newline="") as file:
         writer = csv.writer(file, lineterminator="\n")
         writer.writerow(
-            ["variant_of_gap", "name", "key", "status", "width_cm", "one_float32_step", "step_cm",
-             "x", "z", "between",
+            ["variant_of_gap", "name", "key", "status", "width_cm", "one_float32_step", "touching",
+             "step_cm", "x", "z", "between",
              "and", "objects_forming_gap", "objects_in_the_way"]
         )  # fmt: skip
         for gap in variants:
@@ -214,6 +218,7 @@ def _write_variants(level: Level, variants: list[Gap], main_of: dict[str, Gap], 
                     gap.status,
                     _width_text(level, gap),
                     "yes" if gap.one_float32_step else "",
+                    "yes" if gap.touching else "",
                     f"{level.to_cm(float(gap.witness.step2) ** 0.5):.2f}",
                     f"{x:.0f}",
                     f"{z:.0f}",
@@ -430,6 +435,8 @@ def draw_close_up(level: Level, gap: Gap, path: Path) -> None:
         label = f"{_width_text(level, gap)} cm"
         if gap.one_float32_step:
             label += "\n(one float32 step)"
+        elif gap.touching:
+            label += "\n(touching)"
         ax.annotate(
             label, (-x, z), xytext=(8, 8), textcoords="offset points",
             fontsize=9, color=_colour_of(level, gap), fontweight="bold", zorder=7,
@@ -493,8 +500,8 @@ def draw_level(ax: Axes, level: Level, tiles: set[int], label_objects: bool = Fa
 
 def _colour_of(level: Level, gap: Gap) -> str:
     """By status, except that a warp through a hairline is set apart from other warps, and one
-    through a gap of exactly one float32 step is set apart again."""
-    if gap.status == WARP and gap.one_float32_step:
+    through a gap of exactly one float32 step, or of no width at all, is set apart again."""
+    if gap.status == WARP and (gap.one_float32_step or gap.touching):
         return ONE_FLOAT32_STEP_COLOUR
     if gap.status == WARP and _is_hairline(level, gap):
         return HAIRLINE_COLOUR
@@ -509,7 +516,10 @@ def draw_gap(ax: Axes, level: Level, gap: Gap, prominent: bool, numbered: bool) 
         for wall in (pinch.first, pinch.second):
             _draw_segment(ax, level, wall, colour, 2.2 if prominent else 1.0, zorder=4)
         xs, zs = flipped(level, [pinch.a, pinch.b])
-        ax.plot(xs, zs, color=colour, linewidth=1.0, linestyle=":", zorder=5)
+        if pinch.touching:  # a point, not a line
+            ax.plot(xs, zs, color=colour, marker="o", markersize=3, linestyle="none", zorder=5)
+        else:
+            ax.plot(xs, zs, color=colour, linewidth=1.0, linestyle=":", zorder=5)
     if prominent and numbered:
         x, z = level.to_cm_point((gap.pinch or gap.narrowest).midpoint)
         ax.annotate(

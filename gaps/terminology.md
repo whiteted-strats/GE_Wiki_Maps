@@ -13,7 +13,9 @@ appears at the next, provided there is *line of sight* and he *fits*. The length
 needs is the real measure of how hard it is.
 
 **Line of sight** - the straight line from one position to the next touches no wall. Bond has no
-width while he moves. (`trace` in `sheet.py`.)
+width while he moves. (`trace` in `sheet.py`.) The one exception is a step through a *touching
+gap*, whose line passes through a point on two walls by construction: there only a proper crossing
+of a wall blocks, and running along a wall or through the end of one does not.
 
 **Fits** - the disc, centred on a position, overlaps no wall. Touching exactly is allowed.
 (`fits` in `sheet.py`.)
@@ -99,8 +101,18 @@ grouped into one gap. Reports are per gap. (`survey.py`.)
 **Decision** - the record of one pair of walls closer than 60 cm: kept as a pinch, or dismissed,
 and why. All of them are in `decisions.csv`.
 
-**Touching walls** - two unrelated walls at no distance at all: a gap of width zero. Bond can't
-pass, but they are listed in `touching.csv`.
+**Touching walls** - two unrelated walls at no distance at all: a gap of width zero. They are
+listed in `touching.csv`, and with `--include-touching-gaps` each pair is surveyed as a *touching
+gap*.
+
+**Touching gap** - a pinch of width zero, made of two walls which touch: along a shared line
+(overlapping, or end to end) or at a point (a corner on a wall, or corner to corner). The pinch
+point is where they touch, or the middle of the stretch they share. There is no line to cross, so
+a step is looked for in every direction through the point, under the relaxed line of sight above.
+Touching gaps group only with each other, come after every other gap in the numbering, are drawn
+in black like one float32 step gaps, and their close-ups say "(touching)" under the width. Only
+surveyed when asked: `python -m gaps <level> --include-touching-gaps`. The generic filters don't
+apply to them, as they reason about a gap's width.
 
 **Hairline** - a gap less than 1 cm wide. Nearly all are closed doors which sit a few millionths
 of a centimetre from their frames. However narrow, one with a warp through it is a warp: they are
@@ -114,8 +126,9 @@ adjacent float32s, so that the game has no number for anything between them. Fac
 (two doors one step apart) are the named examples, and there are about sixty in all. The tool's
 exact geometry finds a warp through many of them, by a line halfway between the two which the game
 can't represent: whether the game lets Bond through comes down to the inequalities in its
-collision code, and is untested. A warp through one is drawn in black, its close-up says
-"(one float32 step)" under the width, and gaps.csv has a column for it. Only the exact one-step
+collision code, and is untested. A warp through one is drawn in black (as is one through a
+touching gap), its close-up says "(one float32 step)" under the width, and gaps.csv has a column
+for it. Only the exact one-step
 case is picked out: Frigate's DLTK roller door, at two steps, is left as an ordinary hairline.
 
 **Witness** - an actual warp through a pinch: two positions where Bond fits, with line of sight

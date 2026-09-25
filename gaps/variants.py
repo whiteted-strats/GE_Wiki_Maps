@@ -32,6 +32,8 @@ def mark_variants(level: Level, gaps: list[Gap]) -> None:
 
     for i, first in enumerate(warps):
         for second in warps[i + 1 :]:
+            if second.touching != first.touching:
+                continue  # a touching gap and an ordinary one are never the same warp
             if _step_passes_through(level, first, second) or _step_passes_through(
                 level, second, first
             ):
@@ -53,6 +55,8 @@ def mark_variants(level: Level, gaps: list[Gap]) -> None:
         if gap.witness is not None or gap.filtered_by is not None:
             continue
         for warp in sorted(warps, key=lambda warp: (warp.witness.step2, warp.key)):
+            if warp.touching != gap.touching:
+                continue
             crossed = _pinch_crossed_by(level, warp, gap)
             if crossed is not None:
                 _give_the_step(gap, warp, crossed)

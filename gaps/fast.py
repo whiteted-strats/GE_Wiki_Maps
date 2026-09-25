@@ -18,16 +18,29 @@ def wall_arrays(walls: list[BoundarySegment]) -> tuple[np.ndarray, np.ndarray]:
     return starts, ends
 
 
+END_MARGIN = 1e-9  # how far along a wall counts as its end, as a fraction of its length
+
+
 def ray_hits_wall_at(
-    origin: np.ndarray, direction: np.ndarray, starts: np.ndarray, ends: np.ndarray
+    origin: np.ndarray,
+    direction: np.ndarray,
+    starts: np.ndarray,
+    ends: np.ndarray,
+    glancing_allowed: bool = False,
 ) -> float:
+    """How far along the ray the first wall is hit. With `glancing_allowed`, passing through the
+    end of a wall is not a hit, as in `gaps.sheet.trace` with `along_walls`."""
     wall = ends - starts
     to_start = starts - origin
     denominator = direction[0] * wall[:, 1] - direction[1] * wall[:, 0]
     with np.errstate(divide="ignore", invalid="ignore"):
         along_ray = (to_start[:, 0] * wall[:, 1] - to_start[:, 1] * wall[:, 0]) / denominator
         along_wall = (to_start[:, 0] * direction[1] - to_start[:, 1] * direction[0]) / denominator
-    hits = (denominator != 0) & (along_ray > 1e-9) & (along_wall >= 0) & (along_wall <= 1)
+    if glancing_allowed:
+        on_the_wall = (along_wall > END_MARGIN) & (along_wall < 1 - END_MARGIN)
+    else:
+        on_the_wall = (along_wall >= 0) & (along_wall <= 1)
+    hits = (denominator != 0) & (along_ray > 1e-9) & on_the_wall
     return float(along_ray[hits].min()) if hits.any() else math.inf
 
 

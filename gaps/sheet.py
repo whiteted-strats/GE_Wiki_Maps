@@ -21,9 +21,11 @@ from gaps.exact import (
     boxes_overlap,
     contact_interval,
     covers_unit_interval,
+    crosses_properly,
     dist2_point_segment,
     grow_box,
     lerp,
+    passes_through_interior,
     point_in_polygon,
     segment_inside_polygon,
 )
@@ -64,13 +66,25 @@ def trace(
     q: Point,
     present: ObjectsPresent,
     may_touch_walls_at_ends: bool = False,
+    along_walls: bool = False,
 ) -> Trace:
     """Line of sight from p (on start_tile) to q.
 
     The line is clear if linked tiles cover every part of it and it touches no wall or object on
     the way. `may_touch_walls_at_ends` is for lines drawn from one wall to another, which touch
     walls at p and q by construction; touching anywhere in between still blocks them.
+
+    `along_walls` is the relaxed rule used only for a step through a touching gap, where the line
+    passes through a point on two walls by construction: then only a proper crossing of a wall
+    blocks, and running along a wall, through the end of one or past a corner does not. Nor may
+    any part of the line be strictly inside an object.
     """
+    if p == q:
+        # A point: no line to follow. It is on the sheet if it is on its tile
+        if point_in_polygon(p, level.tiles[start_tile].points):
+            return Trace(clear=True, tiles={start_tile}, end_tiles={start_tile})
+        return Trace(clear=False, reason="leaves the walkable area")
+
     tiles_over, end_tiles, covered = _tiles_along(level, start_tile, p, q)
     result = Trace(clear=False, tiles=tiles_over, end_tiles=end_tiles)
     if not covered:
@@ -83,20 +97,29 @@ def trace(
         walls.extend(level.sides_of_object(obj))
 
     for wall in walls:
-        contact = contact_interval(p, q, wall.a, wall.b)
-        if contact is None:
-            continue
-        only_at_ends = contact[1] <= 0 or contact[0] >= 1
-        if not (may_touch_walls_at_ends and only_at_ends):
+        if along_walls:
+            blocked = crosses_properly(p, q, wall.a, wall.b)
+        else:
+            contact = contact_interval(p, q, wall.a, wall.b)
+            only_at_ends = contact is not None and (contact[1] <= 0 or contact[0] >= 1)
+            blocked = contact is not None and not (may_touch_walls_at_ends and only_at_ends)
+        if blocked:
             result.reason = "touches a wall" if wall.obj is None else "touches an object"
             result.blocker = wall
             return result
 
-    # A line which touches none of an object's sides could still be entirely inside it
+    # A line which touches none of an object's sides could still be inside it
     midpoint = lerp(p, q, Fraction(1, 2))
     for obj in objects:
         outline = level.objects[obj].points
-        if len(outline) >= 3 and point_in_polygon(midpoint, outline):
+        if len(outline) < 3:
+            continue
+        inside = (
+            passes_through_interior(p, q, outline)
+            if along_walls
+            else point_in_polygon(midpoint, outline)
+        )
+        if inside:
             result.reason = "inside an object"
             result.blocker = level.sides_of_object(obj)[0]
             return result

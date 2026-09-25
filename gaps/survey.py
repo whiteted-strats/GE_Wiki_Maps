@@ -20,7 +20,7 @@ from gaps.witness import Witness, find_witness
 
 # Saved surveys are only reused if they were made with this format. Add one whenever a change to
 # the code means that old surveys would be wrong or would no longer load.
-SURVEY_FORMAT = 10
+SURVEY_FORMAT = 11
 
 HAIRLINE_WIDTH_CM = 1  # narrower gaps are hairlines: see gaps/terminology.md
 
@@ -75,6 +75,11 @@ class Gap:
         return (self.pinch or self.narrowest).one_float32_step
 
     @property
+    def touching(self) -> bool:
+        """See Pinch.touching. A gap's pinches are all touching or none are: see _group_pinches."""
+        return (self.pinch or self.narrowest).touching
+
+    @property
     def needs(self) -> frozenset[int]:
         """The objects which form the gap. Destroying one of them removes the gap."""
         return (self.pinch or self.narrowest).needs
@@ -87,14 +92,18 @@ class Survey:
     touching: list[TouchingWalls]
     decisions: list[Decision]
     removed: dict[int, str] = field(default_factory=dict)  # objects left out, and why
+    include_touching: bool = False  # whether touching walls were surveyed as gaps too
     format: int = SURVEY_FORMAT
 
 
-def survey_level(name: str, removed: dict[int, str] | None = None) -> Survey:
-    """`removed`: objects to leave out of the level, see gaps.filters.objects_to_remove."""
+def survey_level(
+    name: str, removed: dict[int, str] | None = None, include_touching: bool = False
+) -> Survey:
+    """`removed`: objects to leave out of the level, see gaps.filters.objects_to_remove.
+    `include_touching`: also survey walls which touch, as gaps of width zero."""
     removed = removed or {}
     level = load_level(name, importlib.import_module(f"data.{name}"), removed)
-    pinches, touching, decisions = find_pinches(level)
+    pinches, touching, decisions = find_pinches(level, include_touching)
     gaps = [Gap(id=i, pinches=group) for i, group in enumerate(_group_pinches(level, pinches))]
     for gap in gaps:
         narrowest = gap.narrowest
@@ -102,7 +111,7 @@ def survey_level(name: str, removed: dict[int, str] | None = None) -> Survey:
             sorted(feature_key(level, wall) for wall in (narrowest.first, narrowest.second))
         )
         _find_best_warp(level, gap)
-    return Survey(level, gaps, touching, decisions, removed)
+    return Survey(level, gaps, touching, decisions, removed, include_touching)
 
 
 def save_survey(survey: Survey, path: Path) -> None:
@@ -126,7 +135,9 @@ def load_survey(path: Path) -> Survey | None:
 
 def _group_pinches(level: Level, pinches: list[Pinch]) -> list[list[Pinch]]:
     """Pinches belong to the same gap if their lines come within Bond's radius of each other, on
-    the same sheet. Groups are built by joining up any two pinches which do."""
+    the same sheet. Groups are built by joining up any two pinches which do. A touching pinch
+    only ever joins other touching pinches: a gap of width zero is a different thing from the gap
+    beside it, and joining them would change the other's narrowest pinch, key and width."""
     radius2 = level.bond_radius**2
     group_of = list(range(len(pinches)))
 
@@ -141,7 +152,7 @@ def _group_pinches(level: Level, pinches: list[Pinch]) -> list[list[Pinch]]:
         )
         for j in range(i + 1, len(pinches)):
             second = pinches[j]
-            if second.start_tile not in nearby_tiles:
+            if second.start_tile not in nearby_tiles or second.touching != first.touching:
                 continue
             if dist2_point_segment(second.midpoint, first.a, first.b) < radius2:
                 group_of[find(j)] = find(i)

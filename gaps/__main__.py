@@ -39,6 +39,14 @@ def main() -> None:
         "They are always listed in variants.csv",
     )
     parser.add_argument(
+        "--include-touching-gaps",
+        dest="include_touching",
+        action="store_true",
+        help="also treat pairs of walls which touch, at no distance, as gaps of width zero and "
+        "look for a step through the point where they touch. They are listed after every other "
+        "gap, drawn in black and marked in the `touching` column. Roughly doubles the survey time",
+    )
+    parser.add_argument(
         "--review",
         action="store_true",
         help="also draw the close-ups for checking our own work, into output/00_debug/: every gap "
@@ -57,8 +65,11 @@ def main() -> None:
                 f"{name}: the objects to remove have changed, so the saved survey can't be reused"
             )
             survey = None
+        if survey is not None and survey.include_touching != arguments.include_touching:
+            print(f"{name}: the saved survey was made with a different --include-touching-gaps")
+            survey = None
         if survey is None:
-            survey = survey_level(name, removed)
+            survey = survey_level(name, removed, arguments.include_touching)
             save_survey(survey, saved)
 
         contradictions = apply_filters(survey.level, survey.gaps)

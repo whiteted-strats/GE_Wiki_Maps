@@ -4,7 +4,9 @@ from fractions import Fraction
 from gaps.exact import (
     closest_points_between_segments,
     contact_interval,
+    crosses_properly,
     is_convex,
+    passes_through_interior,
     point_in_polygon,
     segment_inside_polygon,
 )
@@ -79,6 +81,28 @@ class InsidePolygon(unittest.TestCase):
         self.assertEqual(
             segment_inside_polygon((5, -5), (5, 5), VERTICAL_TILE), [(Fraction(1, 2),) * 2]
         )
+
+
+class ProperCrossings(unittest.TestCase):
+    """For a step through a touching gap: only a proper crossing blocks."""
+
+    def test_crossing_in_the_middle_is_proper(self):
+        self.assertTrue(crosses_properly((0, 0), (10, 0), (5, -5), (5, 5)))
+
+    def test_touching_at_an_end_is_not(self):
+        self.assertFalse(crosses_properly((0, 0), (10, 0), (10, 0), (10, 5)))  # end to end
+        self.assertFalse(crosses_properly((0, 0), (10, 0), (5, 0), (5, 5)))  # a T, from below
+        self.assertFalse(crosses_properly((0, 0), (10, 0), (5, -5), (5, 0)))  # a T, from above
+
+    def test_along_or_beside_is_not(self):
+        self.assertFalse(crosses_properly((0, 0), (10, 0), (5, 0), (20, 0)))  # collinear overlap
+        self.assertFalse(crosses_properly((0, 0), (10, 0), (0, 3), (10, 3)))  # parallel, apart
+
+    def test_inside_a_polygon(self):
+        self.assertTrue(passes_through_interior((-5, -5), (15, 15), SQUARE))  # corner to corner
+        self.assertTrue(passes_through_interior((-5, -5), (5, 15), SQUARE))  # in at a corner
+        self.assertFalse(passes_through_interior((-5, 0), (15, 0), SQUARE))  # along a side
+        self.assertFalse(passes_through_interior((-5, 5), (5, -5), SQUARE))  # through one corner
 
 
 if __name__ == "__main__":

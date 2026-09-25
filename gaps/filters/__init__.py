@@ -40,8 +40,8 @@ def apply_filters(level: Level, gaps: list[Gap]) -> list[Contradiction]:
     contradictions = []
     for gap in gaps:
         gap.filtered_by = _ignored_object_verdict(gap, groups)
-        if gap.filtered_by is not None:
-            continue
+        if gap.filtered_by is not None or gap.touching:
+            continue  # the generic filters reason about a gap's width, and a touching gap has none
         for name, pinch_filter in GENERIC_FILTERS.items():
             reasons = [pinch_filter(level, pinch) for pinch in gap.pinches]
             if not all(reasons):
