@@ -22,7 +22,6 @@ this repo, x is flipped so that they match the game's orientation.
 
 import csv
 import importlib
-import math
 import re
 from collections import Counter
 from pathlib import Path
@@ -34,7 +33,15 @@ from matplotlib.axes import Axes
 from gaps.filters import Contradiction
 from gaps.mesh import BOND_RADIUS_CM, BoundarySegment, Level
 from gaps.pinch import describe
-from gaps.survey import NO_WARP_FOUND, WARP, WARP_IF_REMOVED, Gap, Survey
+from gaps.survey import (
+    HAIRLINE_WIDTH_CM,
+    NO_WARP_FOUND,
+    WARP,
+    WARP_IF_REMOVED,
+    Gap,
+    Survey,
+    width_text,
+)
 from lib.seperate_tile_groups import seperateGroups
 
 matplotlib.rcParams["svg.fonttype"] = "none"  # keep text as text in the close-ups
@@ -44,10 +51,8 @@ SVG_METADATA = {"Date": None}
 
 # The leading 00 lists these first among the folders of output/, in file managers as well as ls
 OUTPUT_ROOT = Path("output/00_gaps")
-# Narrower gaps are hairlines: a warp through one is drawn in a colour of its own, and the width
-# is written on the close-up.
-# They are treated like any other gap otherwise. However narrow, a gap with a warp is a warp.
-HAIRLINE_WIDTH_CM = 1
+# A warp through a hairline is drawn in a colour of its own, and the width is written on the
+# close-up. They are treated like any other gap otherwise. However narrow, a gap with a warp is a warp.
 CLOSE_UP_HALF_SIZE_CM = 260  # shows a few metres of surroundings. Nothing depends on the value
 # Overviews are vector graphics, so these only set how big the numbers and lines are drawn
 # relative to the level: as if it were an image this many pixels along its longer side ...
@@ -137,13 +142,7 @@ def _width(level: Level, gap: Gap) -> float:
 
 
 def _width_text(level: Level, gap: Gap) -> str:
-    """To a thousandth of a centimetre, except for hairlines, which are given to two significant
-    figures: a door in its frame can be a millionth of a centimetre from it."""
-    width = _width(level, gap)
-    if width >= HAIRLINE_WIDTH_CM:
-        return f"{width:.3f}"
-    decimal_places = 1 - math.floor(math.log10(width))  # a gap is never of no width at all
-    return f"{width:.{decimal_places}f}"
+    return width_text(_width(level, gap))
 
 
 def _is_hairline(level: Level, gap: Gap) -> bool:

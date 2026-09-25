@@ -6,6 +6,7 @@ of each other are grouped. Each gap is then reported once, by its easiest warp.
 """
 
 import importlib
+import math
 import pickle
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -21,10 +22,24 @@ from gaps.witness import Witness, find_witness
 # the code means that old surveys would be wrong or would no longer load.
 SURVEY_FORMAT = 10
 
+HAIRLINE_WIDTH_CM = 1  # narrower gaps are hairlines: see gaps/terminology.md
+
 # What was found at a gap
 WARP = "warp"  # a warp exists with the level exactly as dumped
 WARP_IF_REMOVED = "warp if objects removed"  # only once the `blockers` are destroyed or moved
 NO_WARP_FOUND = "no warp found"  # the search found none. This is not proof that there is none.
+
+
+def width_text(width_cm: float) -> str:
+    """How a width is written everywhere: to a thousandth of a centimetre, except for hairlines,
+    which are given to two significant figures, as a door in its frame can be a millionth of a
+    centimetre from it. Known warps record widths in this form, and are compared in it."""
+    if width_cm >= HAIRLINE_WIDTH_CM:
+        return f"{width_cm:.3f}"
+    if width_cm == 0:
+        return "0"
+    decimal_places = 1 - math.floor(math.log10(width_cm))
+    return f"{width_cm:.{decimal_places}f}"
 
 
 @dataclass

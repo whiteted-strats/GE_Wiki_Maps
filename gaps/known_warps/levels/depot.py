@@ -24,10 +24,10 @@ KNOWN_WARPS = [
         name="TAS near roller door",
         walls="0BD111.1 | 0x1ee430.2",
         status=WARP,
-        width_cm=0.0,
+        width_cm=0.00012,
         step_cm=69.15,
         objects_forming_gap=[0x1EE430],
-        notes="Room 0x26. A hairline: 0.000077 cm.",
+        notes="Room 0x26. A hairline: 0.00012 cm.",
     ),
     KnownWarp(
         name="right train door",

@@ -21,7 +21,7 @@ from dataclasses import dataclass, field
 
 from gaps.mesh import Level
 from gaps.pinch import feature_key
-from gaps.survey import Gap
+from gaps.survey import Gap, width_text
 
 
 @dataclass
@@ -29,7 +29,7 @@ class KnownWarp:
     name: str
     walls: str  # the keys of the two walls of one of its pinches, as in the key column of gaps.csv
     status: str  # one of the statuses in gaps/survey.py
-    width_cm: float
+    width_cm: float  # as the tables write it: see gaps.survey.width_text
     step_cm: float  # an upper bound: the survey must find a warp at most this long
     objects_forming_gap: list[int] = field(default_factory=list)
     objects_in_the_way: list[int] = field(default_factory=list)
@@ -84,13 +84,13 @@ def _differences(level: Level, warp: KnownWarp, gap: Gap) -> list[str]:
     pinch = gap.pinch or gap.narrowest
     found = {
         "status": gap.status,
-        "width_cm": round(level.to_cm(float(pinch.width2) ** 0.5), 3),
+        "width_cm": width_text(level.to_cm(float(pinch.width2) ** 0.5)),
         "objects_forming_gap": sorted(gap.needs),
         "objects_in_the_way": sorted(gap.blockers),
     }
     expected = {
         "status": warp.status,
-        "width_cm": warp.width_cm,
+        "width_cm": width_text(warp.width_cm),
         "objects_forming_gap": sorted(warp.objects_forming_gap),
         "objects_in_the_way": sorted(warp.objects_in_the_way),
     }
