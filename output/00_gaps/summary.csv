@@ -102,7 +102,7 @@ dam,22,Window D,warp,52.381,74.77,1474,17905,10456,0x6f,wall of tile 300120 (roo
 silo,9,R-lean'd by Ted FIRST TRY,warp,2.116,74.84,none found,3111,2676,0x47,wall of tile 0A4660 (room 0x47),door 0x1c9d4c (preset 0x0039),0x1c9d4c,,2,0A4660.0 | 0x1c9d4c.1
 dam,23,,warp,45.287,74.98,569,15622,12127,0x6f,generic 0x1e30c8 (preset 0x0162),generic 0x1e5970 (preset 0x016c),0x1e30c8 0x1e5970,,2,0x1e30c8.0 | 0x1e5970.3
 caverns,8,,warp,56.424,75.39,none found,-4477,-5604,0x28,wall of tile 075518 (room 0x28),generic 0x1c5434 (preset 0x008c),0x1c5434,,2,075518.0 | 0x1c5434.2
-control,11,,warp,0.00012,76.04,none found,-1103,-1098,0x10,door 0x1d8c0c (preset 0x0090),door 0x1d8d0c (preset 0x0091),0x1d8c0c 0x1d8d0c,,7,0x1d8c0c.1 | 0x1d8d0c.0
+control,11,Main room locked double door,warp,0.00012,76.04,none found,-1103,-1098,0x10,door 0x1d8c0c (preset 0x0090),door 0x1d8d0c (preset 0x0091),0x1d8c0c 0x1d8d0c,,7,0x1d8c0c.1 | 0x1d8d0c.0
 control,12,,warp,0.00049,76.04,none found,-1389,-4244,0x1c,door 0x1d8e2c (preset 0x0097),door 0x1d8f2c (preset 0x0098),0x1d8e2c 0x1d8f2c,,7,0x1d8e2c.0 | 0x1d8f2c.0
 surface_1,8,,warp,42.539,76.32,none found,5301,-19177,0x10,generic 0x1dcd48 (preset 0x271c),generic 0x1dcdc8 (preset 0x271d),0x1dcd48 0x1dcdc8,,2,0x1dcd48.3 | 0x1dcdc8.0
 facility,7,,warp,40.434,76.34,456,7027,490,0x31,wall of tile 0FCA20 (room 0x31),generic 0x1caf94 (preset 0x00de),0x1caf94,,2,0FCA20.2 | 0x1caf94.2

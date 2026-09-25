@@ -9,7 +9,7 @@ gap,name,status,width_cm,step_cm,walk_round_cm,x,z,room,between,and,objects_form
 8,,warp,57.739,69.61,none found,-3827,-2125,0x4b,wall of tile 002952 (room 0x4b),generic 0x1d5210 (preset 0x0036),0x1d5210,,2,002952.1 | 0x1d5210.1
 9,,warp,32.073,72.20,813,1443,-525,0x3e,wall of tile 009749 (room 0x3e),wall of tile 009A49 (room 0x3e),,,4,009749.0 | 009A49.0
 10,,warp,34.077,72.80,none found,-1443,-526,0x3d,wall of tile 00BF49 (room 0x3d),wall of tile 00B048 (room 0x3d),,,4,00B048.2 | 00BF49.0
-11,,warp,0.00012,76.04,none found,-1103,-1098,0x10,door 0x1d8c0c (preset 0x0090),door 0x1d8d0c (preset 0x0091),0x1d8c0c 0x1d8d0c,,7,0x1d8c0c.1 | 0x1d8d0c.0
+11,Main room locked double door,warp,0.00012,76.04,none found,-1103,-1098,0x10,door 0x1d8c0c (preset 0x0090),door 0x1d8d0c (preset 0x0091),0x1d8c0c 0x1d8d0c,,7,0x1d8c0c.1 | 0x1d8d0c.0
 12,,warp,0.00049,76.04,none found,-1389,-4244,0x1c,door 0x1d8e2c (preset 0x0097),door 0x1d8f2c (preset 0x0098),0x1d8e2c 0x1d8f2c,,7,0x1d8e2c.0 | 0x1d8f2c.0
 13,,warp,0.000031,81.60,779,-954,-307,0x3a,wall of tile 019049 (room 0x3a),glass 0x1d8204 (preset 0x27c2),0x1d8204,,9,019049.1 | 0x1d8204.0
 14,,warp,0.000068,81.61,775,954,-307,0x2c,wall of tile 01D649 (room 0x2c),glass 0x1d8170 (preset 0x27c1),0x1d8170,,8,01D649.0 | 0x1d8170.1
