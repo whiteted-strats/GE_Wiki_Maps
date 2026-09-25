@@ -9,7 +9,7 @@ gap,name,status,width_cm,one_float32_step,step_cm,walk_round_cm,x,z,room,between
 8,,warp,29.626,,69.28,369,1602,4224,0x48,wall of tile 08446A (room 0x48),wall of tile 084368 (room 0x48),,,4,084368.0 | 08446A.2
 9,R-lean'd by Ted FIRST TRY,warp,2.116,,74.84,none found,3111,2676,0x47,wall of tile 0A4660 (room 0x47),door 0x1c9d4c (preset 0x0039),0x1c9d4c,,2,0A4660.0 | 0x1c9d4c.1
 10,,warp,0.00017,,76.79,none found,13,3170,0x1a,wall of tile 05501A (room 0x1a),door 0x1c974c (preset 0x0032),0x1c974c,,2,05501A.1 | 0x1c974c.2
-11,,warp,0.00012,yes,93.39,none found,1951,-18,0x50,wall of tile 001271 (room 0x50),door 0x1cae6c (preset 0x004c),0x1cae6c,,11,001271.2 | 0x1cae6c.0
+11,TAS elevator door warp,warp,0.00012,yes,93.39,none found,1951,-18,0x50,wall of tile 001271 (room 0x50),door 0x1cae6c (preset 0x004c),0x1cae6c,,11,001271.2 | 0x1cae6c.0
 12,,warp,53.735,,96.05,382,906,-1632,0x3a,generic 0x1c4108 (preset 0x0058),generic 0x1c4188 (preset 0x0059),0x1c4108 0x1c4188,,1,0x1c4108.2 | 0x1c4188.0
 13,,warp,15.833,,111.96,442,-1772,1279,0x39,monitor 0x1cbdcc (preset 0x0068),generic 0x1cc7dc (preset 0x005f),0x1cbdcc 0x1cc7dc,,2,0x1cbdcc.2 | 0x1cc7dc.0
 14,,warp,30.121,,126.64,440,1387,-1742,0x3a,monitor 0x1cbbcc (preset 0x005c),generic 0x1cc74c (preset 0x0057),0x1cbbcc 0x1cc74c,,2,0x1cbbcc.0 | 0x1cc74c.1

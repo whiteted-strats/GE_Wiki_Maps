@@ -33,4 +33,20 @@ KNOWN_WARPS = [
         "door, a step straight through can only have its line on one door's x or the other's; "
         "here both sides are doors, so the same collision routine decides. Untested in the game.",
     ),
+    KnownWarp(
+        name="behind columns in",
+        walls="00BC49.0 | 00BD4A.1",
+        status=WARP,
+        width_cm=44.100,
+        step_cm=46.95,
+        notes="Room 0x3d, between two tile walls.",
+    ),
+    KnownWarp(
+        name="behind columns out",
+        walls="00B048.2 | 00BF49.0",
+        status=WARP,
+        width_cm=34.077,
+        step_cm=72.80,
+        notes="Room 0x3d, between two tile walls.",
+    ),
 ]

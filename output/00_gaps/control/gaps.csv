@@ -1,5 +1,5 @@
 gap,name,status,width_cm,one_float32_step,step_cm,walk_round_cm,x,z,room,between,and,objects_forming_gap,objects_in_the_way,pinches,key
-1,,warp,44.100,,46.95,none found,-1443,-680,0x3d,wall of tile 00BC49 (room 0x3d),wall of tile 00BD4A (room 0x3d),,,4,00BC49.0 | 00BD4A.1
+1,behind columns in,warp,44.100,,46.95,none found,-1443,-680,0x3d,wall of tile 00BC49 (room 0x3d),wall of tile 00BD4A (room 0x3d),,,4,00BC49.0 | 00BD4A.1
 2,,warp,42.095,,51.16,515,1443,-679,0x3e,wall of tile 009549 (room 0x3e),wall of tile 00954A (room 0x3e),,,4,009549.0 | 00954A.1
 3,,warp,0.00013,,60.01,none found,1231,499,0x27,wall of tile 019C4A (room 0x27),glass 0x1d7fb4 (preset 0x27c4),0x1d7fb4,,4,019C4A.2 | 0x1d7fb4.2
 4,,warp,0.00013,,60.01,none found,-1231,499,0x31,wall of tile 021B48 (room 0x31),glass 0x1d7e7c (preset 0x27c6),0x1d7e7c,,4,021B48.1 | 0x1d7e7c.2
@@ -8,7 +8,7 @@ gap,name,status,width_cm,one_float32_step,step_cm,walk_round_cm,x,z,room,between
 7,,warp,0.00012,,69.28,none found,1231,561,0x27,wall of tile 019C4A (room 0x27),glass 0x1d7f20 (preset 0x27c3),0x1d7f20,,2,019C4A.2 | 0x1d7f20.1
 8,,warp,57.739,,69.61,none found,-3827,-2125,0x4b,wall of tile 002952 (room 0x4b),generic 0x1d5210 (preset 0x0036),0x1d5210,,2,002952.1 | 0x1d5210.1
 9,,warp,32.073,,72.20,813,1443,-525,0x3e,wall of tile 009749 (room 0x3e),wall of tile 009A49 (room 0x3e),,,4,009749.0 | 009A49.0
-10,,warp,34.077,,72.80,none found,-1443,-526,0x3d,wall of tile 00BF49 (room 0x3d),wall of tile 00B048 (room 0x3d),,,4,00B048.2 | 00BF49.0
+10,behind columns out,warp,34.077,,72.80,none found,-1443,-526,0x3d,wall of tile 00BF49 (room 0x3d),wall of tile 00B048 (room 0x3d),,,4,00B048.2 | 00BF49.0
 11,Main room locked double door,warp,0.00012,yes,76.04,none found,-1103,-1098,0x10,door 0x1d8c0c (preset 0x0090),door 0x1d8d0c (preset 0x0091),0x1d8c0c 0x1d8d0c,,7,0x1d8c0c.1 | 0x1d8d0c.0
 12,,warp,0.00049,yes,76.04,none found,-1389,-4244,0x1c,door 0x1d8e2c (preset 0x0097),door 0x1d8f2c (preset 0x0098),0x1d8e2c 0x1d8f2c,,7,0x1d8e2c.0 | 0x1d8f2c.0
 13,,warp,0.000031,yes,81.60,779,-954,-307,0x3a,wall of tile 019049 (room 0x3a),glass 0x1d8204 (preset 0x27c2),0x1d8204,,9,019049.1 | 0x1d8204.0
