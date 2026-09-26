@@ -18,6 +18,7 @@ from gaps.exact import (
     bounding_box,
     closest_points_between_segments,
     contact_interval,
+    crosses_properly,
     dist2_point_segment,
     divide,
     grow_box,
@@ -33,6 +34,7 @@ BLOCKED = "the line between them touches another wall"
 WRONG_SIDE = "the far wall faces the other way (it belongs to floor which isn't linked here)"
 TIGHTER_NEARBY = "another wall pokes into the space between them, so a tighter pair covers this gap"
 NOT_OVER_FLOOR = "neither wall could be placed on a tile"
+CROSSING = "the walls cross each other: they overlap, they don't touch"
 
 
 @dataclass
@@ -198,15 +200,21 @@ def _examine_touching(
     level: Level, first: BoundarySegment, second: BoundarySegment, same_sheet: bool
 ) -> tuple[Pinch | None, Decision]:
     """A pair of walls at no distance. There is no line between them to check, only a point, so
-    of the rules above only NOT_OVER_FLOOR and WRONG_SIDE apply."""
+    of the rules above only NOT_OVER_FLOOR and WRONG_SIDE apply, and one of their own: the walls
+    must touch, at an end of one of them or along a shared line. Two walls which cross each other
+    are also at no distance, but they overlap: there is nothing between them, not even a point."""
     if first.tile is None and second.tile is not None:
         first, second = second, first
+
+    decision = Decision(first.id, second.id, 0.0, kept=False)
+    if crosses_properly(first.a, first.b, second.a, second.b):
+        decision.reason = CROSSING
+        return None, decision
 
     # The pinch point: where they touch, or the middle of the stretch they lie along together
     contact = contact_interval(first.a, first.b, second.a, second.b)
     at = lerp(first.a, first.b, divide(contact[0] + contact[1], 2))
 
-    decision = Decision(first.id, second.id, 0.0, kept=False)
     needs = frozenset(seg.obj for seg in (first, second) if seg.obj is not None)
 
     start_tile = first.tile

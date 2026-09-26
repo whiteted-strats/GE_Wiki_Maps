@@ -107,7 +107,9 @@ gap*.
 
 **Touching gap** - a pinch of width zero, made of two walls which touch: along a shared line
 (overlapping, or end to end) or at a point (a corner on a wall, or corner to corner). The pinch
-point is where they touch, or the middle of the stretch they share. There is no line to cross, so
+point is where they touch, or the middle of the stretch they share. Two walls which cross each
+other are at no distance too, but they overlap rather than touch (a door set a few millimetres into
+the next), and are dismissed: `decisions.csv` says so. There is no line to cross, so
 a step is looked for in every direction through the point, under the relaxed line of sight above.
 Touching gaps group only with each other, come after every other gap in the numbering, are drawn
 in black like one float32 step gaps, and their close-ups say "(touching)" under the width. Only

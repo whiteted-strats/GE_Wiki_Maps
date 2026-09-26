@@ -4,7 +4,7 @@ import math
 import unittest
 
 from gaps.exact import bounding_box, grow_box
-from gaps.pinch import find_pinches
+from gaps.pinch import CROSSING, find_pinches
 from gaps.sheet import trace, walls_near
 from gaps.survey import WARP, Gap, _find_best_warp, _group_pinches
 from gaps.tests.levels import build, crate, two_rooms
@@ -67,6 +67,12 @@ class TouchingPinches(unittest.TestCase):
             self.assertEqual(pinch.start_tile, ROOM)
             self.assertEqual(pinch.needs, {0x9000})
         self.assertEqual(sum(1 for d in decisions if d.width_cm == 0 and d.kept), 3)
+
+    def test_a_crate_set_into_the_wall_is_not_a_gap(self):
+        level = build(SQUARE_ROOM, {0x9000: crate(0x9000, ROOM, -10, 100, 40)})  # 10 cm into it
+        pinches, _, decisions = find_pinches(level, include_touching=True)
+        self.assertEqual([pinch for pinch in pinches if pinch.touching], [])
+        self.assertIn(CROSSING, {decision.reason for decision in decisions})
 
     def test_touching_pinches_group_only_with_each_other(self):
         level = two_rooms(40, objects={0x9000: crate(0x9000, 0x1200, 300, 130, 40)})

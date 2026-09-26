@@ -19,11 +19,11 @@ from fractions import Fraction
 
 import numpy as np
 
-from gaps.exact import Point, bounding_box, dist2, grow_box, lerp
+from gaps.exact import Point, bounding_box, crosses_properly, dist2, grow_box, lerp
 from gaps.fast import distance_to_nearest_wall, ray_hits_wall_at, wall_arrays
 from gaps.mesh import BoundarySegment, Level
 from gaps.pinch import Pinch
-from gaps.sheet import ObjectsPresent, fits, trace, walls_near
+from gaps.sheet import ObjectsPresent, fits, is_present, trace, walls_near
 
 # How far back from the pinch Bond may stand, either side. The proposals take their walls from
 # everything linked to the pinch within this distance, and where two storeys are linked that close
@@ -193,6 +193,19 @@ def _certify(
         if not line.clear:
             return (None, line.blocker)
     tile_p, tile_q = min(to_p.end_tiles), min(to_q.end_tiles)
+
+    if pinch.touching:
+        # Each half is only checked against crossing walls from the point outwards, so a wall
+        # which passes through the point itself could be crossed by the whole step and by
+        # neither half. Check the whole step against everything either half passed over.
+        tiles = to_p.tiles | to_q.tiles
+        walls = level.walls_of_tiles(tiles)
+        for obj in level.objects_among_tiles(tiles):
+            if is_present(obj, present):
+                walls.extend(level.sides_of_object(obj))
+        for wall in walls:
+            if crosses_properly(p, q, wall.a, wall.b):
+                return (None, wall)
 
     for tile, position in ((tile_p, p), (tile_q, q)):
         bond_fits, overlapped = fits(level, tile, position, present)
