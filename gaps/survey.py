@@ -114,6 +114,20 @@ def survey_level(
     return Survey(level, gaps, touching, decisions, removed, include_touching)
 
 
+def without_touching(survey: Survey) -> Survey:
+    """A survey made with touching gaps, as it would have been made without them. Touching gaps
+    only ever group with each other and rank after every other gap, so dropping them, and the
+    decisions on walls at no distance, leaves exactly a plain survey."""
+    return Survey(
+        survey.level,
+        [gap for gap in survey.gaps if not gap.touching],
+        survey.touching,
+        [decision for decision in survey.decisions if decision.width_cm != 0],
+        survey.removed,
+        include_touching=False,
+    )
+
+
 def save_survey(survey: Survey, path: Path) -> None:
     """Surveying takes a minute or so per level, and filtering and drawing don't need it redone."""
     path.parent.mkdir(parents=True, exist_ok=True)

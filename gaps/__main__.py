@@ -19,7 +19,7 @@ from gaps.filters import apply_filters, objects_to_remove, suppress_warps
 from gaps.known_warps import check_known_warps
 from gaps.report import OUTPUT_ROOT, write_report, write_summary
 from gaps.review import write_review
-from gaps.survey import load_survey, save_survey, survey_level
+from gaps.survey import load_survey, save_survey, survey_level, without_touching
 from gaps.variants import mark_variants
 
 
@@ -65,8 +65,10 @@ def main() -> None:
                 f"{name}: the objects to remove have changed, so the saved survey can't be reused"
             )
             survey = None
-        if survey is not None and survey.include_touching != arguments.include_touching:
-            print(f"{name}: the saved survey was made with a different --include-touching-gaps")
+        if survey is not None and survey.include_touching and not arguments.include_touching:
+            survey = without_touching(survey)  # a superset: the touching gaps are just left out
+        elif survey is not None and arguments.include_touching and not survey.include_touching:
+            print(f"{name}: the saved survey has no touching gaps, so it can't be reused for them")
             survey = None
         if survey is None:
             survey = survey_level(name, removed, arguments.include_touching)

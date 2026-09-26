@@ -6,7 +6,7 @@ import unittest
 from gaps.exact import bounding_box, grow_box
 from gaps.pinch import CROSSING, find_pinches
 from gaps.sheet import trace, walls_near
-from gaps.survey import WARP, Gap, _find_best_warp, _group_pinches
+from gaps.survey import WARP, Gap, Survey, _find_best_warp, _group_pinches, without_touching
 from gaps.tests.levels import build, crate, two_rooms
 from gaps.witness import _propose
 
@@ -81,6 +81,22 @@ class TouchingPinches(unittest.TestCase):
         self.assertTrue(any(not pinch.touching for pinch in pinches))
         for group in _group_pinches(level, pinches):
             self.assertEqual(len({pinch.touching for pinch in group}), 1)
+
+
+class ReusingAFlaggedSurvey(unittest.TestCase):
+    def test_a_survey_with_touching_gaps_serves_as_one_without(self):
+        level = two_rooms(40, objects={0x9000: crate(0x9000, 0x1200, 300, 130, 40)})
+        pinches, touching, decisions = find_pinches(level, include_touching=True)
+        gaps = [Gap(id=i, pinches=group) for i, group in enumerate(_group_pinches(level, pinches))]
+        flagged = Survey(level, gaps, touching, decisions, {}, include_touching=True)
+        plain = without_touching(flagged)
+        self.assertFalse(plain.include_touching)
+        self.assertEqual(
+            [gap.key for gap in plain.gaps], [gap.key for gap in gaps if not gap.touching]
+        )
+        self.assertTrue(plain.gaps)
+        self.assertEqual(plain.decisions, [d for d in decisions if d.width_cm != 0])
+        self.assertEqual(plain.touching, touching)
 
 
 class AWarpAlongASeam(unittest.TestCase):
