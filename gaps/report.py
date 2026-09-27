@@ -32,7 +32,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.axes import Axes
 
-from gaps.filters import Contradiction
+from gaps.filters import Contradiction, ignored_groups
 from gaps.mesh import BOND_RADIUS_CM, BoundarySegment, Level
 from gaps.pinch import describe
 from gaps.survey import (
@@ -67,6 +67,7 @@ WALL_COLOUR = (0.25, 0.25, 0.25)
 HAIRLINE_COLOUR = "orange"
 ONE_FLOAT32_STEP_COLOUR = "black"  # a warp through a gap the game has no number for: see pinch.py
 OBJECT_COLOUR = "sienna"  # well away from the orange of hairlines
+HIGHLIGHT_COLOUR = "cyan"  # --highlight-ignored: the outlines of objects a level file ignores
 
 
 def write_report(
@@ -74,10 +75,15 @@ def write_report(
     contradictions: list[Contradiction],
     draw_variants: bool = False,
     output_root: Path = OUTPUT_ROOT,
+    highlight_ignored: bool = False,
 ) -> Path:
     """Filters must already have been applied to the survey's gaps, and variants marked: see
-    gaps.filters and gaps.variants."""
+    gaps.filters and gaps.variants. `highlight_ignored` draws the outlines of the objects which
+    the level's file ignores in a colour of their own, to check that the right ones are listed."""
     level = survey.level
+    highlight: set[int] = set()
+    if highlight_ignored:
+        highlight = {addr for group in ignored_groups(level) for addr in group.objects}
     folder = output_root / level.name
     folder.mkdir(parents=True, exist_ok=True)
     for old_image in [*folder.glob("*.png"), *folder.glob("*.svg")]:
@@ -112,9 +118,9 @@ def write_report(
     # Filtered and suppressed gaps are drawn faintly and without a number
     faint_keys = {gap.key for gap in [*filtered, *suppressed]}
     shown = [gap for gap in ranked if draw_variants or not gap.variant_of or gap.key in faint_keys]
-    _draw_overviews(level, shown, faint_keys, folder)
+    _draw_overviews(level, shown, faint_keys, folder, highlight)
     for gap in kept:
-        draw_close_up(level, gap, folder / f"{file_name_of(gap)}.svg")
+        draw_close_up(level, gap, folder / f"{file_name_of(gap)}.svg", highlight)
     if draw_variants:
         numbers: Counter = Counter()
         for gap in variants:
@@ -122,7 +128,7 @@ def write_report(
             numbers[main.key] += 1
             gap.id = main.id  # so that it is titled and labelled as belonging to its main gap
             gap.name = f"{main.name} variant {numbers[main.key]}".strip()
-            draw_close_up(level, gap, folder / f"{file_name_of(gap)}.svg")
+            draw_close_up(level, gap, folder / f"{file_name_of(gap)}.svg", highlight)
     return folder
 
 
@@ -395,7 +401,9 @@ def write_summary(output_root: Path = OUTPUT_ROOT) -> Path:
 # Maps
 
 
-def _draw_overviews(level: Level, gaps: list[Gap], faint_keys: set[str], folder: Path) -> None:
+def _draw_overviews(
+    level: Level, gaps: list[Gap], faint_keys: set[str], folder: Path, highlight: set[int]
+) -> None:
     """One map per part of the level, split up the same way as the level's own maps so that floors
     which overlap from above are drawn separately."""
     for index, tiles in enumerate(_tile_groups(level)):
@@ -413,7 +421,7 @@ def _draw_overviews(level: Level, gaps: list[Gap], faint_keys: set[str], folder:
         inches_per_unit = pixels_per_unit / OVERVIEW_DPI
         fig, ax = plt.subplots(figsize=(width * inches_per_unit, height * inches_per_unit))
 
-        draw_level(ax, level, tiles)
+        draw_level(ax, level, tiles, highlight=highlight)
         for gap in group_gaps:
             draw_gap(ax, level, gap, prominent=gap.key not in faint_keys, numbered=True)
         ax.set_xlim(min(xs) - 100, max(xs) + 100)
@@ -421,7 +429,7 @@ def _draw_overviews(level: Level, gaps: list[Gap], faint_keys: set[str], folder:
         finish(fig, ax, folder / f"overview_{index}.svg")
 
 
-def draw_close_up(level: Level, gap: Gap, path: Path) -> None:
+def draw_close_up(level: Level, gap: Gap, path: Path, highlight: set[int] = frozenset()) -> None:
     pinch = gap.pinch or gap.narrowest
     x, z = level.to_cm_point(pinch.midpoint)
     half = _close_up_half_size(level, gap)
@@ -429,7 +437,7 @@ def draw_close_up(level: Level, gap: Gap, path: Path) -> None:
     tiles = level.linked_tiles_within(pinch.start_tile, region)
 
     fig, ax = plt.subplots(figsize=(9, 9))
-    draw_level(ax, level, tiles, label_objects=True)
+    draw_level(ax, level, tiles, label_objects=True, highlight=highlight)
     draw_gap(ax, level, gap, prominent=True, numbered=False)
     if _is_hairline(level, gap):
         label = f"{_width_text(level, gap)} cm"
@@ -483,7 +491,13 @@ def _name_of(gap: Gap) -> str:
     return f"filtered gap {gap.key} ({gap.filtered_by.filter_name})"
 
 
-def draw_level(ax: Axes, level: Level, tiles: set[int], label_objects: bool = False) -> None:
+def draw_level(
+    ax: Axes,
+    level: Level,
+    tiles: set[int],
+    label_objects: bool = False,
+    highlight: set[int] = frozenset(),
+) -> None:
     for addr in tiles:
         xs, zs = flipped(level, level.tiles[addr].points)
         ax.fill(xs, zs, facecolor=TILE_COLOUR, edgecolor=TILE_COLOUR, linewidth=0.3, zorder=1)
@@ -492,7 +506,8 @@ def draw_level(ax: Axes, level: Level, tiles: set[int], label_objects: bool = Fa
     for obj in level.objects_among_tiles(tiles):
         outline = level.objects[obj].points
         xs, zs = flipped(level, [*outline, outline[0]])
-        ax.plot(xs, zs, color=OBJECT_COLOUR, linewidth=0.7, zorder=3)
+        colour = HIGHLIGHT_COLOUR if obj in highlight else OBJECT_COLOUR
+        ax.plot(xs, zs, color=colour, linewidth=1.4 if obj in highlight else 0.7, zorder=3)
         if label_objects:
             name = f"{level.objects[obj].type} {obj:#x}"
             ax.text(xs[0], zs[0], name, fontsize=5, zorder=3, clip_on=True)

@@ -31,15 +31,13 @@ gap,name,status,width_cm,one_float32_step,touching,step_cm,walk_round_cm,x,z,roo
 30,,warp if objects removed,57.646,,,39.43,667,-167,-156,0x2e,generic 0x1d3e48 (preset 0x2710),glass 0x1d79cc (preset 0x27be),0x1d3e48 0x1d79cc,0x1d7a60,2,0x1d3e48.0 | 0x1d79cc.1
 31,,warp if objects removed,58.531,,,71.30,none found,-259,-3012,0x0f,wall of tile 073A19 (room 0x0f),generic 0x1d71d4 (preset 0x276d),0x1d71d4,0x1d7154,7,073A19.0 | 0x1d7154.2
 32,,warp if objects removed,57.988,,,83.96,366,-331,-2551,0x0f,generic 0x1d73d4 (preset 0x2771),generic 0x1d74d4 (preset 0x2773),0x1d73d4 0x1d74d4,0x1d7454,7,0x1d7354.1 | 0x1d7454.5
-33,,no warp found,0.00031,,,,,297,-647,0x43,wall of tile 00D649 (room 0x43),glass 0x1d8738 (preset 0x27d4),0x1d8738,,2,00D649.1 | 0x1d8738.3
-34,,no warp found,0.78,,,,,-1231,-361,0x3d,glass 0x1d832c (preset 0x27cd),glass 0x1d86a4 (preset 0x27d3),0x1d832c 0x1d86a4,,4,0x1d832c.0 | 0x1d86a4.2
-35,,no warp found,8.018,,,,,1610,1373,0x14,wall of tile 000F28 (room 0x14),wall of tile 007E28 (room 0x14),,,1,000F28.2 | 007E28.1
-36,,no warp found,8.018,,,,,1645,1373,0x14,wall of tile 007E28 (room 0x14),wall of tile 007D28 (room 0x14),,,1,007D28.0 | 007E28.1
-37,,no warp found,8.018,,,,,1680,1373,0x14,wall of tile 007E28 (room 0x14),wall of tile 001029 (room 0x14),,,1,001029.1 | 007E28.1
-38,,no warp found,10.021,,,,,605,-2605,0x17,wall of tile 077231 (room 0x17),generic 0x1d6cd4 (preset 0x275d),0x1d6cd4,,3,077231.0 | 0x1d6cd4.0
-39,,no warp found,10.022,,,,,2449,-299,0x0a,wall of tile 034B01 (room 0x0a),generic 0x1d6854 (preset 0x2784),0x1d6854,,6,034B01.1 | 0x1d6854.0
-40,,no warp found,30.606,,,,,-1246,782,0x35,generic 0x1d41c8 (preset 0x2717),glass 0x1d80dc (preset 0x27c0),0x1d41c8 0x1d80dc,,4,0x1d41c8.2 | 0x1d80dc.0
-41,,no warp found,31.248,,,,,-4263,-1367,0x4d,wall of tile 002358 (room 0x4d),generic 0x1d5390 (preset 0x0039),0x1d5390,,2,002358.0 | 0x1d5390.2
-42,,no warp found,43.381,,,,,-1263,1093,0x35,wall of tile 015A48 (room 0x35),generic 0x1d41c8 (preset 0x2717),0x1d41c8,,3,015A48.3 | 0x1d41c8.3
-43,,no warp found,46.649,,,,,140,-152,0x2e,generic 0x1d3e48 (preset 0x2710),glass 0x1d7a60 (preset 0x27ba),0x1d3e48 0x1d7a60,,2,0x1d3e48.4 | 0x1d7a60.1
-44,,no warp found,48.025,,,,,371,-3227,0x1a,wall of tile 079A32 (room 0x1a),generic 0x1d6fd4 (preset 0x276a),0x1d6fd4,,2,079A32.2 | 0x1d6fd4.4
+33,,no warp found,8.018,,,,,1610,1373,0x14,wall of tile 000F28 (room 0x14),wall of tile 007E28 (room 0x14),,,1,000F28.2 | 007E28.1
+34,,no warp found,8.018,,,,,1645,1373,0x14,wall of tile 007E28 (room 0x14),wall of tile 007D28 (room 0x14),,,1,007D28.0 | 007E28.1
+35,,no warp found,8.018,,,,,1680,1373,0x14,wall of tile 007E28 (room 0x14),wall of tile 001029 (room 0x14),,,1,001029.1 | 007E28.1
+36,,no warp found,10.021,,,,,605,-2605,0x17,wall of tile 077231 (room 0x17),generic 0x1d6cd4 (preset 0x275d),0x1d6cd4,,3,077231.0 | 0x1d6cd4.0
+37,,no warp found,10.022,,,,,2449,-299,0x0a,wall of tile 034B01 (room 0x0a),generic 0x1d6854 (preset 0x2784),0x1d6854,,6,034B01.1 | 0x1d6854.0
+38,,no warp found,30.606,,,,,-1246,782,0x35,generic 0x1d41c8 (preset 0x2717),glass 0x1d80dc (preset 0x27c0),0x1d41c8 0x1d80dc,,4,0x1d41c8.2 | 0x1d80dc.0
+39,,no warp found,31.248,,,,,-4263,-1367,0x4d,wall of tile 002358 (room 0x4d),generic 0x1d5390 (preset 0x0039),0x1d5390,,2,002358.0 | 0x1d5390.2
+40,,no warp found,43.381,,,,,-1263,1093,0x35,wall of tile 015A48 (room 0x35),generic 0x1d41c8 (preset 0x2717),0x1d41c8,,3,015A48.3 | 0x1d41c8.3
+41,,no warp found,46.649,,,,,140,-152,0x2e,generic 0x1d3e48 (preset 0x2710),glass 0x1d7a60 (preset 0x27ba),0x1d3e48 0x1d7a60,,2,0x1d3e48.4 | 0x1d7a60.1
+42,,no warp found,48.025,,,,,371,-3227,0x1a,wall of tile 079A32 (room 0x1a),generic 0x1d6fd4 (preset 0x276a),0x1d6fd4,,2,079A32.2 | 0x1d6fd4.4

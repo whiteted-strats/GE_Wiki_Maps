@@ -29,8 +29,9 @@ class FilterFileError(Exception):
 @dataclass
 class Expect:
     count: int
-    room: int | None = None  # every object stands on a tile of this room
+    room: int | set[int] | None = None  # every object is in this room, or one of these rooms
     all: list[Predicate] = field(default_factory=list)  # every object passes every one of these
+    none: list[Predicate] = field(default_factory=list)  # no object passes any of these
     # no two objects are further apart than this, centre to centre
     max_spread_m: float | None = None
     # the bottom of every object is at least this far above the top of the tile it is attached to
@@ -63,11 +64,18 @@ def check_group(level: Level, group: ObjectGroup) -> None:
         if addr not in level.objects:
             fail(f"there is no object {addr:#x} (or it has no collision outline)")
         room = level.room_of_object(addr)
-        if group.expect.room is not None and room != group.expect.room:
-            fail(f"object {addr:#x} is in room {room:#04x}, not {group.expect.room:#04x}")
+        wanted = group.expect.room
+        if isinstance(wanted, int):
+            wanted = {wanted}
+        if wanted is not None and room not in wanted:
+            rooms = ", ".join(f"{r:#04x}" for r in sorted(wanted))
+            fail(f"object {addr:#x} is in room {room:#04x}, not {rooms}")
         for test in group.expect.all:
             if not test(level.objects[addr]):
                 fail(f"object {addr:#x} fails {test.__name__}")
+        for test in group.expect.none:
+            if test(level.objects[addr]):
+                fail(f"object {addr:#x} passes {test.__name__}, which none of the group should")
         if group.expect.min_floor_clearance_m is not None:
             clearance = level.objects[addr].floor_clearance
             if clearance is None or clearance < group.expect.min_floor_clearance_m * 100:

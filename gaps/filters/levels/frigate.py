@@ -1,5 +1,14 @@
 from gaps.filters.groups import Expect, ObjectGroup
-from gaps.filters.predicates import is_crate, is_door, is_overhead
+from gaps.filters.predicates import (
+    has_standard_health,
+    is_axis_aligned,
+    is_crate,
+    is_door,
+    is_generic,
+    is_overhead,
+    is_rectangle,
+    is_z_axis_aligned,
+)
 
 IGNORE_OBJECTS = [
     ObjectGroup(
@@ -17,6 +26,50 @@ IGNORE_OBJECTS = [
             0x1EA03C,  # the rotated one
         ],
         expect=Expect(count=9, room=0x10, all=[is_crate], max_spread_m=2.8),
+    ),
+    ObjectGroup(
+        name="room 0x05",
+        reason="Everything in the room off of the bridge",
+        objects=[
+            0x1E978C,
+            0x1E980C,
+            0x1E988C,
+            0x1EA144,
+            0x1EA1C4,
+            0x1EA444,
+            0x1EA4C4,
+            0x1EA544,
+            0x1EA5C4,
+            0x1EA644,
+            0x1EA6C4,
+        ],
+        expect=Expect(count=11, room=0x05, none=[is_door]),
+    ),
+    ObjectGroup(
+        name="agent area irrelevant chairs",
+        reason="Three of the four chairs in the agent area. The one we pass has been left, since "
+        "we do come close to it in runs.",
+        objects=[0x1EA244, 0x1EA344, 0x1EA3C4],
+        expect=Expect(
+            count=3,
+            room={0x09, 0x0A},
+            all=[is_generic, is_rectangle, has_standard_health],
+            none=[is_axis_aligned],
+            footprint_m2=(0.5, 0.6),
+            max_spread_m=10.3,
+        ),
+    ),
+    ObjectGroup(
+        name="back row agent area consoles",
+        reason="The four consoles in the back row of the agent area.",
+        objects=[0x1E8B0C, 0x1E8B8C, 0x1E908C, 0x1E910C],
+        expect=Expect(
+            count=4,
+            room=0x0A,
+            all=[is_generic, is_rectangle, is_z_axis_aligned, has_standard_health],
+            footprint_m2=(0.7, 0.8),
+            max_spread_m=2.4,
+        ),
     ),
 ]
 

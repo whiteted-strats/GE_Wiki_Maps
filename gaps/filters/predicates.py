@@ -22,6 +22,10 @@ FLAT_RATIO = 0.2  # how thin, from top to bottom, counts as lying flat
 # of the longest. The geometry does no such thing: pinches, lines of sight and warps are all
 # computed on every point as the game stores it, tiny sides included.
 NEGLIGIBLE_SIDE = 0.01
+# A side counts as running along an axis if it strays from it by less than this, in centimetres.
+# The game rotates objects into place in float32, so an axis-aligned door's long sides are tilted
+# by a float32 step or two (3e-5 cm over 87 cm on Train). A door at 45 degrees is off by metres.
+AXIS_TOLERANCE_CM = 0.001
 
 PREDICATES: dict[str, Predicate] = {}
 
@@ -41,6 +45,12 @@ def is_generic(obj: LevelObject) -> bool:
 def is_door(obj: LevelObject) -> bool:
     """Its type is "door"."""
     return obj.type == "door"
+
+
+@predicate
+def is_glass(obj: LevelObject) -> bool:
+    """Its type is "glass"."""
+    return obj.type == "glass"
 
 
 @predicate
@@ -67,6 +77,43 @@ def is_overhead(obj: LevelObject) -> bool:
 def has_standard_health(obj: LevelObject) -> bool:
     """Its health is 1000, which is what nearly every object has."""
     return obj.health == STANDARD_HEALTH
+
+
+@predicate
+def is_axis_aligned(obj: LevelObject) -> bool:
+    """Every side of its outline runs along x or along z, to within AXIS_TOLERANCE_CM. The tiny
+    sides between repeated corners are left out, as in the other predicates."""
+    return _axis_of_longest_side(obj) is not None
+
+
+@predicate
+def is_x_axis_aligned(obj: LevelObject) -> bool:
+    """Axis-aligned, with its longest side running along x."""
+    return _axis_of_longest_side(obj) == "x"
+
+
+@predicate
+def is_z_axis_aligned(obj: LevelObject) -> bool:
+    """Axis-aligned, with its longest side running along z."""
+    return _axis_of_longest_side(obj) == "z"
+
+
+def _axis_of_longest_side(obj: LevelObject) -> str | None:
+    """ "x" or "z" if every side runs along an axis, naming the axis of the longest side. None if
+    any side runs along neither."""
+    points = obj.points
+    negligible = NEGLIGIBLE_SIDE * max(_side_lengths(obj))
+    longest, axis_of_longest = 0.0, None
+    for i in range(len(points)):
+        p, q = points[i], points[(i + 1) % len(points)]
+        along_x, along_z = abs(float(q[0] - p[0])), abs(float(q[1] - p[1]))
+        if max(along_x, along_z) <= negligible:
+            continue
+        if min(along_x, along_z) >= AXIS_TOLERANCE_CM:
+            return None
+        if max(along_x, along_z) > longest:
+            longest, axis_of_longest = max(along_x, along_z), "x" if along_x > along_z else "z"
+    return axis_of_longest
 
 
 @predicate

@@ -1,4 +1,7 @@
 key,filter,reason,status,width_cm,x,z,between,and
+0x1daf9c.0 | 101500.1,ignored objects: crate by the wall,A crate against the wall of the first room. (0x1daf9c),warp,41.743,9178,-5607,wall of tile 101500 (room 0x01),generic 0x1daf9c (preset 0x0022)
+0x1daf9c.1 | 101500.1,ignored objects: crate by the wall,A crate against the wall of the first room. (0x1daf9c),warp,41.743,9178,-5549,wall of tile 101500 (room 0x01),generic 0x1daf9c (preset 0x0022)
+0x1daf9c.2 | 101500.1,ignored objects: crate by the wall,A crate against the wall of the first room. (0x1daf9c),warp,41.743,9178,-5490,wall of tile 101500 (room 0x01),generic 0x1daf9c (preset 0x0022)
 0F3B00.0 | 0x1dab1c.0,anvil and hammer,"generic 0x1dab1c (preset 0x0052) is 1.2 cm from a straight wall, closer than Bond's radius, with 5.6 m of it to one side and 4.3 m of it to the other",no warp found,1.197,5658,-7591,wall of tile 0F3B00 (room 0x10),generic 0x1dab1c (preset 0x0052)
 0F3B00.0 | 0x1dab9c.0,anvil and hammer,"generic 0x1dab9c (preset 0x0053) is 1.2 cm from a straight wall, closer than Bond's radius, with 6.2 m of it to one side and 3.8 m of it to the other",no warp found,1.197,5602,-7591,wall of tile 0F3B00 (room 0x10),generic 0x1dab9c (preset 0x0053)
 0F3B00.0 | 0x1dac1c.0,anvil and hammer,"generic 0x1dac1c (preset 0x0054) is 1.2 cm from a straight wall, closer than Bond's radius, with 6.7 m of it to one side and 3.2 m of it to the other",no warp found,1.197,5546,-7591,wall of tile 0F3B00 (room 0x10),generic 0x1dac1c (preset 0x0054)

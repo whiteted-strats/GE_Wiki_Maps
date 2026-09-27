@@ -78,14 +78,6 @@ L 488.75431 -1
     </g>
    </g>
    <g id="line2d_6">
-    <path clip-path="url(#pf7c17d5b6e)" style="fill: none; stroke: #a0522d; stroke-width: 0.7; stroke-linecap: square"/>
-   </g>
-   <g id="text_3">
-    <g clip-path="url(#pf7c17d5b6e)">
-     <text style="font-size: 5px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="418.560417" y="675.093302" transform="rotate(-0 418.560417 675.093302)">generic 0x1e9d00</text>
-    </g>
-   </g>
-   <g id="line2d_7">
     <path d="M 276.390832 403.298937 
 L 182.498025 439.191146 
 L 146.605758 345.298398 
@@ -93,9 +85,17 @@ L 240.498565 309.406131
 L 276.390832 403.298937 
 " clip-path="url(#pf7c17d5b6e)" style="fill: none; stroke: #a0522d; stroke-width: 0.7; stroke-linecap: square"/>
    </g>
-   <g id="text_4">
+   <g id="text_3">
     <g clip-path="url(#pf7c17d5b6e)">
      <text style="font-size: 5px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="276.390832" y="403.298937" transform="rotate(-0 276.390832 403.298937)">generic 0x1e9e80</text>
+    </g>
+   </g>
+   <g id="line2d_7">
+    <path clip-path="url(#pf7c17d5b6e)" style="fill: none; stroke: #a0522d; stroke-width: 0.7; stroke-linecap: square"/>
+   </g>
+   <g id="text_4">
+    <g clip-path="url(#pf7c17d5b6e)">
+     <text style="font-size: 5px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="418.560417" y="675.093302" transform="rotate(-0 418.560417 675.093302)">generic 0x1e9d00</text>
     </g>
    </g>
    <g id="line2d_8">
@@ -159,58 +159,55 @@ L 405.646004 223.881995
      <text style="font-size: 5px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="-217.976221" y="453.126299" transform="rotate(-0 -217.976221 453.126299)">glass 0x1e8db4</text>
     </g>
    </g>
-   <g id="line2d_15">
-    <path clip-path="url(#pf7c17d5b6e)" style="fill: none; stroke: #a0522d; stroke-width: 0.7; stroke-linecap: square"/>
-   </g>
    <g id="text_12">
-    <g clip-path="url(#pf7c17d5b6e)">
-     <text style="font-size: 5px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="-215.25503" y="-540.457623" transform="rotate(-0 -215.25503 -540.457623)">glass 0x1e8edc</text>
-    </g>
-   </g>
-   <g id="text_13">
     <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(216.267891 14.93877)">aztec gap 1: warp</text>
     <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(165.388359 25.74123)">width 49.500, step 37.3, walk round 616</text>
     <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(92.617031 36.543691)">generic 0x1e9d80 (preset 0x0099)  /  generic 0x1e9e80 (preset 0x009b)</text>
    </g>
-   <g id="line2d_16">
+   <g id="line2d_15">
     <path d="M 364.633231 315.65379 
 L 272.861435 274.641252 
+" clip-path="url(#pf7c17d5b6e)" style="fill: none; stroke: #ff0000; stroke-width: 2.2; stroke-linecap: round"/>
+   </g>
+   <g id="line2d_16">
+    <path d="M 146.605758 345.298398 
+L 240.498565 309.406131 
 " clip-path="url(#pf7c17d5b6e)" style="fill: none; stroke: #ff0000; stroke-width: 2.2; stroke-linecap: round"/>
    </g>
    <g id="line2d_17">
-    <path d="M 146.605758 345.298398 
-L 240.498565 309.406131 
-" clip-path="url(#pf7c17d5b6e)" style="fill: none; stroke: #ff0000; stroke-width: 2.2; stroke-linecap: round"/>
-   </g>
-   <g id="line2d_18">
     <path d="M 364.633231 315.65379 
 L 272.861435 274.641252 
 " clip-path="url(#pf7c17d5b6e)" style="fill: none; stroke: #ff0000; stroke-width: 2.2; stroke-linecap: round"/>
    </g>
-   <g id="line2d_19">
+   <g id="line2d_18">
     <path d="M 240.498565 309.406131 
 L 276.390832 403.298937 
 " clip-path="url(#pf7c17d5b6e)" style="fill: none; stroke: #ff0000; stroke-width: 2.2; stroke-linecap: round"/>
    </g>
-   <g id="line2d_20">
+   <g id="line2d_19">
     <path d="M 272.861435 274.641252 
 L 313.874208 182.869456 
 " clip-path="url(#pf7c17d5b6e)" style="fill: none; stroke: #ff0000; stroke-width: 2.2; stroke-linecap: round"/>
    </g>
-   <g id="line2d_21">
+   <g id="line2d_20">
     <path d="M 146.605758 345.298398 
 L 240.498565 309.406131 
 " clip-path="url(#pf7c17d5b6e)" style="fill: none; stroke: #ff0000; stroke-width: 2.2; stroke-linecap: round"/>
    </g>
-   <g id="line2d_22">
+   <g id="line2d_21">
     <path d="M 272.861435 274.641252 
 L 313.874208 182.869456 
 " clip-path="url(#pf7c17d5b6e)" style="fill: none; stroke: #ff0000; stroke-width: 2.2; stroke-linecap: round"/>
    </g>
-   <g id="line2d_23">
+   <g id="line2d_22">
     <path d="M 240.498565 309.406131 
 L 276.390832 403.298937 
 " clip-path="url(#pf7c17d5b6e)" style="fill: none; stroke: #ff0000; stroke-width: 2.2; stroke-linecap: round"/>
+   </g>
+   <g id="line2d_23">
+    <path d="M 272.861435 274.641252 
+L 240.498565 309.406131 
+" clip-path="url(#pf7c17d5b6e)" style="fill: none; stroke-dasharray: 1,1.65; stroke-dashoffset: 0; stroke: #ff0000"/>
    </g>
    <g id="line2d_24">
     <path d="M 272.861435 274.641252 
@@ -228,11 +225,6 @@ L 240.498565 309.406131
 " clip-path="url(#pf7c17d5b6e)" style="fill: none; stroke-dasharray: 1,1.65; stroke-dashoffset: 0; stroke: #ff0000"/>
    </g>
    <g id="line2d_27">
-    <path d="M 272.861435 274.641252 
-L 240.498565 309.406131 
-" clip-path="url(#pf7c17d5b6e)" style="fill: none; stroke-dasharray: 1,1.65; stroke-dashoffset: 0; stroke: #ff0000"/>
-   </g>
-   <g id="line2d_28">
     <path d="M 270.969297 305.325699 
 L 244.772367 280.938792 
 " clip-path="url(#pf7c17d5b6e)" style="fill: none; stroke: #008000; stroke-width: 1.2; stroke-linecap: square"/>

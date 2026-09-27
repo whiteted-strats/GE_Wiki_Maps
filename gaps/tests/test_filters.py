@@ -16,7 +16,16 @@ from gaps.filters.groups import (
     footprint_m2,
 )
 from gaps.filters.pocket import narrow_pocket
-from gaps.filters.predicates import is_crate, is_door, is_lying_flat, is_overhead, is_square
+from gaps.filters.predicates import (
+    is_axis_aligned,
+    is_crate,
+    is_door,
+    is_lying_flat,
+    is_overhead,
+    is_square,
+    is_x_axis_aligned,
+    is_z_axis_aligned,
+)
 from gaps.mesh import OUTSIDE_WALKABLE_AREA, load_level
 from gaps.pinch import find_pinches
 from gaps.survey import NO_WARP_FOUND, Gap, survey_level
@@ -213,10 +222,11 @@ class RealLevels(unittest.TestCase):
     def test_the_frigate_crates_are_what_the_file_says_they_are(self):
         level = load_level("frigate", importlib.import_module("data.frigate"))
         groups = ignored_groups(level)
-        self.assertEqual([len(group.objects) for group in groups], [9])
         for group in groups:
             check_group(level, group)
-        self.assertTrue(all(is_square(level.objects[obj]) for obj in groups[0].objects))
+        crates = next(group for group in groups if group.name == "pipes room crates")
+        self.assertEqual(len(crates.objects), 9)
+        self.assertTrue(all(is_square(level.objects[obj]) for obj in crates.objects))
 
     def test_frigates_floating_doors_are_the_only_overhead_doors_on_the_level(self):
         data = importlib.import_module("data.frigate")
@@ -243,7 +253,8 @@ class RealLevels(unittest.TestCase):
         removed = objects_to_remove("aztec", data)  # also checks the group against the level
         level = load_level("aztec", data)
         flat_doors = {a for a, obj in level.objects.items() if is_door(obj) and is_lying_flat(obj)}
-        self.assertEqual(set(removed), flat_doors)
+        removed_doors = {a for a in removed if is_door(level.objects[a])}
+        self.assertEqual(removed_doors, flat_doors)
 
     def test_controls_overhead_glass_forms_no_gaps(self):
         """A pane lying flat 3 m over room 0x2e, which is at Bond's feet on the storey above. It was
@@ -262,6 +273,39 @@ class RealLevels(unittest.TestCase):
         self.assertEqual(contradictions, [])
         filtered = {gap.key: gap.filtered_by.filter_name for gap in survey.gaps if gap.filtered_by}
         self.assertEqual(filtered, {"142310.0 | 142510.1": "anvil and hammer"})
+
+
+class AxisAligned(unittest.TestCase):
+    def test_a_crate_is_and_a_turned_one_is_not(self):
+        square = crate(0x9000, 0x1000, 100, 100, 50)
+        turned = crate(0x9100, 0x1000, 100, 100, 50)
+        turned["points"] = [
+            (x + (z - 100) * 0.1, z) for x, z in turned["points"]
+        ]  # leant 6 degrees
+        tilted = crate(0x9200, 0x1000, 100, 100, 50)
+        tilted["points"] = [
+            (x + (z - 100) * 1e-6, z) for x, z in tilted["points"]
+        ]  # a rounding tilt
+        level = build(
+            {"room": [(0, 0), (0, 300), (300, 300), (300, 0)]},
+            {0x9000: square, 0x9100: turned, 0x9200: tilted},
+        )
+        self.assertTrue(is_axis_aligned(level.objects[0x9000]))
+        self.assertFalse(is_axis_aligned(level.objects[0x9100]))
+        self.assertTrue(is_axis_aligned(level.objects[0x9200]))
+
+    def test_which_way_the_longest_side_runs(self):
+        wide = crate(0x9000, 0x1000, 100, 100, 50)
+        wide["points"] = [(100, 100), (180, 100), (180, 120), (100, 120)]  # 80 along x, 20 along z
+        tall = crate(0x9100, 0x1000, 200, 100, 50)
+        tall["points"] = [(200, 100), (220, 100), (220, 180), (200, 180)]
+        level = build(
+            {"room": [(0, 0), (0, 300), (300, 300), (300, 0)]}, {0x9000: wide, 0x9100: tall}
+        )
+        self.assertTrue(is_x_axis_aligned(level.objects[0x9000]))
+        self.assertFalse(is_z_axis_aligned(level.objects[0x9000]))
+        self.assertTrue(is_z_axis_aligned(level.objects[0x9100]))
+        self.assertFalse(is_x_axis_aligned(level.objects[0x9100]))
 
 
 if __name__ == "__main__":

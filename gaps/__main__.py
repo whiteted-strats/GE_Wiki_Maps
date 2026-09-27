@@ -47,6 +47,12 @@ def main() -> None:
         "gap, drawn in black and marked in the `touching` column. Roughly doubles the survey time",
     )
     parser.add_argument(
+        "--highlight-ignored",
+        action="store_true",
+        help="draw the outlines of the objects which the level's file ignores in cyan, on the "
+        "overviews and close-ups, to check that the right objects are listed",
+    )
+    parser.add_argument(
         "--review",
         action="store_true",
         help="also draw the close-ups for checking our own work, into output/00_debug/: every gap "
@@ -79,7 +85,12 @@ def main() -> None:
         suppress_warps(survey.level, survey.gaps)
         problems = check_known_warps(survey.level, survey.gaps)
         anything_wrong = anything_wrong or bool(contradictions or problems)
-        folder = write_report(survey, contradictions, arguments.variants)
+        folder = write_report(
+            survey,
+            contradictions,
+            arguments.variants,
+            highlight_ignored=arguments.highlight_ignored,
+        )
         if arguments.review:
             write_review(survey)
 

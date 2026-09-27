@@ -103,3 +103,4 @@ object,type,reason
 0x1ea940,drone,no collision outline in the data
 0x1e7104,door,"removed by filters/levels/aztec.py, ""doors under the rocket"": The pair of doors between the rocket above and the table room below, which Bond gets 'trapped' in. Each is a slab 4 m by 9.6 m lying flat, 3 m over his head there."
 0x1e7204,door,"removed by filters/levels/aztec.py, ""doors under the rocket"": The pair of doors between the rocket above and the table room below, which Bond gets 'trapped' in. Each is a slab 4 m by 9.6 m lying flat, 3 m over his head there."
+0x1e8edc,glass,"removed by filters/levels/aztec.py, ""overhead black room glass"": The upper pane of the black room's glass, 3.4 m over Bond's head."
